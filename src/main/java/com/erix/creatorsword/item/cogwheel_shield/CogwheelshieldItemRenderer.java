@@ -1,6 +1,6 @@
 package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.mojang.blaze3d.platform.InputConstants;
+import com.erix.creatorsword.KeyBindings;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import org.lwjgl.glfw.GLFW;
 
 public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer {
 
@@ -28,6 +27,7 @@ public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer 
     private float rotationAngle = 0f;
     private float currentSpeed = 0f;
     private int holdTime = 0;
+    private int decelCounter = 0;
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
@@ -104,20 +104,21 @@ public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer 
         renderer.render(HANDLE.get(), light);
 
         // 检测按键加速旋转
-        boolean charging = InputConstants.isKeyDown(Minecraft.getInstance().getWindow().getWindow(), GLFW.GLFW_KEY_TAB);
-        if (charging) {
+        if (KeyBindings.ROTATE_COGWHEEL.isDown()) {
             holdTime++;
-            if (holdTime % 60 == 0 && currentSpeed < 256f) {
+            decelCounter = 0;
+            if (holdTime % 20 == 0 && currentSpeed < 256f) {
                 currentSpeed = currentSpeed == 0f ? 8f : currentSpeed * 2;
             }
         } else {
             holdTime = 0;
             if (currentSpeed > 0f) {
-                // 每秒减半：每20tick减一次
-                if (AnimationTickHolder.getTicks() % 40 == 0) {
-                    currentSpeed /= 2f;
-                    if (currentSpeed < 8f) {
-                        currentSpeed = 0f;
+                decelCounter++;
+                if (decelCounter >= 80) {
+                    decelCounter = 0;
+                    currentSpeed /= 2;
+                    if (currentSpeed < 8) {
+                        currentSpeed = 0;
                     }
                 }
             }

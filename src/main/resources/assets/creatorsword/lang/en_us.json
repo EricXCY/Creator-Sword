@@ -1,4 +1,6 @@
 {
-  "key.creatorsword.charge": "Charge Shield",
-  "key.categories.creatorsword": "CreatorSword Controls"
+  "creatorsword.keybinds.category":  "Creator Sword",
+  "creatorsword.keybinds.keybind.rotate_cogwheel": "Rotate Cogwheel Shield",
+  "item.creatorsword.cogwheel_shield": "cogwheel shield",
+  "itemGroup.creatorsword": "Creator Sword"
 }

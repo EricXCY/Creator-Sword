@@ -21,6 +21,7 @@ public class CreatorSword
     {
         CogwheelshieldItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
+        modEventBus.register(KeyBindings.class);
     }
 
 }
