@@ -1,5 +1,7 @@
 package com.erix.creatorsword;
 
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
+import com.erix.creatorsword.ui.ModTabs;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -17,6 +19,8 @@ public class CreatorSword
 
     public CreatorSword(IEventBus modEventBus, ModContainer modContainer)
     {
+        CogwheelshieldItems.ITEMS.register(modEventBus);
+        ModTabs.CREATIVE_TABS.register(modEventBus);
     }
 
 }
