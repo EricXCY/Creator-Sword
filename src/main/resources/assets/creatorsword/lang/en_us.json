@@ -1,5 +1,4 @@
 {
-  "itemGroup.creatorsword": "Example Mod Tab",
-  "block.creatorsword.example_block": "Example Block",
-  "item.creatorsword.example_item": "Example Item"
+  "key.creatorsword.charge": "Charge Shield",
+  "key.categories.creatorsword": "CreatorSword Controls"
 }
