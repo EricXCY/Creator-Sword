@@ -23,5 +23,5 @@ public class CreatorSword
         ModTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(KeyBindings.class);
     }
-
 }
+
