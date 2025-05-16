@@ -1,6 +1,7 @@
 package com.erix.creatorsword.ui;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
+import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -18,8 +19,8 @@ public class ModTabs {
             CREATIVE_TABS.register("creator_sword", ()-> CreativeModeTab.builder()
                     .withTabsBefore(BASE_CREATIVE_TAB.getKey())
                     .title(Component.translatable("itemGroup.creatorsword"))
-                    .icon(()-> CogwheelshieldItems.COGWHEEL_SHIELD.get().getDefaultInstance())
+                    .icon(()-> CreatorSwordItems.CREATOR_SWORD.get().getDefaultInstance())
                     .displayItems((Parameters, Output) -> {
-                        Output.accept(CogwheelshieldItems.COGWHEEL_SHIELD.get());
+                        Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
                     }).build());
 }

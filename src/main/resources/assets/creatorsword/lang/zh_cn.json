@@ -1,6 +1,7 @@
 {
-  "creatorsword.keybinds.category":  "机械师的剑",
+  "creatorsword.keybinds.category": "机械师的剑",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "旋转齿轮盾",
   "item.creatorsword.cogwheel_shield": "齿轮盾",
+  "item.creatorsword.creator_sword": "机械师之剑",
   "itemGroup.creatorsword": "机械师的剑"
 }
