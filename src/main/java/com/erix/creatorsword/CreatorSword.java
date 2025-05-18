@@ -20,8 +20,8 @@ public class CreatorSword
 
     public CreatorSword(IEventBus modEventBus, ModContainer modContainer)
     {
-        CogwheelshieldItems.ITEMS.register(modEventBus);
         CreatorSwordItems.ITEMS.register(modEventBus);
+        CogwheelshieldItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(KeyBindings.class);
     }
