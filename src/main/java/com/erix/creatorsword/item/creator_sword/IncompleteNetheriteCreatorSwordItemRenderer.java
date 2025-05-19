@@ -19,9 +19,6 @@ public class IncompleteNetheriteCreatorSwordItemRenderer extends CustomRenderedI
     private static final PartialModel SWORD = PartialModel.of(
             ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/incomplete_netherite_creator_sword")
     );
-    private static final PartialModel ROTATING_GEAR = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/gear")
-    );
 
 
     @Override
@@ -80,6 +77,5 @@ public class IncompleteNetheriteCreatorSwordItemRenderer extends CustomRenderedI
         }
 
         renderer.render(SWORD.get(), light);
-        renderer.render(ROTATING_GEAR.get(), light);
     }
 }
