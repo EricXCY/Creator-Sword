@@ -1,13 +1,13 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "create:wrench"
+    "item": "creatorsword:creator_sword"
   },
-  "loops": 5,
+  "loops": 4,
   "results": [
     {
       "chance": 1.0,
-      "id": "creatorsword:creator_sword"
+      "id": "creatorsword:netherite_creator_sword"
     }
   ],
   "sequence": [
@@ -15,20 +15,20 @@
       "type": "create:deploying",
       "ingredients": [
         {
-          "item": "create:wrench"
+          "item": "creatorsword:creator_sword"
         },
         {
-          "item": "create:brass_sheet"
+          "item": "minecraft:netherite_scrap"
         }
       ],
       "results": [
         {
-          "id": "creatorsword:incomplete_creator_sword"
+          "id": "creatorsword:incomplete_netherite_creator_sword"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "creatorsword:incomplete_creator_sword"
+    "id": "creatorsword:incomplete_netherite_creator_sword"
   }
 }

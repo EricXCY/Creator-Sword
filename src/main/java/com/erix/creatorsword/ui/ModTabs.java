@@ -2,6 +2,7 @@ package com.erix.creatorsword.ui;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.creator_sword.IncompleteItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -22,6 +23,9 @@ public class ModTabs {
                     .icon(()-> CreatorSwordItems.CREATOR_SWORD.get().getDefaultInstance())
                     .displayItems((Parameters, Output) -> {
                         Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
+                        Output.accept(IncompleteItems.INCOMPLETE_CREATOR_SWORD.get());
+                        Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+                        Output.accept(IncompleteItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
                         Output.accept(CogwheelshieldItems.COGWHEEL_SHIELD.get());
                     }).build());
 }

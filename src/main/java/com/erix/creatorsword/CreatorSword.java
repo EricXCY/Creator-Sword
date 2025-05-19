@@ -2,6 +2,7 @@ package com.erix.creatorsword;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.creator_sword.IncompleteItems;
 import com.erix.creatorsword.ui.ModTabs;
 import org.slf4j.Logger;
 
@@ -21,6 +22,7 @@ public class CreatorSword
     {
         CreatorSwordItems.ITEMS.register(modEventBus);
         CogwheelshieldItems.ITEMS.register(modEventBus);
+        IncompleteItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(KeyBindings.class);
     }

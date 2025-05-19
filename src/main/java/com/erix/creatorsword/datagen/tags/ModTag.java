@@ -23,11 +23,14 @@ public class ModTag extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(ItemTags.SWORDS)
-                .add(CreatorSwordItems.CREATOR_SWORD.get());
+                .add(CreatorSwordItems.CREATOR_SWORD.get())
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
         tag(Tags.Items.MELEE_WEAPON_TOOLS)
-                .add(CreatorSwordItems.CREATOR_SWORD.get());
+                .add(CreatorSwordItems.CREATOR_SWORD.get())
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
         tag(Tags.Items.TOOLS_WRENCH)
-                .add(CreatorSwordItems.CREATOR_SWORD.get());
+                .add(CreatorSwordItems.CREATOR_SWORD.get())
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
 
         tag(Tags.Items.TOOLS_SHIELD)
                 .add(CogwheelshieldItems.COGWHEEL_SHIELD.get());

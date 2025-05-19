@@ -3,5 +3,8 @@
   "creatorsword.keybinds.keybind.rotate_cogwheel": "Rotate Cogwheel Shield",
   "item.creatorsword.cogwheel_shield": "cogwheel shield",
   "item.creatorsword.creator_sword": "creator's sword",
-  "itemGroup.creatorsword": "Creator Sword"
+  "item.creatorsword.incomplete_creator_sword": "incomplete creator's sword",
+  "item.creatorsword.netherite_creator_sword": "netherite creator's sword",
+  "item.creatorsword.incomplete_netherite_creator_sword": "incomplete netherite creator's sword",
+  "itemGroup.creatorsword": "Creator's Sword"
 }

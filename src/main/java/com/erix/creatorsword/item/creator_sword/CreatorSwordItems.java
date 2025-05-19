@@ -10,4 +10,6 @@ public class CreatorSwordItems {
 
     public static final DeferredItem<SwordItem> CREATOR_SWORD = ITEMS.registerItem("creator_sword",
             CreatorSwordItem::new);
+    public static final DeferredItem<SwordItem> NETHERITE_CREATOR_SWORD = ITEMS.registerItem("netherite_creator_sword",
+            NetheriteCreatorSwordItem::new);
 }
