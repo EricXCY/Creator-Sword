@@ -12,7 +12,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 public class CogwheelShieldItem extends ShieldItem {
 
     public CogwheelShieldItem(Properties properties) {
-        super(new Item.Properties().stacksTo(1));
+        super(new Item.Properties().stacksTo(1).durability(336));
     }
 
     @Override
