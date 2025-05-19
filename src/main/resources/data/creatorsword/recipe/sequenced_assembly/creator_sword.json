@@ -1,0 +1,34 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "create:wrench"
+  },
+  "loops": 5,
+  "results": [
+    {
+      "chance": 1.0,
+      "id": "creatorsword:creator_sword"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "create:wrench"
+        },
+        {
+          "item": "create:brass_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "create:wrench"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "create:wrench"
+  }
+}
