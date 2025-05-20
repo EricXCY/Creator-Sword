@@ -23,12 +23,12 @@
       ],
       "results": [
         {
-          "id": "creatorsword:incomplete_creator_sword"
+          "id": "create:wrench"
         }
       ]
     }
   ],
   "transitional_item": {
-    "id": "creatorsword:incomplete_creator_sword"
+    "id": "create:wrench"
   }
 }

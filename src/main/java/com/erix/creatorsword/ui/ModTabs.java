@@ -23,9 +23,7 @@ public class ModTabs {
                     .icon(()-> CreatorSwordItems.CREATOR_SWORD.get().getDefaultInstance())
                     .displayItems((Parameters, Output) -> {
                         Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
-                        Output.accept(IncompleteItems.INCOMPLETE_CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
-                        Output.accept(IncompleteItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
                         Output.accept(CogwheelshieldItems.COGWHEEL_SHIELD.get());
                     }).build());
 }
