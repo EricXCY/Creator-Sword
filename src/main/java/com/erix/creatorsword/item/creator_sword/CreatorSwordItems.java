@@ -2,7 +2,6 @@ package com.erix.creatorsword.item.creator_sword;
 
 import com.erix.creatorsword.CreatorSword;
 import com.simibubi.create.content.equipment.wrench.WrenchItem;
-import net.minecraft.world.item.SwordItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

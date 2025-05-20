@@ -34,11 +34,6 @@ public class NetheriteCreatorSwordItem extends WrenchItem {
     }
 
     @Override
-    public boolean isBookEnchantable(ItemStack stack, ItemStack book) {
-        return true;
-    }
-
-    @Override
     public int getEnchantmentValue(ItemStack stack) {
         return Tiers.NETHERITE.getEnchantmentValue();
     }

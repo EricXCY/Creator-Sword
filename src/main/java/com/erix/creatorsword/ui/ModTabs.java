@@ -2,7 +2,6 @@ package com.erix.creatorsword.ui;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
-import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
