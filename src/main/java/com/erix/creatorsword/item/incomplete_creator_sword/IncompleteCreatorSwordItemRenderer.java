@@ -1,4 +1,4 @@
-package com.erix.creatorsword.item.creator_sword;
+package com.erix.creatorsword.item.incomplete_creator_sword;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
