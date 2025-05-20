@@ -25,6 +25,7 @@ public class CreatorSword
         IncompleteItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(KeyBindings.class);
+        ModRecipeSerializers.register(modEventBus);
     }
 }
 

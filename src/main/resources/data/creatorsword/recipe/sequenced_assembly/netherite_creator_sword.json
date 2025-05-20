@@ -1,5 +1,5 @@
 {
-  "type": "create:sequenced_assembly",
+  "type": "creatorsword:enchanted_sequenced_assembly",
   "ingredient": {
     "item": "creatorsword:creator_sword"
   },
