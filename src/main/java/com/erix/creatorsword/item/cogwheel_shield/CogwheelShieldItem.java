@@ -18,6 +18,6 @@ public class CogwheelShieldItem extends ShieldItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, new CogwheelshieldItemRenderer()));
+        consumer.accept(SimpleCustomRenderer.create(this, new CogwheelShieldItemRenderer()));
     }
 }

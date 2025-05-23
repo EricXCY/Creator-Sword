@@ -1,6 +1,6 @@
 package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.erix.creatorsword.KeyBindings;
+import com.erix.creatorsword.data.ModDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer {
+public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer {
 
     private static final PartialModel HANDLE = PartialModel.of(
             ResourceLocation.fromNamespaceAndPath("creatorsword", "item/cogwheel_shield/handle")
@@ -23,11 +23,6 @@ public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer 
     private static final PartialModel ROTATING_GEAR = PartialModel.of(
             ResourceLocation.fromNamespaceAndPath("creatorsword", "item/cogwheel_shield/cogwheel_shield_handless")
     );
-    // 渲染状态缓存
-    private float rotationAngle = 0f;
-    private float currentSpeed = 0f;
-    private int holdTime = 0;
-    private int decelCounter = 0;
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
@@ -54,7 +49,7 @@ public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer 
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
                     ms.translate(8 / 16f, 4f / 16f, 4 / 16f);
-                    ms.scale(0.9f, 0.25f, 0.9f);
+                    ms.scale(-0.9f, 0.25f, 0.9f);
                 } else {
                     ms.mulPose(Axis.XP.rotationDegrees(280));
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -103,30 +98,7 @@ public class CogwheelshieldItemRenderer extends CustomRenderedItemModelRenderer 
         // 旋转/缩放完之后，渲染护手
         renderer.render(HANDLE.get(), light);
 
-        // 检测按键加速旋转
-        if (KeyBindings.ROTATE_COGWHEEL.isDown()) {
-            holdTime++;
-            decelCounter = 0;
-            if (holdTime % 20 == 0 && currentSpeed < 256f) {
-                currentSpeed = currentSpeed == 0f ? 8f : currentSpeed * 2;
-            }
-        } else {
-            holdTime = 0;
-            if (currentSpeed > 0f) {
-                decelCounter++;
-                if (decelCounter >= 80) {
-                    decelCounter = 0;
-                    currentSpeed /= 2;
-                    if (currentSpeed < 8) {
-                        currentSpeed = 0;
-                    }
-                }
-            }
-        }
-
-        float delta = AnimationTickHolder.getPartialTicks();
-        rotationAngle += currentSpeed * delta / 20f;
-        rotationAngle %= 360;
+        float rotationAngle = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
 
         ms.pushPose(); // 进入齿轮局部旋转
         ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
