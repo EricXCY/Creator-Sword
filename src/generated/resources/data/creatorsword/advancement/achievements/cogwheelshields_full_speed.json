@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "get_full_speed": {
+      "trigger": "creatorsword:cogwheelshields_full_speed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.creatorsword.cogwheelshields_full_speed.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "creatorsword:cogwheel_shield"
+    },
+    "title": {
+      "translate": "advancement.creatorsword.cogwheelshields_full_speed.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_full_speed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

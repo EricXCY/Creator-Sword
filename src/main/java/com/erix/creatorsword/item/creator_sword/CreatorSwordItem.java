@@ -10,9 +10,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-
 public class CreatorSwordItem extends WrenchItem {
-
     public CreatorSwordItem(Properties properties) {
         super(new Properties().durability(1561).attributes(SwordItem.createAttributes(Tiers.DIAMOND, 3.1f, -2.3f)));
     }
@@ -21,7 +19,6 @@ public class CreatorSwordItem extends WrenchItem {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
         return true;
     }
-
 
     @Override
     @OnlyIn(Dist.CLIENT)

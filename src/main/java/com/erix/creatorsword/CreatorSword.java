@@ -1,8 +1,11 @@
 package com.erix.creatorsword;
 
+import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
+import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteItems;
+import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
 import org.slf4j.Logger;
 
@@ -18,13 +21,15 @@ public class CreatorSword
     public static final String MODID = "creatorsword";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public CreatorSword(IEventBus modEventBus, ModContainer modContainer)
-    {
+    public CreatorSword(IEventBus modEventBus, ModContainer modContainer) {
         CreatorSwordItems.ITEMS.register(modEventBus);
         CogwheelshieldItems.ITEMS.register(modEventBus);
         IncompleteItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         modEventBus.register(KeyBindings.class);
+        ModDataComponents.DATA_COMPONENTS.register(modEventBus);
+        modEventBus.register(NetworkHandler.class);
+        CreatorSwordCriteriaTriggers.TRIGGERS.register(modEventBus);
     }
 }
 

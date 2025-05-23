@@ -6,5 +6,8 @@
   "item.creatorsword.incomplete_creator_sword": "incomplete creator's sword",
   "item.creatorsword.netherite_creator_sword": "netherite creator's sword",
   "item.creatorsword.incomplete_netherite_creator_sword": "incomplete netherite creator's sword",
-  "itemGroup.creatorsword": "Creator's Sword"
+  "itemGroup.creatorsword": "Creator's Sword",
+  "advancement.creatorsword.cogwheelshields_full_speed.title": "Mobile Crushing Wheel?!",
+  "advancement.creatorsword.cogwheelshields_full_speed.description": "Both hands hold cogwheel shield with full rotation speed.",
+  "message.creatorsword.advancement_full_speed_cogwheelshields": "%s has reached the goal %s"
 }

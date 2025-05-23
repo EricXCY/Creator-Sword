@@ -1,5 +1,6 @@
 package com.erix.creatorsword;
 
+import com.erix.creatorsword.datagen.Advancements.ModAdvancementProvider;
 import com.erix.creatorsword.datagen.recipes.ModRecipe;
 import com.erix.creatorsword.datagen.tags.ModTag;
 import net.minecraft.core.HolderLookup;
@@ -25,5 +26,6 @@ public class ModDataGenerator {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         generator.addProvider(event.includeServer(),new ModRecipe(output,lookupProvider));
         generator.addProvider(event.includeServer(),new ModTag(output, lookupProvider, blockTags, existingFileHelper));
+        generator.addProvider(event.includeServer(),new ModAdvancementProvider(output, lookupProvider, existingFileHelper));
     }
 }

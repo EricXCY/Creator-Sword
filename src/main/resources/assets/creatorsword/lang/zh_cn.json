@@ -6,5 +6,8 @@
   "item.creatorsword.incomplete_creator_sword": "未完成的机械师之剑",
   "item.creatorsword.netherite_creator_sword": "下界合金机械师之剑",
   "item.creatorsword.incomplete_netherite_creator_sword": "未完成的下界合金机械师之剑",
-  "itemGroup.creatorsword": "机械师之剑"
+  "itemGroup.creatorsword": "机械师之剑",
+  "advancement.creatorsword.cogwheelshields_full_speed.title": "移动的粉碎轮?!",
+  "advancement.creatorsword.cogwheelshields_full_speed.description": "主副手同时持有满速齿轮盾",
+  "message.creatorsword.advancement_full_speed_cogwheelshields": "%s达成了目标%s"
 }
