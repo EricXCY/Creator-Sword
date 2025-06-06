@@ -55,18 +55,22 @@ public class KeyInputHandler {
         long chargeStartMs = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
         long lastDecayMs = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L);
 
-        // 1. 按下开始充能
+        // 1. 按下开始加速
         if (isDown && !wasDown) {
             isCharging = true;
             isDecaying = false;
-            chargeStartMs = System.currentTimeMillis();
+            if (speed > 0) {
+                float equivalentSeconds = (float) (Math.log(Math.max(speed / MIN_SPEED, 1)) / Math.log(2)) + 1;
+                chargeStartMs = System.currentTimeMillis() - (long) (equivalentSeconds * 1000);
+            } else {
+                chargeStartMs = System.currentTimeMillis();
+            }
             stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), true);
             stack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), chargeStartMs);
-            stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
             stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
         }
 
-        // 2. 充能中
+        // 2. 加速
         if (isDown && isCharging) {
             long elapsed = System.currentTimeMillis() - chargeStartMs;
             float seconds = elapsed / 1000f;
@@ -95,7 +99,7 @@ public class KeyInputHandler {
             }
         }
 
-        // 4. 衰减
+        // 4. 减速
         if (isDecaying && !isCharging && speed > 0f) {
             long now = System.currentTimeMillis();
             if (now - lastDecayMs >= DECAY_INTERVAL_MS) {
