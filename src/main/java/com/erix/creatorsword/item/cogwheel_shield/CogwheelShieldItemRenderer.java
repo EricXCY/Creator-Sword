@@ -6,7 +6,6 @@ import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
-import net.createmod.catnip.animation.AnimationTickHolder;
 
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.client.Minecraft;
@@ -30,7 +29,6 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
 
         ms.pushPose(); // 第一次PushPose
 
-        // 先根据上下文旋转缩放
         switch (transformType) {
             case THIRD_PERSON_RIGHT_HAND -> {
                 ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -49,7 +47,7 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
                     ms.translate(8 / 16f, 4f / 16f, 4 / 16f);
-                    ms.scale(-0.9f, 0.25f, 0.9f);
+                    ms.scale(0.9f, 0.25f, 0.9f);
                 } else {
                     ms.mulPose(Axis.XP.rotationDegrees(280));
                     ms.mulPose(Axis.YP.rotationDegrees(90));
