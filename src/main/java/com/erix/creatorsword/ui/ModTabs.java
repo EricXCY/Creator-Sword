@@ -1,6 +1,6 @@
 package com.erix.creatorsword.ui;
 
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -23,6 +23,6 @@ public class ModTabs {
                     .displayItems((Parameters, Output) -> {
                         Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
-                        Output.accept(CogwheelshieldItems.COGWHEEL_SHIELD.get());
+                        Output.accept(CogwheelShieldItems.COGWHEEL_SHIELD.get());
                     }).build());
 }

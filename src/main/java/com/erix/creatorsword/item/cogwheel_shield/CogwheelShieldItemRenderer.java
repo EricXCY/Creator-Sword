@@ -6,9 +6,9 @@ import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
-import net.createmod.catnip.animation.AnimationTickHolder;
 
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
@@ -30,7 +30,6 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
 
         ms.pushPose(); // 第一次PushPose
 
-        // 先根据上下文旋转缩放
         switch (transformType) {
             case THIRD_PERSON_RIGHT_HAND -> {
                 ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -49,7 +48,7 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
                     ms.translate(8 / 16f, 4f / 16f, 4 / 16f);
-                    ms.scale(-0.9f, 0.25f, 0.9f);
+                    ms.scale(0.9f, 0.25f, 0.9f);
                 } else {
                     ms.mulPose(Axis.XP.rotationDegrees(280));
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -98,14 +97,22 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
         // 旋转/缩放完之后，渲染护手
         renderer.render(HANDLE.get(), light);
 
-        float rotationAngle = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+        float partialTicks = AnimationTickHolder.getPartialTicks();
+        float tickTime = Minecraft.getInstance().level.getGameTime() + partialTicks;
 
-        ms.pushPose(); // 进入齿轮局部旋转
-        ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
-        renderer.render(ROTATING_GEAR.get(), light);
-        ms.popPose(); // 结束齿轮局部旋转
+        float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        float rotationAngle = (speed * tickTime) % 360f;
 
-        ms.popPose(); // 恢复初始Pose
+        if (Math.abs(rotationAngle) > 0.001f) {
+            ms.pushPose();
+            ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
+            renderer.render(ROTATING_GEAR.get(), light);
+            ms.popPose();
+        } else {
+            renderer.render(ROTATING_GEAR.get(), light);
+        }
+
+        ms.popPose();
     }
 
 }

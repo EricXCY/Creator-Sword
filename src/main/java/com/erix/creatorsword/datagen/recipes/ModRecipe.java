@@ -1,6 +1,6 @@
 package com.erix.creatorsword.datagen.recipes;
 
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.simibubi.create.AllBlocks;
 import net.minecraft.core.HolderLookup;
@@ -19,7 +19,7 @@ public class ModRecipe extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) { // 有序合成
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CogwheelshieldItems.COGWHEEL_SHIELD.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CogwheelShieldItems.COGWHEEL_SHIELD.get())
                 .pattern("PSP")
                 .pattern("PPP")
                 .pattern(" P ")

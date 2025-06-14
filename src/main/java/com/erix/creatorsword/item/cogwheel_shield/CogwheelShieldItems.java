@@ -6,7 +6,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 
-public class CogwheelshieldItems {
+public class CogwheelShieldItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreatorSword.MODID);
 
     public static final DeferredItem<Item> COGWHEEL_SHIELD = ITEMS.registerItem("cogwheel_shield",
