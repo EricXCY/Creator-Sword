@@ -1,6 +1,6 @@
 package com.erix.creatorsword.datagen.Advancements;
 
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -29,7 +29,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
         public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
             Advancement.Builder builder = Advancement.Builder.advancement();
             builder.display(
-                    new ItemStack((ItemLike) CogwheelshieldItems.COGWHEEL_SHIELD),
+                    new ItemStack((ItemLike) CogwheelShieldItems.COGWHEEL_SHIELD),
                     Component.translatable("advancement.creatorsword.cogwheelshields_full_speed.title"),
                     Component.translatable("advancement.creatorsword.cogwheelshields_full_speed.description"),
                     null,

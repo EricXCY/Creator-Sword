@@ -1,8 +1,14 @@
 package com.erix.creatorsword.client;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
 import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
+import com.erix.creatorsword.item.cogwheel_shield.ShieldStateCache;
 import com.erix.creatorsword.network.ShieldFullSpeedPayload;
+import com.erix.creatorsword.network.ShieldStatePayload;
+import com.erix.creatorsword.network.ShieldThrowPayload;
 import net.minecraft.client.Minecraft;
 import com.erix.creatorsword.KeyBindings;
 import net.minecraft.world.item.ItemStack;
@@ -22,12 +28,10 @@ public class KeyInputHandler {
         ItemStack main = mc.player.getMainHandItem();
 
         if (off.getItem() instanceof CogwheelShieldItem) {
-            handleShield(off);
-            updateRotationAngle(off, true);
+            handleShield(off, true);
         }
         if (main.getItem() instanceof CogwheelShieldItem) {
-            handleShield(main);
-            updateRotationAngle(main, false);
+            handleShield(main, false);
         }
 
         float mainSpeed = main.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
@@ -42,108 +46,111 @@ public class KeyInputHandler {
         wasDown = KeyBindings.ROTATE_COGWHEEL.isDown();
     }
 
-    private static void handleShield(ItemStack stack) {
-        if (!(stack.getItem() instanceof CogwheelShieldItem)) {
-            resetNBT(stack);
-            return;
-        }
+    private static void handleShield(ItemStack stack, boolean isOffhand) {
+        ShieldStateCache cache = getCache(stack);
 
         boolean isDown = KeyBindings.ROTATE_COGWHEEL.isDown();
-        boolean isCharging = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        boolean isDecaying = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
-        float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        long chargeStartMs = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
-        long lastDecayMs = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L);
+        long now = System.currentTimeMillis();
+
+        // 初始化衰减状态
+        if (cache.speed > 0 && !cache.isCharging && !cache.isDecaying) {
+            cache.isDecaying = true;
+            cache.lastDecay = now;
+        }
 
         // 1. 按下开始加速
         if (isDown && !wasDown) {
-            isCharging = true;
-            isDecaying = false;
-            if (speed > 0) {
-                float equivalentSeconds = (float) (Math.log(Math.max(speed / MIN_SPEED, 1)) / Math.log(2)) + 1;
-                chargeStartMs = System.currentTimeMillis() - (long) (equivalentSeconds * 1000);
+            cache.isCharging = true;
+            cache.isDecaying = false;
+            if (cache.speed > 0) {
+                float equivalentSeconds = (float) (Math.log(Math.max(cache.speed / MIN_SPEED, 1)) / Math.log(2)) + 1;
+                cache.chargeStart = now - (long) (equivalentSeconds * 1000);
             } else {
-                chargeStartMs = System.currentTimeMillis();
+                cache.chargeStart = now;
             }
-            stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), true);
-            stack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), chargeStartMs);
-            stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
         }
 
         // 2. 加速
-        if (isDown && isCharging) {
-            long elapsed = System.currentTimeMillis() - chargeStartMs;
+        if (isDown && cache.isCharging) {
+            long elapsed = now - cache.chargeStart;
             float seconds = elapsed / 1000f;
-            float newSpeed = seconds >= 1
+            cache.speed = seconds >= 1
                     ? (float) Math.min(MIN_SPEED * Math.pow(2, seconds - 1), MAX_SPEED)
                     : MIN_SPEED;
-            stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), newSpeed);
         }
 
         // 3. 松开
-        if (!isDown && wasDown && isCharging) {
-            isCharging = false;
-            stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-
-            if (isCharging) {
-                triggerThrowShield(stack, speed);
-                stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-                isDecaying = false;
-                stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
-            } else {
-                // 进入衰减
-                isDecaying = true;
-                lastDecayMs = System.currentTimeMillis();
-                stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-                stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), lastDecayMs);
-            }
+        if (!isDown && wasDown) {
+            cache.isCharging = false;
+            cache.isDecaying = true;
+            cache.lastDecay = now;
         }
 
         // 4. 减速
-        if (isDecaying && !isCharging && speed > 0f) {
-            long now = System.currentTimeMillis();
-            if (now - lastDecayMs >= DECAY_INTERVAL_MS) {
-                lastDecayMs = now;
-                speed /= 2f;
-                if (speed < MIN_SPEED) {
-                    speed = 0f;
-                    isDecaying = false;
+        if (cache.isDecaying && !cache.isCharging && cache.speed > 0f) {
+            if (now - cache.lastDecay >= DECAY_INTERVAL_MS) {
+                cache.lastDecay = now;
+                cache.speed /= 2f;
+                if (cache.speed < MIN_SPEED) {
+                    cache.speed = 0f;
+                    cache.isDecaying = false;
                 }
-                stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), speed);
-                stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), lastDecayMs);
-                stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), isDecaying);
             }
         }
-        if (!isCharging && !isDecaying && speed != 0f) {
-                stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+
+        // 如果不再加速也不在衰减，则速度清零
+        if (!cache.isCharging && !cache.isDecaying && cache.speed != 0f) {
+            cache.speed = 0f;
         }
+
+        // 判断是否需要同步
+        boolean shouldSend = (now - cache.lastSync) >= 100;
+        boolean speedChanged = Math.abs(stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f) - cache.speed) > 0.01f;
+        boolean chargingChanged = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false) != cache.isCharging;
+        boolean decayingChanged = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false) != cache.isDecaying;
+
+//        if (shouldSend && (speedChanged || chargingChanged || decayingChanged)) {
+//            PacketDistributor.sendToServer(new ShieldStatePayload(
+//                    cache.speed,
+//                    cache.isCharging,
+//                    cache.isDecaying,
+//                    cache.chargeStart,
+//                    cache.lastDecay,
+//                    isOffhand
+//            ));
+//            cache.lastSync = now;
+//        }
+
+        // 最后统一写回组件（只写一次）
+        stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), cache.speed);
+        stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), cache.isCharging);
+        stack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), cache.chargeStart);
+        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), cache.isDecaying);
+        stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), cache.lastDecay);
+        stack.set(ModDataComponents.GEAR_SHIELD_LAST_SYNC.get(), cache.lastSync);
     }
 
-    private static void updateRotationAngle(ItemStack stack, boolean isOffhand) {
-        float angle = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
-        float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+    public static void triggerThrowShield(ItemStack stack, float speed, boolean isOffhand) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player == null || mc.level == null) return;
+        if (!(stack.getItem() instanceof CogwheelShieldItem)) return;
 
-        if (isOffhand) {
-            angle += speed / 20f;
-            if (angle < 0f) angle += 360f;
-        } else {
-            angle -= speed / 20f;
-            if (angle > 360f) angle -= 360f;
-        }
-        stack.set(ModDataComponents.GEAR_SHIELD_ANGLE.get(), angle);
+//        PacketDistributor.sendToServer(new ShieldThrowPayload(speed, isOffhand, stack));
     }
 
 
-    private static void triggerThrowShield(ItemStack stack, float speed) {
-        System.out.println("投掷齿轮盾！速度：" + speed);
-        // TODO: 实际投掷逻辑
-    }
-
-    private static void resetNBT(ItemStack stack) {
+    static void resetNBT(ItemStack stack) {
         stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
         stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
         stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L);
+    }
+
+    private static final Map<Integer, ShieldStateCache> shieldStateCache = new HashMap<>();
+
+    private static ShieldStateCache getCache(ItemStack stack) {
+        int key = System.identityHashCode(stack);
+        return shieldStateCache.computeIfAbsent(key, k -> new ShieldStateCache());
     }
 }

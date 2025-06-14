@@ -1,7 +1,7 @@
 package com.erix.creatorsword.datagen.tags;
 
 import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelshieldItems;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -33,10 +33,10 @@ public class ModTag extends ItemTagsProvider {
                 .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
 
         tag(Tags.Items.TOOLS_SHIELD)
-                .add(CogwheelshieldItems.COGWHEEL_SHIELD.get());
+                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ItemTags.VANISHING_ENCHANTABLE)
-                .add(CogwheelshieldItems.COGWHEEL_SHIELD.get());
+                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(CogwheelshieldItems.COGWHEEL_SHIELD.get());
+                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
     }
 }
