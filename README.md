@@ -49,7 +49,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
 *   消耗空气来增加旋转速度
 *   使用机械师之剑或齿轮盾来获取空气
 
-根据旋转速度调整剑的伤害和速度
+根据转速调整剑的伤害和速度
 
 新增道具：基于货物蛙港样式的抓钩工具
 
