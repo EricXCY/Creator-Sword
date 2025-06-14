@@ -41,8 +41,11 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 ms.scale(0.6f, 0.6f, 0.6f);
             }
             case FIRST_PERSON_RIGHT_HAND -> {
-                boolean blocking = Minecraft.getInstance().player.isUsingItem() &&
-                        Minecraft.getInstance().player.getUseItem() == stack;
+                boolean blocking = false;
+                if (Minecraft.getInstance().player != null) {
+                    blocking = Minecraft.getInstance().player.isUsingItem() &&
+                            Minecraft.getInstance().player.getUseItem() == stack;
+                }
                 if (blocking) {
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -56,8 +59,11 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 }
             }
             case FIRST_PERSON_LEFT_HAND -> {
-                boolean blocking = Minecraft.getInstance().player.isUsingItem() &&
-                        Minecraft.getInstance().player.getUseItem() == stack;
+                boolean blocking = false;
+                if (Minecraft.getInstance().player != null) {
+                    blocking = Minecraft.getInstance().player.isUsingItem() &&
+                            Minecraft.getInstance().player.getUseItem() == stack;
+                }
                 if (blocking) {
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));

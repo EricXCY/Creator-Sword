@@ -48,7 +48,6 @@ public class CreatorSwordClientEvents {
 
         float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         boolean charging = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        long chargeStart = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
 
         if (speed > 0 && !charging) {
             stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);

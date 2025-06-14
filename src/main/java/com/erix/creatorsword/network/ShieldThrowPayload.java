@@ -6,6 +6,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public record ShieldThrowPayload(float speed, ItemStack stack) implements CustomPacketPayload {
     public static final Type<ShieldThrowPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath("creatorsword", "shield_throw"));
@@ -17,7 +18,7 @@ public record ShieldThrowPayload(float speed, ItemStack stack) implements Custom
             );
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public @NotNull Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 }
