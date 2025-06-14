@@ -1,7 +1,6 @@
 package com.erix.creatorsword;
 
 import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
-import com.erix.creatorsword.client.EntityRendererSetUp;
 import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.entity.ModEntities;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;

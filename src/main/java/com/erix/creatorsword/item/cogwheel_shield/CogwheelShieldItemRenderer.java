@@ -8,7 +8,6 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRendere
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
 
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
-import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
@@ -42,11 +41,8 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 ms.scale(0.6f, 0.6f, 0.6f);
             }
             case FIRST_PERSON_RIGHT_HAND -> {
-                boolean blocking = false;
-                if (Minecraft.getInstance().player != null) {
-                    blocking = Minecraft.getInstance().player.isUsingItem() &&
-                            Minecraft.getInstance().player.getUseItem() == stack;
-                }
+                boolean blocking = Minecraft.getInstance().player.isUsingItem() &&
+                        Minecraft.getInstance().player.getUseItem() == stack;
                 if (blocking) {
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -60,11 +56,8 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 }
             }
             case FIRST_PERSON_LEFT_HAND -> {
-                boolean blocking = false;
-                if (Minecraft.getInstance().player != null) {
-                    blocking = Minecraft.getInstance().player.isUsingItem() &&
-                            Minecraft.getInstance().player.getUseItem() == stack;
-                }
+                boolean blocking = Minecraft.getInstance().player.isUsingItem() &&
+                        Minecraft.getInstance().player.getUseItem() == stack;
                 if (blocking) {
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -103,25 +96,14 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
         // 旋转/缩放完之后，渲染护手
         renderer.render(HANDLE.get(), light);
 
-        float partialTicks = AnimationTickHolder.getPartialTicks();
-        float tickTime = 0;
-        if (Minecraft.getInstance().level != null) {
-            tickTime = Minecraft.getInstance().level.getGameTime() + partialTicks;
-        }
+        float rotationAngle = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
 
-        float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        float rotationAngle = (speed * tickTime) % 360f;
+        ms.pushPose(); // 进入齿轮局部旋转
+        ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
+        renderer.render(ROTATING_GEAR.get(), light);
+        ms.popPose(); // 结束齿轮局部旋转
 
-        if (Math.abs(rotationAngle) > 0.001f) {
-            ms.pushPose();
-            ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
-            renderer.render(ROTATING_GEAR.get(), light);
-            ms.popPose();
-        } else {
-            renderer.render(ROTATING_GEAR.get(), light);
-        }
-
-        ms.popPose();
+        ms.popPose(); // 恢复初始Pose
     }
 
 }

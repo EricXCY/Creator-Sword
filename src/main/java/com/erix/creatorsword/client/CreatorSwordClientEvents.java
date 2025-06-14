@@ -11,8 +11,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
-import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.InputEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = "creatorsword", value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
@@ -21,7 +21,7 @@ public class CreatorSwordClientEvents {
     private static boolean wasVPressed = false;
 
     @SubscribeEvent
-    public static void onClientTick(ClientTickEvent.Post event) {
+    public static void onRenderGui(RenderGuiEvent.Post event) {
         KeyInputHandler.clientTick();
     }
 
@@ -36,7 +36,7 @@ public class CreatorSwordClientEvents {
             if (stack.getItem() instanceof CogwheelShieldItem) {
                 float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
                 if (speed >= THROW_SPEED_THRESHOLD) {
-                    KeyInputHandler.triggerThrowShield(stack, speed, true);
+                    KeyInputHandler.triggerThrowShield(stack, speed);
                 }
             }
         }
@@ -53,7 +53,7 @@ public class CreatorSwordClientEvents {
         if (speed > 0 && !charging) {
             stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
             stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), System.currentTimeMillis());
-            PacketDistributor.sendToServer(new ShieldStatePayload(speed, charging, true, chargeStart, System.currentTimeMillis(), isOffhand));
+            PacketDistributor.sendToServer(new ShieldStatePayload(stack, isOffhand));
         }
     }
 
@@ -72,7 +72,7 @@ public class CreatorSwordClientEvents {
 
         KeyInputHandler.resetNBT(stack);
         PacketDistributor.sendToServer(new ShieldStatePayload(
-                0f, false, false, 0L, 0L, isOffhand
+                stack, isOffhand
         ));
     }
 
@@ -84,5 +84,4 @@ public class CreatorSwordClientEvents {
         resetAndSyncShield(mc.player.getOffhandItem(), true);
         resetAndSyncShield(mc.player.getMainHandItem(), false);
     }
-
 }

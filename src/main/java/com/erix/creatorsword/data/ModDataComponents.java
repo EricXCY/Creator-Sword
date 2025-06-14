@@ -35,13 +35,9 @@ public class ModDataComponents {
             DATA_COMPONENTS.registerComponentType("gear_shield_angle",
                     builder -> builder.persistent(com.mojang.serialization.Codec.FLOAT));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_LAST_SYNC =
-            DATA_COMPONENTS.registerComponentType("gear_shield_last_sync",
-                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
-
-    private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name, java.util.function.UnaryOperator<DataComponentType.Builder<T>> builder) {
-        return DATA_COMPONENTS.register(name, () -> builder.apply(DataComponentType.builder()).build());
-    }
+//    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_LAST_SYNC =
+//            DATA_COMPONENTS.registerComponentType("gear_shield_last_sync",
+//                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
 }
 
 
