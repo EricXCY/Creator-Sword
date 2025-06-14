@@ -42,8 +42,11 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 ms.scale(0.6f, 0.6f, 0.6f);
             }
             case FIRST_PERSON_RIGHT_HAND -> {
-                boolean blocking = Minecraft.getInstance().player.isUsingItem() &&
-                        Minecraft.getInstance().player.getUseItem() == stack;
+                boolean blocking = false;
+                if (Minecraft.getInstance().player != null) {
+                    blocking = Minecraft.getInstance().player.isUsingItem() &&
+                            Minecraft.getInstance().player.getUseItem() == stack;
+                }
                 if (blocking) {
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -57,8 +60,11 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 }
             }
             case FIRST_PERSON_LEFT_HAND -> {
-                boolean blocking = Minecraft.getInstance().player.isUsingItem() &&
-                        Minecraft.getInstance().player.getUseItem() == stack;
+                boolean blocking = false;
+                if (Minecraft.getInstance().player != null) {
+                    blocking = Minecraft.getInstance().player.isUsingItem() &&
+                            Minecraft.getInstance().player.getUseItem() == stack;
+                }
                 if (blocking) {
                     ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
                     ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -98,7 +104,10 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
         renderer.render(HANDLE.get(), light);
 
         float partialTicks = AnimationTickHolder.getPartialTicks();
-        float tickTime = Minecraft.getInstance().level.getGameTime() + partialTicks;
+        float tickTime = 0;
+        if (Minecraft.getInstance().level != null) {
+            tickTime = Minecraft.getInstance().level.getGameTime() + partialTicks;
+        }
 
         float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         float rotationAngle = (speed * tickTime) % 360f;
