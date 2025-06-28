@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "com.erix.creatorsword.mixin",
+  "mixins": [
+    "ItemProviderEntryMixin",
+    "RadialWrenchHandlerMixin"
+  ],
+  "client": [
+  ],
+  "server": [
+  ],
+  "compatibilityLevel": "JAVA_21",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
