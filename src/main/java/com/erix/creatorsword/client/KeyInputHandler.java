@@ -3,7 +3,6 @@ package com.erix.creatorsword.client;
 import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldFullSpeedPayload;
-import com.erix.creatorsword.network.ShieldStatePayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
 import net.minecraft.client.Minecraft;
 import com.erix.creatorsword.KeyBindings;
@@ -131,27 +130,12 @@ public class KeyInputHandler {
             stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), lastDecayMs);
         }
 
-//        // 判断是否需要发送同步包
-//        long now = System.currentTimeMillis();
-//        long lastSync = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_SYNC.get(), 0L);
-//
-//        boolean shouldSend = (now - lastSync) >= 100; // 100ms 限制频率
-//        boolean speedChanged = Math.abs(speed - oldSpeed) > 0.01f;
-//        boolean chargingChanged = oldCharging != isCharging;
-//        boolean decayingChanged = oldDecaying != isDecaying;
-//
-//        if (shouldSend && (speedChanged || chargingChanged || decayingChanged)) {
-//            PacketDistributor.sendToServer(new ShieldStatePayload(stack, isOffhand));
-//            stack.set(ModDataComponents.GEAR_SHIELD_LAST_SYNC.get(), now);
-//        }
-
         // 最后统一写回NBT，避免状态不一致
         stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), speed);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), isCharging);
         stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), isDecaying);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), chargeStartMs);
         stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), lastDecayMs);
-//        stack.set(ModDataComponents.GEAR_SHIELD_LAST_SYNC.get(), lastSync);
     }
 
 
