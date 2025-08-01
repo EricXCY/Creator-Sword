@@ -4,6 +4,7 @@ import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldFullSpeedPayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
+import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.client.Minecraft;
 import com.erix.creatorsword.KeyBindings;
 import net.minecraft.world.item.ItemStack;
@@ -14,6 +15,8 @@ public class KeyInputHandler {
     private static final float MAX_SPEED = 256f;
     private static final float MIN_SPEED = 8f;
     private static final long DECAY_INTERVAL_MS = 750;
+    private static long lastAirConsumeTime = 0;
+    private static final long AIR_CONSUME_INTERVAL = 1000;
 
     public static void clientTick() {
         Minecraft mc = Minecraft.getInstance();
@@ -44,6 +47,8 @@ public class KeyInputHandler {
     }
 
     private static void handleShield(ItemStack stack, boolean isOffhand) {
+        Minecraft mc = Minecraft.getInstance();
+        
         if (!(stack.getItem() instanceof CogwheelShieldItem)) {
             resetNBT(stack);
             return;
@@ -82,10 +87,32 @@ public class KeyInputHandler {
 
         // 2. 加速
         if (isDown && isCharging) {
-            long elapsed = System.currentTimeMillis() - chargeStartMs;
+            long now = System.currentTimeMillis();
+            long elapsed = now - chargeStartMs;
             float seconds = elapsed / 1000f;
+
+            // 默认加速倍率
+            float accelerationFactor = 1f;
+
+            // 检查是否拥有含气背罐，并尝试消耗空气
+            if (mc.player != null) {
+                var backtanks = BacktankUtil.getAllWithAir(mc.player);
+                if (!backtanks.isEmpty()) {
+                    int airCost = 1;
+                    float currentAir = BacktankUtil.getAir(backtanks.get(0));
+                    if (currentAir >= airCost) {
+                        accelerationFactor = 1.25f;
+                        if (now - lastAirConsumeTime >= AIR_CONSUME_INTERVAL) {
+                            BacktankUtil.consumeAir(mc.player, backtanks.get(0), airCost);
+                            lastAirConsumeTime = now;
+                        }
+                    }
+                }
+            }
+
+            // 应用加速
             speed = seconds >= 1
-                    ? (float) Math.min(MIN_SPEED * Math.pow(2, seconds - 1), MAX_SPEED)
+                    ? (float) Math.min(MIN_SPEED * Math.pow(2, (seconds - 1) * accelerationFactor), MAX_SPEED)
                     : MIN_SPEED;
         }
 
