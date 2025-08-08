@@ -34,6 +34,17 @@ public class KeyInputHandler {
             updateRotationAngle(main, false);
         }
 
+        if (mc.screen != null) {
+            wasDown = false;
+
+            if (main.getItem() instanceof CogwheelShieldItem) {
+                main.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+            }
+            if (off.getItem() instanceof CogwheelShieldItem) {
+                off.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+            }
+        }
+
         float mainSpeed = main.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         float offSpeed = off.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         boolean mainFull = main.getItem() instanceof CogwheelShieldItem && mainSpeed >= 256f;
@@ -136,9 +147,11 @@ public class KeyInputHandler {
             }
         }
 
-        // 如果不再加速也不在衰减，则速度清零
-        if (!isCharging && !isDecaying && speed != 0f) {
-            speed = 0f;
+        // 如果不再加速也不在衰减，则减速
+        if (!isCharging && !isDecaying && speed > 0f) {
+            isCharging = false;
+            isDecaying = true;
+            lastDecayMs = System.currentTimeMillis();
         }
 
         if (Math.abs(speed - oldSpeed) > 0.01f) {
@@ -185,15 +198,15 @@ public class KeyInputHandler {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return;
 
-        PacketDistributor.sendToServer(new ShieldThrowPayload(speed, stack));
         stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+        PacketDistributor.sendToServer(new ShieldThrowPayload(speed, stack));
     }
 
     static void resetNBT(ItemStack stack) {
         stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
-        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
+        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
         stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L);
         stack.set(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
     }

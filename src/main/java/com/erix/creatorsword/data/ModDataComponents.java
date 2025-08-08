@@ -34,10 +34,4 @@ public class ModDataComponents {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> GEAR_SHIELD_ANGLE =
             DATA_COMPONENTS.registerComponentType("gear_shield_angle",
                     builder -> builder.persistent(com.mojang.serialization.Codec.FLOAT));
-
-//    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_LAST_SYNC =
-//            DATA_COMPONENTS.registerComponentType("gear_shield_last_sync",
-//                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
 }
-
-
