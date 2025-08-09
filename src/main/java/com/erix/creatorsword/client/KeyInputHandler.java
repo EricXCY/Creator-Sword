@@ -35,7 +35,7 @@ public class KeyInputHandler {
         }
 
         if (mc.screen != null) {
-            wasDown = false;
+            wasDown = true;
 
             if (main.getItem() instanceof CogwheelShieldItem) {
                 main.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);

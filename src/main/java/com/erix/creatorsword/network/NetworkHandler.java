@@ -60,7 +60,7 @@ public class NetworkHandler {
 
                     float clientSpeed = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
                     boolean clientCharging = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-                    boolean clientDecaying = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
+                    boolean clientDecaying = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
                     long clientChargeStart = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
                     long clientLastDecay = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L);
                     float clientAngle = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);

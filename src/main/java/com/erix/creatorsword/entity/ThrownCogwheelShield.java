@@ -98,6 +98,9 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                             return;
                         }
                         stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), speed);
+                        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+                        stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), System.currentTimeMillis());
+                        stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
                         // 优先返回副手
                         if (player.getItemInHand(InteractionHand.OFF_HAND).isEmpty()) {
                             player.setItemInHand(InteractionHand.OFF_HAND, stack);
