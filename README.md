@@ -22,7 +22,7 @@ New in version 0.1.0
   * While wearing a backtank, shield acceleration is faster (1.0x → 1.25x), consuming 1 air unit per second
   * Attacking mobs with the Creator Sword while wearing a backtank grants 1 unit of air
 
-Fixed a bug when opening GUI during shield acceleration froze the rotation speed
+Fixed a bug where opening GUI during shield acceleration froze the rotation speed
 
 ## Future plans
 Version 0.1 will focus on linking backtank and weapons:
