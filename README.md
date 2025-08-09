@@ -11,16 +11,26 @@
 
 **Requires:** Create 6.0.0 or higher
 
-## Future Plan
+New in version 0.1.0
 
-Link with backtank
+* The rotation speed can be read in the lower right corner when holding the shield with at least 8su
+  * ≤64su — white
+  * 64–128su — green
+  * 128–256su — aqua
+  * ≥256su — light purple
+* Link with backtank:
+  * While wearing a backtank, shield acceleration is faster (1.0x → 1.25x), consuming 1 air unit per second
+  * Attacking mobs with the Creator Sword while wearing a backtank grants 1 unit of air
 
-*   consume air to increase rotation speed
-*   gain air by using creator's sword or cogwheel shield
+Fixed a bug where opening GUI during shield acceleration froze the rotation speed
 
-Adjust the damage and speed of swords according to the rotation speed
+## Future plans
+Version 0.1 will focus on linking backtank and weapons:
+* Enchantment books: consume more air for faster shield acceleration; Swords gain more air on attacks
 
-A new tool, a grappling hook based on the package frogport
+Version 0.2 will add new tools:
+* A grappling hook inspired by package frogport
+* New tools based on the incomplete Creator Sword in old versions
 
 ## Usage in modpacks
 
@@ -42,16 +52,25 @@ You can make any modifications to the mod with the goal of distributing it in a 
 
 **需要：** 机械动力6.0.0 或更高
 
-## 未来计划
+新版本0.1.0更新内容：
+* 持盾时盾牌转速不低于8su可在右小角显示当前转速
+  * ≤64su为白色
+  * 64-128su为绿色
+  * 128-256su为深蓝色
+  * ≥256su为紫色
+* 与背罐联动
+  * 持有背罐时会消耗空气让盾牌加速更快(1.0x->1.25x)，每秒消耗1单位空气
+  * 持有背罐时使用机械师之剑攻击生物可以增加1单位空气
 
-与背罐联动
+修复盾牌加速时点开GUI会冻住转速的Bug。
+## 未来计划&杂谈
 
-*   消耗空气来增加旋转速度
-*   使用机械师之剑或齿轮盾来获取空气
+0.1版本会专注于背罐与武器间的联动
+* 附魔书：盾牌加速消耗空气来提升加速；剑攻击时获取更多空气。
 
-根据转速调整剑的伤害和速度
-
-新增道具：基于货物蛙港样式的抓钩工具
+0.2版本会新增道具
+* 基于货物蛙港样式的抓钩工具
+* 基于老版本不完整的机械师之剑的新道具
 
 ## 使用
 
