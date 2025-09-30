@@ -99,7 +99,7 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         if (target instanceof AbstractMinecart minecart) {
             Player player = event.getEntity();
             ItemStack heldItem = player.getMainHandItem();
-            if (com.simibubi.create.AllItems.WRENCH.isIn(heldItem)) {
+            if (heldItem.is(AllTags.AllItemTags.WRENCH.tag)) {
                 if (!player.isCreative()) {
                     minecart.hurt(minecart.damageSources().playerAttack(player), 100.0F);
                 }
