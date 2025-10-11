@@ -40,11 +40,18 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
 
     public boolean hurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        Minecraft mc = Minecraft.getInstance();
-        var backtanks = BacktankUtil.getAllWithAir(mc.player);
-        int airCost = -1;
-        BacktankUtil.consumeAir(mc.player, backtanks.get(0), airCost);
+        if (!attacker.level().isClientSide() && attacker instanceof Player player) {
+            handleBacktankLogic(player);
+        }
         return true;
+    }
+
+    private void handleBacktankLogic(Player player) {
+        var backtanks = BacktankUtil.getAllWithAir(player);
+        if (!backtanks.isEmpty()) {
+            int airCost = -100;
+            BacktankUtil.consumeAir(player, backtanks.get(0), airCost);
+        }
     }
 
     @Override
@@ -53,6 +60,7 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         consumer.accept(SimpleCustomRenderer.create(this, getRenderer()));
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected abstract CustomRenderedItemModelRenderer getRenderer();
 
     @Nonnull

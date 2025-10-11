@@ -25,7 +25,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
     private static final EntityDataAccessor<ItemStack> ITEM_STACK = SynchedEntityData.defineId(ThrownCogwheelShield.class, EntityDataSerializers.ITEM_STACK);
     private static final float BASE_DAMAGE = 5.0f;
     private int lifetime = 0;
-    private static final int MAX_LIFETIME = 60; // 3秒
+    private static final int MAX_LIFETIME = 100; // 5秒
     private static final float RETURN_SPEED = 1.2f;
     private static final float PICKUP_DISTANCE = 1.2f;
     private ItemStack cachedItemStack;
@@ -133,6 +133,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                 if (target != this.getOwner()) {
                     float speed = this.getEntityData().get(SPEED);
                     float damage = BASE_DAMAGE * (speed / 256f);
+                    damage = Math.max(0f, Math.min(damage, BASE_DAMAGE));
                     target.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
                 }
             }

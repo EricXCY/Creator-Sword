@@ -1,7 +1,7 @@
 package com.erix.creatorsword.client;
 
 import com.erix.creatorsword.entity.ModEntities;
-import com.erix.creatorsword.item.cogwheel_shield.ThrownCogwheelShieldRenderer;
+import com.erix.creatorsword.entity.ThrownCogwheelShieldRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;

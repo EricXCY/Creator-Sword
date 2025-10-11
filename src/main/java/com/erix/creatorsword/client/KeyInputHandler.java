@@ -6,7 +6,6 @@ import com.erix.creatorsword.network.ShieldFullSpeedPayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.client.Minecraft;
-import com.erix.creatorsword.KeyBindings;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 

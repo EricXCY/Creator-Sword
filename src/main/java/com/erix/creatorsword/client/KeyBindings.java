@@ -1,9 +1,8 @@
-package com.erix.creatorsword;
+package com.erix.creatorsword.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
 public class KeyBindings {
@@ -13,12 +12,12 @@ public class KeyBindings {
             "creatorsword.keybinds.category"
     );
 
-    public static void register(IEventBus modEventBus) {
-        modEventBus.addListener(KeyBindings::onRegisterKeyMappings);
-    }
-
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
         event.register(ROTATE_COGWHEEL);
+    }
+
+    public static KeyMapping getRotateKey() {
+        return ROTATE_COGWHEEL;
     }
 }

@@ -1,6 +1,5 @@
 package com.erix.creatorsword.client;
 
-import com.erix.creatorsword.KeyBindings;
 import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldStatePayload;

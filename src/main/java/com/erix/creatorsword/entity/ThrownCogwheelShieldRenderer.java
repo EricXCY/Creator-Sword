@@ -1,7 +1,7 @@
-package com.erix.creatorsword.item.cogwheel_shield;
+package com.erix.creatorsword.entity;
 
 import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.entity.ThrownCogwheelShield;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;

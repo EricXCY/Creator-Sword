@@ -9,6 +9,8 @@ import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteItems;
 import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
 import org.slf4j.Logger;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 
 import com.mojang.logging.LogUtils;
 
@@ -27,11 +29,14 @@ public class CreatorSword
         CogwheelShieldItems.ITEMS.register(modEventBus);
         IncompleteItems.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
-        modEventBus.register(KeyBindings.class);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         modEventBus.register(NetworkHandler.class);
         CreatorSwordCriteriaTriggers.TRIGGERS.register(modEventBus);
         ModEntities.register(modEventBus);
+
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            com.erix.creatorsword.client.ClientSetup.init(modEventBus);
+        }
     }
 }
 
