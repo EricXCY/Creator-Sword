@@ -108,7 +108,7 @@ public class KeyInputHandler {
             if (mc.player != null) {
                 var backtanks = BacktankUtil.getAllWithAir(mc.player);
                 if (!backtanks.isEmpty()) {
-                    int airCost = 1;
+                    int airCost = 3;
                     float currentAir = BacktankUtil.getAir(backtanks.get(0));
                     if (currentAir >= airCost) {
                         accelerationFactor = 1.25f;
@@ -138,7 +138,7 @@ public class KeyInputHandler {
             long now = System.currentTimeMillis();
             if (now - lastDecayMs >= DECAY_INTERVAL_MS) {
                 lastDecayMs = now;
-                speed /= 2f;
+                speed /= 1.8f;
                 if (speed < MIN_SPEED) {
                     speed = 0f;
                     isDecaying = false;
@@ -169,7 +169,7 @@ public class KeyInputHandler {
             stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), lastDecayMs);
         }
 
-        // 最后统一写回NBT，避免状态不一致
+        // 统一写回NBT
         stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), speed);
         stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), isCharging);
         stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), isDecaying);
