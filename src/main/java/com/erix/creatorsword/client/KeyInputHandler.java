@@ -1,13 +1,17 @@
 package com.erix.creatorsword.client;
 
 import com.erix.creatorsword.data.ModDataComponents;
+import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldFullSpeedPayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class KeyInputHandler {
     private static boolean wasDown = false;
@@ -16,6 +20,8 @@ public class KeyInputHandler {
     private static final long DECAY_INTERVAL_MS = 750;
     private static long lastAirConsumeTime = 0;
     private static final long AIR_CONSUME_INTERVAL = 1000;
+    static float basicFactor = 1f;
+
 
     public static void clientTick() {
         Minecraft mc = Minecraft.getInstance();
@@ -64,6 +70,17 @@ public class KeyInputHandler {
             return;
         }
 
+        AtomicReference<Float> boostFactor = new AtomicReference<>(1.0f);
+        EnchantmentHelper.runIterationOnItem(stack, (enchantHolder, level) -> {
+            var effect = enchantHolder.value().effects().get(ModEnchantmentComponents.PNEUMATIC_BOOST.get());
+            if (effect != null) {
+                boostFactor.set(effect.applyBoost(boostFactor.get(), level));
+            }
+        });
+
+        float pneumaticBoost = boostFactor.get();
+        float accelerationFactor = pneumaticBoost * basicFactor;
+
         boolean isDown = KeyBindings.ROTATE_COGWHEEL.isDown();
         boolean oldCharging = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         boolean oldDecaying = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
@@ -101,20 +118,20 @@ public class KeyInputHandler {
             long elapsed = now - chargeStartMs;
             float seconds = elapsed / 1000f;
 
-            // 默认加速倍率
-            float accelerationFactor = 1f;
-
             // 检查是否拥有含气背罐，并尝试消耗空气
             if (mc.player != null) {
                 var backtanks = BacktankUtil.getAllWithAir(mc.player);
                 if (!backtanks.isEmpty()) {
-                    int airCost = 3;
+                    int airCost = (int) (accelerationFactor/0.25);
                     float currentAir = BacktankUtil.getAir(backtanks.get(0));
                     if (currentAir >= airCost) {
-                        accelerationFactor = 1.25f;
                         if (now - lastAirConsumeTime >= AIR_CONSUME_INTERVAL) {
+                            basicFactor = 1.5f;
                             BacktankUtil.consumeAir(mc.player, backtanks.get(0), airCost);
                             lastAirConsumeTime = now;
+                        }
+                        else {
+                            basicFactor = 1f;
                         }
                     }
                 }
@@ -122,7 +139,7 @@ public class KeyInputHandler {
 
             // 应用加速
             speed = seconds >= 1
-                    ? (float) Math.min(MIN_SPEED * Math.pow(2, (seconds - 1) * accelerationFactor), MAX_SPEED)
+                    ? (float) Math.min(MIN_SPEED * Math.pow(1.75, (seconds - 1) * accelerationFactor), MAX_SPEED)
                     : MIN_SPEED;
         }
 

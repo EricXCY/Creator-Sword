@@ -3,20 +3,27 @@
     "translate": "enchantment.creatorsword.pneumatic_boost"
   },
 
-  "supported_items": "creatorsword:cogwheel_shield",
+  "supported_items": "#creatorsword:enchantable/pneumatic_boost",
+  "primary_items": ["creatorsword:cogwheel_shield"],
 
   "weight": 7,
-  "max_level": 3,
+  "max_level": 4,
   "min_cost": {
-    "base": 15,
-    "per_level_above_first": 15
+    "base": 8,
+    "per_level_above_first": 8
   },
   "max_cost": {
-    "base": 45,
+    "base": 30,
     "per_level_above_first": 15
   },
   "anvil_cost": 1,
   "slots": [
     "hand"
-  ]
+  ],
+  "effects": {
+    "creatorsword:pneumatic_boost": {
+      "base": 1.5,
+      "per_level": 0.5
+    }
+  }
 }

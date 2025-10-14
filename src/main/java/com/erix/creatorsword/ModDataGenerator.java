@@ -1,6 +1,6 @@
 package com.erix.creatorsword;
 
-import com.erix.creatorsword.datagen.Advancements.ModAdvancementProvider;
+import com.erix.creatorsword.datagen.advancements.ModAdvancementProvider;
 import com.erix.creatorsword.datagen.recipes.ModRecipe;
 import com.erix.creatorsword.datagen.tags.ModTag;
 import net.minecraft.core.HolderLookup;

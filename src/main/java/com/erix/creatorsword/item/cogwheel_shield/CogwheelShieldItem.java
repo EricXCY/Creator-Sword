@@ -4,6 +4,7 @@ import java.util.function.Consumer;
 
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -19,5 +20,15 @@ public class CogwheelShieldItem extends ShieldItem {
     @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(SimpleCustomRenderer.create(this, new CogwheelShieldItemRenderer()));
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getEnchantmentValue() {
+        return 20;
     }
 }

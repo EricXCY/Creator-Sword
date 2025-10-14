@@ -1,4 +1,4 @@
-package com.erix.creatorsword.datagen.Advancements;
+package com.erix.creatorsword.datagen.advancements;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.advancements.Advancement;

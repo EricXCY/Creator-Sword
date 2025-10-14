@@ -38,7 +38,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
         super(ModEntities.COGWHEEL_SHIELD_ENTITY.get(), shooter, level);
         this.getEntityData().set(SPEED, speed);
         this.getEntityData().set(RETURNING, false);
-        this.getEntityData().set(ITEM_STACK, stack.copy()); // 保存完整 ItemStack
+        this.getEntityData().set(ITEM_STACK, stack.copy());
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
         if (cachedItemStack == null) {
             ItemStack stack = this.getEntityData().get(ITEM_STACK);
             if (!stack.isEmpty()) {
-                cachedItemStack = stack.copy(); // 只复制一次
+                cachedItemStack = stack.copy();
             } else {
                 cachedItemStack = new ItemStack(getDefaultItem());
             }
