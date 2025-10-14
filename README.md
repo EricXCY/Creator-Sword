@@ -26,7 +26,7 @@ In version 0.1.1
 
 * Fixed server crash
 * Add an enchantment book
-  * But it seems that the survival mode cannot be obtained at present, because it can't appear on the enchantment table by some unknown reason
+  * But it seems that the survival mode cannot be obtained at present, because it can't appear on the enchantment table for some unknown reason
 
 ## Future plans
 Version 0.1 will focus on linking backtank and weapons:
