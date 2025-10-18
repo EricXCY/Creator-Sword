@@ -4,9 +4,13 @@ import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -15,6 +19,13 @@ import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 public class ModTag extends ItemTagsProvider {
+    public static final TagKey<Item> ENCHANTABLE_PNEUMATIC_BOOST =
+            createTagKey("pneumatic_boost");
+
+    private static TagKey<Item> createTagKey(String name) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, name));
+    }
+
     public ModTag(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                   CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, CreatorSword.MODID, existingFileHelper);
@@ -38,5 +49,8 @@ public class ModTag extends ItemTagsProvider {
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+
+        tag(ENCHANTABLE_PNEUMATIC_BOOST).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
     }
+
 }

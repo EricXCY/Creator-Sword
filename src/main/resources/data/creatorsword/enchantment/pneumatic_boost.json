@@ -3,7 +3,7 @@
     "translate": "enchantment.creatorsword.pneumatic_boost"
   },
 
-  "supported_items": "#creatorsword:enchantable/pneumatic_boost",
+  "supported_items": "#creatorsword:pneumatic_boost",
   "primary_items": ["creatorsword:cogwheel_shield"],
 
   "weight": 7,
