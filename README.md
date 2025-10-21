@@ -66,8 +66,6 @@ You can make any modifications to the mod with the goal of distributing it in a 
   * 持有背罐时会消耗空气让盾牌加速更快(1.0x->1.25x)，每秒消耗1单位空气
   * 持有背罐时使用机械师之剑攻击生物可以增加1单位空气
 
-0.1.1修复服务端奔溃的bug并添加了新附魔书，但不知道为什么附魔台就是显示不了૮₍ꐦ -᷅ ⤙ -᷄ ₎ა
-
 ## 未来计划&杂谈
 
 0.1版本会专注于背罐与武器间的联动

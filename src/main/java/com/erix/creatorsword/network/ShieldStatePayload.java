@@ -8,13 +8,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public record ShieldStatePayload(ItemStack stack, boolean isOffhand) implements CustomPacketPayload {
+public record ShieldStatePayload(ItemStack stack, boolean offhand) implements CustomPacketPayload {
     public static final Type<ShieldStatePayload> TYPE =
             new Type<>(ResourceLocation.fromNamespaceAndPath("creatorsword", "shield_state"));
     public static final StreamCodec<RegistryFriendlyByteBuf, ShieldStatePayload> STREAM_CODEC =
             StreamCodec.composite(
                     ItemStack.STREAM_CODEC, ShieldStatePayload::stack,
-                    ByteBufCodecs.BOOL, ShieldStatePayload::isOffhand,
+                    ByteBufCodecs.BOOL, ShieldStatePayload::offhand,
                     ShieldStatePayload::new
             );
 

@@ -51,7 +51,6 @@ public class CreatorSwordClientEvents {
 
         if (speed > 0 && !charging) {
             stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-            stack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), System.currentTimeMillis());
             PacketDistributor.sendToServer(new ShieldStatePayload(stack, isOffhand));
         }
     }
@@ -69,7 +68,7 @@ public class CreatorSwordClientEvents {
     private static void resetAndSyncShield(ItemStack stack, boolean isOffhand) {
         if (!(stack.getItem() instanceof CogwheelShieldItem)) return;
 
-        KeyInputHandler.resetNBT(stack);
+        CogwheelShieldItem.resetNBT(stack);
         PacketDistributor.sendToServer(new ShieldStatePayload(
                 stack, isOffhand
         ));

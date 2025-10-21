@@ -20,4 +20,8 @@ public class KeyBindings {
     public static KeyMapping getRotateKey() {
         return ROTATE_COGWHEEL;
     }
+
+    public static boolean isKeyDown(KeyMapping key) {
+        return ROTATE_COGWHEEL.isDown();
+    }
 }

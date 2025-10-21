@@ -19,19 +19,19 @@ public class ModDataComponents {
             DATA_COMPONENTS.registerComponentType("gear_shield_charging",
                     builder -> builder.persistent(com.mojang.serialization.Codec.BOOL));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_CHARGE_START =
-            DATA_COMPONENTS.registerComponentType("gear_shield_charge_start",
-                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
-
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> GEAR_SHIELD_DECAYING =
             DATA_COMPONENTS.registerComponentType("gear_shield_decaying",
                     builder -> builder.persistent(com.mojang.serialization.Codec.BOOL));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_LAST_DECAY =
-            DATA_COMPONENTS.registerComponentType("gear_shield_last_decay",
-                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
-
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> GEAR_SHIELD_ANGLE =
             DATA_COMPONENTS.registerComponentType("gear_shield_angle",
                     builder -> builder.persistent(com.mojang.serialization.Codec.FLOAT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_LAST_UPDATE =
+            DATA_COMPONENTS.registerComponentType("gear_shield_last_update",
+                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> GEAR_SHIELD_LAST_AIR_TICK  =
+            DATA_COMPONENTS.registerComponentType("gear_shield_last_air_tick",
+                    builder -> builder.persistent(com.mojang.serialization.Codec.LONG));
 }

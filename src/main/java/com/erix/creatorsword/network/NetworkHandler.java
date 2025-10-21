@@ -51,7 +51,7 @@ public class NetworkHandler {
                     ServerPlayer player = (ServerPlayer) context.player();
                     if (player == null) return;
 
-                    InteractionHand hand = payload.isOffhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+                    InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
                     ItemStack serverStack = player.getItemInHand(hand);
 
                     if (!(serverStack.getItem() instanceof CogwheelShieldItem)) return;
@@ -61,8 +61,8 @@ public class NetworkHandler {
                     float clientSpeed = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
                     boolean clientCharging = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
                     boolean clientDecaying = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-                    long clientChargeStart = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L);
-                    long clientLastDecay = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L);
+                    long clientLastUpdate = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
+                    long clientLastAirTick = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
                     float clientAngle = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
 
                     if (Math.abs(serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f) - clientSpeed) > 0.01f)
@@ -74,11 +74,11 @@ public class NetworkHandler {
                     if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false) != clientDecaying)
                         serverStack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), clientDecaying);
 
-                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), 0L) != clientChargeStart)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_CHARGE_START.get(), clientChargeStart);
+                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L) != clientLastUpdate)
+                        serverStack.set(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), clientLastUpdate);
 
-                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), 0L) != clientLastDecay)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_LAST_DECAY.get(), clientLastDecay);
+                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L) != clientLastAirTick)
+                        serverStack.set(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), clientLastAirTick);
 
                     if (Math.abs(serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f) - clientAngle) > 0.01f)
                         serverStack.set(ModDataComponents.GEAR_SHIELD_ANGLE.get(), clientAngle);
