@@ -22,7 +22,7 @@ public class ModTag extends ItemTagsProvider {
     public static final TagKey<Item> ENCHANTABLE_PNEUMATIC_BOOST =
             createTagKey("pneumatic_boost");
     public static final TagKey<Item> ENCHANTABLE_OVERDRIVE =
-            createTagKey("overdrive.json");
+            createTagKey("overdrive");
 
     private static TagKey<Item> createTagKey(String name) {
         return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, name));

@@ -55,7 +55,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
 0.1.2更新内容：
 * 新增附魔书：
   * 转速突破-盾牌转速可达到512RPM
-  * 气动推进-提升盾牌旋转加速度
+  * 气动增压-提升盾牌旋转加速度
 * 优化盾牌投掷手感和轨迹
 
 ## 未来计划&杂谈

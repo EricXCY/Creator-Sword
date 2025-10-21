@@ -20,7 +20,7 @@ import static com.erix.creatorsword.ResourceLocationUtil.getResourceLocation;
 
 public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> PNEUMATIC_BOOST = registerKey("pneumatic_boost");
-    public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive.json");
+    public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive");
 
     private static ResourceKey<Enchantment> registerKey(String name) {
         return ResourceKey.create(Registries.ENCHANTMENT, getResourceLocation(name));
