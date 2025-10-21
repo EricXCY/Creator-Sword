@@ -6,7 +6,6 @@ import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
@@ -22,10 +21,11 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 public class CogwheelShieldItem extends ShieldItem {
     private static final float MIN_SPEED = 8f;
-    private static final float MAX_SPEED = 256f;
     private static final float DECAY_RATE = 0.95f; // 衰减系数
     private static final int UPDATE_INTERVAL_TICKS = 2; // 每2tick更新一次
     private static final int AIR_CONSUME_INTERVAL_TICKS = 20; // 每秒消耗空气
+    private static final float NORMAL_MAX_SPEED = 256f;
+    private static final float OVERDRIVE_MAX_SPEED = 512f;
 
     public CogwheelShieldItem(Properties properties) {
         super(new Item.Properties().stacksTo(1).durability(336));
@@ -71,7 +71,7 @@ public class CogwheelShieldItem extends ShieldItem {
             float airBoost = consumeAirIfNeeded(stack, player, accelFactor, currentTick);
             // 使用当前速度计算增长
             float nextSpeed = speed * (accelFactor) * airBoost;
-            speed = Math.min(Math.max(nextSpeed, MIN_SPEED), MAX_SPEED);
+            speed = Math.min(Math.max(nextSpeed, MIN_SPEED), getMaxSpeed(stack, player));
 
         } else {
             // 衰减阶段
@@ -82,7 +82,7 @@ public class CogwheelShieldItem extends ShieldItem {
 
             if (decaying) {
                 speed *= DECAY_RATE;
-                if (speed < MIN_SPEED) {
+                if (speed < 1f) {
                     speed = 0f;
                     decaying = false;
                 }
@@ -137,5 +137,14 @@ public class CogwheelShieldItem extends ShieldItem {
         stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
         stack.set(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
         stack.set(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+    }
+
+    private float getMaxSpeed(ItemStack stack, Player player) {
+        Registry<Enchantment> registry = player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+        Holder<Enchantment> holder = registry.getHolder(EnchantmentKeys.OVERDRIVE)
+                .orElseThrow(() -> new IllegalStateException("Enchantment not found: " + EnchantmentKeys.OVERDRIVE));
+
+        int overdriveLevel = EnchantmentHelper.getItemEnchantmentLevel(holder, stack);
+        return overdriveLevel > 0 ? OVERDRIVE_MAX_SPEED : NORMAL_MAX_SPEED;
     }
 }

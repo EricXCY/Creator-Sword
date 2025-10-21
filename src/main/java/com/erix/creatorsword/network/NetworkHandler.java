@@ -35,10 +35,13 @@ public class NetworkHandler {
                     if (player != null) {
                         ItemStack stack = player.getItemInHand(InteractionHand.OFF_HAND);
                         if (stack.getItem() instanceof CogwheelShieldItem && stack.is(payload.stack().getItem())) {
-                            ThrownCogwheelShield projectile = new ThrownCogwheelShield(player.level(), player, payload.speed(), stack.copy());
-                            projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-                            player.level().addFreshEntity(projectile);
-                            player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+                            if (player.level().getEntitiesOfClass(ThrownCogwheelShield.class, player.getBoundingBox().inflate(5),
+                                    e -> e.getOwner() == player).isEmpty()) {
+                                ThrownCogwheelShield projectile = new ThrownCogwheelShield(player.level(), player, payload.speed(), stack.copy());
+                                projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+                                player.level().addFreshEntity(projectile);
+                                player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+                            }
                         }
                     }
                 }
@@ -61,9 +64,6 @@ public class NetworkHandler {
                     float clientSpeed = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
                     boolean clientCharging = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
                     boolean clientDecaying = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-                    long clientLastUpdate = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
-                    long clientLastAirTick = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
-                    float clientAngle = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
 
                     if (Math.abs(serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f) - clientSpeed) > 0.01f)
                         serverStack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), clientSpeed);
@@ -73,15 +73,6 @@ public class NetworkHandler {
 
                     if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false) != clientDecaying)
                         serverStack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), clientDecaying);
-
-                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L) != clientLastUpdate)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), clientLastUpdate);
-
-                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L) != clientLastAirTick)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), clientLastAirTick);
-
-                    if (Math.abs(serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f) - clientAngle) > 0.01f)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_ANGLE.get(), clientAngle);
                 }
         );
 

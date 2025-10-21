@@ -119,12 +119,10 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                 }
             }
             // 减速逻辑
-            if (speed > 0 && lifetime % 15 == 0) {
-                speed /= 2f;
-                if (speed < 8f) {
-                    speed = 0f;
-                }
-                this.getEntityData().set(SPEED, speed);
+            if (speed > 0 && lifetime % 5 == 0) {
+                float newSpeed = speed * 0.8f;
+                if (newSpeed < 4f) newSpeed = 0f;
+                this.getEntityData().set(SPEED, newSpeed);
             }
         }
     }
@@ -138,7 +136,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                 if (target != this.getOwner()) {
                     float speed = this.getEntityData().get(SPEED);
                     float damage = BASE_DAMAGE * (speed / 256f);
-                    damage = Math.max(0f, Math.min(damage, BASE_DAMAGE));
+                    damage = Math.max(0f, damage);
                     target.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
                 }
             }

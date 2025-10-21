@@ -5,6 +5,7 @@ import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldStatePayload;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionHand;
@@ -98,20 +99,32 @@ public class CreatorSwordClientEvents {
         float speed = offhand.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         if (speed < 0.01f) return;
 
-        // 获取颜色
-        int color = getColorFromSpeed(speed);
-        String text = String.format("%.1f su", speed);
-
         GuiGraphics guiGraphics = event.getGuiGraphics();
         PoseStack poseStack = guiGraphics.pose();
+
+        String text = String.format("%.1f RPM", speed);
+
         int screenWidth = mc.getWindow().getGuiScaledWidth();
         int screenHeight = mc.getWindow().getGuiScaledHeight();
-
-        int x = screenWidth - mc.font.width(text) - 10;
+        int x = screenWidth - mc.font.width(text) - 7;
         int y = screenHeight - 10;
 
+        int color = getColorFromSpeed(speed);
         poseStack.pushPose();
-        guiGraphics.drawString(mc.font, text, x, y, color);
+        if (speed >= 512f) {
+            long time = System.currentTimeMillis();
+            int charX = x;
+            for (int i = 0; i < text.length(); i++) {
+                float hue = (float) ((i * 0.13f + (time % 2000L) / 2000.0) % 1.0f);
+                int rgb = java.awt.Color.HSBtoRGB(hue, 1.0f, 1.0f);
+                String c = String.valueOf(text.charAt(i));
+                guiGraphics.drawString(mc.font, c, charX, y, rgb, true); // 带阴影
+                charX += mc.font.width(c);
+            }
+        } else {
+            guiGraphics.drawString(mc.font, text, x, y, color, true);
+        }
+
         poseStack.popPose();
     }
 
@@ -119,6 +132,7 @@ public class CreatorSwordClientEvents {
         if (speed < 64f) return 0xFFFFFF;
         else if (speed < 128f) return 0x22FF22;
         else if (speed < 256f) return 0x0084FF;
-        else return 0xFF55FF;
+        else if (speed < 512f) return 0xFF55FF;
+        else return 0xFFFFFF;
     }
 }

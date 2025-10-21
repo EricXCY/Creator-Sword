@@ -20,6 +20,7 @@ import static com.erix.creatorsword.ResourceLocationUtil.getResourceLocation;
 
 public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> PNEUMATIC_BOOST = registerKey("pneumatic_boost");
+    public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive.json");
 
     private static ResourceKey<Enchantment> registerKey(String name) {
         return ResourceKey.create(Registries.ENCHANTMENT, getResourceLocation(name));
@@ -36,6 +37,18 @@ public class EnchantmentKeys {
                         items.getOrThrow(ModTag.ENCHANTABLE_PNEUMATIC_BOOST),
                         7,
                         4,
+                        Enchantment.dynamicCost(8, 8),
+                        Enchantment.dynamicCost(30, 15),
+                        1,
+                        EquipmentSlotGroup.HAND
+                )
+        ));
+
+        register(context, OVERDRIVE, new Enchantment.Builder(
+                Enchantment.definition(
+                        items.getOrThrow(ModTag.ENCHANTABLE_OVERDRIVE),
+                        7,
+                        1,
                         Enchantment.dynamicCost(8, 8),
                         Enchantment.dynamicCost(30, 15),
                         1,
