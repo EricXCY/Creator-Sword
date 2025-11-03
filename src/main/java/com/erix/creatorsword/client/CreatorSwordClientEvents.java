@@ -23,6 +23,7 @@ public class CreatorSwordClientEvents {
 
     @SubscribeEvent
     public static void onRenderGui(RenderGuiEvent.Post event) {
+        if (Minecraft.getInstance().screen != null) return;
         KeyInputHandler.clientTick();
     }
 

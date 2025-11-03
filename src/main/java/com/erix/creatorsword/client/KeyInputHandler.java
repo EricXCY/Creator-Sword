@@ -12,6 +12,9 @@ public class KeyInputHandler {
 
     public static void clientTick() {
         Minecraft mc = Minecraft.getInstance();
+        if (Minecraft.getInstance().screen != null)
+            return;
+
         if (mc.player == null) return;
 
         boolean isDown = KeyBindings.ROTATE_COGWHEEL.isDown();
