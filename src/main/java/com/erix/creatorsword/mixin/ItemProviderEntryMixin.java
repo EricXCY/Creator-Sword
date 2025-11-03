@@ -26,5 +26,4 @@ public abstract class ItemProviderEntryMixin<R extends ItemLike, T extends R> ex
             cir.cancel();
         }
     }
-
 }
