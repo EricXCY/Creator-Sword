@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 
 import javax.annotation.Nonnull;
@@ -107,7 +108,7 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         if (target instanceof AbstractMinecart minecart) {
             Player player = event.getEntity();
             ItemStack heldItem = player.getMainHandItem();
-            if (heldItem.is(AllTags.AllItemTags.WRENCH.tag)) {
+            if (heldItem.is(Tags.Items.TOOLS_WRENCH)) {
                 if (!player.isCreative()) {
                     minecart.hurt(minecart.damageSources().playerAttack(player), 100.0F);
                 }

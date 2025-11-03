@@ -1,5 +1,6 @@
 package com.erix.creatorsword.mixin;
 
+import com.simibubi.create.AllKeys;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchHandler;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.createmod.catnip.gui.ScreenOpener;
@@ -26,7 +27,7 @@ public class RadialWrenchHandlerMixin {
         if (!pressed)
             return;
 
-        if (key != com.simibubi.create.AllKeys.ROTATE_MENU.getBoundCode())
+        if (!com.simibubi.create.AllKeys.ROTATE_MENU.doesModifierAndCodeMatch(key))
             return;
 
         if (RadialWrenchHandler.COOLDOWN > 0)
