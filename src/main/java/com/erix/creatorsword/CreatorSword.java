@@ -7,6 +7,7 @@ import com.erix.creatorsword.entity.ModEntities;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteItems;
+import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
 import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
 import net.minecraft.resources.ResourceLocation;
@@ -30,6 +31,7 @@ public class CreatorSword
         CreatorSwordItems.ITEMS.register(modEventBus);
         CogwheelShieldItems.ITEMS.register(modEventBus);
         IncompleteItems.ITEMS.register(modEventBus);
+        SupremeGlueItem.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         modEventBus.register(NetworkHandler.class);

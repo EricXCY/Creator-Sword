@@ -1,11 +1,12 @@
 {
-  "creatorsword.keybinds.category":  "Creator Sword",
+  "creatorsword.keybinds.category":  "Creator's Sword",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "Rotate Cogwheel Shield",
   "item.creatorsword.cogwheel_shield": "cogwheel shield",
   "item.creatorsword.creator_sword": "creator's sword",
   "item.creatorsword.incomplete_creator_sword": "incomplete creator's sword",
   "item.creatorsword.netherite_creator_sword": "netherite creator's sword",
   "item.creatorsword.incomplete_netherite_creator_sword": "incomplete netherite creator's sword",
+  "item.creatorsword.supreme_glue": "supreme glue",
   "itemGroup.creatorsword": "Creator's Sword",
   "advancement.creatorsword.cogwheelshields_full_speed.title": "Mobile Crushing Wheel?!",
   "advancement.creatorsword.cogwheelshields_full_speed.description": "Both hands hold cogwheel shield with full rotation speed.",
