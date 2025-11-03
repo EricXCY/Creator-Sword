@@ -1,6 +1,5 @@
 package com.erix.creatorsword.mixin;
 
-import com.simibubi.create.AllKeys;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchHandler;
 import com.simibubi.create.content.contraptions.wrench.RadialWrenchMenu;
 import net.createmod.catnip.gui.ScreenOpener;
