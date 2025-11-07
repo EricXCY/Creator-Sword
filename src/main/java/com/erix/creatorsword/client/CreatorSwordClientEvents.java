@@ -5,7 +5,6 @@ import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldStatePayload;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionHand;

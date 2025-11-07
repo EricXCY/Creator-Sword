@@ -5,7 +5,7 @@ import com.simibubi.create.content.equipment.wrench.WrenchItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class IncompleteItems {
+public class IncompleteCreatorSwordItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreatorSword.MODID);
 
     public static final DeferredItem<WrenchItem> INCOMPLETE_CREATOR_SWORD = ITEMS.registerItem("incomplete_creator_sword",

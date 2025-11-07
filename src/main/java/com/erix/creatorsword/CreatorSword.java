@@ -6,7 +6,8 @@ import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
 import com.erix.creatorsword.entity.ModEntities;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
-import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteItems;
+import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteCreatorSwordItems;
+import com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems;
 import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
 import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
@@ -30,7 +31,8 @@ public class CreatorSword
     public CreatorSword(IEventBus modEventBus, ModContainer modContainer) {
         CreatorSwordItems.ITEMS.register(modEventBus);
         CogwheelShieldItems.ITEMS.register(modEventBus);
-        IncompleteItems.ITEMS.register(modEventBus);
+        IncompleteCreatorSwordItems.ITEMS.register(modEventBus);
+        IncompleteEnchantmentBookItems.ITEMS.register(modEventBus);
         SupremeGlueItem.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
