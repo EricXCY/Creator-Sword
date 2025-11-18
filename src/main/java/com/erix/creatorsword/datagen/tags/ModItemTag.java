@@ -52,7 +52,10 @@ public class ModItemTag extends ItemTagsProvider {
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
 
-        tag(ENCHANTABLE_PNEUMATIC_BOOST).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+        tag(ENCHANTABLE_PNEUMATIC_BOOST)
+                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get())
+                .add(CreatorSwordItems.CREATOR_SWORD.get())
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
     }
 }

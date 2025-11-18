@@ -1,6 +1,5 @@
 package com.erix.creatorsword.entity;
 
-import com.erix.creatorsword.client.KeyBindings;
 import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
