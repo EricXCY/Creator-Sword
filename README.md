@@ -47,7 +47,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
     * 气动增压-提升盾牌旋转加速度;提升机械师之剑攻击时的攻击速度
     * 坚固-忽略小幅度的耐久损失
 
-**需要：** 机械动力6.0.8 或更高8
+**需要：** 机械动力6.0.8 或更高
 
 ## 未来计划&杂谈
 0.2版本会新增道具
