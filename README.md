@@ -13,14 +13,11 @@
     *   While wearing a backtank, shield acceleration is faster, consuming 1 air unit per second
 *   **Enchantment Book:**
     * Overdrive - allow the rotation speed to reach 512 PRM
-    * Pneumatic Boost - faster acceleration of rotate speed
+    * Pneumatic Boost - faster acceleration of rotate speed; faster attack speed for creator's swords when attacking
     * Sturdy - ignore small durability losses
 **Requires:** Create 6.0.8 or higher
 
 ## Future plans
-Version 0.1 will focus on linking backtank and weapons:
-* Enchantment books: Swords gain more air on attacks
-
 Version 0.2 will add new tools:
 * A grappling hook inspired by package frogport
 * New tools based on the incomplete Creator Sword in old versions
@@ -45,23 +42,17 @@ You can make any modifications to the mod with the goal of distributing it in a 
     *   掷出的盾牌会对路径上的生物造成伤害，伤害基于转速
     *   持盾时可在右下角显示当前转速
     *   有背罐时会消耗空气让盾牌加速更快，每秒消耗1单位空气
-*   **Enchantment Book:**
+*   **附魔书:**
     * 转速突破-盾牌转速可达到512RPM
-    * 气动增压-提升盾牌旋转加速度
+    * 气动增压-提升盾牌旋转加速度;提升机械师之剑攻击时的攻击速度
     * 坚固-忽略小幅度的耐久损失
 
 **需要：** 机械动力6.0.8 或更高8
 
 ## 未来计划&杂谈
-
-0.1版本会专注于背罐与武器间的联动
-* 附魔书：剑攻击时获取更多空气
-
 0.2版本会新增道具
 * 基于货物蛙港样式的抓钩工具
 * 基于老版本不完整的机械师之剑的新道具
-
-**开学了，再加上模组越来越复杂，有点超出我这个Java初学者的能力了。现在边学边开发，后续更新进度会慢下来˃̣̣̥᷄⌓˂̣̣̥᷅**
 
 ## 使用
 
