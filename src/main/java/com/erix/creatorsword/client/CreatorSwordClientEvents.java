@@ -15,7 +15,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-@EventBusSubscriber(modid = "creatorsword", value = Dist.CLIENT, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = "creatorsword", value = Dist.CLIENT)
 public class CreatorSwordClientEvents {
     private static final float THROW_SPEED_THRESHOLD = 64f;
     private static boolean wasVPressed = false;

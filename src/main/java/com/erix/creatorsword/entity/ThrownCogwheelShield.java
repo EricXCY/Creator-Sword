@@ -28,7 +28,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
     private int lifetime = 0;
     private static final int MAX_LIFETIME = 100; // 5秒
     private static final float RETURN_SPEED = 1.2f;
-    private static final float PICKUP_DISTANCE = 1.2f;
+    private static final float PICKUP_DISTANCE = 1.0f;
     private ItemStack cachedItemStack;
 
     public ThrownCogwheelShield(EntityType<? extends ThrownCogwheelShield> type, Level level) {
@@ -71,16 +71,28 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
 
     @Override
     public void tick() {
+        boolean isReturning = this.getEntityData().get(RETURNING);
+        Entity owner = this.getOwner();
+        float speed = this.getEntityData().get(SPEED);
+
+        if (owner instanceof Player player) {
+
+            Vec3 playerPos = player.position().add(0, player.getBbHeight() * 0.5, 0);
+            Vec3 toPlayer = playerPos.subtract(this.position());
+            double dist = toPlayer.length();
+
+            if (isReturning) {
+                this.setNoGravity(true);
+                if (dist > 0.05) {
+                    this.setDeltaMovement(toPlayer.normalize().scale(RETURN_SPEED));
+                }
+            }
+        }
+
         super.tick();
         if (!this.level().isClientSide()) {
             lifetime++;
 
-            // 更新旋转角度
-            float speed = this.getEntityData().get(SPEED);
-
-            // 检查是否返回
-            boolean isReturning = this.getEntityData().get(RETURNING);
-            Entity owner = this.getOwner();
             if (owner instanceof Player player) {
                 Vec3 playerPos = player.position().add(0, player.getEyeHeight() / 2, 0);
                 Vec3 toPlayer = playerPos.subtract(this.position());
@@ -105,10 +117,6 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                         // 优先返回副手
                         if (player.getItemInHand(InteractionHand.OFF_HAND).isEmpty()) {
                             player.setItemInHand(InteractionHand.OFF_HAND, stack);
-                            if (KeyBindings.ROTATE_COGWHEEL.isDown()) {
-                                stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
-                                stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), true);
-                            }
                         } else if (!player.getInventory().add(stack)) {
                             player.drop(stack, false);
                         } else {
