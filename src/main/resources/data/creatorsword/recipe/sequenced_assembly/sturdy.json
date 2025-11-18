@@ -3,14 +3,14 @@
   "ingredient": {
     "item": "minecraft:book"
   },
-  "loops": 1,
+  "loops": 2,
   "results": [
     {
       "id": "minecraft:enchanted_book",
       "components": {
         "minecraft:stored_enchantments": {
           "levels": {
-            "creatorsword:pneumatic_boost": 1
+            "creatorsword:sturdy": 1
           }
         }
       }
@@ -25,7 +25,7 @@
         },
         [
           {
-            "item": "create:propeller"
+            "item": "create:sturdy_sheet"
           }
         ]
       ],
@@ -68,6 +68,6 @@
     }
   ],
   "transitional_item": {
-    "id": "creatorsword:incomplete_pneumatic_boost_book"
+    "id": "creatorsword:incomplete_sturdy_book"
   }
 }
