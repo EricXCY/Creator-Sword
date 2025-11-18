@@ -14,5 +14,9 @@
   "advancement.creatorsword.cogwheelshields_full_speed.description": "Both hands hold cogwheel shield with full rotation speed.",
   "message.creatorsword.advancement_full_speed_cogwheelshields": "%s has reached the goal %s",
   "enchantment.creatorsword.pneumatic_boost": "Pneumatic Boost",
-  "enchantment.creatorsword.overdrive": "Overdrive"
+  "enchantment.creatorsword.pneumatic_boost.desc": "Boost cogwheel shield rotation speed by consuming backtank air, scaling with level",
+  "enchantment.creatorsword.overdrive": "Overdrive",
+  "enchantment.creatorsword.overdrive.desc": "Double the maximum rotation speed",
+  "enchantment.creatorsword.sturdy": "Sturdy",
+  "enchantment.creatorsword.sturdy.desc": "Ignore small durability losses, scaling with level"
 }

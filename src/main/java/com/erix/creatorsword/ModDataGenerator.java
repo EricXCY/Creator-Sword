@@ -2,7 +2,8 @@ package com.erix.creatorsword;
 
 import com.erix.creatorsword.datagen.advancements.ModAdvancementProvider;
 import com.erix.creatorsword.datagen.recipes.ModRecipe;
-import com.erix.creatorsword.datagen.tags.ModTag;
+import com.erix.creatorsword.datagen.tags.ModEnchantmentTag;
+import com.erix.creatorsword.datagen.tags.ModItemTag;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -24,8 +25,13 @@ public class ModDataGenerator {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         CompletableFuture<TagsProvider.TagLookup<Block>> blockTags = CompletableFuture.completedFuture(null);
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        generator.addProvider(event.includeServer(),new ModRecipe(output,lookupProvider));
-        generator.addProvider(event.includeServer(),new ModTag(output, lookupProvider, blockTags, existingFileHelper));
-        generator.addProvider(event.includeServer(),new ModAdvancementProvider(output, lookupProvider, existingFileHelper));
+        ModDatapackBuiltinEntriesProvider builtin = new ModDatapackBuiltinEntriesProvider(output, lookupProvider);
+        generator.addProvider(event.includeServer(), builtin);
+        CompletableFuture<HolderLookup.Provider> registryProvider = builtin.getRegistryProvider();
+
+        generator.addProvider(event.includeServer(), new ModRecipe(output,lookupProvider));
+        generator.addProvider(event.includeServer(), new ModItemTag(output, lookupProvider, blockTags, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModEnchantmentTag(output, registryProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, existingFileHelper));
     }
 }

@@ -18,7 +18,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
-public class ModTag extends ItemTagsProvider {
+public class ModItemTag extends ItemTagsProvider {
     public static final TagKey<Item> ENCHANTABLE_PNEUMATIC_BOOST =
             createTagKey("pneumatic_boost");
     public static final TagKey<Item> ENCHANTABLE_OVERDRIVE =
@@ -28,7 +28,7 @@ public class ModTag extends ItemTagsProvider {
         return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, name));
     }
 
-    public ModTag(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
+    public ModItemTag(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
                   CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTags, CreatorSword.MODID, existingFileHelper);
     }
@@ -55,5 +55,4 @@ public class ModTag extends ItemTagsProvider {
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
     }
-
 }

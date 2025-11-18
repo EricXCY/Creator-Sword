@@ -1,12 +1,13 @@
 package com.erix.creatorsword.datagen.enchantments;
 
-import com.erix.creatorsword.datagen.tags.ModTag;
+import com.erix.creatorsword.datagen.tags.ModItemTag;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,7 @@ import static com.erix.creatorsword.ResourceLocationUtil.getResourceLocation;
 public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> PNEUMATIC_BOOST = registerKey("pneumatic_boost");
     public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive");
+    public static final ResourceKey<Enchantment> STURDY = registerKey("sturdy");
 
     private static ResourceKey<Enchantment> registerKey(String name) {
         return ResourceKey.create(Registries.ENCHANTMENT, getResourceLocation(name));
@@ -34,7 +36,7 @@ public class EnchantmentKeys {
 
         register(context, PNEUMATIC_BOOST, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ModTag.ENCHANTABLE_PNEUMATIC_BOOST),
+                        items.getOrThrow(ModItemTag.ENCHANTABLE_PNEUMATIC_BOOST),
                         7,
                         4,
                         Enchantment.dynamicCost(8, 8),
@@ -46,13 +48,25 @@ public class EnchantmentKeys {
 
         register(context, OVERDRIVE, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ModTag.ENCHANTABLE_OVERDRIVE),
+                        items.getOrThrow(ModItemTag.ENCHANTABLE_OVERDRIVE),
                         7,
                         1,
                         Enchantment.dynamicCost(8, 8),
                         Enchantment.dynamicCost(30, 15),
                         1,
                         EquipmentSlotGroup.HAND
+                )
+        ));
+
+        register(context, STURDY, new Enchantment.Builder(
+                Enchantment.definition(
+                        items.getOrThrow(ItemTags.DURABILITY_ENCHANTABLE),
+                        8,
+                        3,
+                        Enchantment.dynamicCost(10, 10),
+                        Enchantment.dynamicCost(30, 20),
+                        1,
+                        EquipmentSlotGroup.ANY
                 )
         ));
     }

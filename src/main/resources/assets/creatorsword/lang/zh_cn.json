@@ -14,5 +14,9 @@
   "advancement.creatorsword.cogwheelshields_full_speed.description": "主副手同时持有满速齿轮盾",
   "message.creatorsword.advancement_full_speed_cogwheelshields": "%s达成了目标%s",
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
-  "enchantment.creatorsword.overdrive": "转速突破"
+  "enchantment.creatorsword.pneumatic_boost.desc": "消耗空气提升旋转加速度",
+  "enchantment.creatorsword.overdrive": "转速突破",
+  "enchantment.creatorsword.overdrive.desc": "最大转速翻倍",
+  "enchantment.creatorsword.sturdy": "坚固",
+  "enchantment.creatorsword.sturdy.desc": "无视小幅度耐久消耗"
 }
