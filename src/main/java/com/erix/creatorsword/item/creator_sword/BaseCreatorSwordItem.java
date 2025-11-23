@@ -91,9 +91,23 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
     private boolean canWrenchPickup(BlockState state) {
         if (AllTags.AllBlockTags.WRENCH_PICKUP.matches(state))
             return true;
+        return isExtraPickupBlock(state);
+    }
+
+    private boolean isExtraPickupBlock(BlockState state) {
         return state.is(Blocks.DISPENSER) ||
                 state.is(Blocks.DROPPER) ||
-                state.is(Blocks.CRAFTER);
+                state.is(Blocks.CRAFTER) ||
+                state.is(Blocks.JUKEBOX) ||
+                state.is(Blocks.NOTE_BLOCK) ||
+                state.is(Blocks.COPPER_BULB) ||
+                state.is(Blocks.WAXED_COPPER_BULB) ||
+                state.is(Blocks.EXPOSED_COPPER_BULB) ||
+                state.is(Blocks.WAXED_EXPOSED_COPPER_BULB) ||
+                state.is(Blocks.WEATHERED_COPPER_BULB) ||
+                state.is(Blocks.WAXED_WEATHERED_COPPER_BULB) ||
+                state.is(Blocks.OXIDIZED_COPPER_BULB) ||
+                state.is(Blocks.WAXED_OXIDIZED_COPPER_BULB);
     }
 
     private InteractionResult onItemUseOnOther(UseOnContext context) {
