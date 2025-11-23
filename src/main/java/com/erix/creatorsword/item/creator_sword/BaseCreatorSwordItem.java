@@ -128,25 +128,4 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         AllSoundEvents.WRENCH_REMOVE.playOnServer(world, pos, 1.0F, Create.RANDOM.nextFloat() * 0.5F + 0.5F);
         return InteractionResult.SUCCESS;
     }
-
-    public static void wrenchInstaKillsMinecarts(AttackEntityEvent event) {
-        Entity target = event.getTarget();
-        if (target instanceof AbstractMinecart minecart) {
-            Player player = event.getEntity();
-            ItemStack heldItem = player.getMainHandItem();
-            if (heldItem.is(Tags.Items.TOOLS_WRENCH)) {
-                if (!player.isCreative()) {
-                    minecart.hurt(minecart.damageSources().playerAttack(player), 100.0F);
-                }
-            }
-        }
-    }
-
-    public static void playRotateSound(Level level, BlockPos pos) {
-        AllSoundEvents.WRENCH_ROTATE.playOnServer(level, pos, 1.0F, Create.RANDOM.nextFloat() + 0.5F);
-    }
-
-    public static void playRemoveSound(Level level, BlockPos pos) {
-        AllSoundEvents.WRENCH_REMOVE.playOnServer(level, pos, 1.0F, Create.RANDOM.nextFloat() * 0.5F + 0.5F);
-    }
 }
