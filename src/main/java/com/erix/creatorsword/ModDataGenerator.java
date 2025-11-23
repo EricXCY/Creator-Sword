@@ -1,5 +1,6 @@
 package com.erix.creatorsword;
 
+import com.erix.creatorsword.datagen.ModDatapackBuiltinEntriesProvider;
 import com.erix.creatorsword.datagen.advancements.ModAdvancementProvider;
 import com.erix.creatorsword.datagen.recipes.ModRecipe;
 import com.erix.creatorsword.datagen.tags.ModEnchantmentTag;

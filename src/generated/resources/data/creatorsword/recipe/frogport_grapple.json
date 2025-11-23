@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:slime_ball"
+    },
+    "F": {
+      "item": "create:package_frogport"
+    },
+    "G": {
+      "item": "create:goggles"
+    },
+    "S": {
+      "item": "minecraft:string"
+    }
+  },
+  "pattern": [
+    " G ",
+    " F ",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "creatorsword:frogport_grapple"
+  }
+}

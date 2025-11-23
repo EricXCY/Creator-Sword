@@ -2,6 +2,7 @@ package com.erix.creatorsword.ui;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -24,5 +25,6 @@ public class ModTabs {
                         Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
                         Output.accept(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+                        Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                     }).build());
 }

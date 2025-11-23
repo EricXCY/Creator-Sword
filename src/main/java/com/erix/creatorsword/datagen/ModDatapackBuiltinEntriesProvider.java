@@ -1,6 +1,7 @@
-package com.erix.creatorsword;
+package com.erix.creatorsword.datagen;
 
 
+import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;

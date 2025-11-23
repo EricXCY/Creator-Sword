@@ -6,6 +6,7 @@ import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
 import com.erix.creatorsword.entity.ModEntities;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteCreatorSwordItems;
 import com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems;
 import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
@@ -34,6 +35,7 @@ public class CreatorSword
         IncompleteCreatorSwordItems.ITEMS.register(modEventBus);
         IncompleteEnchantmentBookItems.ITEMS.register(modEventBus);
         SupremeGlueItem.ITEMS.register(modEventBus);
+        FrogportGrappleItem.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);
         modEventBus.register(NetworkHandler.class);

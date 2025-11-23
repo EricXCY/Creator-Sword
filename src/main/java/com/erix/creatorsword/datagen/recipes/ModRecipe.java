@@ -2,13 +2,16 @@ package com.erix.creatorsword.datagen.recipes;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -18,7 +21,7 @@ public class ModRecipe extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput) { // 有序合成
+    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) { // 有序合成
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CogwheelShieldItems.COGWHEEL_SHIELD.get())
                 .pattern("PSP")
                 .pattern("PPP")
@@ -27,6 +30,18 @@ public class ModRecipe extends RecipeProvider {
                 .define('S', AllBlocks.SHAFT.get())
                 .unlockedBy("has_andesite",has(AllBlocks.SHAFT))
                 .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FrogportGrappleItem.FROGPORT_GRAPPLE.get())
+                .pattern(" G ")
+                .pattern(" F ")
+                .pattern("SBS")
+                .define('G', AllItems.GOGGLES)
+                .define('F', AllBlocks.PACKAGE_FROGPORT.get())
+                .define('S', Items.STRING)
+                .define('B', Items.SLIME_BALL)
+                .unlockedBy("has_package_frogport",has(AllBlocks.PACKAGE_FROGPORT))
+                .save(recipeOutput);
+
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
                         Ingredient.of(CreatorSwordItems.CREATOR_SWORD.get()),
