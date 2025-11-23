@@ -1,5 +1,6 @@
 package com.erix.creatorsword.datagen.recipes;
 
+import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
@@ -40,6 +41,15 @@ public class ModRecipe extends RecipeProvider {
                 .define('S', Items.STRING)
                 .define('B', Items.SLIME_BALL)
                 .unlockedBy("has_package_frogport",has(AllBlocks.PACKAGE_FROGPORT))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CaptureBoxItem.CAPTURE_BOX.get())
+                .pattern(" C ")
+                .pattern(" B ")
+                .pattern(" C ")
+                .define('C', AllItems.CARDBOARD)
+                .define('B', Items.BARREL)
+                .unlockedBy("has_barrel",has(Items.BARREL))
                 .save(recipeOutput);
 
         SmithingTransformRecipeBuilder.smithing(

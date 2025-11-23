@@ -1,6 +1,7 @@
 package com.erix.creatorsword.item.frogport_grapple;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.client.player.AbstractClientPlayer;
@@ -260,7 +261,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         Vec3 toHook = hookPos.subtract(playerPos);
         double dist = toHook.length();
 
-        if (dist < 1.0) {
+        if (dist < 1.5) {
             playRetractAndClear(level, player, stack);
             return;
         }
@@ -297,14 +298,18 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             return;
         }
 
-        Vec3 playerPos = player.position();
-        Vec3 targetPos = target.position();
+        Vec3 playerCenter = player.position().add(0, player.getBbHeight() * 0.5, 0);
+        Vec3 targetCenter = target.position().add(0, target.getBbHeight() * 0.5, 0);
 
-        Vec3 toPlayer = playerPos.subtract(targetPos);
+        Vec3 toPlayer = playerCenter.subtract(targetCenter);
         double dist = toPlayer.length();
 
         // 足够近就停止拉扯
-        if (dist < 1.5) {
+        if (dist < 0.5) {
+            if (tryCaptureWithBox(player, target)) {
+                playRetractAndClear(level, player, stack);
+                return;
+            }
             playRetractAndClear(level, player, stack);
             return;
         }
@@ -472,4 +477,20 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         return ench.getLevel(holder);
     }
 
+    private static boolean tryCaptureWithBox(Player player, LivingEntity target) {
+        // 主手 & 副手都检查一下
+        ItemStack main = player.getMainHandItem();
+        ItemStack off  = player.getOffhandItem();
+
+        // 优先用副手盒子（你说“另一只手”）
+        if (off.getItem() instanceof CaptureBoxItem && !CaptureBoxItem.hasEntity(off)) {
+            return CaptureBoxItem.captureEntity(off, target);
+        }
+
+        if (main.getItem() instanceof CaptureBoxItem && !CaptureBoxItem.hasEntity(main)) {
+            return CaptureBoxItem.captureEntity(main, target);
+        }
+
+        return false;
+    }
 }
