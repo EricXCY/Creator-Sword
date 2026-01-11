@@ -54,4 +54,3 @@ public class CreatorSword
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }
-

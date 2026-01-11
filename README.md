@@ -28,6 +28,7 @@
     *   Overdrive - allow the rotation speed to reach 512 PRM
     *   Pneumatic Boost - faster acceleration of rotate speed; faster attack speed for creator's swords when attacking
     *   Sturdy - ignore small durability losses
+
 **Requires:** Create 6.0.8 or higher
 
 ## Future plans

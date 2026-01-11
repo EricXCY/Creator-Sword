@@ -2,6 +2,7 @@ package com.erix.creatorsword.client;
 
 import com.erix.creatorsword.data.ModDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
+import com.erix.creatorsword.network.ShieldFullSpeedPayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
@@ -9,6 +10,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class KeyInputHandler {
     private static boolean wasDown = false;
+    private static boolean sentFullSpeedThisHold = false;
+    private static final float FULL_SPEED = 256f;
 
     public static void clientTick() {
         Minecraft mc = Minecraft.getInstance();
@@ -21,14 +24,26 @@ public class KeyInputHandler {
         ItemStack off = mc.player.getOffhandItem();
         ItemStack main = mc.player.getMainHandItem();
 
-        if (off.getItem() instanceof CogwheelShieldItem shieldOff)
+        if (off.getItem() instanceof CogwheelShieldItem shieldOff) {
             shieldOff.tickClient(off, mc.player, isDown);
+            updateRotation(off, true);
+        }
 
-        if (main.getItem() instanceof CogwheelShieldItem shieldMain)
+        if (main.getItem() instanceof CogwheelShieldItem shieldMain) {
             shieldMain.tickClient(main, mc.player, isDown);
+            updateRotation(main, false);
+        }
 
-        updateRotation(off, true);
-        updateRotation(main, false);
+        if (isDown && !sentFullSpeedThisHold) {
+            if (isShieldAtFullSpeed(off) || isShieldAtFullSpeed(main)) {
+                PacketDistributor.sendToServer(new ShieldFullSpeedPayload());
+                sentFullSpeedThisHold = true;
+            }
+        }
+
+        if (!isDown) {
+            sentFullSpeedThisHold = false;
+        }
 
         if (!isDown && wasDown) {
 
@@ -61,5 +76,11 @@ public class KeyInputHandler {
 
         stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
         PacketDistributor.sendToServer(new ShieldThrowPayload(speed, stack));
+    }
+
+    private static boolean isShieldAtFullSpeed(ItemStack stack) {
+        if (!(stack.getItem() instanceof CogwheelShieldItem)) return false;
+        float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        return speed >= FULL_SPEED;
     }
 }
