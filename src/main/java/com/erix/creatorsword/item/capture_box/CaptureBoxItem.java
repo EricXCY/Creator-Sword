@@ -125,10 +125,15 @@ public class CaptureBoxItem extends Item {
         level.addFreshEntity(entity);
 
         CustomData.update(DataComponents.CUSTOM_DATA, stack, t -> {
-            t.putBoolean(KEY_HAS_ENTITY, false);
+            t.remove(KEY_HAS_ENTITY);
             t.remove(KEY_ENTITY_TYPE);
             t.remove(KEY_ENTITY_NBT);
         });
+
+        CustomData data2 = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        if (data2.copyTag().isEmpty()) {
+            stack.remove(DataComponents.CUSTOM_DATA);
+        }
 
         return true;
     }

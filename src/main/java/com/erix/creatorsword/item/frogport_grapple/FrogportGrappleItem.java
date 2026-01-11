@@ -103,7 +103,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         // 发射
         FrogportGrappleSounds.playExtend(level, player);
 
-        double range = 32.0;
+        double range = 48.0;
         Vec3 eye = player.getEyePosition(1.0f);
         Vec3 look = player.getViewVector(1.0f);
         Vec3 end = eye.add(look.scale(range));

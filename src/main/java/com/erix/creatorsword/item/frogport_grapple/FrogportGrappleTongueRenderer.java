@@ -8,8 +8,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
@@ -39,6 +41,9 @@ public class FrogportGrappleTongueRenderer {
     private static final String KEY_HOOK_Y      = "FrogHookY";
     private static final String KEY_HOOK_Z      = "FrogHookZ";
 
+    private static final ResourceLocation TONGUE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "textures/misc/tongue.png");
+
     @SubscribeEvent
     public static void onRenderLevel(RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES)
@@ -65,7 +70,6 @@ public class FrogportGrappleTongueRenderer {
             int phase = tag.getInt(KEY_PHASE);
             float progress = Mth.clamp(tag.getFloat(KEY_PROGRESS), 0f, 1f);
 
-            // 和 item 端保持一致的 step，用 partialTicks 做插值
             float step = 0.18f;
             float renderProgress = progress;
 
@@ -163,7 +167,7 @@ public class FrogportGrappleTongueRenderer {
         poseStack.pushPose();
         poseStack.translate(-camPos.x, -camPos.y, -camPos.z);
 
-        VertexConsumer vc = buffer.getBuffer(RenderType.solid());
+        VertexConsumer vc = buffer.getBuffer(RenderType.entityCutoutNoCull(TONGUE_TEXTURE));
         PoseStack.Pose pose = poseStack.last();
 
         Vec3 normal = dir.cross(side).normalize();
@@ -172,34 +176,45 @@ public class FrogportGrappleTongueRenderer {
         float nz = (float) normal.z;
 
         int light = 0xF000F0;
-        int r = (int) (0.6f * 255);
-        int g = (int) (1.0f * 255);
-        int b = (int) (0.6f * 255);
-        int a = (int) (0.95f * 255);
+        int r = 255;
+        int g = 255;
+        int b = 255;
+        int a = 255;
+
+        float U0 = 0f, U1 = 1f, V0 = 0f, V1 = 1f;
 
         // 正面
-        put(vc, pose, s1, r, g, b, a, light, nx, ny, nz);
-        put(vc, pose, s2, r, g, b, a, light, nx, ny, nz);
-        put(vc, pose, e2, r, g, b, a, light, nx, ny, nz);
-        put(vc, pose, e1, r, g, b, a, light, nx, ny, nz);
+        put(vc, pose, s1, r, g, b, a, light, nx, ny, nz, U0, V0);
+        put(vc, pose, s2, r, g, b, a, light, nx, ny, nz, U1, V0);
+        put(vc, pose, e2, r, g, b, a, light, nx, ny, nz, U1, V1);
+        put(vc, pose, e1, r, g, b, a, light, nx, ny, nz, U0, V1);
 
-        // 背面（双面都画）
-        put(vc, pose, s1, r, g, b, a, light, -nx, -ny, -nz);
-        put(vc, pose, e1, r, g, b, a, light, -nx, -ny, -nz);
-        put(vc, pose, e2, r, g, b, a, light, -nx, -ny, -nz);
-        put(vc, pose, s2, r, g, b, a, light, -nx, -ny, -nz);
+        // 背面
+        put(vc, pose, s1, r, g, b, a, light, -nx, -ny, -nz, U0, V0);
+        put(vc, pose, e1, r, g, b, a, light, -nx, -ny, -nz, U0, V1);
+        put(vc, pose, e2, r, g, b, a, light, -nx, -ny, -nz, U1, V1);
+        put(vc, pose, s2, r, g, b, a, light, -nx, -ny, -nz, U1, V0);
 
         poseStack.popPose();
     }
 
     private static void put(VertexConsumer vc, PoseStack.Pose pose,
                             Vec3 v, int r, int g, int b, int a,
-                            int light, float nx, float ny, float nz) {
+                            int light, float nx, float ny, float nz,
+                            float u, float vTex) {
+
+        int overlay = OverlayTexture.NO_OVERLAY;
+        int overlayU = overlay & 0xFFFF;
+        int overlayV = (overlay >> 16) & 0xFFFF;
+
+        int lightU = light & 0xFFFF;
+        int lightV = (light >> 16) & 0xFFFF;
 
         vc.addVertex(pose, (float) v.x, (float) v.y, (float) v.z)
                 .setColor(r, g, b, a)
-                .setUv(0, 0)
-                .setUv2(light, light)
+                .setUv(u, vTex)
+                .setUv1(overlayU, overlayV)
+                .setUv2(lightU, lightV)
                 .setNormal(pose, nx, ny, nz);
     }
 }
