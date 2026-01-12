@@ -300,12 +300,11 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         Vec3 playerCenter = player.position().add(0, player.getBbHeight() * 0.5, 0);
         Vec3 targetCenter = target.position().add(0, target.getBbHeight() * 0.5, 0);
-
         Vec3 toPlayer = playerCenter.subtract(targetCenter);
-        double dist = toPlayer.length();
+        AABB pBox = player.getBoundingBox().inflate(0.0);
+        AABB tBox = target.getBoundingBox().inflate(0.0);
 
-        // 足够近就停止拉扯
-        if (dist < 0.5) {
+        if (pBox.intersects(tBox)) {
             if (tryCaptureWithBox(player, target)) {
                 playRetractAndClear(level, player, stack);
                 return;
@@ -314,7 +313,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             return;
         }
 
-        applyPullMotion(target, toPlayer.normalize(), 0.6, 1.2);
+        applyPullMotion(target, toPlayer.normalize(), 0.45, 1.0);
     }
 
     private static void applyPullMotion(Entity entity, Vec3 direction, double strength, double maxSpeed) {

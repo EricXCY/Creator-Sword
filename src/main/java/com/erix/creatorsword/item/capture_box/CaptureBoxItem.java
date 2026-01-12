@@ -1,6 +1,7 @@
 package com.erix.creatorsword.item.capture_box;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.client.tooltip.CaptureBoxTooltip;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,6 +14,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -26,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class CaptureBoxItem extends Item {
     private static final String KEY_HAS_ENTITY   = "HasCapturedEntity";
@@ -203,5 +206,21 @@ public class CaptureBoxItem extends Item {
         } else {
             tooltip.add(Component.translatable("item.creatorsword.capture_box.filled.unknown"));
         }
+    }
+
+    @Override
+    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+        if (!hasEntity(stack)) return Optional.empty();
+
+        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = data.copyTag();
+
+        String typeStr = tag.getString("CapturedEntityType");
+        if (typeStr.isEmpty()) return Optional.empty();
+
+        CompoundTag entityNbt = tag.getCompound("CapturedEntityNbt");
+        if (entityNbt.isEmpty()) return Optional.empty();
+
+        return Optional.of(new CaptureBoxTooltip(typeStr, entityNbt));
     }
 }
