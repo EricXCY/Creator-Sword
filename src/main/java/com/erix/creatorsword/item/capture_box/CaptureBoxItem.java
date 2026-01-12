@@ -28,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class CaptureBoxItem extends Item {
@@ -191,25 +192,43 @@ public class CaptureBoxItem extends Item {
                                 @NotNull TooltipFlag flag) {
         super.appendHoverText(stack, context, tooltip, flag);
 
-        if (!hasEntity(stack)) {
+        CompoundTag entityNbt = getCapturedEntityNbt(stack);
+        if (entityNbt == null) {
             tooltip.add(Component.translatable("item.creatorsword.capture_box.empty"));
             return;
         }
 
         EntityType<?> type = getStoredEntityType(stack);
-        if (type != null) {
-            Component mobName = type.getDescription();
-            tooltip.add(Component.translatable(
-                    "item.creatorsword.capture_box.filled",
-                    mobName
-            ));
-        } else {
+        if (type == null) {
             tooltip.add(Component.translatable("item.creatorsword.capture_box.filled.unknown"));
+            return;
+        }
+
+        Component mobName = type.getDescription();
+
+        Component customName = parseCustomNameFromEntityNbt(entityNbt, context);
+        Component displayName = (customName == null)
+                ? mobName
+                : Component.empty()
+                .append(mobName)
+                .append(Component.literal("("))
+                .append(customName)
+                .append(Component.literal(")"));
+
+        tooltip.add(Component.translatable("item.creatorsword.capture_box.filled", displayName));
+
+        if (entityNbt.contains("Health")) {
+            float health = entityNbt.getFloat("Health");
+            tooltip.add(Component.translatable(
+                    "tooltip.creatorsword.capture_box.health",
+                    String.format("%.1f", health)
+            ));
         }
     }
 
+
     @Override
-    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
+    public Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
         if (!hasEntity(stack)) return Optional.empty();
 
         CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
@@ -223,4 +242,29 @@ public class CaptureBoxItem extends Item {
 
         return Optional.of(new CaptureBoxTooltip(typeStr, entityNbt));
     }
+
+    @Nullable
+    private static CompoundTag getCapturedEntityNbt(ItemStack stack) {
+        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        CompoundTag tag = data.copyTag();
+        if (!tag.getBoolean(KEY_HAS_ENTITY)) return null;
+
+        CompoundTag entityNbt = tag.getCompound(KEY_ENTITY_NBT);
+        return entityNbt.isEmpty() ? null : entityNbt;
+    }
+
+    @Nullable
+    private static Component parseCustomNameFromEntityNbt(CompoundTag entityNbt, Item.TooltipContext context) {
+        if (!entityNbt.contains("CustomName", 8)) return null;
+
+        String json = entityNbt.getString("CustomName");
+        if (json.isEmpty()) return null;
+
+        try {
+            return Component.Serializer.fromJsonLenient(json, Objects.requireNonNull(context.registries()));
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
 }
