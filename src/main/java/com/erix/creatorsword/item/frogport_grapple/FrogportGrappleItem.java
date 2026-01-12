@@ -349,10 +349,10 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     }
 
     private enum GrappleTargetType {
-        FRIENDLY,  // 友好：动物、掉落物、包裹等
-        NEUTRAL,   // 中立：玩家等
-        HOSTILE,   // 敌对：怪物
-        IMMUNE     // 完全免疫（Boss）
+        FRIENDLY,  // 友好
+        NEUTRAL,   // 中立&玩家?
+        HOSTILE,   // 敌对
+        IMMUNE     // Boss
     }
 
     private static GrappleTargetType classifyTarget(Entity entity) {
@@ -366,7 +366,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         // 生物类
         if (entity instanceof LivingEntity living) {
-            // Boss 直接 IMMUNE
+            // Boss
             if (isBoss(living))
                 return GrappleTargetType.IMMUNE;
 
@@ -380,7 +380,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
                 return GrappleTargetType.HOSTILE;
             }
 
-            // 其他生物（动物、鱼等）- 友好
+            // 其他生物- 友好
             if (cat == MobCategory.CREATURE
                     || cat == MobCategory.AMBIENT
                     || cat == MobCategory.WATER_CREATURE
@@ -407,10 +407,6 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     private static boolean canPullTarget(ItemStack stack, Entity target, Level level) {
         GrappleTargetType type = classifyTarget(target);
 
-        // 完全免疫的
-        if (type == GrappleTargetType.IMMUNE)
-            return false;
-
         // 非生物
         if (!(target instanceof LivingEntity living)) {
             return true;
@@ -423,7 +419,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             case FRIENDLY -> power >= 0;
             case NEUTRAL  -> power >= 3;
             case HOSTILE  -> power >= 5;
-            case IMMUNE   -> false;
+            case IMMUNE   -> power >= 6;
         };
     }
 
@@ -477,11 +473,11 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     }
 
     private static boolean tryCaptureWithBox(Player player, LivingEntity target) {
-        // 主手 & 副手都检查一下
+        // 主手 & 副手检查一下
         ItemStack main = player.getMainHandItem();
         ItemStack off  = player.getOffhandItem();
 
-        // 优先用副手盒子（你说“另一只手”）
+        // 优先用副手盒子
         if (off.getItem() instanceof CaptureBoxItem && !CaptureBoxItem.hasEntity(off)) {
             return CaptureBoxItem.captureEntity(off, target);
         }
