@@ -1,0 +1,62 @@
+{
+  "creatorsword.keybinds.category":  "Меч Создателя",
+  "creatorsword.keybinds.keybind.rotate_cogwheel": "Раскрутить Зубчатый щит",
+
+  "item.creatorsword.cogwheel_shield": "Зубчатый щит",
+  "item.creatorsword.cogwheel_shield.tooltip.summary": "Зубчатый щит раскручивается при нажатии клавиши вращения.",
+  "item.creatorsword.cogwheel_shield.tooltip.condition1": "При нажатии ПКМ",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour1": "Отображает _RPM_ в _правом нижнем_ углу экрана.",
+  "item.creatorsword.cogwheel_shield.tooltip.condition2": "При нажатии и удерживании клавиши вращения",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour2": "Раскручивается с фиксированным ускорением. Надетый _баллон_ расходует воздух для _увеличения ускорения_.",
+  "item.creatorsword.cogwheel_shield.tooltip.condition3": "При отпускании клавиши вращения (скорость вращения ≥ 64 RPM)",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour3": "_Бросается_ и наносит _урон_ существам на своём пути. _Урон_ зависит от _скорости вращения_.",
+
+
+  "item.creatorsword.creator_sword": "Меч Создателя",
+  "item.creatorsword.creator_sword.tooltip.summary": "Меч с функциями гаечного ключа.",
+  "item.creatorsword.creator_sword.tooltip.condition1": "При атаке",
+  "item.creatorsword.creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
+  "item.creatorsword.creator_sword.tooltip.condition2": "При разборке механизмов",
+  "item.creatorsword.creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
+
+  "item.creatorsword.netherite_creator_sword": "Незеритовый Меч Создателя",
+  "item.creatorsword.netherite_creator_sword.tooltip.summary": "Меч с функциями гаечного ключа.",
+  "item.creatorsword.netherite_creator_sword.tooltip.condition1": "При атаке",
+  "item.creatorsword.netherite_creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
+  "item.creatorsword.netherite_creator_sword.tooltip.condition2": "При разборке механизмов",
+  "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
+
+  "item.creatorsword.incomplete_creator_sword": "Незавершённый Меч Создателя",
+  "item.creatorsword.incomplete_creator_sword.tooltip.summary": "Сломанный меч.",
+  "item.creatorsword.incomplete_netherite_creator_sword": "Незавершённый незеритовый Меч Создателя",
+  "item.creatorsword.incomplete_netherite_creator_sword.tooltip.summary": "Сломанный незеритовый меч.",
+
+  "item.creatorsword.incomplete_pneumatic_boost_book": "Незавершённая книга «Пневмобуст»",
+  "item.creatorsword.incomplete_overdrive_book": "Незавершённая книга «Форсаж»",
+  "item.creatorsword.incomplete_sturdy_book": "Незавершённая книга «Устойчивость»",
+  "item.creatorsword.supreme_glue": "Превосходный клей",
+
+  "item.creatorsword.frogport_grapple": "Крюк квакопорта",
+  "item.creatorsword.frogport_grapple.tooltip.summary": "Крюк-кошка, вдохновлённый почтовым квакопортом.",
+  "item.creatorsword.frogport_grapple.tooltip.condition1": "При нажатии ПКМ",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour1": "_Цепляется_ за цель на расстоянии до 48 блоков.",
+  "item.creatorsword.frogport_grapple.tooltip.condition2": "При наведении на существо",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour2": "_Притягивает_ существо и _захватывает_ его, если в другой руке находится _Коробка ловушка_.",
+
+  "item.creatorsword.capture_box": "Коробка ловушка",
+  "item.creatorsword.capture_box.empty": "Пусто",
+  "item.creatorsword.capture_box.filled": "Содержит: %s",
+  "item.creatorsword.capture_box.filled.unknown": "Содержит: <Неизвестно>",
+  "tooltip.creatorsword.capture_box.health": "Здоровье: %s",
+  "itemGroup.creatorsword": "Меч Создателя",
+
+  "advancement.creatorsword.cogwheelshields_full_speed.title": "Мобильное дробильное колесо?!",
+  "advancement.creatorsword.cogwheelshields_full_speed.description": "Держите зубчатый щит в обеих руках на полной скорости вращения.",
+
+  "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Увеличивает скорость вращения зубчатого щита, расходуя воздух из баллона, а также повышает скорость атаки Меча Создателя. Эффект усиливается с уровнем.",
+  "enchantment.creatorsword.overdrive": "Форсаж",
+  "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения.",
+  "enchantment.creatorsword.sturdy": "Устойчивость",
+  "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности. Эффект усиливается с уровнем."
+}
