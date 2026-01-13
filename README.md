@@ -31,6 +31,8 @@
 
 **Requires:** Create 6.0.8 or higher
 
+**Translation:** ru_ru by GromovoyStarWolf
+
 ## Future plans
 * Try to support 1.20.1
 * Add a new function for Capture Box
@@ -71,6 +73,8 @@ You can make any modifications to the mod with the goal of distributing it in a 
     * 坚固-忽略小幅度的耐久损失
 
 **需要：** 机械动力6.0.8 或更高
+
+**翻译:** ru_ru — GromovoyStarWolf
 
 ## 未来计划&杂谈
 * 尝试支持1.20.1版本
