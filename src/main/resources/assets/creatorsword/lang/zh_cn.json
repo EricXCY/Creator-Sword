@@ -38,9 +38,9 @@
   "item.creatorsword.frogport_grapple": "蛙港抓钩",
   "item.creatorsword.frogport_grapple.tooltip.summary": "蛙港样式的抓钩。",
   "item.creatorsword.frogport_grapple.tooltip.condition1": "右键抓取",
-  "item.creatorsword.frogport_grapple.tooltip.behaviour1": "可_勾_最远48格距离。",
-  "item.creatorsword.frogport_grapple.tooltip.condition2": "对准生物时",
-  "item.creatorsword.frogport_grapple.tooltip.behaviour2": "_拉起_生物，当副手持有抓捕盒时可以_抓捕生物_。",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour1": "可_钩住_最远48格内的目标",
+  "item.creatorsword.frogport_grapple.tooltip.condition2": "钩中生物时",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour2": "将生物_拉向你_。若副手持有_抓捕盒_，可_抓捕生物_。",
 
   "item.creatorsword.capture_box": "抓捕盒",
   "item.creatorsword.capture_box.empty": "空盒子",
