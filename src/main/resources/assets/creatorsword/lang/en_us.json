@@ -1,26 +1,60 @@
 {
   "creatorsword.keybinds.category":  "Creator's Sword",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "Rotate Cogwheel Shield",
+
   "item.creatorsword.cogwheel_shield": "Cogwheel Shield",
+  "item.creatorsword.cogwheel_shield.tooltip.summary": "Gear-shaped shield rotates by pressing rotation key.",
+  "item.creatorsword.cogwheel_shield.tooltip.condition1": "When right-clicking",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour1": "Displays _RPM_ in the _bottom right_ corner of the screen.",
+  "item.creatorsword.cogwheel_shield.tooltip.condition2": "When pressing rotation key",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour2": "Rotates at a fixed acceleration. Equipping a _backtank_ can consume air to _increase acceleration_.",
+  "item.creatorsword.cogwheel_shield.tooltip.condition3": "When releasing key, rotation speed>=64RPM",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour3": "_Thrown_ and causes _damage_ to mobs along the path. _Damage_ depends on _rotation speed_.",
+
+
   "item.creatorsword.creator_sword": "Creator's Sword",
-  "item.creatorsword.incomplete_creator_sword": "Incomplete Creator's Sword",
+  "item.creatorsword.creator_sword.tooltip.summary": "A sword with wrench functionality.",
+  "item.creatorsword.creator_sword.tooltip.condition1": "When attacking",
+  "item.creatorsword.creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
+  "item.creatorsword.creator_sword.tooltip.condition2": "When dismantling components",
+  "item.creatorsword.creator_sword.tooltip.behaviour2": "_Extra redstone comonents_ can be dismantled.",
+
   "item.creatorsword.netherite_creator_sword": "Netherite Creator's Sword",
+  "item.creatorsword.netherite_creator_sword.tooltip.summary": "A sword with wrench functionality.",
+  "item.creatorsword.netherite_creator_sword.tooltip.condition1": "When attacking",
+  "item.creatorsword.netherite_creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
+  "item.creatorsword.netherite_creator_sword.tooltip.condition2": "When dismantling components",
+  "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "_Extra redstone comonents_ can be dismantled.",
+
+  "item.creatorsword.incomplete_creator_sword": "Incomplete Creator's Sword",
+  "item.creatorsword.incomplete_creator_sword.tooltip.summary": "A broken sword.",
   "item.creatorsword.incomplete_netherite_creator_sword": "Incomplete Netherite Creator's Sword",
+  "item.creatorsword.incomplete_netherite_creator_sword.tooltip.summary": "A broken netherite sword.",
+
   "item.creatorsword.incomplete_pneumatic_boost_book": "Incomplete Pneumatic Boost Book",
   "item.creatorsword.incomplete_overdrive_book": "Incomplete Overdrive Book",
   "item.creatorsword.incomplete_sturdy_book": "Incomplete Sturdy Book",
   "item.creatorsword.supreme_glue": "Supreme Glue",
+
   "item.creatorsword.frogport_grapple": "Frogport Grapple",
+  "item.creatorsword.frogport_grapple.tooltip.summary": "A grappling hook inspired by package frogport.",
+  "item.creatorsword.frogport_grapple.tooltip.condition1": "When right-clicking",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour1": "_Hook_ up to a distance of up to 48 squares.",
+  "item.creatorsword.frogport_grapple.tooltip.condition2": "Towards mob",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour2": "_Pull_ mob and _catch_ it if holding a capture box in another hand.",
+
   "item.creatorsword.capture_box": "Capture Box",
   "item.creatorsword.capture_box.empty": "Empty",
   "item.creatorsword.capture_box.filled": "Containing: %s",
   "item.creatorsword.capture_box.filled.unknown": "Containing: <Unknown>",
   "tooltip.creatorsword.capture_box.health": "Health: %s",
   "itemGroup.creatorsword": "Creator's Sword",
+
   "advancement.creatorsword.cogwheelshields_full_speed.title": "Mobile Crushing Wheel?!",
   "advancement.creatorsword.cogwheelshields_full_speed.description": "Both hands hold cogwheel shield with full rotation speed.",
+
   "enchantment.creatorsword.pneumatic_boost": "Pneumatic Boost",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Boost cogwheel shield rotation speed by consuming backtank air, scaling with level",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Boost rotation speed of cogwheel shield by consuming backtank air and boost attack speed of creator's sword, scaling with level",
   "enchantment.creatorsword.overdrive": "Overdrive",
   "enchantment.creatorsword.overdrive.desc": "Double the maximum rotation speed",
   "enchantment.creatorsword.sturdy": "Sturdy",

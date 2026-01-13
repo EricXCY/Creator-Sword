@@ -18,6 +18,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 
 public class CogwheelShieldItem extends ShieldItem {
     private static final float MIN_SPEED = 8f;
@@ -38,7 +39,7 @@ public class CogwheelShieldItem extends ShieldItem {
     }
 
     @Override
-    public boolean isEnchantable(ItemStack stack) {
+    public boolean isEnchantable(@NotNull ItemStack stack) {
         return true;
     }
 
@@ -113,11 +114,11 @@ public class CogwheelShieldItem extends ShieldItem {
             return 1.0f;
 
         int airCost = (int) (accelFactor * 2);
-        if (BacktankUtil.getAir(tanks.get(0)) < airCost)
+        if (BacktankUtil.getAir(tanks.getFirst()) < airCost)
             return 1.0f;
 
         // 消耗空气并触发提速
-        BacktankUtil.consumeAir(player, tanks.get(0), airCost);
+        BacktankUtil.consumeAir(player, tanks.getFirst(), airCost);
         return 1.1f;
     }
 

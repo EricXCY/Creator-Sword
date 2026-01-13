@@ -13,10 +13,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-@EventBusSubscriber(modid = CreatorSword.MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = CreatorSword.MODID)
 public class PneumaticBoostAttackSpeedHandler {
 
-    // 1.21 要用 ResourceLocation 作为 modifier ID
     private static final ResourceLocation ATTACK_SPEED_MODIFIER =
             ResourceLocation.fromNamespaceAndPath("creatorsword", "pneumatic_boost_attack_speed");
 

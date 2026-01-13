@@ -13,14 +13,14 @@
     *   While wearing a backtank, shield acceleration is faster, consuming 1 air unit per second
 *   **Frogport Grapple:**
     *   A grappling hook inspired by package frogport
-    *   Supports distances up to 32 meters
-    *   Can latch onto blocks, items and most entities without EnderDragon, WitherBoss and Warden
+    *   Supports distances up to 48 meters
+    *   Can latch onto blocks, pull mobs
         * **Always pullable (no Power required)**
-          * Friendly mobs (animals, villagers, fish, bats, axolotls, etc.)
+          * Friendly mobs
         * **Neutral targets** – require **Power III+**
-            * Players, Golems and other neutral / misc mobs
+            * Neutral mobs
         * **Hostile mobs** – require **Power V**
-            * Monsters (zombies, skeletons, creepers, spiders, etc.)
+            * Monsters without bosses
 *   **Capture Box:**
     *   When one hand grabs a mob while the other hand holds a capture box, the mob will be placed into the capture box
     *   Release the mob by right-click the capture box
@@ -32,7 +32,6 @@
 **Requires:** Create 6.0.8 or higher
 
 ## Future plans
-* Add Ponder for tools
 * Try to support 1.20.1
 * Add a new function for Capture Box
   * Crushing Wheel can directly crush capture boxes containing mob to obtain loot
@@ -58,11 +57,11 @@ You can make any modifications to the mod with the goal of distributing it in a 
     *   持盾时可在右下角显示当前转速
     *   有背罐时会消耗空气让盾牌加速更快，每秒消耗1单位空气
 *   **蛙港抓钩:**
-    *   支持最远32格距离
-    *   可以抓上方块，拉取除了末影龙、凋零、坚守者以外的生物实体（包裹也可以）
+    *   支持最远48格距离
+    *   可以抓上方块，拉取生物
         * 无力量附魔时可以拉取友好生物
-        * 有力量三可以拉取玩家和中立生物
-        * 有力量五可以拉取敌对生物
+        * 有力量三可以拉取中立生物
+        * 有力量五可以拉取敌对生物，除了坚守者、凋零(试试力量六呢？)和末影龙
 *   **抓捕盒:**
     *   当一只手拿着抓捕盒，另一只手使用蛙港抓钩拉取实体时可以将实体放入抓捕盒
     *   右键抓捕盒放出实体
@@ -74,7 +73,6 @@ You can make any modifications to the mod with the goal of distributing it in a 
 **需要：** 机械动力6.0.8 或更高
 
 ## 未来计划&杂谈
-* 为工具添加思索
 * 尝试支持1.20.1版本
 * 添加新功能：让粉碎轮可以直接粉碎装有生物的抓捕盒以获取生物掉落物
 * 基于重锤核心的新道具

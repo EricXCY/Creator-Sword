@@ -350,9 +350,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
     private enum GrappleTargetType {
         FRIENDLY,  // 友好
-        NEUTRAL,   // 中立&玩家?
+        NEUTRAL,   // 中立
         HOSTILE,   // 敌对
-        IMMUNE     // Boss
+        IMMUNE     // Boss&玩家?
     }
 
     private static GrappleTargetType classifyTarget(Entity entity) {
@@ -370,9 +370,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             if (isBoss(living))
                 return GrappleTargetType.IMMUNE;
 
-            // 玩家：中立
+            // 玩家?
             if (living instanceof Player)
-                return GrappleTargetType.NEUTRAL;
+                return GrappleTargetType.IMMUNE;
 
             MobCategory cat = living.getType().getCategory();
 
