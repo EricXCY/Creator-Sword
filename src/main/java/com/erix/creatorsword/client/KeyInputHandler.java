@@ -35,7 +35,7 @@ public class KeyInputHandler {
         }
 
         if (isDown && !sentFullSpeedThisHold) {
-            if (isShieldAtFullSpeed(off) || isShieldAtFullSpeed(main)) {
+            if (isShieldAtFullSpeed(off) && isShieldAtFullSpeed(main)) {
                 PacketDistributor.sendToServer(new ShieldFullSpeedPayload());
                 sentFullSpeedThisHold = true;
             }
