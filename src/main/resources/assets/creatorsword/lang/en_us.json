@@ -17,14 +17,14 @@
   "item.creatorsword.creator_sword.tooltip.condition1": "When attacking",
   "item.creatorsword.creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
   "item.creatorsword.creator_sword.tooltip.condition2": "When dismantling components",
-  "item.creatorsword.creator_sword.tooltip.behaviour2": "_Extra redstone comonents_ can be dismantled.",
+  "item.creatorsword.creator_sword.tooltip.behaviour2": "_More redstone comonents_ can be dismantled.",
 
   "item.creatorsword.netherite_creator_sword": "Netherite Creator's Sword",
   "item.creatorsword.netherite_creator_sword.tooltip.summary": "A sword with wrench functionality.",
   "item.creatorsword.netherite_creator_sword.tooltip.condition1": "When attacking",
   "item.creatorsword.netherite_creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
   "item.creatorsword.netherite_creator_sword.tooltip.condition2": "When dismantling components",
-  "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "_Extra redstone comonents_ can be dismantled.",
+  "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "_More redstone comonents_ can be dismantled.",
 
   "item.creatorsword.incomplete_creator_sword": "Incomplete Creator's Sword",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "A broken sword.",

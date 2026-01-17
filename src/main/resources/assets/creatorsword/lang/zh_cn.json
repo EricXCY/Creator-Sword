@@ -16,14 +16,14 @@
   "item.creatorsword.creator_sword.tooltip.condition1": "攻击时",
   "item.creatorsword.creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
   "item.creatorsword.creator_sword.tooltip.condition2": "拆除组件时",
-  "item.creatorsword.creator_sword.tooltip.behaviour2": "可以拆除_额外的红石组件_。",
+  "item.creatorsword.creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
 
   "item.creatorsword.netherite_creator_sword": "下界合金机械师之剑",
   "item.creatorsword.netherite_creator_sword.tooltip.summary": "集成扳手功能的剑。",
   "item.creatorsword.netherite_creator_sword.tooltip.condition1": "攻击时",
   "item.creatorsword.netherite_creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
   "item.creatorsword.netherite_creator_sword.tooltip.condition2": "拆除组件时",
-  "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "可以拆除_额外的红石组件_。",
+  "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
 
   "item.creatorsword.incomplete_creator_sword": "不完整的机械师之剑",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "被折断的机械师之剑。",
