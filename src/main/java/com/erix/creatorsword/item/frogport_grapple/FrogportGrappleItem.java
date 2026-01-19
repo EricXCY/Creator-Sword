@@ -51,6 +51,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     private static final String KEY_HOOK_X     = "FrogHookX";
     private static final String KEY_HOOK_Y     = "FrogHookY";
     private static final String KEY_HOOK_Z     = "FrogHookZ";
+    private static final String KEY_PROGRESS_PREV = "FrogTongueProgressPrev";
 
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(CreatorSword.MODID);
@@ -108,10 +109,29 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         Vec3 look = player.getViewVector(1.0f);
         Vec3 end = eye.add(look.scale(range));
 
-        // 尝试命中生物
-        EntityHitResult entityHit = getEntityHit(level, player, eye, end);
-        if (entityHit != null && entityHit.getEntity() instanceof LivingEntity living) {
+        // 尝试命中方块
+        ClipContext ctx = new ClipContext(
+                eye,
+                end,
+                ClipContext.Block.COLLIDER,
+                ClipContext.Fluid.NONE,
+                player
+        );
+        BlockHitResult blockHit = level.clip(ctx);
 
+        Vec3 endForEntity = (blockHit.getType() == HitResult.Type.BLOCK)
+                ? blockHit.getLocation()
+                : end;
+
+        // 尝试命中生物
+        EntityHitResult entityHit = getEntityHit(level, player, eye, endForEntity);
+
+        boolean entityCloser = entityHit != null && (
+                blockHit.getType() != HitResult.Type.BLOCK
+                        || eye.distanceToSqr(entityHit.getLocation()) < eye.distanceToSqr(blockHit.getLocation())
+        );
+
+        if (entityCloser && entityHit.getEntity() instanceof LivingEntity living) {
             if (!canPullTarget(stack, living, level)) {
                 return InteractionResultHolder.pass(stack);
             }
@@ -125,21 +145,12 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         }
 
-        // 尝试命中方块
-        ClipContext ctx = new ClipContext(
-                eye,
-                end,
-                ClipContext.Block.COLLIDER,
-                ClipContext.Fluid.NONE,
-                player
-        );
-        BlockHitResult hitResult = level.clip(ctx);
 
-        if (hitResult.getType() != HitResult.Type.BLOCK) {
+        if (blockHit.getType() != HitResult.Type.BLOCK) {
             return InteractionResultHolder.pass(stack);
         }
 
-        BlockPos pos = hitResult.getBlockPos();
+        BlockPos pos = blockHit.getBlockPos();
 
         if (level.isEmptyBlock(pos) || level.getBlockState(pos).getBlock() == Blocks.AIR) {
             return InteractionResultHolder.pass(stack);
@@ -333,7 +344,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     private static EntityHitResult getEntityHit(Level level, Player player, Vec3 start, Vec3 end) {
         AABB box = player.getBoundingBox()
                 .expandTowards(end.subtract(start))
-                .inflate(1.0D);
+                .inflate(0.5D);
 
         return ProjectileUtil.getEntityHitResult(
                 level,
@@ -428,13 +439,16 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         CompoundTag tag = data.copyTag();
 
         int phase = tag.getInt(KEY_PHASE);
-        float progress = tag.getFloat(KEY_PROGRESS);
+
+        float prevProgress = tag.getFloat(KEY_PROGRESS);
+        float progress = prevProgress;
 
         float step = 0.18f;
 
         switch (phase) {
             case 0 -> progress = 0f;
-            case 1 -> {
+
+            case 1 -> { // 伸舌
                 progress += step;
                 if (progress >= 1f) {
                     progress = 1f;
@@ -442,8 +456,10 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
                     phase = hooked ? 2 : 3;
                 }
             }
-            case 2 -> progress = 1f;
-            case 3 -> {
+
+            case 2 -> progress = 1f; // 持续伸出
+
+            case 3 -> { // 收舌
                 progress -= step;
                 if (progress <= 0f) {
                     progress = 0f;
@@ -453,9 +469,12 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         }
 
         final int fPhase = phase;
+        final float fPrev = prevProgress;
         final float fProgress = progress;
+
         CustomData.update(DataComponents.CUSTOM_DATA, stack, t -> {
             t.putInt(KEY_PHASE, fPhase);
+            t.putFloat(KEY_PROGRESS_PREV, fPrev);
             t.putFloat(KEY_PROGRESS, fProgress);
         });
     }

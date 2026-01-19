@@ -31,15 +31,14 @@ import javax.annotation.Nullable;
 @EventBusSubscriber(modid = CreatorSword.MODID, value = Dist.CLIENT)
 public class FrogportGrappleTongueRenderer {
 
-    // 和 Item 那边的 key 保持一致
     private static final String KEY_HOOKED      = "FrogHooked";
     private static final String KEY_PHASE       = "FrogTonguePhase";
     private static final String KEY_PROGRESS    = "FrogTongueProgress";
-    private static final String KEY_IS_ENTITY   = "FrogHookIsEntity";
     private static final String KEY_ENTITY_ID   = "FrogHookEntityId";
     private static final String KEY_HOOK_X      = "FrogHookX";
     private static final String KEY_HOOK_Y      = "FrogHookY";
     private static final String KEY_HOOK_Z      = "FrogHookZ";
+    private static final String KEY_PROGRESS_PREV = "FrogTongueProgressPrev";
 
     private static final ResourceLocation TONGUE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "textures/misc/tongue.png");
@@ -67,21 +66,18 @@ public class FrogportGrappleTongueRenderer {
             boolean hooked = tag.getBoolean(KEY_HOOKED);
             if (!hooked) continue;
 
-            int phase = tag.getInt(KEY_PHASE);
-            float progress = Mth.clamp(tag.getFloat(KEY_PROGRESS), 0f, 1f);
+            float curr = Mth.clamp(tag.getFloat(KEY_PROGRESS), 0f, 1f);
+            float prev = Mth.clamp(tag.getFloat(KEY_PROGRESS_PREV), 0f, 1f);
 
-            float step = 0.18f;
-            float renderProgress = progress;
-
-            if (phase == 1) { // 伸舌
-                renderProgress = Mth.clamp(progress + step * partialTicks, 0f, 1f);
-            } else if (phase == 3) { // 收舌
-                renderProgress = Mth.clamp(progress - step * partialTicks, 0f, 1f);
+            if (!tag.contains(KEY_PROGRESS_PREV)) {
+                prev = curr;
             }
+
+            float renderProgress = Mth.lerp(partialTicks, prev, curr);
+            renderProgress = Mth.clamp(renderProgress, 0f, 1f);
 
             if (renderProgress <= 0f) continue;
 
-            // 终点：实体优先，其次用记录的 HookX/Y/Z
             Vec3 hookPos = getHookEndPos(tag, partialTicks);
             if (hookPos == null) continue;
 
@@ -109,10 +105,10 @@ public class FrogportGrappleTongueRenderer {
         double sideSign = (armForHand == HumanoidArm.RIGHT) ? 1.0 : -1.0;
 
         Vec3 base = eye
-                .add(look.scale(1.0))  // 前后
-                .add(0, -0.2, 0);      // 上下
+                .add(look.scale(0.7))  // 前后
+                .add(0, -0.27, 0);      // 上下
 
-        double offset = 0.3; // 左右身位偏移
+        double offset = 0.4; // 左右身位偏移
         return base.add(right.scale(sideSign * offset));
     }
 
