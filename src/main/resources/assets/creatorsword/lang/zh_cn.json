@@ -49,7 +49,10 @@
   "tooltip.creatorsword.capture_box.health": "血量: %s",
   "itemGroup.creatorsword": "机械师之剑",
   "advancement.creatorsword.cogwheelshields_full_speed.title": "移动的粉碎轮?!",
-  "advancement.creatorsword.cogwheelshields_full_speed.description": "主副手同时持有满速齿轮盾",
+  "advancement.creatorsword.cogwheelshields_full_speed.description": "主副手同时持有满速齿轮盾。",
+  "advancement.creatorsword.traveling_frog.title": "旅行青蛙",
+  "advancement.creatorsword.traveling_frog.description": "累计使用蛙港抓钩移动 100000 格。",
+
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
   "enchantment.creatorsword.pneumatic_boost.desc": "消耗空气提升旋转加速度",
   "enchantment.creatorsword.overdrive": "转速突破",

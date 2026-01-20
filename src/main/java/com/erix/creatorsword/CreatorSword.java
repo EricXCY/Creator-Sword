@@ -8,6 +8,7 @@ import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
+import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleTravelStat;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteCreatorSwordItems;
 import com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems;
 import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
@@ -28,7 +29,7 @@ import net.neoforged.fml.common.Mod;
 public class CreatorSword
 {
     public static final String MODID = "creatorsword";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public CreatorSword(IEventBus modEventBus, ModContainer modContainer) {
         CreatorSwordItems.ITEMS.register(modEventBus);
@@ -37,6 +38,7 @@ public class CreatorSword
         IncompleteEnchantmentBookItems.ITEMS.register(modEventBus);
         SupremeGlueItem.ITEMS.register(modEventBus);
         FrogportGrappleItem.ITEMS.register(modEventBus);
+        FrogportGrappleTravelStat.register(modEventBus);
         CaptureBoxItem.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
         ModDataComponents.DATA_COMPONENTS.register(modEventBus);

@@ -1,6 +1,7 @@
 package com.erix.creatorsword.item.frogport_grapple;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
@@ -8,6 +9,8 @@ import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
@@ -52,6 +55,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     private static final String KEY_HOOK_Y     = "FrogHookY";
     private static final String KEY_HOOK_Z     = "FrogHookZ";
     private static final String KEY_PROGRESS_PREV = "FrogTongueProgressPrev";
+
+    private static final ResourceLocation STAT_GRAPPLE_TRAVEL = FrogportGrappleTravelStat.ID;
+    private static final int TRAVEL_TARGET = 100000;
 
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(CreatorSword.MODID);
@@ -160,6 +166,24 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         if (!level.isClientSide) {
             startBlockHook(stack, pos);
+            try {
+                if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+
+                    Vec3 hookPos = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+                    int add = (int) Math.floor(eye.distanceTo(hookPos));
+                    if (add > 0) {
+                        var stat = Stats.CUSTOM.get(STAT_GRAPPLE_TRAVEL);
+                        sp.awardStat(stat, add);
+
+                        int total = sp.getStats().getValue(stat);
+                        if (total >= TRAVEL_TARGET) {
+                            CreatorSwordCriteriaTriggers.TRAVELING_FROG.get().trigger(sp);
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                CreatorSword.LOGGER.warn("frogport_grapple_travel stat failed", e);
+            }
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
@@ -417,11 +441,6 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
     private static boolean canPullTarget(ItemStack stack, Entity target, Level level) {
         GrappleTargetType type = classifyTarget(target);
-
-        // 非生物
-        if (!(target instanceof LivingEntity living)) {
-            return true;
-        }
 
         // 生物
         int power = getPowerLevel(stack, level);

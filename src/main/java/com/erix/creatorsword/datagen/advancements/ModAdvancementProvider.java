@@ -1,6 +1,8 @@
 package com.erix.creatorsword.datagen.advancements;
 
+import com.erix.creatorsword.advancement.TravelingFrogTrigger;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
+import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -41,6 +43,25 @@ public class ModAdvancementProvider extends AdvancementProvider {
             builder.addCriterion("get_full_speed", FullSpeedTrigger.criterion());
             builder.requirements(AdvancementRequirements.allOf(List.of("get_full_speed")));
             builder.save(saver, ResourceLocation.fromNamespaceAndPath("creatorsword", "achievements/cogwheelshields_full_speed"), existingFileHelper);
+
+            builder = Advancement.Builder.advancement();
+            builder.display(
+                    new ItemStack((ItemLike) FrogportGrappleItem.FROGPORT_GRAPPLE),
+                    Component.translatable("advancement.creatorsword.traveling_frog.title"),
+                    Component.translatable("advancement.creatorsword.traveling_frog.description"),
+                    null,
+                    AdvancementType.CHALLENGE,
+                    true,
+                    true,
+                    false
+            );
+            builder.addCriterion("reach_100000", TravelingFrogTrigger.criterion());
+            builder.requirements(AdvancementRequirements.allOf(List.of("reach_100000")));
+            builder.save(
+                    saver,
+                    ResourceLocation.fromNamespaceAndPath("creatorsword", "achievements/traveling_frog"),
+                    existingFileHelper
+            );
         }
     }
 }

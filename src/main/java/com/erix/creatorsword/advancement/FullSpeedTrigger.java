@@ -11,9 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
 public class FullSpeedTrigger extends SimpleCriterionTrigger<FullSpeedTrigger.Instance> {
-    ResourceLocation advancementId = ResourceLocation.fromNamespaceAndPath("creatorsword", "achievements/cogwheelshields_full_speed");
-
-
     public FullSpeedTrigger() {}
 
     @Override

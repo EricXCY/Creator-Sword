@@ -1,0 +1,26 @@
+{
+  "criteria": {
+    "reach_100000": {
+      "trigger": "creatorsword:traveling_frog"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.creatorsword.traveling_frog.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "creatorsword:frogport_grapple"
+    },
+    "title": {
+      "translate": "advancement.creatorsword.traveling_frog.title"
+    }
+  },
+  "requirements": [
+    [
+      "reach_100000"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
