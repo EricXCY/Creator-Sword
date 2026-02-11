@@ -32,8 +32,8 @@ import javax.annotation.Nonnull;
 import java.util.function.Consumer;
 
 public abstract class BaseCreatorSwordItem extends SwordItem {
-    public BaseCreatorSwordItem(Tiers tier, Properties attributes) {
-        super(tier, attributes);
+    public BaseCreatorSwordItem(Tiers tier, Properties props) {
+        super(tier, props);
     }
 
     public boolean hurtEnemy(ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
