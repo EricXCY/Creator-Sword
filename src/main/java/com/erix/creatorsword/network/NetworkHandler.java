@@ -1,7 +1,6 @@
 package com.erix.creatorsword.network;
 
 import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
-import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.entity.ThrownCogwheelShield;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import net.minecraft.nbt.CompoundTag;
@@ -11,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+
+import static com.erix.creatorsword.data.ShieldDataComponents.*;
 
 public class NetworkHandler {
     private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
@@ -73,20 +74,9 @@ public class NetworkHandler {
 
                     if (!(serverStack.getItem() instanceof CogwheelShieldItem)) return;
 
-                    ItemStack clientStack = payload.stack();
-
-                    float clientSpeed = clientStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-                    boolean clientCharging = clientStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-                    boolean clientDecaying = clientStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-
-                    if (Math.abs(serverStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f) - clientSpeed) > 0.01f)
-                        serverStack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), clientSpeed);
-
-                    if (serverStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false) != clientCharging)
-                        serverStack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), clientCharging);
-
-                    if (serverStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false) != clientDecaying)
-                        serverStack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), clientDecaying);
+                    serverStack.set(GEAR_SHIELD_SPEED, payload.speed());
+                    serverStack.set(GEAR_SHIELD_CHARGING, payload.charging());
+                    serverStack.set(GEAR_SHIELD_DECAYING, payload.decaying());
                 }
         );
 

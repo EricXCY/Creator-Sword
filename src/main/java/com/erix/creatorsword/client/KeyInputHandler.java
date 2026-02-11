@@ -8,10 +8,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.util.IdentityHashMap;
+import java.util.Map;
+
 public class KeyInputHandler {
     private static boolean wasDown = false;
     private static boolean sentFullSpeedThisHold = false;
     private static final float FULL_SPEED = 256f;
+    private static final Map<ItemStack, Long> ANGLE_TICK_GUARD = new IdentityHashMap<>();
 
     public static void clientTick() {
         Minecraft mc = Minecraft.getInstance();

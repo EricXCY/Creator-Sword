@@ -7,7 +7,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -17,31 +16,10 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(modid = "creatorsword", value = Dist.CLIENT)
 public class CreatorSwordClientEvents {
-    private static final float THROW_SPEED_THRESHOLD = 64f;
-    private static boolean wasVPressed = false;
-
     @SubscribeEvent
     public static void onRenderGui(RenderGuiEvent.Post event) {
         if (Minecraft.getInstance().screen != null) return;
         KeyInputHandler.clientTick();
-    }
-
-    @SubscribeEvent
-    public static void onKeyInput(InputEvent.Key event) {
-        Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null) return;
-
-        boolean isVPressed = KeyBindings.ROTATE_COGWHEEL.isDown();
-        if (!isVPressed && wasVPressed) {
-            ItemStack stack = mc.player.getItemInHand(InteractionHand.OFF_HAND);
-            if (stack.getItem() instanceof CogwheelShieldItem) {
-                float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-                if (speed >= THROW_SPEED_THRESHOLD) {
-                    KeyInputHandler.triggerThrowShield(stack, speed);
-                }
-            }
-        }
-        wasVPressed = isVPressed;
     }
 
     private static void syncShieldState(ItemStack stack, boolean isOffhand) {
@@ -49,10 +27,10 @@ public class CreatorSwordClientEvents {
 
         float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         boolean charging = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        boolean decaying = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false);
 
-        if (speed > 0 && !charging) {
-            stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-            PacketDistributor.sendToServer(new ShieldStatePayload(stack, isOffhand));
+        if (speed > 0) {
+            PacketDistributor.sendToServer(new ShieldStatePayload(isOffhand, speed, charging, decaying));
         }
     }
 
@@ -71,9 +49,10 @@ public class CreatorSwordClientEvents {
 
         CogwheelShieldItem.resetNBT(stack);
         PacketDistributor.sendToServer(new ShieldStatePayload(
-                stack, isOffhand
+                isOffhand, 0f, false, true
         ));
     }
+
 
     @SubscribeEvent
     public static void onPlayerLogout(ClientPlayerNetworkEvent.LoggingOut event) {
