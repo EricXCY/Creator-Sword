@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import com.erix.creatorsword.CreatorSword;
 
 
-public class ModDataComponents {
+public class ShieldDataComponents {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS =
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CreatorSword.MODID);
 

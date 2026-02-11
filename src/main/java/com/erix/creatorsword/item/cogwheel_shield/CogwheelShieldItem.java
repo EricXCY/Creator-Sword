@@ -2,8 +2,10 @@ package com.erix.creatorsword.item.cogwheel_shield;
 
 import java.util.function.Consumer;
 
-import com.erix.creatorsword.data.ModDataComponents;
+import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.Holder;
@@ -48,18 +50,23 @@ public class CogwheelShieldItem extends ShieldItem {
         return 20;
     }
 
+    @Override
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(AllBlocks.SHAFT.asItem());
+    }
+
     @OnlyIn(Dist.CLIENT)
     public void tickClient(ItemStack stack, Player player, boolean keyDown) {
         long currentTick = player.level().getGameTime();
-        long lastUpdateTick = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
+        long lastUpdateTick = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
         if (currentTick - lastUpdateTick < UPDATE_INTERVAL_TICKS)
             return;
 
-        stack.set(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), currentTick);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), currentTick);
 
         float speed = getSpeed(stack);
-        boolean charging = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        boolean decaying = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false);
+        boolean charging = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        boolean decaying = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false);
 
         float accelFactor = getAccelerationFactor(stack, player);
 
@@ -70,7 +77,6 @@ public class CogwheelShieldItem extends ShieldItem {
                 decaying = false;
             }
             float airBoost = consumeAirIfNeeded(stack, player, accelFactor, currentTick);
-            // 使用当前速度计算增长
             float nextSpeed = speed * (accelFactor) * airBoost;
             speed = Math.min(Math.max(nextSpeed, MIN_SPEED), getMaxSpeed(stack, player));
 
@@ -91,23 +97,23 @@ public class CogwheelShieldItem extends ShieldItem {
         }
 
         setSpeed(stack, speed);
-        stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), charging);
-        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), decaying);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), charging);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), decaying);
     }
 
     public float getSpeed(ItemStack stack) {
-        return stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        return stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
     }
 
     public void setSpeed(ItemStack stack, float speed) {
-        stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), speed);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), speed);
     }
 
     private float consumeAirIfNeeded(ItemStack stack, Player player, float accelFactor, long tick) {
-        long lastConsumeTick = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
+        long lastConsumeTick = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
         if (tick - lastConsumeTick < AIR_CONSUME_INTERVAL_TICKS) return 1.0f;
 
-        stack.set(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), tick);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), tick);
 
         var tanks = BacktankUtil.getAllWithAir(player);
         if (tanks.isEmpty())
@@ -127,17 +133,17 @@ public class CogwheelShieldItem extends ShieldItem {
         Holder<Enchantment> holder = registry.getHolder(EnchantmentKeys.PNEUMATIC_BOOST)
                 .orElseThrow(() -> new IllegalStateException("Enchantment not found: " + EnchantmentKeys.PNEUMATIC_BOOST));
 
-        int enchantLevel = EnchantmentHelper.getItemEnchantmentLevel(holder, stack);
+        int enchantLevel = EnchantmentHelper.getTagEnchantmentLevel(holder, stack);
         return (float) (1.1 + 0.05f * enchantLevel);
     }
 
     public static void resetNBT(ItemStack stack) {
-        stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        stack.set(ModDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
-        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-        stack.set(ModDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
-        stack.set(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
+        stack.set(ShieldDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
     }
 
     private float getMaxSpeed(ItemStack stack, Player player) {
@@ -145,7 +151,7 @@ public class CogwheelShieldItem extends ShieldItem {
         Holder<Enchantment> holder = registry.getHolder(EnchantmentKeys.OVERDRIVE)
                 .orElseThrow(() -> new IllegalStateException("Enchantment not found: " + EnchantmentKeys.OVERDRIVE));
 
-        int overdriveLevel = EnchantmentHelper.getItemEnchantmentLevel(holder, stack);
+        int overdriveLevel = EnchantmentHelper.getTagEnchantmentLevel(holder, stack);
         return overdriveLevel > 0 ? OVERDRIVE_MAX_SPEED : NORMAL_MAX_SPEED;
     }
 }

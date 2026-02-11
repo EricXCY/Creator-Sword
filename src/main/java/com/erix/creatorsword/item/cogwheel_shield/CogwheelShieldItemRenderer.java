@@ -1,6 +1,6 @@
 package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.erix.creatorsword.data.ModDataComponents;
+import com.erix.creatorsword.data.ShieldDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
@@ -102,7 +102,7 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
         // 旋转/缩放完之后，渲染护手
         renderer.render(HANDLE.get(), light);
 
-        float rotationAngle = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+        float rotationAngle = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
 
         ms.pushPose(); // 进入齿轮局部旋转
         ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));

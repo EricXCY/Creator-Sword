@@ -1,9 +1,10 @@
 package com.erix.creatorsword.network;
 
 import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
-import com.erix.creatorsword.data.ModDataComponents;
+import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.entity.ThrownCogwheelShield;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +13,8 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public class NetworkHandler {
+    private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
+
     @SubscribeEvent
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
@@ -32,18 +35,29 @@ public class NetworkHandler {
                 ShieldThrowPayload.STREAM_CODEC,
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
-                    if (player != null) {
-                        ItemStack stack = player.getItemInHand(InteractionHand.OFF_HAND);
-                        if (stack.getItem() instanceof CogwheelShieldItem && stack.is(payload.stack().getItem())) {
-                            if (player.level().getEntitiesOfClass(ThrownCogwheelShield.class, player.getBoundingBox().inflate(5),
-                                    e -> e.getOwner() == player).isEmpty()) {
-                                ThrownCogwheelShield projectile = new ThrownCogwheelShield(player.level(), player, payload.speed(), stack.copy());
-                                projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-                                player.level().addFreshEntity(projectile);
-                                player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
-                            }
-                        }
-                    }
+                    if (player == null) return;
+
+                    ItemStack off = player.getItemInHand(InteractionHand.OFF_HAND);
+                    if (!(off.getItem() instanceof CogwheelShieldItem)) return;
+
+                    CompoundTag pd = player.getPersistentData();
+                    if (pd.contains(THROWN_SHIELD_TAG)) return;
+
+                    // 防止附近已经有自己的投掷盾
+                    if (!player.level().getEntitiesOfClass(
+                            ThrownCogwheelShield.class,
+                            player.getBoundingBox().inflate(5),
+                            e -> e.getOwner() == player
+                    ).isEmpty()) return;
+
+                    pd.put(THROWN_SHIELD_TAG, off.save(player.registryAccess()));
+
+                    ThrownCogwheelShield projectile =
+                            new ThrownCogwheelShield(player.level(), player, payload.speed(), off.copy());
+                    projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
+                    player.level().addFreshEntity(projectile);
+
+                    player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
                 }
         );
 
@@ -61,18 +75,18 @@ public class NetworkHandler {
 
                     ItemStack clientStack = payload.stack();
 
-                    float clientSpeed = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-                    boolean clientCharging = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-                    boolean clientDecaying = clientStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+                    float clientSpeed = clientStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+                    boolean clientCharging = clientStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+                    boolean clientDecaying = clientStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
 
-                    if (Math.abs(serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f) - clientSpeed) > 0.01f)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), clientSpeed);
+                    if (Math.abs(serverStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f) - clientSpeed) > 0.01f)
+                        serverStack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), clientSpeed);
 
-                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false) != clientCharging)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), clientCharging);
+                    if (serverStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false) != clientCharging)
+                        serverStack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), clientCharging);
 
-                    if (serverStack.getOrDefault(ModDataComponents.GEAR_SHIELD_DECAYING.get(), false) != clientDecaying)
-                        serverStack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), clientDecaying);
+                    if (serverStack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false) != clientDecaying)
+                        serverStack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), clientDecaying);
                 }
         );
 

@@ -1,6 +1,6 @@
 package com.erix.creatorsword.entity;
 
-import com.erix.creatorsword.data.ModDataComponents;
+import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -8,6 +8,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -55,7 +56,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
     }
 
     @Override
-    public ItemStack getItem() {
+    public @NotNull ItemStack getItem() {
         if (cachedItemStack == null) {
             ItemStack stack = this.getEntityData().get(ITEM_STACK);
             if (!stack.isEmpty()) {
@@ -90,6 +91,11 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
 
         super.tick();
         if (!this.level().isClientSide()) {
+            if (this.getEntityData().get(ITEM_STACK).isEmpty()) {
+                this.discard();
+                return;
+            }
+
             lifetime++;
 
             if (owner instanceof Player player) {
@@ -104,14 +110,17 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
 
                     // 检查拾取
                     if (distanceToPlayer <= PICKUP_DISTANCE) {
-                        ItemStack stack = getItem();
-                        if (stack.isEmpty()) {
+                        ItemStack stackData = this.getEntityData().get(ITEM_STACK);
+                        if (stackData.isEmpty()) {
                             this.discard();
                             return;
                         }
-                        stack.set(ModDataComponents.GEAR_SHIELD_SPEED.get(), speed);
-                        stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-                        stack.set(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+                        ItemStack stack = stackData.copy();
+
+                        float speedNow = this.getEntityData().get(SPEED);
+                        stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), speedNow);
+                        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+                        stack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
 
                         // 优先返回副手
                         if (player.getItemInHand(InteractionHand.OFF_HAND).isEmpty()) {
@@ -120,6 +129,9 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                             player.drop(stack, false);
                         } else {
                             player.inventoryMenu.broadcastChanges();
+                        }
+                        if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
+                            sp.getPersistentData().remove("creatorsword_thrown_shield");
                         }
                         this.discard();
                     }
@@ -145,6 +157,15 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                     float damage = BASE_DAMAGE * (speed / 256f);
                     damage = Math.max(0f, damage);
                     target.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
+
+                    if (damageShieldStack(3)) {
+                        Entity owner = this.getOwner();
+                        if (owner instanceof net.minecraft.server.level.ServerPlayer sp) {
+                            sp.getPersistentData().remove("creatorsword_thrown_shield");
+                        }
+                        this.discard();
+                        return;
+                    }
                 }
             }
             // 碰撞后开始返回
@@ -155,5 +176,22 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
     public float getRotationAngle() {
         float speed = this.getEntityData().get(SPEED);
         return (speed * this.tickCount / 20f) % 360f;
+    }
+
+    private boolean damageShieldStack(int amount) {
+        Entity owner = this.getOwner();
+        if (!(owner instanceof LivingEntity living)) return false;
+
+        ItemStack stack = this.getEntityData().get(ITEM_STACK);
+        if (stack.isEmpty() || !stack.isDamageableItem()) return false;
+
+        ItemStack updated = stack.copy();
+        updated.hurtAndBreak(amount, living, EquipmentSlot.OFFHAND);
+
+        boolean broken = updated.isEmpty() || updated.getDamageValue() >= updated.getMaxDamage();
+        this.getEntityData().set(ITEM_STACK, broken ? ItemStack.EMPTY : updated);
+
+        this.cachedItemStack = null;
+        return broken;
     }
 }

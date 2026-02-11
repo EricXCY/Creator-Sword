@@ -1,6 +1,6 @@
 package com.erix.creatorsword.client;
 
-import com.erix.creatorsword.data.ModDataComponents;
+import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldStatePayload;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -35,7 +35,7 @@ public class CreatorSwordClientEvents {
         if (!isVPressed && wasVPressed) {
             ItemStack stack = mc.player.getItemInHand(InteractionHand.OFF_HAND);
             if (stack.getItem() instanceof CogwheelShieldItem) {
-                float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+                float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
                 if (speed >= THROW_SPEED_THRESHOLD) {
                     KeyInputHandler.triggerThrowShield(stack, speed);
                 }
@@ -47,11 +47,11 @@ public class CreatorSwordClientEvents {
     private static void syncShieldState(ItemStack stack, boolean isOffhand) {
         if (!(stack.getItem() instanceof CogwheelShieldItem)) return;
 
-        float speed = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        boolean charging = stack.getOrDefault(ModDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        boolean charging = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
 
         if (speed > 0 && !charging) {
-            stack.set(ModDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+            stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
             PacketDistributor.sendToServer(new ShieldStatePayload(stack, isOffhand));
         }
     }
@@ -96,7 +96,7 @@ public class CreatorSwordClientEvents {
         if (!player.isUsingItem() || player.getUseItem() != offhand) return;
 
         // 读取转速
-        float speed = offhand.getOrDefault(ModDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        float speed = offhand.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         if (speed < 0.01f) return;
 
         GuiGraphics guiGraphics = event.getGuiGraphics();
