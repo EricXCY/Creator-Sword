@@ -32,7 +32,6 @@ import javax.annotation.Nullable;
 public class FrogportGrappleTongueRenderer {
 
     private static final String KEY_HOOKED      = "FrogHooked";
-    private static final String KEY_PHASE       = "FrogTonguePhase";
     private static final String KEY_PROGRESS    = "FrogTongueProgress";
     private static final String KEY_ENTITY_ID   = "FrogHookEntityId";
     private static final String KEY_HOOK_X      = "FrogHookX";

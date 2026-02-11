@@ -14,18 +14,13 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
-import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -63,8 +58,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             DeferredRegister.createItems(CreatorSword.MODID);
     public static final DeferredHolder<Item, FrogportGrappleItem> FROGPORT_GRAPPLE =
             ITEMS.register("frogport_grapple",
-                    () -> new FrogportGrappleItem(new Item.Properties()
-                            .stacksTo(1)));
+                    () -> new FrogportGrappleItem(new Item.Properties().durability(250).stacksTo(1)));
 
     public FrogportGrappleItem(Properties properties) {
         super(properties);
@@ -138,7 +132,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         );
 
         if (entityCloser && entityHit.getEntity() instanceof LivingEntity living) {
-            if (!canPullTarget(stack, living, level)) {
+            if (!GrappleTargetCondition.canPullTarget(stack, living, level)) {
                 return InteractionResultHolder.pass(stack);
             }
 
@@ -146,6 +140,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
             if (!level.isClientSide) {
                 startEntityHook(stack, living);
+                damageOnHook(level, player, hand, stack, 1);
             }
 
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
@@ -166,6 +161,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         if (!level.isClientSide) {
             startBlockHook(stack, pos);
+            damageOnHook(level, player, hand, stack, 1);
             try {
                 if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
 
@@ -328,7 +324,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             return;
         }
 
-        if (!canPullTarget(stack, target, level)) {
+        if (!GrappleTargetCondition.canPullTarget(stack, target, level)) {
             playRetractAndClear(level, player, stack);
             return;
         }
@@ -383,76 +379,6 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         );
     }
 
-    private enum GrappleTargetType {
-        FRIENDLY,  // 友好
-        NEUTRAL,   // 中立
-        HOSTILE,   // 敌对
-        IMMUNE     // Boss&玩家?
-    }
-
-    private static GrappleTargetType classifyTarget(Entity entity) {
-        // 掉落物
-        if (entity instanceof net.minecraft.world.entity.item.ItemEntity)
-            return GrappleTargetType.FRIENDLY;
-
-        // Create 包裹
-        if (entity.getType() == com.simibubi.create.AllEntityTypes.PACKAGE.get())
-            return GrappleTargetType.FRIENDLY;
-
-        // 生物类
-        if (entity instanceof LivingEntity living) {
-            // Boss
-            if (isBoss(living))
-                return GrappleTargetType.IMMUNE;
-
-            // 玩家?
-            if (living instanceof Player)
-                return GrappleTargetType.IMMUNE;
-
-            MobCategory cat = living.getType().getCategory();
-
-            if (cat == MobCategory.MONSTER) {
-                return GrappleTargetType.HOSTILE;
-            }
-
-            // 其他生物- 友好
-            if (cat == MobCategory.CREATURE
-                    || cat == MobCategory.AMBIENT
-                    || cat == MobCategory.WATER_CREATURE
-                    || cat == MobCategory.WATER_AMBIENT
-                    || cat == MobCategory.UNDERGROUND_WATER_CREATURE
-                    || cat == MobCategory.AXOLOTLS) {
-                return GrappleTargetType.FRIENDLY;
-            }
-
-            // 剩下的当中立
-            return GrappleTargetType.NEUTRAL;
-        }
-
-        // 其他非生物实体默认中立
-        return GrappleTargetType.NEUTRAL;
-    }
-
-    private static boolean isBoss(LivingEntity entity) {
-        return entity instanceof EnderDragon
-                || entity instanceof WitherBoss
-                || entity instanceof Warden;
-    }
-
-    private static boolean canPullTarget(ItemStack stack, Entity target, Level level) {
-        GrappleTargetType type = classifyTarget(target);
-
-        // 生物
-        int power = getPowerLevel(stack, level);
-
-        return switch (type) {
-            case FRIENDLY -> power >= 0;
-            case NEUTRAL  -> power >= 3;
-            case HOSTILE  -> power >= 5;
-            case IMMUNE   -> power >= 6;
-        };
-    }
-
     private static void tickTongueAnimation(ItemStack stack) {
         CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         CompoundTag tag = data.copyTag();
@@ -462,7 +388,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         float prevProgress = tag.getFloat(KEY_PROGRESS);
         float progress = prevProgress;
 
-        float step = 0.18f;
+        float step = 0.15f;
 
         switch (phase) {
             case 0 -> progress = 0f;
@@ -498,18 +424,6 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         });
     }
 
-    private static int getPowerLevel(ItemStack stack, Level level) {
-
-        ItemEnchantments ench = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
-
-        var reg = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
-        var holder = reg.get(Enchantments.POWER).orElse(null);
-        if (holder == null)
-            return 0;
-
-        return ench.getLevel(holder);
-    }
-
     private static boolean tryCaptureWithBox(Player player, LivingEntity target) {
         // 主手 & 副手检查一下
         ItemStack main = player.getMainHandItem();
@@ -525,5 +439,15 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         }
 
         return false;
+    }
+
+    private static EquipmentSlot slotForHand(InteractionHand hand) {
+        return hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
+    }
+
+    private static void damageOnHook(Level level, Player player, InteractionHand hand, ItemStack stack, int amount) {
+        if (level.isClientSide) return;
+        if (player.getAbilities().instabuild) return;
+        stack.hurtAndBreak(amount, player, slotForHand(hand));
     }
 }
