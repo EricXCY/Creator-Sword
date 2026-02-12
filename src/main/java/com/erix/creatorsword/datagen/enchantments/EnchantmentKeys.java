@@ -23,6 +23,7 @@ public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> PNEUMATIC_BOOST = registerKey("pneumatic_boost");
     public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive");
     public static final ResourceKey<Enchantment> STURDY = registerKey("sturdy");
+    public static final ResourceKey<Enchantment> STICKY_TONGUE = registerKey("sticky_tongue");
 
     private static ResourceKey<Enchantment> registerKey(String name) {
         return ResourceKey.create(Registries.ENCHANTMENT, getResourceLocation(name));
@@ -67,6 +68,18 @@ public class EnchantmentKeys {
                         Enchantment.dynamicCost(30, 20),
                         1,
                         EquipmentSlotGroup.ANY
+                )
+        ));
+
+        register(context, STICKY_TONGUE, new Enchantment.Builder(
+                Enchantment.definition(
+                        items.getOrThrow(ModItemTag.ENCHANTABLE_STICKY_TONGUE),
+                        8,
+                        3,
+                        Enchantment.dynamicCost(8, 8),
+                        Enchantment.dynamicCost(30, 15),
+                        1,
+                        EquipmentSlotGroup.HAND
                 )
         ));
     }

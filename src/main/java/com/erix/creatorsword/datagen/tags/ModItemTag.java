@@ -25,6 +25,8 @@ public class ModItemTag extends ItemTagsProvider {
             createTagKey("pneumatic_boost");
     public static final TagKey<Item> ENCHANTABLE_OVERDRIVE =
             createTagKey("overdrive");
+    public static final TagKey<Item> ENCHANTABLE_STICKY_TONGUE =
+            createTagKey("sticky_tongue");
 
     private static TagKey<Item> createTagKey(String name) {
         return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, name));
@@ -53,13 +55,12 @@ public class ModItemTag extends ItemTagsProvider {
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
-        tag(ItemTags.BOW_ENCHANTABLE)
-                .add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
 
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_PNEUMATIC_BOOST)
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get())
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
                 .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+        tag(ENCHANTABLE_STICKY_TONGUE).add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
     }
 }

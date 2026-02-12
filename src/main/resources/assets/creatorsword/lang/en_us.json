@@ -34,6 +34,7 @@
   "item.creatorsword.incomplete_pneumatic_boost_book": "Incomplete Pneumatic Boost Book",
   "item.creatorsword.incomplete_overdrive_book": "Incomplete Overdrive Book",
   "item.creatorsword.incomplete_sturdy_book": "Incomplete Sturdy Book",
+  "item.creatorsword.incomplete_sticky_tongue_book": "Incomplete Sticky Tongue Book",
   "item.creatorsword.supreme_glue": "Supreme Glue",
 
   "item.creatorsword.frogport_grapple": "Frogport Grapple",
@@ -56,9 +57,11 @@
   "advancement.creatorsword.traveling_frog.description": "Accumulate 100000 blocks of movement using the Frogport Grapple.",
 
   "enchantment.creatorsword.pneumatic_boost": "Pneumatic Boost",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Boost rotation speed of cogwheel shield by consuming backtank air and boost attack speed of creator's sword, scaling with level",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Boost rotation speed of cogwheel shield by consuming backtank air and boost attack speed of creator's swords",
   "enchantment.creatorsword.overdrive": "Overdrive",
   "enchantment.creatorsword.overdrive.desc": "Double the maximum rotation speed",
   "enchantment.creatorsword.sturdy": "Sturdy",
-  "enchantment.creatorsword.sturdy.desc": "Ignore small durability losses, scaling with level"
+  "enchantment.creatorsword.sturdy.desc": "Ignore small durability losses, scaling with level",
+  "enchantment.creatorsword.sticky_tongue": "Sticky Tongue",
+  "enchantment.creatorsword.sticky_tongue.desc": "Upgrade the capture level of the Frogport Grapple"
 }

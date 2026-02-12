@@ -34,6 +34,7 @@
   "item.creatorsword.incomplete_pneumatic_boost_book": "Незавершённая книга «Пневмобуст»",
   "item.creatorsword.incomplete_overdrive_book": "Незавершённая книга «Форсаж»",
   "item.creatorsword.incomplete_sturdy_book": "Незавершённая книга «Устойчивость»",
+  "item.creatorsword.incomplete_sticky_tongue_book": "Незавершённая книга «Липкий язык»",
   "item.creatorsword.supreme_glue": "Превосходный клей",
 
   "item.creatorsword.frogport_grapple": "Крюк квакопорта",
@@ -56,9 +57,12 @@
   "advancement.creatorsword.traveling_frog.description": "Накопите 100000 блоков перемещения с помощью Крюка квакопорта.",
 
   "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Увеличивает скорость вращения зубчатого щита, расходуя воздух из баллона, а также повышает скорость атаки Меча Создателя. Эффект усиливается с уровнем.",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Увеличивает скорость вращения зубчатого щита, расходуя воздух из баллона, а также повышает скорость атаки Меча Создателя.",
   "enchantment.creatorsword.overdrive": "Форсаж",
   "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения.",
   "enchantment.creatorsword.sturdy": "Устойчивость",
-  "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности. Эффект усиливается с уровнем."
+  "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности. Эффект усиливается с уровнем.",
+  "enchantment.creatorsword.sticky_tongue": "Липкий язык",
+  "enchantment.creatorsword.sticky_tongue.desc": "Повышает уровень захвата лягушачьего гарпуна."
+
 }

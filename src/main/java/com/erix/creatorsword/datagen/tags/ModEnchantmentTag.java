@@ -21,6 +21,7 @@ public class ModEnchantmentTag extends EnchantmentTagsProvider {
         this.tag(EnchantmentTags.TREASURE)
                 .add(EnchantmentKeys.OVERDRIVE)
                 .add(EnchantmentKeys.PNEUMATIC_BOOST)
-                .add(EnchantmentKeys.STURDY);
+                .add(EnchantmentKeys.STURDY)
+                .add(EnchantmentKeys.STICKY_TONGUE);
     }
 }

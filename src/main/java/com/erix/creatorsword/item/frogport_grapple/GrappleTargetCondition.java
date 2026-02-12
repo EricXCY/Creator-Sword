@@ -1,5 +1,6 @@
 package com.erix.creatorsword.item.frogport_grapple;
 
+import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,7 +9,6 @@ import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 
@@ -25,13 +25,13 @@ public final class GrappleTargetCondition {
 
     public static boolean canPullTarget(ItemStack stack, Entity target, Level level) {
         GrappleTargetType type = classifyTarget(target);
-        int power = getPowerLevel(stack, level);
+        int sricky = getStickyTongueLevel(stack, level);
 
         return switch (type) {
-            case FRIENDLY -> power >= 0;
-            case NEUTRAL  -> power >= 3;
-            case HOSTILE  -> power >= 5;
-            case IMMUNE   -> power >= 6;
+            case FRIENDLY -> sricky >= 0;
+            case NEUTRAL  -> sricky >= 1;
+            case HOSTILE  -> sricky >= 2;
+            case IMMUNE   -> sricky >= 3;
         };
     }
 
@@ -70,11 +70,11 @@ public final class GrappleTargetCondition {
                 || entity instanceof Warden;
     }
 
-    private static int getPowerLevel(ItemStack stack, Level level) {
+    private static int getStickyTongueLevel(ItemStack stack, Level level) {
         ItemEnchantments ench = stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 
         var reg = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
-        var holder = reg.get(Enchantments.POWER).orElse(null);
+        var holder = reg.get(EnchantmentKeys.STICKY_TONGUE).orElse(null);
         if (holder == null)
             return 0;
 

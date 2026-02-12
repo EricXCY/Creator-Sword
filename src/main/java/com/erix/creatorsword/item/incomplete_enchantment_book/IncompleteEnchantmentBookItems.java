@@ -18,5 +18,8 @@ public class IncompleteEnchantmentBookItems extends Item {
 
     public static final DeferredItem<com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems> INCOMPLETE_STURDY = ITEMS.registerItem("incomplete_sturdy_book",
             com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems::new);
+
+    public static final DeferredItem<com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems> INCOMPLETE_STICKY_TONGUE = ITEMS.registerItem("incomplete_sticky_tongue_book",
+            com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems::new);
 }
 

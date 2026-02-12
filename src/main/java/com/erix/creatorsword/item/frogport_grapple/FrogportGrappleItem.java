@@ -16,6 +16,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.boss.EnderDragonPart;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
@@ -41,14 +42,14 @@ import java.util.function.Consumer;
 
 public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
-    private static final String KEY_PHASE      = "FrogTonguePhase";
-    private static final String KEY_PROGRESS   = "FrogTongueProgress";
-    private static final String KEY_HOOKED     = "FrogHooked";
-    private static final String KEY_IS_ENTITY  = "FrogHookIsEntity";
-    private static final String KEY_ENTITY_ID   = "FrogHookEntityId";
-    private static final String KEY_HOOK_X     = "FrogHookX";
-    private static final String KEY_HOOK_Y     = "FrogHookY";
-    private static final String KEY_HOOK_Z     = "FrogHookZ";
+    private static final String KEY_PHASE = "FrogTonguePhase";
+    private static final String KEY_PROGRESS = "FrogTongueProgress";
+    private static final String KEY_HOOKED = "FrogHooked";
+    private static final String KEY_IS_ENTITY = "FrogHookIsEntity";
+    private static final String KEY_ENTITY_ID = "FrogHookEntityId";
+    private static final String KEY_HOOK_X = "FrogHookX";
+    private static final String KEY_HOOK_Y = "FrogHookY";
+    private static final String KEY_HOOK_Z = "FrogHookZ";
     private static final String KEY_PROGRESS_PREV = "FrogTongueProgressPrev";
 
     private static final ResourceLocation STAT_GRAPPLE_TRAVEL = FrogportGrappleTravelStat.ID;
@@ -91,12 +92,10 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
                                                            @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
+        // 右键收回
         CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         CompoundTag tag = data.copyTag();
-        boolean hooked = tag.getBoolean(KEY_HOOKED);
-
-        // 右键收回
-        if (hooked) {
+        if (tag.getBoolean(KEY_HOOKED)) {
             playRetractAndClear(level, player, stack);
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         }
@@ -109,50 +108,33 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         Vec3 look = player.getViewVector(1.0f);
         Vec3 end = eye.add(look.scale(range));
 
-        // 尝试命中方块
-        ClipContext ctx = new ClipContext(
-                eye,
-                end,
+        // 方块命中
+        BlockHitResult blockHit = level.clip(new ClipContext(
+                eye, end,
                 ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE,
                 player
-        );
-        BlockHitResult blockHit = level.clip(ctx);
+        ));
 
         Vec3 endForEntity = (blockHit.getType() == HitResult.Type.BLOCK)
                 ? blockHit.getLocation()
                 : end;
 
-        // 尝试命中生物
         EntityHitResult entityHit = getEntityHit(level, player, eye, endForEntity);
 
-        boolean entityCloser = entityHit != null && (
-                blockHit.getType() != HitResult.Type.BLOCK
-                        || eye.distanceToSqr(entityHit.getLocation()) < eye.distanceToSqr(blockHit.getLocation())
-        );
-
-        if (entityCloser && entityHit.getEntity() instanceof LivingEntity living) {
-            if (!GrappleTargetCondition.canPullTarget(stack, living, level)) {
-                return InteractionResultHolder.pass(stack);
+        if (isEntityCloser(eye, blockHit, entityHit)) {
+            if (tryHookEntity(level, player, hand, stack, entityHit)) {
+                return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
             }
-
-            FrogportGrappleSounds.playLatch(level, player);
-
-            if (!level.isClientSide) {
-                startEntityHook(stack, living);
-                damageOnHook(level, player, hand, stack, 1);
-            }
-
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+            return InteractionResultHolder.pass(stack);
         }
 
-
+        // 否则抓方块
         if (blockHit.getType() != HitResult.Type.BLOCK) {
             return InteractionResultHolder.pass(stack);
         }
 
         BlockPos pos = blockHit.getBlockPos();
-
         if (level.isEmptyBlock(pos) || level.getBlockState(pos).getBlock() == Blocks.AIR) {
             return InteractionResultHolder.pass(stack);
         }
@@ -162,24 +144,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         if (!level.isClientSide) {
             startBlockHook(stack, pos);
             damageOnHook(level, player, hand, stack, 1);
-            try {
-                if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
-
-                    Vec3 hookPos = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
-                    int add = (int) Math.floor(eye.distanceTo(hookPos));
-                    if (add > 0) {
-                        var stat = Stats.CUSTOM.get(STAT_GRAPPLE_TRAVEL);
-                        sp.awardStat(stat, add);
-
-                        int total = sp.getStats().getValue(stat);
-                        if (total >= TRAVEL_TARGET) {
-                            CreatorSwordCriteriaTriggers.TRAVELING_FROG.get().trigger(sp);
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                CreatorSword.LOGGER.warn("frogport_grapple_travel stat failed", e);
-            }
+            awardTravelStatIfServer(player, eye, pos);
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
@@ -235,6 +200,74 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             pullEntityTowardsPlayer(stack, level, player, tag);
         } else {
             pullPlayerTowardsBlock(stack, level, player, tag);
+        }
+    }
+
+    private static boolean isEntityCloser(Vec3 eye, BlockHitResult blockHit, @Nullable EntityHitResult entityHit) {
+        if (entityHit == null) return false;
+        if (blockHit.getType() != HitResult.Type.BLOCK) return true;
+        return eye.distanceToSqr(entityHit.getLocation()) < eye.distanceToSqr(blockHit.getLocation());
+    }
+
+    private static boolean tryHookEntity(Level level, Player player, InteractionHand hand, ItemStack stack,
+                                         @Nullable EntityHitResult entityHit) {
+        if (entityHit == null) return false;
+
+        LivingEntity living = resolveLiving(entityHit.getEntity());
+        if (living == null) return false;
+
+        if (!GrappleTargetCondition.canPullTarget(stack, living, level)) {
+            return false;
+        }
+
+        FrogportGrappleSounds.playLatch(level, player);
+
+        if (!level.isClientSide) {
+            startEntityHook(stack, living);
+            damageOnHook(level, player, hand, stack, 1);
+        }
+
+        return true;
+    }
+
+    @Nullable
+    private static LivingEntity resolveLiving(Entity hit) {
+        if (hit instanceof LivingEntity le) return le;
+
+        if (hit instanceof EnderDragonPart part) {
+            return part.parentMob;
+        }
+
+        Entity v = hit.getVehicle();
+        if (v instanceof LivingEntity le) return le;
+
+        Entity root = hit.getRootVehicle();
+        if (root instanceof LivingEntity le) return le;
+
+        for (Entity p : hit.getPassengers()) {
+            if (p instanceof LivingEntity le) return le;
+        }
+
+        return null;
+    }
+
+    private static void awardTravelStatIfServer(Player player, Vec3 eye, BlockPos pos) {
+        if (!(player instanceof net.minecraft.server.level.ServerPlayer sp)) return;
+
+        Vec3 hookPos = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+        int add = (int) Math.floor(eye.distanceTo(hookPos));
+        if (add <= 0) return;
+
+        try {
+            var stat = Stats.CUSTOM.get(STAT_GRAPPLE_TRAVEL);
+            sp.awardStat(stat, add);
+
+            int total = sp.getStats().getValue(stat);
+            if (total >= TRAVEL_TARGET) {
+                CreatorSwordCriteriaTriggers.TRAVELING_FROG.get().trigger(sp);
+            }
+        } catch (Exception e) {
+            CreatorSword.LOGGER.warn("frogport_grapple_travel stat failed", e);
         }
     }
 
@@ -374,7 +407,6 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
                 box,
                 entity -> entity.isPickable()
                         && !entity.isSpectator()
-                        && entity instanceof LivingEntity
                         && !entity.is(player)
         );
     }
@@ -388,7 +420,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         float prevProgress = tag.getFloat(KEY_PROGRESS);
         float progress = prevProgress;
 
-        float step = 0.15f;
+        float step = 0.16f;
 
         switch (phase) {
             case 0 -> progress = 0f;
@@ -425,11 +457,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     }
 
     private static boolean tryCaptureWithBox(Player player, LivingEntity target) {
-        // 主手 & 副手检查一下
         ItemStack main = player.getMainHandItem();
-        ItemStack off  = player.getOffhandItem();
+        ItemStack off = player.getOffhandItem();
 
-        // 优先用副手盒子
         if (off.getItem() instanceof CaptureBoxItem && !CaptureBoxItem.hasEntity(off)) {
             return CaptureBoxItem.captureEntity(off, target);
         }

@@ -33,6 +33,7 @@
   "item.creatorsword.incomplete_pneumatic_boost_book": "未完成的气动增压附魔书",
   "item.creatorsword.incomplete_overdrive_book": "未完成的转速突破附魔书",
   "item.creatorsword.incomplete_sturdy_book": "未完成的坚固附魔书",
+  "item.creatorsword.incomplete_sticky_tongue_book": "未完成的黏舌附魔书",
   "item.creatorsword.supreme_glue": "极力胶",
 
   "item.creatorsword.frogport_grapple": "蛙港抓钩",
@@ -54,9 +55,11 @@
   "advancement.creatorsword.traveling_frog.description": "累计使用蛙港抓钩移动 100000 格。",
 
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
-  "enchantment.creatorsword.pneumatic_boost.desc": "消耗空气提升旋转加速度",
+  "enchantment.creatorsword.pneumatic_boost.desc": "消耗空气提升旋转加速度；提升机械师之剑的攻速",
   "enchantment.creatorsword.overdrive": "转速突破",
   "enchantment.creatorsword.overdrive.desc": "最大转速翻倍",
   "enchantment.creatorsword.sturdy": "坚固",
-  "enchantment.creatorsword.sturdy.desc": "无视小幅度耐久消耗"
+  "enchantment.creatorsword.sturdy.desc": "无视小幅度耐久消耗",
+  "enchantment.creatorsword.sticky_tongue": "黏舌",
+  "enchantment.creatorsword.sticky_tongue.desc": "提升蛙港抓钩对生物的抓捕等级"
 }
