@@ -32,26 +32,41 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class CaptureBoxItem extends Item {
-    private static final String KEY_HAS_ENTITY   = "HasCapturedEntity";
-    private static final String KEY_ENTITY_TYPE  = "CapturedEntityType";
-    private static final String KEY_ENTITY_NBT   = "CapturedEntityNbt";
+    private static final String KEY_HAS_ENTITY  = "HasCapturedEntity";
+    private static final String KEY_ENTITY_TYPE = "CapturedEntityType";
+    private static final String KEY_ENTITY_NBT  = "CapturedEntityNbt";
 
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(CreatorSword.MODID);
     public static final DeferredHolder<Item, CaptureBoxItem> CAPTURE_BOX =
             ITEMS.register("capture_box",
-                    () -> new CaptureBoxItem(new Item.Properties()
-                            .stacksTo(1)));
+                    () -> new CaptureBoxItem(new Item.Properties().stacksTo(1)));
 
     public CaptureBoxItem(Properties properties) {
         super(properties);
     }
 
+    private static CompoundTag getRootTag(ItemStack stack) {
+        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
+        return data.copyTag();
+    }
+
+    private static boolean hasFlag(CompoundTag tag) {
+        return tag.getBoolean(KEY_HAS_ENTITY);
+    }
+
+    public static boolean hasEntity(ItemStack stack) {
+        return hasFlag(getRootTag(stack));
+    }
+
+    public static boolean hasCapturedMob(ItemStack stack) {
+        return getStoredEntityType(stack) != null && getCapturedEntityNbt(stack) != null;
+    }
+
     @Nullable
     public static EntityType<?> getStoredEntityType(ItemStack stack) {
-        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        CompoundTag tag = data.copyTag();
-        if (!tag.getBoolean(KEY_HAS_ENTITY))
+        CompoundTag tag = getRootTag(stack);
+        if (!hasFlag(tag))
             return null;
 
         String typeStr = tag.getString(KEY_ENTITY_TYPE);
@@ -65,10 +80,14 @@ public class CaptureBoxItem extends Item {
         return BuiltInRegistries.ENTITY_TYPE.get(id);
     }
 
-    public static boolean hasEntity(ItemStack stack) {
-        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        CompoundTag tag = data.copyTag();
-        return tag.getBoolean(KEY_HAS_ENTITY);
+    @Nullable
+    public static CompoundTag getCapturedEntityNbt(ItemStack stack) {
+        CompoundTag tag = getRootTag(stack);
+        if (!hasFlag(tag))
+            return null;
+
+        CompoundTag entityNbt = tag.getCompound(KEY_ENTITY_NBT);
+        return entityNbt.isEmpty() ? null : entityNbt;
     }
 
     public static boolean captureEntity(ItemStack stack, LivingEntity target) {
@@ -80,8 +99,6 @@ public class CaptureBoxItem extends Item {
             return false;
 
         ResourceLocation typeId = EntityType.getKey(target.getType());
-        if (typeId == null)
-            return false;
 
         target.setDeltaMovement(Vec3.ZERO);
         target.hurtMarked = true;
@@ -96,7 +113,6 @@ public class CaptureBoxItem extends Item {
             t.put(KEY_ENTITY_NBT, entityNbt);
         });
 
-        // 删除原实体
         target.discard();
         return true;
     }
@@ -105,16 +121,9 @@ public class CaptureBoxItem extends Item {
         if (level.isClientSide)
             return false;
 
-        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        CompoundTag tag = data.copyTag();
-        if (!tag.getBoolean(KEY_HAS_ENTITY))
-            return false;
-
-        String typeStr = tag.getString(KEY_ENTITY_TYPE);
-        CompoundTag entityNbt = tag.getCompound(KEY_ENTITY_NBT);
-
-        EntityType<?> type = BuiltInRegistries.ENTITY_TYPE.get(ResourceLocation.tryParse(typeStr));
-        if (type == null)
+        EntityType<?> type = getStoredEntityType(stack);
+        CompoundTag entityNbt = getCapturedEntityNbt(stack);
+        if (type == null || entityNbt == null)
             return false;
 
         BlockPos pos = hit.getBlockPos();
@@ -124,22 +133,25 @@ public class CaptureBoxItem extends Item {
         if (!(entity instanceof LivingEntity living))
             return false;
 
-        entity.load(entityNbt);
-        entity.moveTo(spawnPos.x, spawnPos.y, spawnPos.z, player.getYRot(), player.getXRot());
-        level.addFreshEntity(entity);
+        living.load(entityNbt);
+        living.moveTo(spawnPos.x, spawnPos.y, spawnPos.z, player.getYRot(), player.getXRot());
+        level.addFreshEntity(living);
 
+        updateDataComponents(stack, KEY_HAS_ENTITY, KEY_ENTITY_TYPE, KEY_ENTITY_NBT);
+        return true;
+    }
+
+    public static void updateDataComponents(ItemStack stack, String keyHasEntity, String keyEntityType, String keyEntityNbt) {
         CustomData.update(DataComponents.CUSTOM_DATA, stack, t -> {
-            t.remove(KEY_HAS_ENTITY);
-            t.remove(KEY_ENTITY_TYPE);
-            t.remove(KEY_ENTITY_NBT);
+            t.remove(keyHasEntity);
+            t.remove(keyEntityType);
+            t.remove(keyEntityNbt);
         });
 
         CustomData data2 = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         if (data2.copyTag().isEmpty()) {
             stack.remove(DataComponents.CUSTOM_DATA);
         }
-
-        return true;
     }
 
     @Override
@@ -148,9 +160,8 @@ public class CaptureBoxItem extends Item {
                                                            @NotNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!hasEntity(stack)) {
+        if (!hasEntity(stack))
             return InteractionResultHolder.pass(stack);
-        }
 
         double reach = player.blockInteractionRange();
         Vec3 eye = player.getEyePosition(1.0f);
@@ -166,15 +177,12 @@ public class CaptureBoxItem extends Item {
         );
         net.minecraft.world.phys.BlockHitResult hit = level.clip(ctx);
 
-        if (hit.getType() != net.minecraft.world.phys.HitResult.Type.BLOCK) {
+        if (hit.getType() != net.minecraft.world.phys.HitResult.Type.BLOCK)
             return InteractionResultHolder.pass(stack);
-        }
 
         if (!level.isClientSide) {
-            boolean released = releaseEntity(level, player, stack, hit);
-            if (!released) {
+            if (!releaseEntity(level, player, stack, hit))
                 return InteractionResultHolder.pass(stack);
-            }
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
@@ -205,8 +213,8 @@ public class CaptureBoxItem extends Item {
         }
 
         Component mobName = type.getDescription();
-
         Component customName = parseCustomNameFromEntityNbt(entityNbt, context);
+
         Component displayName = (customName == null)
                 ? mobName
                 : Component.empty()
@@ -226,31 +234,20 @@ public class CaptureBoxItem extends Item {
         }
     }
 
-
     @Override
-    public Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
-        if (!hasEntity(stack)) return Optional.empty();
+    public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack stack) {
+        if (!hasEntity(stack))
+            return Optional.empty();
 
-        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        CompoundTag tag = data.copyTag();
+        CompoundTag entityNbt = getCapturedEntityNbt(stack);
+        EntityType<?> type = getStoredEntityType(stack);
 
-        String typeStr = tag.getString("CapturedEntityType");
-        if (typeStr.isEmpty()) return Optional.empty();
+        if (entityNbt == null || type == null)
+            return Optional.empty();
 
-        CompoundTag entityNbt = tag.getCompound("CapturedEntityNbt");
-        if (entityNbt.isEmpty()) return Optional.empty();
+        ResourceLocation id = EntityType.getKey(type);
 
-        return Optional.of(new CaptureBoxTooltip(typeStr, entityNbt));
-    }
-
-    @Nullable
-    private static CompoundTag getCapturedEntityNbt(ItemStack stack) {
-        CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
-        CompoundTag tag = data.copyTag();
-        if (!tag.getBoolean(KEY_HAS_ENTITY)) return null;
-
-        CompoundTag entityNbt = tag.getCompound(KEY_ENTITY_NBT);
-        return entityNbt.isEmpty() ? null : entityNbt;
+        return Optional.of(new CaptureBoxTooltip(id.toString(), entityNbt));
     }
 
     @Nullable
@@ -266,5 +263,4 @@ public class CaptureBoxItem extends Item {
             return null;
         }
     }
-
 }
