@@ -5,7 +5,6 @@ import java.util.function.Consumer;
 import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.Holder;
@@ -51,7 +50,7 @@ public class CogwheelShieldItem extends ShieldItem {
     }
 
     @Override
-    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(@NotNull ItemStack toRepair, ItemStack repair) {
         return repair.is(AllBlocks.SHAFT.asItem());
     }
 
