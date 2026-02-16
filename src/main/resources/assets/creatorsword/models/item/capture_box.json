@@ -3,7 +3,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:item/package_transforms",
 	"textures": {
-		"0": "creatorsword:item/capture_box"
+		"0": "creatorsword:item/capture_box",
+		"particle": "creatorsword:item/capture_box"
 	},
 	"elements": [
 		{

@@ -4,8 +4,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"1": "creatorsword:item/gear",
-		"5": "creatorsword:item/incomplete_creator_sword",
-		"particle": "creatorsword:item/incomplete_creator_sword"
+		"5": "creatorsword:item/incomplete_creator_sword"
 	},
 	"elements": [
 		{

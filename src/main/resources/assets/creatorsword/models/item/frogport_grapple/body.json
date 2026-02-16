@@ -4,8 +4,7 @@
 	"render_type": "minecraft:cutout",
 	"textures": {
 		"0": "create:block/port2",
-		"1": "create:block/port",
-		"particle": "create:block/port2"
+		"1": "create:block/port"
 	},
 	"elements": [
 		{

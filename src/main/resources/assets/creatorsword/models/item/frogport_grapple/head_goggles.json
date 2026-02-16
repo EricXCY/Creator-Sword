@@ -5,8 +5,7 @@
 	"textures": {
 		"0": "create:block/port2",
 		"1": "create:block/port",
-		"2": "create:block/froggles",
-		"particle": "create:block/port2"
+		"2": "create:block/froggles"
 	},
 	"elements": [
 		{
