@@ -46,7 +46,7 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
 
     private void handleBacktankLogic(Player player) {
         var backtanks = BacktankUtil.getAllWithAir(player);
-        var tank = backtanks.get(0);
+        var tank = backtanks.getFirst();
         int currentAir = BacktankUtil.getAir(tank);
         int maxAir = BacktankUtil.maxAir(tank);
 

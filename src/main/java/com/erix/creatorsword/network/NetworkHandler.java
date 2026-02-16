@@ -25,9 +25,7 @@ public class NetworkHandler {
                 ShieldFullSpeedPayload.STREAM_CODEC,
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
-                    if (player != null) {
-                        CreatorSwordCriteriaTriggers.FULL_SPEED.get().trigger(player);
-                    }
+                    CreatorSwordCriteriaTriggers.FULL_SPEED.get().trigger(player);
                 }
         );
 
@@ -36,7 +34,6 @@ public class NetworkHandler {
                 ShieldThrowPayload.STREAM_CODEC,
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
-                    if (player == null) return;
 
                     ItemStack off = player.getItemInHand(InteractionHand.OFF_HAND);
                     if (!(off.getItem() instanceof CogwheelShieldItem)) return;
@@ -67,7 +64,6 @@ public class NetworkHandler {
                 ShieldStatePayload.STREAM_CODEC,
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
-                    if (player == null) return;
 
                     InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
                     ItemStack serverStack = player.getItemInHand(hand);

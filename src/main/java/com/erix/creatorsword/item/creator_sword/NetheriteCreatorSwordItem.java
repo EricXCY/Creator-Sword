@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRendere
 import net.minecraft.world.item.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 public class NetheriteCreatorSwordItem extends BaseCreatorSwordItem {
     public NetheriteCreatorSwordItem(Properties properties) {
@@ -17,7 +18,7 @@ public class NetheriteCreatorSwordItem extends BaseCreatorSwordItem {
     }
 
     @Override
-    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+    public boolean isValidRepairItem(@NotNull ItemStack toRepair, ItemStack repair) {
         return repair.is(Items.NETHERITE_INGOT);
     }
 }
