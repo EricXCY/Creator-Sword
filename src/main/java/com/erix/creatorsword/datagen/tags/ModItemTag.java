@@ -48,13 +48,17 @@ public class ModItemTag extends ItemTagsProvider {
         tag(Tags.Items.TOOLS_WRENCH)
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
                 .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+        tag(Tags.Items.TOOLS)
+                .add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
 
         tag(Tags.Items.TOOLS_SHIELD)
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ItemTags.VANISHING_ENCHANTABLE)
-                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get())
+                .add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get())
+                .add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
 
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_PNEUMATIC_BOOST)

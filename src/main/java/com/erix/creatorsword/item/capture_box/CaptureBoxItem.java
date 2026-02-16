@@ -46,6 +46,11 @@ public class CaptureBoxItem extends Item {
         super(properties);
     }
 
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack stack) {
+        return true;
+    }
+
     private static CompoundTag getRootTag(ItemStack stack) {
         CustomData data = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         return data.copyTag();

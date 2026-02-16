@@ -70,12 +70,28 @@ public final class CaptureBoxLoot {
 
         ResourceKey<LootTable> lootTableId = living.getLootTable();
         LootTable table = level.getServer().reloadableRegistries().getLootTable(lootTableId);
-        return Optional.of(table.getRandomItems(params));
+
+        int rolls = 2;
+        List<ItemStack> out = new java.util.ArrayList<>();
+        for (int i = 0; i < rolls; i++) {
+            out.addAll(table.getRandomItems(params));
+        }
+        List<ItemStack> merged = new java.util.ArrayList<>();
+        outer:
+        for (ItemStack s : out) {
+            for (ItemStack m : merged) {
+                if (ItemStack.isSameItemSameComponents(m, s) && m.getCount() < m.getMaxStackSize()) {
+                    int can = Math.min(s.getCount(), m.getMaxStackSize() - m.getCount());
+                    m.grow(can);
+                    s.shrink(can);
+                    if (s.isEmpty()) continue outer;
+                }
+            }
+            merged.add(s.copy());
+        }
+        return Optional.of(merged);
     }
 
-    /**
-     * 纯函数：失败/不匹配 -> 空 list；成功 roll -> 返回结果（可能为空）。
-     */
     public static List<ItemStack> rollLoot(
             ServerLevel level,
             ItemStack captureBox,
