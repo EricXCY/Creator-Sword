@@ -6,6 +6,7 @@
   "loops": 1,
   "results": [
     {
+      "chance": 60.0,
       "id": "minecraft:enchanted_book",
       "components": {
         "minecraft:stored_enchantments": {
@@ -14,6 +15,26 @@
           }
         }
       }
+    },
+    {
+      "chance": 10.0,
+      "id": "minecraft:book"
+    },
+    {
+      "chance": 10.0,
+      "id": "minecraft:slime_block"
+    },
+    {
+      "chance": 5.0,
+      "id": "minecraft:slime_ball"
+    },
+    {
+      "chance": 10.0,
+      "id": "create:experience_nugget"
+    },
+    {
+      "chance": 5.0,
+      "id": "create:experience_block"
     }
   ],
   "sequence": [

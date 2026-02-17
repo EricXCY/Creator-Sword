@@ -3,9 +3,10 @@
   "ingredient": {
     "item": "minecraft:book"
   },
-  "loops": 2,
+  "loops": 3,
   "results": [
     {
+      "chance": 50.0,
       "id": "minecraft:enchanted_book",
       "components": {
         "minecraft:stored_enchantments": {
@@ -14,6 +15,22 @@
           }
         }
       }
+    },
+    {
+      "chance": 20.0,
+      "id": "minecraft:book"
+    },
+    {
+      "chance": 10.0,
+      "id": "create:sturdy_sheet"
+    },
+    {
+      "chance": 10.0,
+      "id": "create:experience_nugget"
+    },
+    {
+      "chance": 10.0,
+      "id": "create:experience_block"
     }
   ],
   "sequence": [
