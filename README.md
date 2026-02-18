@@ -1,5 +1,7 @@
 ## Creator-Sword
 
+Happy Chinese new year!
+
 **Creator-Sword** is a mod that adds more weapon options to the [Create Mod](https://www.curseforge.com/minecraft/mc-mods/create). It introduces new weapons that combine combat functionality with Create Mod's mechanical features, providing both utility and combat efficiency.
 
 *   **Creator's Sword:** A unique sword that combines melee combat with wrench functionality from the Create Mod
@@ -14,13 +16,7 @@
 *   **Frogport Grapple:**
     *   A grappling hook inspired by package frogport
     *   Supports distances up to 48 meters
-    *   Can latch onto blocks, pull mobs
-        * **Always pullable (no Power required)**
-          * Friendly mobs
-        * **Neutral targets** – require **Power III+**
-            * Neutral mobs
-        * **Hostile mobs** – require **Power V**
-            * Monsters without bosses
+    *   Can latch onto blocks, pull mobs based on the level of **Sticky Tongue Enchantment**
 *   **Capture Box:**
     *   When one hand grabs a mob while the other hand holds a capture box, the mob will be placed into the capture box
     *   Release the mob by right-click the capture box
@@ -28,6 +24,7 @@
     *   Overdrive - allow the rotation speed to reach 512 PRM
     *   Pneumatic Boost - faster acceleration of rotate speed; faster attack speed for creator's swords when attacking
     *   Sturdy - ignore small durability losses
+    *   Sticky Tongue - Upgrade capture level
 
 **Requires:** Create 6.0.8 or higher
 
@@ -35,8 +32,6 @@
 
 ## Future plans
 * Try to support 1.20.1
-* Add a new function for Capture Box
-  * Crushing Wheel can directly crush capture boxes containing mob to obtain loot
 
 ## Usage in modpacks
 
@@ -61,9 +56,6 @@ You can make any modifications to the mod with the goal of distributing it in a 
 *   **蛙港抓钩:**
     *   支持最远48格距离
     *   可以抓上方块，拉取生物
-        * 无力量附魔时可以拉取友好生物
-        * 有力量三可以拉取中立生物
-        * 有力量五可以拉取敌对生物，除了坚守者、凋零(试试力量六呢？)和末影龙
 *   **抓捕盒:**
     *   当一只手拿着抓捕盒，另一只手使用蛙港抓钩拉取实体时可以将实体放入抓捕盒
     *   右键抓捕盒放出实体
@@ -71,6 +63,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
     * 转速突破-盾牌转速可达到512RPM
     * 气动增压-提升盾牌旋转加速度;提升机械师之剑攻击时的攻击速度
     * 坚固-忽略小幅度的耐久损失
+    * 黏舌-提升抓捕等级
 
 **需要：** 机械动力6.0.8 或更高
 
@@ -78,7 +71,6 @@ You can make any modifications to the mod with the goal of distributing it in a 
 
 ## 未来计划&杂谈
 * 尝试支持1.20.1版本
-* 添加新功能：让粉碎轮可以直接粉碎装有生物的抓捕盒以获取生物掉落物
 * 基于重锤核心的新道具
 
 ## 使用

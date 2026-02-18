@@ -75,7 +75,7 @@ public class EnchantmentKeys {
                 Enchantment.definition(
                         items.getOrThrow(ModItemTag.ENCHANTABLE_STICKY_TONGUE),
                         8,
-                        3,
+                        2,
                         Enchantment.dynamicCost(8, 8),
                         Enchantment.dynamicCost(30, 15),
                         1,
