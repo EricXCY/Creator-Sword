@@ -9,10 +9,10 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class NetheriteCreatorSwordItemRenderer extends BaseSwordItemRenderer {
 
     private static final PartialModel SWORD = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/chinese_new_year_netherite_sword")
+            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/netherite_sword")
     );
     private static final PartialModel ROTATING_GEAR = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/chinese_new_year_gear")
+            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/gear")
     );
 
     @Override

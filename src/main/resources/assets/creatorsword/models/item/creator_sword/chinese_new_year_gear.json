@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:item/wrench/item",
 	"textures": {
-		"2": "creatorsword:item/gear"
+		"2": "creatorsword:item/chinese_new_year_gear"
 	},
 	"elements": [
 		{
