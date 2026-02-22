@@ -7,15 +7,9 @@ import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -30,7 +24,7 @@ public class CogwheelShieldItem extends ShieldItem {
     private static final float OVERDRIVE_MAX_SPEED = 512f;
 
     public CogwheelShieldItem(Properties properties) {
-        super(new Item.Properties().stacksTo(1).durability(336));
+        super(properties.stacksTo(1).durability(336));
     }
 
     @Override
@@ -42,11 +36,6 @@ public class CogwheelShieldItem extends ShieldItem {
     @Override
     public boolean isEnchantable(@NotNull ItemStack stack) {
         return true;
-    }
-
-    @Override
-    public int getEnchantmentValue() {
-        return 20;
     }
 
     @Override
@@ -67,16 +56,15 @@ public class CogwheelShieldItem extends ShieldItem {
         boolean charging = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         boolean decaying = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false);
 
-        float accelFactor = getAccelerationFactor(stack, player);
-
         if (keyDown) {
             // 启动加速
             if (!charging) {
                 charging = true;
                 decaying = false;
             }
-            float airBoost = consumeAirIfNeeded(stack, player, accelFactor, currentTick);
-            float nextSpeed = speed * (accelFactor) * airBoost;
+
+            float accelFactor = getAccelerationFactor(stack, player, currentTick);
+            float nextSpeed = speed * accelFactor;
             speed = Math.min(Math.max(nextSpeed, MIN_SPEED), getMaxSpeed(stack, player));
 
         } else {
@@ -108,32 +96,38 @@ public class CogwheelShieldItem extends ShieldItem {
         stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), speed);
     }
 
-    private float consumeAirIfNeeded(ItemStack stack, Player player, float accelFactor, long tick) {
+    private float getAccelerationFactor(ItemStack stack, Player player, long tick) {
+        int level = EnchantmentKeys.getEnchantmentLevel(
+                player.level().registryAccess(),
+                EnchantmentKeys.PNEUMATIC_BOOST,
+                stack
+        );
+        int k = level + 1;
+
+        var tanks = BacktankUtil.getAllWithAir(player);
+        boolean hasBacktankWithAir = !tanks.isEmpty();
+
+        int hasTank = 0;
+        if (hasBacktankWithAir) {
+            boolean paid = consumeAirIfNeeded(stack, player, tick, k, tanks.getFirst());
+            hasTank = paid ? 1 : 0;
+        }
+
+        return 1.05f + 0.1f * hasTank * k + 0.05f * level;
+    }
+
+    private boolean consumeAirIfNeeded(ItemStack stack, Player player, long tick, int enchantLevel, ItemStack tank) {
         long lastConsumeTick = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
-        if (tick - lastConsumeTick < AIR_CONSUME_INTERVAL_TICKS) return 1.0f;
+        if (tick - lastConsumeTick < AIR_CONSUME_INTERVAL_TICKS) return true;
 
         stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), tick);
 
-        var tanks = BacktankUtil.getAllWithAir(player);
-        if (tanks.isEmpty())
-            return 1.0f;
+        int airCost = enchantLevel * 2;
+        int air = BacktankUtil.getAir(tank);
+        if (air < airCost) return false;
+        BacktankUtil.consumeAir(player, tank, airCost);
 
-        int airCost = (int) (accelFactor * 2);
-        if (BacktankUtil.getAir(tanks.getFirst()) < airCost)
-            return 1.0f;
-
-        // 消耗空气并触发提速
-        BacktankUtil.consumeAir(player, tanks.getFirst(), airCost);
-        return 1.1f;
-    }
-
-    private float getAccelerationFactor(ItemStack stack, Player player) {
-        Registry<Enchantment> registry = player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-        Holder<Enchantment> holder = registry.getHolder(EnchantmentKeys.PNEUMATIC_BOOST)
-                .orElseThrow(() -> new IllegalStateException("Enchantment not found: " + EnchantmentKeys.PNEUMATIC_BOOST));
-
-        int enchantLevel = EnchantmentHelper.getTagEnchantmentLevel(holder, stack);
-        return (float) (1.1 + 0.05f * enchantLevel);
+        return true;
     }
 
     public static void resetNBT(ItemStack stack) {
@@ -146,11 +140,11 @@ public class CogwheelShieldItem extends ShieldItem {
     }
 
     private float getMaxSpeed(ItemStack stack, Player player) {
-        Registry<Enchantment> registry = player.level().registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-        Holder<Enchantment> holder = registry.getHolder(EnchantmentKeys.OVERDRIVE)
-                .orElseThrow(() -> new IllegalStateException("Enchantment not found: " + EnchantmentKeys.OVERDRIVE));
-
-        int overdriveLevel = EnchantmentHelper.getTagEnchantmentLevel(holder, stack);
+        int overdriveLevel = EnchantmentKeys.getEnchantmentLevel(
+                player.level().registryAccess(),
+                EnchantmentKeys.OVERDRIVE,
+                stack
+        );
         return overdriveLevel > 0 ? OVERDRIVE_MAX_SPEED : NORMAL_MAX_SPEED;
     }
 }
