@@ -16,9 +16,9 @@ public class CSServer extends ConfigBase {
     private static class Comments {
         static String frogport_rules =
                 """
-                Frogport Grapple Rules
-                - useCustomRules = false: use built-in defaults
-                - useCustomRules = true : read selectors from config lists (level0-3, deny)
+                Frogport Grapple Capture Rules
+                - ruleMode = DEFAULT: use built-in defaults
+                - ruleMode = CUSTOM : read selectors from config lists (level0-3, deny)
                 
                 Selector syntax:
                   - category:<MobCategory>   e.g. category:MONSTER

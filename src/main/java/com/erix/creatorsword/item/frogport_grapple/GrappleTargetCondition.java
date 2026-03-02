@@ -13,6 +13,7 @@ import net.minecraft.world.entity.monster.warden.Warden;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
+import com.erix.creatorsword.config.FrogportGrappleCfg.RuleMode;
 
 public final class GrappleTargetCondition {
 
@@ -30,7 +31,7 @@ public final class GrappleTargetCondition {
 
         var cfg = CreatorSwordConfigs.server().frogportGrapple;
 
-        if (cfg == null || !cfg.useCustomRules.get()) {
+        if (cfg == null || cfg.ruleMode.get() == RuleMode.DEFAULT) {
             GrappleTargetType type = classifyTarget(target);
             return switch (type) {
                 case L0 -> sticky >= 0;

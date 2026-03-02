@@ -10,7 +10,13 @@ import java.util.Objects;
 
 public class FrogportGrappleCfg extends ConfigBase {
 
-    public final ConfigBool useCustomRules = b(false, "useCustomRules", Comments.useCustomRules);
+    public enum RuleMode {
+        DEFAULT,
+        CUSTOM
+    }
+
+    public final ConfigEnum<RuleMode> ruleMode =
+            e(RuleMode.DEFAULT, "captureRuleMode", Comments.ruleMode);
     public final ConfigInt tongueLength = i(48, 1, "tongueLength", Comments.tongueLength);
 
     private ModConfigSpec.ConfigValue<List<? extends String>> level0;
@@ -102,7 +108,7 @@ public class FrogportGrappleCfg extends ConfigBase {
     public @NotNull String getName() { return "Frogport Grapple"; }
 
     private static class Comments {
-        static String useCustomRules = "If true, use config lists (level0-3, deny). If false, use built-in rules.";
+        static String ruleMode = "Rule mode: DEFAULT uses built-in rules; CUSTOM uses config selector lists.";
         static String tongueLength = "Max tongue reach distance (blocks).";
     }
 }
