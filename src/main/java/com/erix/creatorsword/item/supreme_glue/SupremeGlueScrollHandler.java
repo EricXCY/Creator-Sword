@@ -34,7 +34,6 @@ public class SupremeGlueScrollHandler {
         Player player = mc.player;
         if (player == null || mc.level == null) return;
 
-        // 仅当手持 Supreme Glue 且按下 Ctrl 时
         if (!(player.getMainHandItem().is(SupremeGlueItem.SUPREME_GLUE))) return;
         if (!AllKeys.ctrlDown()) return;
 
@@ -44,7 +43,6 @@ public class SupremeGlueScrollHandler {
         if (delta == 0) return;
 
         SuperGlueSelectionHandler handler = CreateClient.GLUE_HANDLER;
-        if (handler == null) return;
 
         try {
             var firstField = SuperGlueSelectionHandler.class.getDeclaredField("firstPos");
@@ -58,7 +56,6 @@ public class SupremeGlueScrollHandler {
             BlockPos hovered = (BlockPos) hoveredField.get(handler);
             if (first == null || hovered == null) return;
 
-            // 构造当前 AABB
             AABB bb = new AABB(Vec3.atLowerCornerOf(first), Vec3.atLowerCornerOf(hovered)).expandTowards(1, 1, 1);
 
             Vec3 cam = mc.gameRenderer.getMainCamera().getPosition();
@@ -69,7 +66,6 @@ public class SupremeGlueScrollHandler {
             Direction selectedFace = faceHit.missed() ? null : (inside ? faceHit.getFacing().getOpposite() : faceHit.getFacing());
             if (selectedFace == null) return;
 
-            // 内部则反向
             if (inside) delta *= -1;
 
             int intDelta = (int) (delta > 0 ? Math.ceil(delta) : Math.floor(delta));
@@ -89,11 +85,9 @@ public class SupremeGlueScrollHandler {
             double maxZ = Math.max(bb.maxZ - z * axDir.getStep(), bb.minZ);
             bb = new AABB(bb.minX, bb.minY, bb.minZ, maxX, maxY, maxZ);
 
-            // 更新 hoveredPos
             BlockPos newHovered = BlockPos.containing(bb.maxX, bb.maxY, bb.maxZ);
             hoveredField.set(handler, newHovered);
 
-            // ⚙️ 重新计算 glue 群集 (Create 渲染选框依赖这个)
             Set<BlockPos> newCluster = SuperGlueSelectionHelper.searchGlueGroup(mc.level, first, newHovered, true);
             clusterField.set(handler, newCluster);
 
