@@ -1,7 +1,5 @@
 ## Creator-Sword
 
-Happy Chinese new year!
-
 **Creator-Sword** is a mod that adds more weapon options to the [Create Mod](https://www.curseforge.com/minecraft/mc-mods/create). It introduces new weapons that combine combat functionality with Create Mod's mechanical features, providing both utility and combat efficiency.
 
 *   **Creator's Sword:** A unique sword that combines melee combat with wrench functionality from the Create Mod
