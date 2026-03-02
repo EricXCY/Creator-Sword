@@ -1,6 +1,7 @@
 package com.erix.creatorsword;
 
 import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
+import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
 import com.erix.creatorsword.entity.ModEntities;
@@ -33,7 +34,8 @@ public class CreatorSword
     public static final String MODID = "creatorsword";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public CreatorSword(IEventBus modEventBus, ModContainer modContainer) {
+    public CreatorSword(IEventBus modEventBus, ModContainer container) {
+        CreatorSwordConfigs.register(container);
         CreatorSwordItems.ITEMS.register(modEventBus);
         CogwheelShieldItems.ITEMS.register(modEventBus);
         IncompleteCreatorSwordItems.ITEMS.register(modEventBus);

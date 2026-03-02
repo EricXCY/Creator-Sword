@@ -14,26 +14,26 @@ import mezz.jei.api.recipe.vanilla.IJeiAnvilRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 @JeiPlugin
-public class CreatorswordJeiPlugin implements IModPlugin {
+public class CreatorSwordJeiPlugin implements IModPlugin {
     private static final ResourceLocation UID = CreatorSword.asResource("jei_plugin");
 
     @Override
-    public ResourceLocation getPluginUid() {
+    public @NotNull ResourceLocation getPluginUid() {
         return UID;
     }
 
     @Override
-    public void registerCategories(IRecipeCategoryRegistration registration) {
+    public void registerCategories(@NotNull IRecipeCategoryRegistration registration) {
         // registration.addRecipeCategories(new XxxCategory(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        // ===== Anvil repair =====
         IVanillaRecipeFactory vanilla = registration.getVanillaRecipeFactory();
         if (Minecraft.getInstance().level == null) return;
 
@@ -42,7 +42,8 @@ public class CreatorswordJeiPlugin implements IModPlugin {
                 List.of(makeAnvilRepair(vanilla,
                         new ItemStack(CogwheelShieldItems.COGWHEEL_SHIELD.get()),
                         new ItemStack(com.simibubi.create.AllBlocks.SHAFT.asItem()),
-                        new ItemStack(CogwheelShieldItems.COGWHEEL_SHIELD.get())
+                        new ItemStack(CogwheelShieldItems.COGWHEEL_SHIELD.get()),
+                        CreatorSword.asResource("anvil_repair/cogwheel_shield")
                 ))
         );
 
@@ -51,7 +52,8 @@ public class CreatorswordJeiPlugin implements IModPlugin {
                 List.of(makeAnvilRepair(vanilla,
                         new ItemStack(CreatorSwordItems.CREATOR_SWORD.get()),
                         new ItemStack(com.simibubi.create.AllItems.BRASS_SHEET.asItem()),
-                        new ItemStack(CreatorSwordItems.CREATOR_SWORD.get())
+                        new ItemStack(CreatorSwordItems.CREATOR_SWORD.get()),
+                        CreatorSword.asResource("anvil_repair/creator_sword")
                 ))
         );
 
@@ -60,7 +62,8 @@ public class CreatorswordJeiPlugin implements IModPlugin {
                 List.of(makeAnvilRepair(vanilla,
                         new ItemStack(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()),
                         new ItemStack(net.minecraft.world.item.Items.NETHERITE_INGOT),
-                        new ItemStack(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get())
+                        new ItemStack(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()),
+                        CreatorSword.asResource("anvil_repair/netherite_creator_sword")
                 ))
         );
     }
@@ -69,7 +72,8 @@ public class CreatorswordJeiPlugin implements IModPlugin {
             IVanillaRecipeFactory vanilla,
             ItemStack input,
             ItemStack repairMat,
-            ItemStack output
+            ItemStack output,
+            ResourceLocation uid
     ) {
         ItemStack damaged = input.copy();
         damaged.setDamageValue(damaged.getMaxDamage());
@@ -81,12 +85,13 @@ public class CreatorswordJeiPlugin implements IModPlugin {
         return vanilla.createAnvilRecipe(
                 List.of(damaged),
                 List.of(repairMat),
-                List.of(repaired)
+                List.of(repaired),
+                uid
         );
     }
 
     @Override
-    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+    public void registerRecipeCatalysts(@NotNull IRecipeCatalystRegistration registration) {
         // registration.addRecipeCatalyst(new ItemStack(ModItems.YOUR_BLOCK.get()), XxxRecipeType.TYPE);
     }
 }

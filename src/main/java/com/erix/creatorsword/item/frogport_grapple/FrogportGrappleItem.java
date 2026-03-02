@@ -2,6 +2,7 @@ package com.erix.creatorsword.item.frogport_grapple;
 
 import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
+import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
@@ -102,8 +103,8 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         // 发射
         FrogportGrappleSounds.playExtend(level, player);
-
-        double range = 48.0;
+        var cfg = CreatorSwordConfigs.server().frogportGrapple;
+        double range = cfg.tongueLength.get();
         Vec3 eye = player.getEyePosition(1.0f);
         Vec3 look = player.getViewVector(1.0f);
         Vec3 end = eye.add(look.scale(range));
@@ -143,7 +144,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         if (!level.isClientSide) {
             startBlockHook(stack, pos);
-            damageOnHook(level, player, hand, stack, 1);
+            damageOnHook(level, player, hand, stack);
             awardTravelStatIfServer(player, eye, pos);
         }
 
@@ -224,7 +225,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         if (!level.isClientSide) {
             startEntityHook(stack, living);
-            damageOnHook(level, player, hand, stack, 1);
+            damageOnHook(level, player, hand, stack);
         }
 
         return true;
@@ -420,7 +421,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         float prevProgress = tag.getFloat(KEY_PROGRESS);
         float progress = prevProgress;
 
-        float step = 0.16f;
+        float step = 0.17f;
 
         switch (phase) {
             case 0 -> progress = 0f;
@@ -475,9 +476,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         return hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
     }
 
-    private static void damageOnHook(Level level, Player player, InteractionHand hand, ItemStack stack, int amount) {
+    private static void damageOnHook(Level level, Player player, InteractionHand hand, ItemStack stack) {
         if (level.isClientSide) return;
         if (player.getAbilities().instabuild) return;
-        stack.hurtAndBreak(amount, player, slotForHand(hand));
+        stack.hurtAndBreak(1, player, slotForHand(hand));
     }
 }
