@@ -25,6 +25,8 @@ public class ModItemTag extends ItemTagsProvider {
             createTagKey("pneumatic_boost");
     public static final TagKey<Item> ENCHANTABLE_OVERDRIVE =
             createTagKey("overdrive");
+    public static final TagKey<Item> ENCHANTABLE_STURDY =
+            createTagKey("sturdy");
     public static final TagKey<Item> ENCHANTABLE_STICKY_TONGUE =
             createTagKey("sticky_tongue");
 
@@ -65,6 +67,7 @@ public class ModItemTag extends ItemTagsProvider {
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get())
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
                 .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+        tag(ENCHANTABLE_STURDY).addTag(ItemTags.DURABILITY_ENCHANTABLE);
         tag(ENCHANTABLE_STICKY_TONGUE).add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
     }
 }

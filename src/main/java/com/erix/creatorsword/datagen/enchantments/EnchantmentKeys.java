@@ -61,7 +61,7 @@ public class EnchantmentKeys {
 
         register(context, STURDY, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ItemTags.DURABILITY_ENCHANTABLE),
+                        items.getOrThrow(ModItemTag.ENCHANTABLE_STURDY),
                         8,
                         3,
                         Enchantment.dynamicCost(10, 10),

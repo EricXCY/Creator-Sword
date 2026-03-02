@@ -15,6 +15,6 @@
   "slots": [
     "any"
   ],
-  "supported_items": "#minecraft:enchantable/durability",
+  "supported_items": "#creatorsword:sturdy",
   "weight": 8
 }
