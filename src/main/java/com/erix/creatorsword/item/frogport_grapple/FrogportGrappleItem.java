@@ -1,7 +1,7 @@
 package com.erix.creatorsword.item.frogport_grapple;
 
 import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
+import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;

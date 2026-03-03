@@ -1,17 +1,16 @@
-package com.erix.creatorsword.advancement;
+package com.erix.creatorsword.data.advancement;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class TravelingFrogTrigger extends SimpleCriterionTrigger<TravelingFrogTrigger.Instance> {
-
-    public TravelingFrogTrigger() {}
+public class FullSpeedTrigger extends SimpleCriterionTrigger<FullSpeedTrigger.Instance> {
+    public FullSpeedTrigger() {}
 
     @Override
     public @NotNull Codec<Instance> codec() {
@@ -36,7 +35,6 @@ public class TravelingFrogTrigger extends SimpleCriterionTrigger<TravelingFrogTr
         }
 
     public static Criterion<Instance> criterion() {
-        return CreatorSwordCriteriaTriggers.TRAVELING_FROG.get()
-                .createCriterion(new Instance(Optional.empty()));
+        return CreatorSwordCriteriaTriggers.FULL_SPEED.get().createCriterion(new Instance(Optional.empty()));
     }
 }

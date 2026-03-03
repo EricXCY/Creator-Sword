@@ -1,4 +1,4 @@
-package com.erix.creatorsword.client.tooltip;
+package com.erix.creatorsword.ui.tooltip;
 
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;

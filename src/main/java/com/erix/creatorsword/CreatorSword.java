@@ -1,12 +1,12 @@
 package com.erix.creatorsword;
 
-import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
+import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.CSLootModifiers;
 import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
 import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
 import com.erix.creatorsword.entity.ModEntities;
-import com.erix.creatorsword.event.ShieldRecoveryEvents;
+import com.erix.creatorsword.item.cogwheel_shield.ShieldRecoveryEvents;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;

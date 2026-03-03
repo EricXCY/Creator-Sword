@@ -1,7 +1,7 @@
 package com.erix.creatorsword.item.capture_box;
 
 import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.client.tooltip.CaptureBoxTooltip;
+import com.erix.creatorsword.ui.tooltip.CaptureBoxTooltip;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;

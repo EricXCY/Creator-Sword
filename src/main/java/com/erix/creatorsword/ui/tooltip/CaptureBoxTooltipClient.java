@@ -1,4 +1,4 @@
-package com.erix.creatorsword.client.tooltip;
+package com.erix.creatorsword.ui.tooltip;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;

@@ -1,4 +1,4 @@
-package com.erix.creatorsword.advancement;
+package com.erix.creatorsword.data.advancement;
 
 import com.erix.creatorsword.CreatorSword;
 import net.minecraft.advancements.CriterionTrigger;

@@ -1,4 +1,4 @@
-package com.erix.creatorsword.client.tooltip;
+package com.erix.creatorsword.ui.tooltip;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;

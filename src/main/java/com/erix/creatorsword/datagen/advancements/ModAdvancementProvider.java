@@ -1,6 +1,6 @@
 package com.erix.creatorsword.datagen.advancements;
 
-import com.erix.creatorsword.advancement.TravelingFrogTrigger;
+import com.erix.creatorsword.data.advancement.TravelingFrogTrigger;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import net.minecraft.advancements.Advancement;
@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import com.erix.creatorsword.advancement.FullSpeedTrigger;
+import com.erix.creatorsword.data.advancement.FullSpeedTrigger;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;

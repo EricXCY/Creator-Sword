@@ -1,4 +1,4 @@
-package com.erix.creatorsword.event;
+package com.erix.creatorsword.item.cogwheel_shield;
 
 import com.erix.creatorsword.entity.ThrownCogwheelShield;
 import net.minecraft.nbt.CompoundTag;

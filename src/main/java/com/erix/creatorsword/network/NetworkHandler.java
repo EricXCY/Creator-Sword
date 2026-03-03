@@ -1,6 +1,6 @@
 package com.erix.creatorsword.network;
 
-import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
+import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.entity.ThrownCogwheelShield;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import net.minecraft.nbt.CompoundTag;
