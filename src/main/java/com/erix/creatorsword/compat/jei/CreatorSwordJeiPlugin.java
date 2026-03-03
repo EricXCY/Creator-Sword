@@ -66,6 +66,16 @@ public class CreatorSwordJeiPlugin implements IModPlugin {
                         CreatorSword.asResource("anvil_repair/netherite_creator_sword")
                 ))
         );
+
+        registration.addRecipes(
+                RecipeTypes.ANVIL,
+                List.of(makeAnvilRepair(vanilla,
+                        new ItemStack(CreatorSwordItems.CNY_CREATOR_SWORD.get()),
+                        new ItemStack(net.minecraft.world.item.Items.NETHERITE_INGOT),
+                        new ItemStack(CreatorSwordItems.CNY_CREATOR_SWORD.get()),
+                        CreatorSword.asResource("anvil_repair/cny_creator_sword")
+                ))
+        );
     }
 
     private static IJeiAnvilRecipe makeAnvilRepair(

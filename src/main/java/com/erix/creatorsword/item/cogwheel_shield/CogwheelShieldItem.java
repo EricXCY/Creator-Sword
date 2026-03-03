@@ -2,7 +2,6 @@ package com.erix.creatorsword.item.cogwheel_shield;
 
 import java.util.function.Consumer;
 
-import com.erix.creatorsword.data.ShieldDataComponents;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;

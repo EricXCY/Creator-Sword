@@ -11,7 +11,6 @@
   "item.creatorsword.cogwheel_shield.tooltip.condition3": "При отпускании клавиши вращения (скорость вращения ≥ 64 RPM)",
   "item.creatorsword.cogwheel_shield.tooltip.behaviour3": "_Бросается_ и наносит _урон_ существам на своём пути. _Урон_ зависит от _скорости вращения_.",
 
-
   "item.creatorsword.creator_sword": "Меч Создателя",
   "item.creatorsword.creator_sword.tooltip.summary": "Меч с функциями гаечного ключа.",
   "item.creatorsword.creator_sword.tooltip.condition1": "При атаке",
@@ -25,6 +24,13 @@
   "item.creatorsword.netherite_creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
   "item.creatorsword.netherite_creator_sword.tooltip.condition2": "При разборке механизмов",
   "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
+
+  "item.creatorsword.cny_creator_sword": "Красная Заря",
+  "item.creatorsword.cny_creator_sword.tooltip.summary": "Древний Меч с функциями гаечного ключа.",
+  "item.creatorsword.cny_creator_sword.tooltip.condition1": "При атаке",
+  "item.creatorsword.cny_creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
+  "item.creatorsword.cny_creator_sword.tooltip.condition2": "При разборке механизмов",
+  "item.creatorsword.cny_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
 
   "item.creatorsword.incomplete_creator_sword": "Незавершённый Меч Создателя",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "Сломанный меч.",

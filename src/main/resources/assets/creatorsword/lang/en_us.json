@@ -11,7 +11,6 @@
   "item.creatorsword.cogwheel_shield.tooltip.condition3": "When releasing key, rotation speed>=64RPM",
   "item.creatorsword.cogwheel_shield.tooltip.behaviour3": "_Thrown_ and causes _damage_ to mobs along the path. _Damage_ depends on _rotation speed_.",
 
-
   "item.creatorsword.creator_sword": "Creator's Sword",
   "item.creatorsword.creator_sword.tooltip.summary": "A sword with wrench functionality.",
   "item.creatorsword.creator_sword.tooltip.condition1": "When attacking",
@@ -25,6 +24,13 @@
   "item.creatorsword.netherite_creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
   "item.creatorsword.netherite_creator_sword.tooltip.condition2": "When dismantling components",
   "item.creatorsword.netherite_creator_sword.tooltip.behaviour2": "_More redstone comonents_ can be dismantled.",
+
+  "item.creatorsword.cny_creator_sword": "Crimson Afterglow",
+  "item.creatorsword.cny_creator_sword.tooltip.summary": "An ancient sword with wrench functionality.",
+  "item.creatorsword.cny_creator_sword.tooltip.condition1": "When attacking",
+  "item.creatorsword.cny_creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
+  "item.creatorsword.cny_creator_sword.tooltip.condition2": "When dismantling components",
+  "item.creatorsword.cny_creator_sword.tooltip.behaviour2": "_More redstone comonents_ can be dismantled.",
 
   "item.creatorsword.incomplete_creator_sword": "Incomplete Creator's Sword",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "A broken sword.",

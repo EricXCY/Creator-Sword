@@ -43,13 +43,16 @@ public class ModItemTag extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(ItemTags.SWORDS)
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
-                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get())
+                .add(CreatorSwordItems.CNY_CREATOR_SWORD.get());
         tag(Tags.Items.MELEE_WEAPON_TOOLS)
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
-                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get())
+                .add(CreatorSwordItems.CNY_CREATOR_SWORD.get());
         tag(Tags.Items.TOOLS_WRENCH)
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
-                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get())
+                .add(CreatorSwordItems.CNY_CREATOR_SWORD.get());
         tag(Tags.Items.TOOLS)
                 .add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
 
@@ -66,7 +69,8 @@ public class ModItemTag extends ItemTagsProvider {
         tag(ENCHANTABLE_PNEUMATIC_BOOST)
                 .add(CogwheelShieldItems.COGWHEEL_SHIELD.get())
                 .add(CreatorSwordItems.CREATOR_SWORD.get())
-                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+                .add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get())
+                .add(CreatorSwordItems.CNY_CREATOR_SWORD.get());
         tag(ENCHANTABLE_STURDY).addTag(ItemTags.DURABILITY_ENCHANTABLE);
         tag(ENCHANTABLE_STICKY_TONGUE).add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
     }

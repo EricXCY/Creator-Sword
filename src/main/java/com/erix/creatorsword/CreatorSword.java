@@ -2,7 +2,8 @@ package com.erix.creatorsword;
 
 import com.erix.creatorsword.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
-import com.erix.creatorsword.data.ShieldDataComponents;
+import com.erix.creatorsword.data.CSLootModifiers;
+import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
 import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
 import com.erix.creatorsword.entity.ModEntities;
 import com.erix.creatorsword.event.ShieldRecoveryEvents;
@@ -51,6 +52,7 @@ public class CreatorSword
         ModEntities.register(modEventBus);
         ModEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
         NeoForge.EVENT_BUS.register(new ShieldRecoveryEvents());
+        CSLootModifiers.register(modEventBus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             com.erix.creatorsword.client.ClientSetup.init(modEventBus);

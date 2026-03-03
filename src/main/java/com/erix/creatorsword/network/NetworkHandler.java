@@ -11,7 +11,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-import static com.erix.creatorsword.data.ShieldDataComponents.*;
+import static com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents.*;
 
 public class NetworkHandler {
     private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";

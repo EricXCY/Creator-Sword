@@ -23,6 +23,7 @@ public class ClientTooltipRegistration {
             registerCreateTooltip(CogwheelShieldItems.COGWHEEL_SHIELD.get());
             registerCreateTooltip(CreatorSwordItems.CREATOR_SWORD.get());
             registerCreateTooltip(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+            registerCreateTooltip(CreatorSwordItems.CNY_CREATOR_SWORD.get());
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_CREATOR_SWORD.get());
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
             registerCreateTooltip(FrogportGrappleItem.FROGPORT_GRAPPLE.get());

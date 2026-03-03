@@ -1,6 +1,6 @@
 package com.erix.creatorsword.client;
 
-import com.erix.creatorsword.data.ShieldDataComponents;
+import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldStatePayload;
 import com.mojang.blaze3d.vertex.PoseStack;

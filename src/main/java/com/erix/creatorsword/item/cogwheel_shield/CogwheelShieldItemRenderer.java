@@ -1,6 +1,5 @@
 package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.erix.creatorsword.data.ShieldDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;

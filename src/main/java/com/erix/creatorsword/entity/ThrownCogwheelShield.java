@@ -1,6 +1,6 @@
 package com.erix.creatorsword.entity;
 
-import com.erix.creatorsword.data.ShieldDataComponents;
+import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
