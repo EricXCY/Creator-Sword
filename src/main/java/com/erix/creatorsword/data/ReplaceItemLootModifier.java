@@ -32,7 +32,23 @@ public class ReplaceItemLootModifier extends LootModifier {
     protected @NotNull ObjectArrayList<ItemStack> doApply(@NotNull ObjectArrayList<ItemStack> list, LootContext context) {
         if (chance > context.getRandom().nextDouble()) {
             list.clear();
-            list.add(item.getDefaultInstance());
+            ItemStack stack = item.getDefaultInstance();
+
+            int max = stack.getMaxDamage();
+            if (max > 0) {
+                double minRatio = 0.05;
+                double maxRatio = 0.25;
+
+                double ratio = minRatio + context.getRandom().nextDouble() * (maxRatio - minRatio);
+
+                int durabilityLeft = Math.max(1, (int) Math.round(max * ratio));
+                int damage = max - durabilityLeft;
+
+                damage = Math.max(0, Math.min(damage, max - 1));
+                stack.setDamageValue(damage);
+            }
+
+            list.add(stack);
         }
 
         return list;
