@@ -92,23 +92,45 @@ public class FrogportGrappleTongueRenderer {
 
 
     private static Vec3 getTongueStart(LocalPlayer player, InteractionHand hand, float partialTick) {
-        Vec3 eye = player.getEyePosition(partialTick);
-        Vec3 look = player.getViewVector(partialTick);
-        Vec3 right = look.cross(new Vec3(0, 1, 0)).normalize();
+        Minecraft mc = Minecraft.getInstance();
+        Camera camera = mc.gameRenderer.getMainCamera();
 
         HumanoidArm mainArm = player.getMainArm();
-        HumanoidArm armForHand = (hand == InteractionHand.MAIN_HAND)
-                ? mainArm
-                : mainArm.getOpposite();
+        HumanoidArm armForHand = hand == InteractionHand.MAIN_HAND ? mainArm : mainArm.getOpposite();
+        int armSign = armForHand == HumanoidArm.RIGHT ? 1 : -1;
 
-        double sideSign = (armForHand == HumanoidArm.RIGHT) ? 1.0 : -1.0;
+        if (mc.options.getCameraType().isFirstPerson() && player == mc.player) {
+            Vec3 camPos = camera.getPosition();
 
-        Vec3 base = eye
-                .add(look.scale(0.7))  // 前后
-                .add(0, -0.27, 0);      // 上下
+            org.joml.Vector3f lookF = camera.getLookVector();
+            org.joml.Vector3f upF = camera.getUpVector();
+            org.joml.Vector3f leftF = camera.getLeftVector();
 
-        double offset = 0.4; // 左右身位偏移
-        return base.add(right.scale(sideSign * offset));
+            Vec3 forward = new Vec3(lookF.x(), lookF.y(), lookF.z()).normalize();
+            Vec3 up = new Vec3(upF.x(), upF.y(), upF.z()).normalize();
+            Vec3 right = new Vec3(-leftF.x(), -leftF.y(), -leftF.z()).normalize();
+
+            double forwardOffset = 0.3;        // 前后
+            double sideOffset = 0.23 * armSign;  // 左右
+            double downOffset = -0.13;           // 上下
+
+            return camPos
+                    .add(forward.scale(forwardOffset))
+                    .add(right.scale(sideOffset))
+                    .add(up.scale(downOffset));
+        } else {
+            float bodyYaw = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * ((float)Math.PI / 180F);
+            double sin = Mth.sin(bodyYaw);
+            double cos = Mth.cos(bodyYaw);
+            double side = armSign * 0.35;
+            float crouchOffset = player.isCrouching() ? -0.1875F : 0.0F;
+
+            return new Vec3(
+                    Mth.lerp(partialTick, player.xo, player.getX()) - cos * side - sin * 0.6,
+                    Mth.lerp(partialTick, player.yo, player.getY()) + player.getEyeHeight() - 0.7 + crouchOffset,
+                    Mth.lerp(partialTick, player.zo, player.getZ()) - sin * side + cos * 0.6
+            );
+        }
     }
 
 
@@ -151,7 +173,7 @@ public class FrogportGrappleTongueRenderer {
             side = dir.cross(new Vec3(1, 0, 0));
         }
 
-        double halfWidth = 0.06;
+        double halfWidth = 0.05;
         side = side.normalize().scale(halfWidth);
 
         Vec3 s1 = start.add(side);

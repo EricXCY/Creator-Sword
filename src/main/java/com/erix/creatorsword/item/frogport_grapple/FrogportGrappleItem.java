@@ -140,12 +140,13 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             return InteractionResultHolder.pass(stack);
         }
 
+        Vec3 hitPos = blockHit.getLocation();
         FrogportGrappleSounds.playLatch(level, player);
 
         if (!level.isClientSide) {
-            startBlockHook(stack, pos);
+            startBlockHook(stack, hitPos);
             damageOnHook(level, player, hand, stack);
-            awardTravelStatIfServer(player, eye, pos);
+            awardTravelStatIfServer(player, eye, hitPos);
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
@@ -252,10 +253,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         return null;
     }
 
-    private static void awardTravelStatIfServer(Player player, Vec3 eye, BlockPos pos) {
+    private static void awardTravelStatIfServer(Player player, Vec3 eye, Vec3 hookPos) {
         if (!(player instanceof net.minecraft.server.level.ServerPlayer sp)) return;
 
-        Vec3 hookPos = new Vec3(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
         int add = (int) Math.floor(eye.distanceTo(hookPos));
         if (add <= 0) return;
 
@@ -287,12 +287,12 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         });
     }
 
-    private static void startBlockHook(ItemStack stack, BlockPos pos) {
+    private static void startBlockHook(ItemStack stack, Vec3 hitPos) {
         CustomData.update(DataComponents.CUSTOM_DATA, stack, t -> {
             t.putBoolean(KEY_HOOKED, true);
-            t.putDouble(KEY_HOOK_X, pos.getX() + 0.5);
-            t.putDouble(KEY_HOOK_Y, pos.getY() + 0.5);
-            t.putDouble(KEY_HOOK_Z, pos.getZ() + 0.5);
+            t.putDouble(KEY_HOOK_X, hitPos.x);
+            t.putDouble(KEY_HOOK_Y, hitPos.y);
+            t.putDouble(KEY_HOOK_Z, hitPos.z);
 
             t.putInt(KEY_PHASE, 1);
             t.putFloat(KEY_PROGRESS, 0.0f);
@@ -326,7 +326,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         Vec3 toHook = hookPos.subtract(playerPos);
         double dist = toHook.length();
 
-        if (dist < 1.5) {
+        if (dist < 1) {
             playRetractAndClear(level, player, stack);
             return;
         }
