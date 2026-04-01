@@ -4,6 +4,7 @@ import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
+import com.erix.creatorsword.item.smithing_template.SmithingTemplateItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,5 +30,6 @@ public class ModTabs {
                         Output.accept(CogwheelShieldItems.COGWHEEL_SHIELD.get());
                         Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());
+                        Output.accept(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get());
                     }).build());
 }

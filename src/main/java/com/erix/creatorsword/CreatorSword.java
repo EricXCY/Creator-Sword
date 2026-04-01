@@ -14,6 +14,7 @@ import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleTravelStat;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteCreatorSwordItems;
 import com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems;
+import com.erix.creatorsword.item.smithing_template.SmithingTemplateItems;
 import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
 import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
@@ -53,6 +54,7 @@ public class CreatorSword
         ModEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
         NeoForge.EVENT_BUS.register(new ShieldRecoveryEvents());
         CSLootModifiers.register(modEventBus);
+        SmithingTemplateItems.register(modEventBus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             com.erix.creatorsword.client.ClientSetup.init(modEventBus);

@@ -69,6 +69,12 @@
   "enchantment.creatorsword.sturdy": "Устойчивость",
   "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности. Эффект усиливается с уровнем.",
   "enchantment.creatorsword.sticky_tongue": "Липкий язык",
-  "enchantment.creatorsword.sticky_tongue.desc": "Повышает уровень захвата лягушачьего гарпуна."
+  "enchantment.creatorsword.sticky_tongue.desc": "Повышает уровень захвата лягушачьего гарпуна.",
 
+  "item.creatorsword.crimson_afterglow_smithing_template": "Кузнечный шаблон «Красная Заря»",
+  "item.creatorsword.crimson_afterglow_smithing_template.applies_to": "Незеритовый Меч Создателя",
+  "item.creatorsword.crimson_afterglow_smithing_template.ingredients": "Прочная пластина",
+  "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "Улучшение «Красная Заря»",
+  "item.creatorsword.crimson_afterglow_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
+  "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "Добавьте прочную пластину"
 }

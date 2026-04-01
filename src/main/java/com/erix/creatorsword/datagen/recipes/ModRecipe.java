@@ -4,6 +4,7 @@ import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
+import com.erix.creatorsword.item.smithing_template.SmithingTemplateItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import net.minecraft.core.HolderLookup;
@@ -56,9 +57,21 @@ public class ModRecipe extends RecipeProvider {
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
                         Ingredient.of(CreatorSwordItems.CREATOR_SWORD.get()),
                         Ingredient.of(Items.NETHERITE_INGOT),
-                        RecipeCategory.COMBAT, CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()
+                        RecipeCategory.COMBAT,
+                        CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()
                 )
                 .unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT))
                 .save(recipeOutput, "netherite_creator_sword_smithing");
+
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get()),
+                        Ingredient.of(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()),
+                        Ingredient.of(AllItems.STURDY_SHEET.get()),
+                        RecipeCategory.COMBAT,
+                        CreatorSwordItems.CNY_CREATOR_SWORD.get()
+                )
+                .unlocks("has_crimson_afterglow_template",
+                        has(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get()))
+                .save(recipeOutput, "crimson_afterglow_smithing");
     }
 }
