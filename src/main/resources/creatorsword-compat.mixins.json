@@ -1,0 +1,14 @@
+{
+  "required": false,
+  "package": "com.erix.creatorsword.compat.mixin",
+  "plugin": "com.erix.creatorsword.mixin.CreatorSwordMixinPlugin",
+  "mixins": [
+    "simulated.ThrottleLeverBlockMixin"
+  ],
+  "client": [],
+  "server": [],
+  "compatibilityLevel": "JAVA_21",
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
