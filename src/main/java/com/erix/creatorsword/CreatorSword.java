@@ -19,10 +19,12 @@ import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
 import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
 import org.slf4j.Logger;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
+import com.erix.creatorsword.compat.ftbultimine.CreatorSwordFTBUltimineCompat;
 
 import com.mojang.logging.LogUtils;
 
@@ -58,6 +60,10 @@ public class CreatorSword
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             com.erix.creatorsword.client.ClientSetup.init(modEventBus);
+        }
+
+        if (ModList.get().isLoaded("ftbultimine")) {
+            CreatorSwordFTBUltimineCompat.init();
         }
     }
 

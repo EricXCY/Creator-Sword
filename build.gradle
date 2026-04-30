@@ -17,6 +17,23 @@ repositories {
     maven { url = "https://maven.blamejared.com" } // JEI, Vazkii's Mods
     maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" } // ForgeConfigAPIPort
+
+    maven {
+        name = "Architectury"
+        url = "https://maven.architectury.dev"
+    }
+    maven {
+        url "https://maven.ftb.dev/releases"
+        content {
+            includeGroup "dev.ftb.mods"
+        }
+    }
+
+    maven {
+        name = "RyanHCode Maven"
+        url = "https://maven.ryanhcode.dev/releases"
+    }
+
     mavenCentral()
 }
 
@@ -75,6 +92,20 @@ dependencies {
     compileOnly("mezz.jei:jei-$minecraft_version-common-api:$jei_version")
     compileOnly("mezz.jei:jei-$minecraft_version-neoforge-api:$jei_version")
     runtimeOnly("mezz.jei:jei-$minecraft_version-neoforge:$jei_version")
+
+    compileOnly("dev.ftb.mods:ftb-ultimine-neoforge:${ftb_ultimine_version}")
+    runtimeOnly("dev.ftb.mods:ftb-ultimine-neoforge:${ftb_ultimine_version}")
+
+    runtimeOnly("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
+    runtimeOnly("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}") {
+        transitive = false
+    }
+    compileOnly("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}") {
+        transitive = false
+    }
+    runtimeOnly("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}") {
+        transitive = false
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {
