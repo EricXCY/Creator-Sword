@@ -3,7 +3,7 @@
   "package": "com.erix.creatorsword.compat.mixin",
   "plugin": "com.erix.creatorsword.mixin.CreatorSwordMixinPlugin",
   "mixins": [
-    "simulated.ThrottleLeverBlockMixin"
+    "aeronautics.ThrottleLeverBlockMixin"
   ],
   "client": [],
   "server": [],

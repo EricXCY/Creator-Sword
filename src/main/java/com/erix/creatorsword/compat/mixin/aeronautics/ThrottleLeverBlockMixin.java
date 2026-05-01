@@ -1,4 +1,4 @@
-package com.erix.creatorsword.compat.mixin.simulated;
+package com.erix.creatorsword.compat.mixin.aeronautics;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;

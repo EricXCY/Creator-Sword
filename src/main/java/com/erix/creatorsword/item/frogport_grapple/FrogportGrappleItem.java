@@ -48,9 +48,9 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     private static final String KEY_HOOKED = "FrogHooked";
     private static final String KEY_IS_ENTITY = "FrogHookIsEntity";
     private static final String KEY_ENTITY_ID = "FrogHookEntityId";
-    private static final String KEY_HOOK_X = "FrogHookX";
-    private static final String KEY_HOOK_Y = "FrogHookY";
-    private static final String KEY_HOOK_Z = "FrogHookZ";
+    public static final String KEY_HOOK_X = "FrogHookX";
+    public static final String KEY_HOOK_Y = "FrogHookY";
+    public static final String KEY_HOOK_Z = "FrogHookZ";
     private static final String KEY_PROGRESS_PREV = "FrogTongueProgressPrev";
 
     private static final ResourceLocation STAT_GRAPPLE_TRAVEL = FrogportGrappleTravelStat.ID;
@@ -144,7 +144,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         FrogportGrappleSounds.playLatch(level, player);
 
         if (!level.isClientSide) {
-            startBlockHook(stack, hitPos);
+            startBlockHook(stack, level, blockHit, hitPos);
             damageOnHook(level, player, hand, stack);
             awardTravelStatIfServer(player, eye, hitPos);
         }
@@ -287,18 +287,37 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         });
     }
 
-    private static void startBlockHook(ItemStack stack, Vec3 hitPos) {
+    private static void startBlockHook(ItemStack stack, Level level, BlockHitResult blockHit, Vec3 fallbackHitPos) {
+        FrogportHookTarget target = FrogportHookTargetResolver.resolve(level, blockHit, fallbackHitPos);
+
         CustomData.update(DataComponents.CUSTOM_DATA, stack, t -> {
             t.putBoolean(KEY_HOOKED, true);
-            t.putDouble(KEY_HOOK_X, hitPos.x);
-            t.putDouble(KEY_HOOK_Y, hitPos.y);
-            t.putDouble(KEY_HOOK_Z, hitPos.z);
+
+            t.putDouble(KEY_HOOK_X, target.worldPos().x);
+            t.putDouble(KEY_HOOK_Y, target.worldPos().y);
+            t.putDouble(KEY_HOOK_Z, target.worldPos().z);
 
             t.putInt(KEY_PHASE, 1);
             t.putFloat(KEY_PROGRESS, 0.0f);
 
             t.putBoolean(KEY_IS_ENTITY, false);
             t.remove(KEY_ENTITY_ID);
+
+            t.putString(FrogportHookTarget.KEY_HOOK_KIND, target.kind());
+            t.putBoolean(FrogportHookTarget.KEY_HOOK_DYNAMIC, target.dynamic());
+
+            if (target.dynamic() && target.subLevelId() != null) {
+                t.putUUID(FrogportHookTarget.KEY_HOOK_SUBLEVEL_ID, target.subLevelId());
+
+                t.putDouble(FrogportHookTarget.KEY_HOOK_LOCAL_X, target.localPos().x);
+                t.putDouble(FrogportHookTarget.KEY_HOOK_LOCAL_Y, target.localPos().y);
+                t.putDouble(FrogportHookTarget.KEY_HOOK_LOCAL_Z, target.localPos().z);
+            } else {
+                t.remove(FrogportHookTarget.KEY_HOOK_SUBLEVEL_ID);
+                t.remove(FrogportHookTarget.KEY_HOOK_LOCAL_X);
+                t.remove(FrogportHookTarget.KEY_HOOK_LOCAL_Y);
+                t.remove(FrogportHookTarget.KEY_HOOK_LOCAL_Z);
+            }
         });
     }
 
@@ -316,11 +335,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
                                                Level level,
                                                Player player,
                                                CompoundTag tag) {
-        double hx = tag.getDouble(KEY_HOOK_X);
-        double hy = tag.getDouble(KEY_HOOK_Y);
-        double hz = tag.getDouble(KEY_HOOK_Z);
-
-        Vec3 hookPos = new Vec3(hx, hy, hz);
+        Vec3 hookPos = FrogportHookTargetResolver.resolveCurrentWorldPos(level, tag);
         Vec3 playerPos = player.position();
 
         Vec3 toHook = hookPos.subtract(playerPos);

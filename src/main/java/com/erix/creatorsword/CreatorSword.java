@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 import com.erix.creatorsword.compat.ftbultimine.CreatorSwordFTBUltimineCompat;
+import com.erix.creatorsword.compat.aeronautics.FrogportAeronauticsCompat;
 
 import com.mojang.logging.LogUtils;
 
@@ -64,6 +65,10 @@ public class CreatorSword
 
         if (ModList.get().isLoaded("ftbultimine")) {
             CreatorSwordFTBUltimineCompat.init();
+        }
+
+        if (ModList.get().isLoaded("aeronautics") || ModList.get().isLoaded("sable")) {
+            FrogportAeronauticsCompat.init();
         }
     }
 

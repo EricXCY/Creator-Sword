@@ -96,7 +96,11 @@ dependencies {
     compileOnly("dev.ftb.mods:ftb-ultimine-neoforge:${ftb_ultimine_version}")
     runtimeOnly("dev.ftb.mods:ftb-ultimine-neoforge:${ftb_ultimine_version}")
 
+    compileOnly("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
     runtimeOnly("dev.ryanhcode.sable:sable-neoforge-${minecraft_version}:${sable_version}")
+    compileOnly("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}") {
+        transitive = false
+    }
     runtimeOnly("dev.simulated_team.simulated:simulated-neoforge-${minecraft_version}:${simulated_version}") {
         transitive = false
     }

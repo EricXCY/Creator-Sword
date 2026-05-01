@@ -149,11 +149,8 @@ public class FrogportGrappleTongueRenderer {
             }
         }
 
-        if (tag.contains(KEY_HOOK_X)) {
-            double hx = tag.getDouble(KEY_HOOK_X);
-            double hy = tag.getDouble(KEY_HOOK_Y);
-            double hz = tag.getDouble(KEY_HOOK_Z);
-            return new Vec3(hx, hy, hz);
+        if (tag.contains(KEY_HOOK_X) && mc.level != null) {
+            return FrogportHookTargetResolver.resolveCurrentWorldPos(mc.level, tag);
         }
 
         return null;
