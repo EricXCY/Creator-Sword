@@ -76,5 +76,11 @@
   "item.creatorsword.crimson_afterglow_smithing_template.ingredients": "Прочная пластина",
   "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "Улучшение «Красная Заря»",
   "item.creatorsword.crimson_afterglow_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
-  "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "Добавьте прочную пластину"
+  "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "Добавьте прочную пластину",
+
+  "fluid.creatorsword.ominous_essence": "Зловещая эссенция",
+  "fluid.creatorsword.ominous_essence_ii": "Зловещая эссенция II",
+  "fluid.creatorsword.ominous_essence_iii": "Зловещая эссенция III",
+  "fluid.creatorsword.ominous_essence_iv": "Зловещая эссенция IV",
+  "fluid.creatorsword.ominous_essence_v": "Зловещая эссенция V"
 }

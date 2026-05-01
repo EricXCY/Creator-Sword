@@ -3,8 +3,10 @@ package com.erix.creatorsword;
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.CSLootModifiers;
-import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
-import com.erix.creatorsword.enchantment.ModEnchantmentComponents;
+import com.erix.creatorsword.fluid.CSFluidCapabilities;
+import com.erix.creatorsword.fluid.CSFluids;
+import com.erix.creatorsword.data.CSDataComponents;
+import com.erix.creatorsword.enchantment.CSEnchantmentComponents;
 import com.erix.creatorsword.entity.ModEntities;
 import com.erix.creatorsword.item.cogwheel_shield.ShieldRecoveryEvents;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
@@ -18,6 +20,7 @@ import com.erix.creatorsword.item.smithing_template.SmithingTemplateItems;
 import com.erix.creatorsword.item.supreme_glue.SupremeGlueItem;
 import com.erix.creatorsword.network.NetworkHandler;
 import com.erix.creatorsword.ui.ModTabs;
+import com.simibubi.create.foundation.data.CreateRegistrate;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.common.NeoForge;
@@ -34,13 +37,17 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 
 @Mod(CreatorSword.MODID)
-public class CreatorSword
-{
+public class CreatorSword {
     public static final String MODID = "creatorsword";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final CreateRegistrate REGISTRATE = CreateRegistrate.create(MODID);
+
     public CreatorSword(IEventBus modEventBus, ModContainer container) {
+        REGISTRATE.registerEventListeners(modEventBus);
+
         CreatorSwordConfigs.register(container);
+
         CreatorSwordItems.ITEMS.register(modEventBus);
         CogwheelShieldItems.ITEMS.register(modEventBus);
         IncompleteCreatorSwordItems.ITEMS.register(modEventBus);
@@ -50,14 +57,17 @@ public class CreatorSword
         FrogportGrappleTravelStat.register(modEventBus);
         CaptureBoxItem.ITEMS.register(modEventBus);
         ModTabs.CREATIVE_TABS.register(modEventBus);
-        ShieldDataComponents.DATA_COMPONENTS.register(modEventBus);
+        CSDataComponents.DATA_COMPONENTS.register(modEventBus);
         modEventBus.register(NetworkHandler.class);
         CreatorSwordCriteriaTriggers.TRIGGERS.register(modEventBus);
         ModEntities.register(modEventBus);
-        ModEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
+        CSEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
         NeoForge.EVENT_BUS.register(new ShieldRecoveryEvents());
         CSLootModifiers.register(modEventBus);
         SmithingTemplateItems.register(modEventBus);
+
+        CSFluids.register();
+        CSFluidCapabilities.register(modEventBus);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
             com.erix.creatorsword.client.ClientSetup.init(modEventBus);
@@ -70,6 +80,10 @@ public class CreatorSword
         if (ModList.get().isLoaded("aeronautics") || ModList.get().isLoaded("sable")) {
             FrogportAeronauticsCompat.init();
         }
+    }
+
+    public static CreateRegistrate registrate() {
+        return REGISTRATE;
     }
 
     public static ResourceLocation asResource(String path) {

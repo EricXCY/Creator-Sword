@@ -1,0 +1,34 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "type": "neoforge:components",
+      "amount": 250,
+      "components": {
+        "minecraft:ominous_bottle_amplifier": 2
+      },
+      "fluids": "creatorsword:ominous_essence"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 250,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:poison"
+        }
+      },
+      "fluids": "create:potion"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "components": {
+        "minecraft:ominous_bottle_amplifier": 3
+      },
+      "id": "creatorsword:ominous_essence"
+    }
+  ]
+}

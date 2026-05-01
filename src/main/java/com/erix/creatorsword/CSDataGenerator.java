@@ -1,8 +1,9 @@
 package com.erix.creatorsword;
 
-import com.erix.creatorsword.datagen.ModDatapackBuiltinEntriesProvider;
-import com.erix.creatorsword.datagen.advancements.ModAdvancementProvider;
-import com.erix.creatorsword.datagen.recipes.ModRecipe;
+import com.erix.creatorsword.datagen.CSDatapackBuiltinEntriesProvider;
+import com.erix.creatorsword.datagen.advancements.CSAdvancementProvider;
+import com.erix.creatorsword.datagen.recipes.CSMixingRecipeGen;
+import com.erix.creatorsword.datagen.recipes.CSRecipe;
 import com.erix.creatorsword.datagen.tags.ModEnchantmentTag;
 import com.erix.creatorsword.datagen.tags.ModItemTag;
 import net.minecraft.core.HolderLookup;
@@ -18,7 +19,7 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = CreatorSword.MODID)
-public class ModDataGenerator {
+public class CSDataGenerator {
     @SubscribeEvent
     public static void register(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
@@ -26,13 +27,14 @@ public class ModDataGenerator {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         CompletableFuture<TagsProvider.TagLookup<Block>> blockTags = CompletableFuture.completedFuture(null);
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        ModDatapackBuiltinEntriesProvider builtin = new ModDatapackBuiltinEntriesProvider(output, lookupProvider);
+        CSDatapackBuiltinEntriesProvider builtin = new CSDatapackBuiltinEntriesProvider(output, lookupProvider);
         generator.addProvider(event.includeServer(), builtin);
         CompletableFuture<HolderLookup.Provider> registryProvider = builtin.getRegistryProvider();
 
-        generator.addProvider(event.includeServer(), new ModRecipe(output,lookupProvider));
+        generator.addProvider(event.includeServer(), new CSRecipe(output,lookupProvider));
         generator.addProvider(event.includeServer(), new ModItemTag(output, lookupProvider, blockTags, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModEnchantmentTag(output, registryProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModAdvancementProvider(output, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new CSAdvancementProvider(output, lookupProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new CSMixingRecipeGen(output, lookupProvider));
     }
 }

@@ -1,0 +1,34 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "neoforge:components",
+      "amount": 250,
+      "components": {
+        "minecraft:ominous_bottle_amplifier": 0
+      },
+      "fluids": "creatorsword:ominous_essence"
+    },
+    {
+      "type": "neoforge:components",
+      "amount": 250,
+      "components": {
+        "create:potion_fluid_bottle_type": "regular",
+        "minecraft:potion_contents": {
+          "potion": "minecraft:infested"
+        }
+      },
+      "fluids": "create:potion"
+    }
+  ],
+  "results": [
+    {
+      "amount": 250,
+      "components": {
+        "minecraft:ominous_bottle_amplifier": 1
+      },
+      "id": "creatorsword:ominous_essence"
+    }
+  ]
+}

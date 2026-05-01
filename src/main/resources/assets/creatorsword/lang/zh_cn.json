@@ -75,5 +75,11 @@
   "item.creatorsword.crimson_afterglow_smithing_template.ingredients": "坚固板",
   "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "赤霞升级",
   "item.creatorsword.crimson_afterglow_smithing_template.base_slot_description": "放入一把下界合金机械师之剑",
-  "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "放入一块坚固板"
+  "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "放入一块坚固板",
+
+  "fluid.creatorsword.ominous_essence": "不祥原浆",
+  "fluid.creatorsword.ominous_essence_ii": "不祥原浆 II",
+  "fluid.creatorsword.ominous_essence_iii": "不祥原浆 III",
+  "fluid.creatorsword.ominous_essence_iv": "不祥原浆 IV",
+  "fluid.creatorsword.ominous_essence_v": "不祥原浆 V"
 }
