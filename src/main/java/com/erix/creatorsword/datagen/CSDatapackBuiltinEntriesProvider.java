@@ -12,12 +12,11 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 
-public class ModDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProvider {
+public class CSDatapackBuiltinEntriesProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.ENCHANTMENT, EnchantmentKeys::bootstrap);
 
-    public ModDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public CSDatapackBuiltinEntriesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, BUILDER, Set.of(CreatorSword.MODID));
     }
-
 }

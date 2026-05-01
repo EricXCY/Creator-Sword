@@ -1,6 +1,6 @@
 package com.erix.creatorsword.client;
 
-import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
+import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldStatePayload;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -25,9 +25,9 @@ public class CreatorSwordClientEvents {
     private static void syncShieldState(ItemStack stack, boolean isOffhand) {
         if (!(stack.getItem() instanceof CogwheelShieldItem)) return;
 
-        float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        boolean charging = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        boolean decaying = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false);
+        float speed = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        boolean charging = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        boolean decaying = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_DECAYING.get(), false);
 
         if (speed > 0) {
             PacketDistributor.sendToServer(new ShieldStatePayload(isOffhand, speed, charging, decaying));
@@ -75,7 +75,7 @@ public class CreatorSwordClientEvents {
         if (!player.isUsingItem() || player.getUseItem() != offhand) return;
 
         // 读取转速
-        float speed = offhand.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        float speed = offhand.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         if (speed < 0.01f) return;
 
         GuiGraphics guiGraphics = event.getGuiGraphics();

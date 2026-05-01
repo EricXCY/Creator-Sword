@@ -1,4 +1,4 @@
-package com.erix.creatorsword.item.cogwheel_shield;
+package com.erix.creatorsword.data;
 
 import com.erix.creatorsword.CreatorSword;
 import com.mojang.serialization.Codec;
@@ -10,7 +10,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class ShieldDataComponents {
+public class CSDataComponents {
     public static final DeferredRegister.DataComponents DATA_COMPONENTS =
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CreatorSword.MODID);
 

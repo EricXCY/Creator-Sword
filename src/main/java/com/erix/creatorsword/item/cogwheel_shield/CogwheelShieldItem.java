@@ -2,6 +2,7 @@ package com.erix.creatorsword.item.cogwheel_shield;
 
 import java.util.function.Consumer;
 
+import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
@@ -45,15 +46,15 @@ public class CogwheelShieldItem extends ShieldItem {
     @OnlyIn(Dist.CLIENT)
     public void tickClient(ItemStack stack, Player player, boolean keyDown) {
         long currentTick = player.level().getGameTime();
-        long lastUpdateTick = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
+        long lastUpdateTick = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
         if (currentTick - lastUpdateTick < UPDATE_INTERVAL_TICKS)
             return;
 
-        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), currentTick);
+        stack.set(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), currentTick);
 
         float speed = getSpeed(stack);
-        boolean charging = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        boolean decaying = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), false);
+        boolean charging = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        boolean decaying = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_DECAYING.get(), false);
 
         if (keyDown) {
             // 启动加速
@@ -83,16 +84,16 @@ public class CogwheelShieldItem extends ShieldItem {
         }
 
         setSpeed(stack, speed);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), charging);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), decaying);
+        stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), charging);
+        stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), decaying);
     }
 
     public float getSpeed(ItemStack stack) {
-        return stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        return stack.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
     }
 
     public void setSpeed(ItemStack stack, float speed) {
-        stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), speed);
+        stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), speed);
     }
 
     private float getAccelerationFactor(ItemStack stack, Player player, long tick) {
@@ -116,10 +117,10 @@ public class CogwheelShieldItem extends ShieldItem {
     }
 
     private boolean consumeAirIfNeeded(ItemStack stack, Player player, long tick, int enchantLevel, ItemStack tank) {
-        long lastConsumeTick = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
+        long lastConsumeTick = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
         if (tick - lastConsumeTick < AIR_CONSUME_INTERVAL_TICKS) return true;
 
-        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), tick);
+        stack.set(CSDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), tick);
 
         int airCost = enchantLevel * 2;
         int air = BacktankUtil.getAir(tank);
@@ -130,12 +131,12 @@ public class CogwheelShieldItem extends ShieldItem {
     }
 
     public static void resetNBT(ItemStack stack) {
-        stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
-        stack.set(ShieldDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+        stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+        stack.set(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
+        stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+        stack.set(CSDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
+        stack.set(CSDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
     }
 
     private float getMaxSpeed(ItemStack stack, Player player) {

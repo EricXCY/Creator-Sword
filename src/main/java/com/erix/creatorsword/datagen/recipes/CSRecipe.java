@@ -17,8 +17,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ModRecipe extends RecipeProvider {
-    public ModRecipe(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+public class CSRecipe extends RecipeProvider {
+    public CSRecipe(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
 

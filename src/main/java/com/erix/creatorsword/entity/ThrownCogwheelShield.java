@@ -1,6 +1,6 @@
 package com.erix.creatorsword.entity;
 
-import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
+import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -118,9 +118,9 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
                         ItemStack stack = stackData.copy();
 
                         float speedNow = this.getEntityData().get(SPEED);
-                        stack.set(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), speedNow);
-                        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-                        stack.set(ShieldDataComponents.GEAR_SHIELD_CHARGING.get(), false);
+                        stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), speedNow);
+                        stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+                        stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
 
                         // 优先返回副手
                         if (player.getItemInHand(InteractionHand.OFF_HAND).isEmpty()) {

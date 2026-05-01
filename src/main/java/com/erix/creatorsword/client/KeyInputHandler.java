@@ -1,6 +1,6 @@
 package com.erix.creatorsword.client;
 
-import com.erix.creatorsword.item.cogwheel_shield.ShieldDataComponents;
+import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import com.erix.creatorsword.network.ShieldFullSpeedPayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
@@ -55,7 +55,7 @@ public class KeyInputHandler {
             if (off.getItem() instanceof CogwheelShieldItem) stack = off;
 
             if (!stack.isEmpty()) {
-                float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+                float speed = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
                 if (speed >= 64f) {
                     triggerThrowShield(stack, speed);
                 }
@@ -66,24 +66,24 @@ public class KeyInputHandler {
     }
 
     private static void updateRotation(ItemStack stack, boolean offhand) {
-        float angle = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
-        float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        float angle = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+        float speed = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         angle += (offhand ? 1 : -1) * (speed / 20f);
         angle = (angle + 360f) % 360f;
-        stack.set(ShieldDataComponents.GEAR_SHIELD_ANGLE.get(), angle);
+        stack.set(CSDataComponents.GEAR_SHIELD_ANGLE.get(), angle);
     }
 
     public static void triggerThrowShield(ItemStack stack, float speed) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null || mc.level == null) return;
 
-        stack.set(ShieldDataComponents.GEAR_SHIELD_DECAYING.get(), true);
+        stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), true);
         PacketDistributor.sendToServer(new ShieldThrowPayload(speed));
     }
 
     private static boolean isShieldAtFullSpeed(ItemStack stack) {
         if (!(stack.getItem() instanceof CogwheelShieldItem)) return false;
-        float speed = stack.getOrDefault(ShieldDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
+        float speed = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
         return speed >= FULL_SPEED;
     }
 }

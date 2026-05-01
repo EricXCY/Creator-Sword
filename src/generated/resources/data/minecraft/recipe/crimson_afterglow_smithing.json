@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "create:sturdy_sheet"
+  },
+  "base": {
+    "item": "creatorsword:netherite_creator_sword"
+  },
+  "result": {
+    "count": 1,
+    "id": "creatorsword:cny_creator_sword"
+  },
+  "template": {
+    "item": "creatorsword:crimson_afterglow_smithing_template"
+  }
+}

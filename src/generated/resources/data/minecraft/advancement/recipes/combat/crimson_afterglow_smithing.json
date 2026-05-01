@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crimson_afterglow_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "creatorsword:crimson_afterglow_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:crimson_afterglow_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_crimson_afterglow_template"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:crimson_afterglow_smithing"
+    ]
+  }
+}
