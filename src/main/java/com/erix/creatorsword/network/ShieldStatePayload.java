@@ -1,5 +1,6 @@
 package com.erix.creatorsword.network;
 
+import com.erix.creatorsword.CreatorSword;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public record ShieldStatePayload(boolean offhand, float speed, boolean charging, boolean decaying) implements CustomPacketPayload {
     public static final Type<ShieldStatePayload> TYPE =
-            new Type<>(ResourceLocation.fromNamespaceAndPath("creatorsword", "shield_state"));
+            new Type<>(ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "shield_state"));
     public static final StreamCodec<RegistryFriendlyByteBuf, ShieldStatePayload> STREAM_CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.BOOL, ShieldStatePayload::offhand,

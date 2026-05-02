@@ -16,6 +16,10 @@ import static com.erix.creatorsword.data.CSDataComponents.*;
 public class NetworkHandler {
     private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
 
+    private static final float THROW_SPEED_THRESHOLD = 64f;
+    private static final float FULL_SPEED_THRESHOLD = 256f;
+    private static final float MAX_SYNC_SPEED = 512f;
+
     @SubscribeEvent
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
@@ -25,6 +29,25 @@ public class NetworkHandler {
                 ShieldFullSpeedPayload.STREAM_CODEC,
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
+
+                    ItemStack offhand = player.getItemInHand(InteractionHand.OFF_HAND);
+                    ItemStack mainhand = player.getItemInHand(InteractionHand.MAIN_HAND);
+
+                    if (!(offhand.getItem() instanceof CogwheelShieldItem))
+                        return;
+
+                    if (!(mainhand.getItem() instanceof CogwheelShieldItem))
+                        return;
+
+                    float offhandSpeed = Math.clamp(payload.offhandSpeed(), 0f, MAX_SYNC_SPEED);
+                    float mainhandSpeed = Math.clamp(payload.mainhandSpeed(), 0f, MAX_SYNC_SPEED);
+
+                    if (offhandSpeed < FULL_SPEED_THRESHOLD)
+                        return;
+
+                    if (mainhandSpeed < FULL_SPEED_THRESHOLD)
+                        return;
+
                     CreatorSwordCriteriaTriggers.FULL_SPEED.get().trigger(player);
                 }
         );
@@ -35,26 +58,43 @@ public class NetworkHandler {
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
 
-                    ItemStack off = player.getItemInHand(InteractionHand.OFF_HAND);
-                    if (!(off.getItem() instanceof CogwheelShieldItem)) return;
+                    ItemStack offhand = player.getItemInHand(InteractionHand.OFF_HAND);
 
-                    CompoundTag pd = player.getPersistentData();
-                    if (pd.contains(THROWN_SHIELD_TAG)) return;
+                    if (!(offhand.getItem() instanceof CogwheelShieldItem))
+                        return;
 
-                    // 防止附近已经有自己的投掷盾
-                    if (!player.level().getEntitiesOfClass(
-                            ThrownCogwheelShield.class,
-                            player.getBoundingBox().inflate(5),
-                            e -> e.getOwner() == player
-                    ).isEmpty()) return;
+                    CompoundTag persistentData = player.getPersistentData();
 
-                    pd.put(THROWN_SHIELD_TAG, off.save(player.registryAccess()));
+                    if (persistentData.contains(THROWN_SHIELD_TAG))
+                        return;
+
+                    if (hasExistingThrownShield(player))
+                        return;
+
+                    float speed = Math.clamp(payload.speed(), 0f, MAX_SYNC_SPEED);
+
+                    if (speed < THROW_SPEED_THRESHOLD)
+                        return;
+
+                    offhand.set(GEAR_SHIELD_SPEED.get(), speed);
+                    offhand.set(GEAR_SHIELD_CHARGING.get(), false);
+                    offhand.set(GEAR_SHIELD_DECAYING.get(), true);
+
+                    persistentData.put(THROWN_SHIELD_TAG, offhand.save(player.registryAccess()));
 
                     ThrownCogwheelShield projectile =
-                            new ThrownCogwheelShield(player.level(), player, payload.speed(), off.copy());
-                    projectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
-                    player.level().addFreshEntity(projectile);
+                            new ThrownCogwheelShield(player.level(), player, speed, offhand.copy());
 
+                    projectile.shootFromRotation(
+                            player,
+                            player.getXRot(),
+                            player.getYRot(),
+                            0.0F,
+                            1.5F,
+                            1.0F
+                    );
+
+                    player.level().addFreshEntity(projectile);
                     player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
                 }
         );
@@ -65,16 +105,41 @@ public class NetworkHandler {
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
 
-                    InteractionHand hand = payload.offhand() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
+                    InteractionHand hand = payload.offhand()
+                            ? InteractionHand.OFF_HAND
+                            : InteractionHand.MAIN_HAND;
+
                     ItemStack serverStack = player.getItemInHand(hand);
 
-                    if (!(serverStack.getItem() instanceof CogwheelShieldItem)) return;
+                    if (!(serverStack.getItem() instanceof CogwheelShieldItem))
+                        return;
 
-                    serverStack.set(GEAR_SHIELD_SPEED, payload.speed());
-                    serverStack.set(GEAR_SHIELD_CHARGING, payload.charging());
-                    serverStack.set(GEAR_SHIELD_DECAYING, payload.decaying());
+                    float speed = Math.clamp(payload.speed(), 0f, MAX_SYNC_SPEED);
+
+                    float oldSpeed = serverStack.getOrDefault(GEAR_SHIELD_SPEED.get(), 0f);
+                    boolean oldCharging = serverStack.getOrDefault(GEAR_SHIELD_CHARGING.get(), false);
+                    boolean oldDecaying = serverStack.getOrDefault(GEAR_SHIELD_DECAYING.get(), false);
+
+                    if (Math.abs(oldSpeed - speed) > 0.01f) {
+                        serverStack.set(GEAR_SHIELD_SPEED.get(), speed);
+                    }
+
+                    if (oldCharging != payload.charging()) {
+                        serverStack.set(GEAR_SHIELD_CHARGING.get(), payload.charging());
+                    }
+
+                    if (oldDecaying != payload.decaying()) {
+                        serverStack.set(GEAR_SHIELD_DECAYING.get(), payload.decaying());
+                    }
                 }
         );
+    }
 
+    private static boolean hasExistingThrownShield(ServerPlayer player) {
+        return !player.level().getEntitiesOfClass(
+                ThrownCogwheelShield.class,
+                player.getBoundingBox().inflate(5),
+                entity -> entity.getOwner() == player
+        ).isEmpty();
     }
 }

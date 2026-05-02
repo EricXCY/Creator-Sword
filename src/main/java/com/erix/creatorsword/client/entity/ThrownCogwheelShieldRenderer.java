@@ -1,6 +1,7 @@
-package com.erix.creatorsword.entity;
+package com.erix.creatorsword.client.entity;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.entity.ThrownCogwheelShield;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -13,14 +14,17 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class ThrownCogwheelShieldRenderer extends EntityRenderer<ThrownCogwheelShield> {
     private static final PartialModel HANDLE = PartialModel.of(
             ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/handle")
     );
+
     private static final PartialModel ROTATING_GEAR = PartialModel.of(
             ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/cogwheel_shield_handless")
     );
+
     private final ItemRenderer itemRenderer;
 
     public ThrownCogwheelShieldRenderer(EntityRendererProvider.Context context) {
@@ -29,13 +33,14 @@ public class ThrownCogwheelShieldRenderer extends EntityRenderer<ThrownCogwheelS
     }
 
     @Override
-    public void render(ThrownCogwheelShield entity, float yaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int light) {
+    public void render(ThrownCogwheelShield entity, float yaw, float partialTicks,
+                       PoseStack poseStack, @NotNull MultiBufferSource buffer, int light) {
         poseStack.pushPose();
 
         poseStack.mulPose(Axis.ZP.rotationDegrees(yaw + 180.0f));
-        poseStack.scale(1.0f, 1.0f, 1.0f);
 
         ItemStack stack = entity.getItem();
+
         if (stack.isEmpty()) {
             stack = new ItemStack(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         }
@@ -52,7 +57,9 @@ public class ThrownCogwheelShieldRenderer extends EntityRenderer<ThrownCogwheelS
         );
 
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getRotationAngle()));
+
+        poseStack.mulPose(Axis.YP.rotationDegrees(entity.getRotationAngle(partialTicks)));
+
         itemRenderer.render(
                 stack,
                 ItemDisplayContext.GROUND,
@@ -63,14 +70,18 @@ public class ThrownCogwheelShieldRenderer extends EntityRenderer<ThrownCogwheelS
                 OverlayTexture.NO_OVERLAY,
                 ROTATING_GEAR.get()
         );
-        poseStack.popPose();
 
         poseStack.popPose();
+        poseStack.popPose();
+
         super.render(entity, yaw, partialTicks, poseStack, buffer, light);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(ThrownCogwheelShield entity) {
-        return ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/cogwheel_shield_handless");
+    public @NotNull ResourceLocation getTextureLocation(@NotNull ThrownCogwheelShield entity) {
+        return ResourceLocation.fromNamespaceAndPath(
+                CreatorSword.MODID,
+                "item/cogwheel_shield/cogwheel_shield_handless"
+        );
     }
 }

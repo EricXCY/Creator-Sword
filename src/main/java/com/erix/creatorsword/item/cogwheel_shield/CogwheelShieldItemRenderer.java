@@ -1,14 +1,15 @@
 package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.erix.creatorsword.data.CSDataComponents;
+import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.client.cogwheel_shield.CogwheelShieldKeyInputHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
-
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -17,17 +18,18 @@ import net.minecraft.world.item.ItemStack;
 public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer {
 
     private static final PartialModel HANDLE = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/cogwheel_shield/handle")
+            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/handle")
     );
+
     private static final PartialModel ROTATING_GEAR = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath("creatorsword", "item/cogwheel_shield/cogwheel_shield_handless")
+            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/cogwheel_shield_handless")
     );
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
                           ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
 
-        ms.pushPose(); // 第一次PushPose
+        ms.pushPose();
 
         switch (transformType) {
             case THIRD_PERSON_RIGHT_HAND -> {
@@ -41,13 +43,10 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 ms.scale(0.6f, 0.6f, 0.6f);
             }
             case FIRST_PERSON_RIGHT_HAND -> {
-                boolean blocking = false;
-                if (Minecraft.getInstance().player != null) {
-                    blocking = Minecraft.getInstance().player.isUsingItem() &&
-                            Minecraft.getInstance().player.getUseItem() == stack;
-                }
+                boolean blocking = isBlockingWith(stack);
+
                 if (blocking) {
-                    ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
+                    ms.mulPose(Axis.XP.rotationDegrees(275));
                     ms.mulPose(Axis.YP.rotationDegrees(90));
                     ms.translate(8 / 16f, 4f / 16f, 4 / 16f);
                     ms.scale(0.9f, 0.25f, 0.9f);
@@ -59,13 +58,10 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 }
             }
             case FIRST_PERSON_LEFT_HAND -> {
-                boolean blocking = false;
-                if (Minecraft.getInstance().player != null) {
-                    blocking = Minecraft.getInstance().player.isUsingItem() &&
-                            Minecraft.getInstance().player.getUseItem() == stack;
-                }
+                boolean blocking = isBlockingWith(stack);
+
                 if (blocking) {
-                    ms.mulPose(Axis.XP.rotationDegrees(275)); // 举起格挡姿势
+                    ms.mulPose(Axis.XP.rotationDegrees(275));
                     ms.mulPose(Axis.YP.rotationDegrees(90));
                     ms.translate(8 / 16f, 4f / 16f, -4 / 16f);
                     ms.scale(0.9f, 0.25f, 0.9f);
@@ -95,21 +91,51 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                 ms.scale(0.7f, 0.7f, 0.7f);
             }
             default -> {
-                // NONE等，忽略
             }
         }
 
-        // 旋转/缩放完之后，渲染护手
         renderer.render(HANDLE.get(), light);
 
-        float rotationAngle = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_ANGLE.get(), 0f);
+        float rotationAngle = getVisualRotationAngle(stack, transformType);
 
-        ms.pushPose(); // 进入齿轮局部旋转
+        ms.pushPose();
         ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
         renderer.render(ROTATING_GEAR.get(), light);
-        ms.popPose(); // 结束齿轮局部旋转
+        ms.popPose();
 
-        ms.popPose(); // 恢复初始Pose
+        ms.popPose();
     }
 
+    private static boolean isBlockingWith(ItemStack stack) {
+        LocalPlayer player = Minecraft.getInstance().player;
+
+        return player != null
+                && player.isUsingItem()
+                && player.getUseItem() == stack;
+    }
+
+    private static float getVisualRotationAngle(ItemStack stack, ItemDisplayContext transformType) {
+        LocalPlayer player = Minecraft.getInstance().player;
+
+        if (player == null)
+            return 0f;
+
+        return switch (transformType) {
+            case FIRST_PERSON_LEFT_HAND, THIRD_PERSON_LEFT_HAND ->
+                    CogwheelShieldKeyInputHandler.getOffhandAngle();
+
+            case FIRST_PERSON_RIGHT_HAND, THIRD_PERSON_RIGHT_HAND ->
+                    CogwheelShieldKeyInputHandler.getMainhandAngle();
+
+            default -> {
+                if (stack == player.getOffhandItem())
+                    yield CogwheelShieldKeyInputHandler.getOffhandAngle();
+
+                if (stack == player.getMainHandItem())
+                    yield CogwheelShieldKeyInputHandler.getMainhandAngle();
+
+                yield 0f;
+            }
+        };
+    }
 }

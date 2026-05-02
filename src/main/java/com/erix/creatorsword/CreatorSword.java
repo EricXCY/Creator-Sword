@@ -3,11 +3,12 @@ package com.erix.creatorsword;
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.CSLootModifiers;
+import com.erix.creatorsword.client.entity.EntityRendererSetup;
 import com.erix.creatorsword.fluid.CSFluidCapabilities;
 import com.erix.creatorsword.fluid.CSFluids;
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.enchantment.CSEnchantmentComponents;
-import com.erix.creatorsword.entity.ModEntities;
+import com.erix.creatorsword.entity.CSEntities;
 import com.erix.creatorsword.item.cogwheel_shield.ShieldRecoveryEvents;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
@@ -56,21 +57,27 @@ public class CreatorSword {
         FrogportGrappleItem.ITEMS.register(modEventBus);
         FrogportGrappleTravelStat.register(modEventBus);
         CaptureBoxItem.ITEMS.register(modEventBus);
+        SmithingTemplateItems.register(modEventBus);
+
         ModTabs.CREATIVE_TABS.register(modEventBus);
         CSDataComponents.DATA_COMPONENTS.register(modEventBus);
-        modEventBus.register(NetworkHandler.class);
         CreatorSwordCriteriaTriggers.TRIGGERS.register(modEventBus);
-        ModEntities.register(modEventBus);
+        CSEntities.register(modEventBus);
         CSEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
-        NeoForge.EVENT_BUS.register(new ShieldRecoveryEvents());
         CSLootModifiers.register(modEventBus);
-        SmithingTemplateItems.register(modEventBus);
 
         CSFluids.register();
         CSFluidCapabilities.register(modEventBus);
 
+        modEventBus.register(NetworkHandler.class);
+        modEventBus.addListener(CSDataGenerator::register);
+
+        NeoForge.EVENT_BUS.register(new ShieldRecoveryEvents());
+
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            com.erix.creatorsword.client.ClientSetup.init(modEventBus);
+            com.erix.creatorsword.client.KeyBindings.register(modEventBus);
+            EntityRendererSetup.register(modEventBus);
+            com.erix.creatorsword.client.cogwheel_shield.CogwheelShieldClientEvents.register();
         }
 
         if (ModList.get().isLoaded("ftbultimine")) {

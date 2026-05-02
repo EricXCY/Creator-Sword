@@ -2,6 +2,7 @@ package com.erix.creatorsword.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
@@ -11,6 +12,10 @@ public class KeyBindings {
             InputConstants.KEY_V,
             "creatorsword.keybinds.category"
     );
+
+    public static void register(IEventBus modEventBus) {
+        modEventBus.register(KeyBindings.class);
+    }
 
     @SubscribeEvent
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
@@ -22,6 +27,6 @@ public class KeyBindings {
     }
 
     public static boolean isKeyDown(KeyMapping key) {
-        return ROTATE_COGWHEEL.isDown();
+        return key.isDown();
     }
 }
