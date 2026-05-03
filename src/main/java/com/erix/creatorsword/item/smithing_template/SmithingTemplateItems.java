@@ -16,6 +16,12 @@ public class SmithingTemplateItems {
                     CSmithingTemplateItem::createCrimsonAfterglowTemplate
             );
 
+    public static final DeferredItem<Item> TRIAL_SMITHING_TEMPLATE =
+            ITEMS.register(
+                    "trial_smithing_template",
+                    CSmithingTemplateItem::createTrialTemplate
+            );
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

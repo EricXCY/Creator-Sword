@@ -1,0 +1,11 @@
+{
+  "type": "creatorsword:replace_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/trial_chambers/reward_ominous_rare"
+    }
+  ],
+  "chance": 0.03,
+  "item": "creatorsword:trial_smithing_template"
+}

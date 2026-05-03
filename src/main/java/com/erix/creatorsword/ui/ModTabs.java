@@ -33,6 +33,7 @@ public class ModTabs {
                         Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());
                         Output.accept(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get());
+                        Output.accept(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get());
                         Output.accept(CSItems.TRIAL_KEY_DIE.get());
                         Output.accept(CSItems.OMINOUS_TRIAL_KEY_DIE.get());
                     }).build());

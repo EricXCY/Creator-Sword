@@ -85,6 +85,13 @@
   "item.creatorsword.crimson_afterglow_smithing_template.base_slot_description": "Add a Netherite Creator's Sword",
   "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "Add a sturdy sheet",
 
+  "item.creatorsword.trial_smithing_template": "Trial Smithing Template",
+  "item.creatorsword.trial_smithing_template.applies_to": "Netherite Creator's Sword",
+  "item.creatorsword.trial_smithing_template.ingredients": "Sturdy Sheet",
+  "item.creatorsword.trial_smithing_template.upgrade_description": "Trial Upgrade",
+  "item.creatorsword.trial_smithing_template.base_slot_description": "Add a Netherite Creator's Sword",
+  "item.creatorsword.trial_smithing_template.additions_slot_description": "Add a sturdy sheet",
+
   "fluid.creatorsword.ominous_essence": "Ominous Essence",
   "fluid.creatorsword.ominous_essence_ii": "Ominous Essence II",
   "fluid.creatorsword.ominous_essence_iii": "Ominous Essence III",

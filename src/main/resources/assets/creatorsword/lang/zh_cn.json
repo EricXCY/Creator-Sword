@@ -84,6 +84,13 @@
   "item.creatorsword.crimson_afterglow_smithing_template.base_slot_description": "放入一把下界合金机械师之剑",
   "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "放入一块坚固板",
 
+  "item.creatorsword.trial_smithing_template": "试炼锻造模板",
+  "item.creatorsword.trial_smithing_template.applies_to": "下界合金机械师之剑",
+  "item.creatorsword.trial_smithing_template.ingredients": "坚固板",
+  "item.creatorsword.trial_smithing_template.upgrade_description": "试炼升级",
+  "item.creatorsword.trial_smithing_template.base_slot_description": "放入一把下界合金机械师之剑",
+  "item.creatorsword.trial_smithing_template.additions_slot_description": "放入一块坚固板",
+
   "fluid.creatorsword.ominous_essence": "不祥原浆",
   "fluid.creatorsword.ominous_essence_ii": "不祥原浆 II",
   "fluid.creatorsword.ominous_essence_iii": "不祥原浆 III",

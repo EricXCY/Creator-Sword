@@ -73,5 +73,16 @@ public class CSRecipe extends RecipeProvider {
                 .unlocks("has_crimson_afterglow_template",
                         has(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get()))
                 .save(recipeOutput, "crimson_afterglow_smithing");
+
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get()),
+                        Ingredient.of(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()),
+                        Ingredient.of(AllItems.STURDY_SHEET.get()),
+                        RecipeCategory.COMBAT,
+                        CreatorSwordItems.TRIAL_CREATOR_SWORD.get()
+                )
+                .unlocks("has_trail_template",
+                        has(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get()))
+                .save(recipeOutput, "trial_smithing");
     }
 }

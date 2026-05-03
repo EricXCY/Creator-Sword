@@ -78,12 +78,19 @@
   "enchantment.creatorsword.sticky_tongue": "Липкий язык",
   "enchantment.creatorsword.sticky_tongue.desc": "Повышает уровень захвата лягушачьего гарпуна.",
 
-  "item.creatorsword.crimson_afterglow_smithing_template": "Кузнечный шаблон «Красная Заря»",
+  "item.creatorsword.crimson_afterglow_smithing_template": "Кузнечный шаблон Красная Заря",
   "item.creatorsword.crimson_afterglow_smithing_template.applies_to": "Незеритовый Меч Создателя",
   "item.creatorsword.crimson_afterglow_smithing_template.ingredients": "Прочная пластина",
-  "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "Улучшение «Красная Заря»",
+  "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "Улучшение Красная Заря",
   "item.creatorsword.crimson_afterglow_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
   "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "Добавьте прочную пластину",
+
+  "item.creatorsword.trial_smithing_template": "Кузнечный шаблон испытаний",
+  "item.creatorsword.trial_smithing_template.applies_to": "Незеритовый Меч Создателя",
+  "item.creatorsword.trial_smithing_template.ingredients": "Прочная пластина",
+  "item.creatorsword.trial_smithing_template.upgrade_description": "Улучшение испытаний",
+  "item.creatorsword.trial_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
+  "item.creatorsword.trial_smithing_template.additions_slot_description": "Добавьте прочную пластину",
 
   "fluid.creatorsword.ominous_essence": "Зловещая эссенция",
   "fluid.creatorsword.ominous_essence_ii": "Зловещая эссенция II",
