@@ -1,0 +1,56 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "creatorsword:config_enabled",
+      "key": "trial_key"
+    }
+  ],
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "creatorsword:trial_key_die"
+  },
+  "results": [
+    {
+      "id": "minecraft:trial_key"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatorsword:incomplete_trial_key_die"
+        },
+        {
+          "item": "minecraft:wither_skeleton_skull"
+        }
+      ],
+      "results": [
+        {
+          "id": "creatorsword:incomplete_trial_key_die"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "creatorsword:incomplete_trial_key_die"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 500,
+          "fluid": "creatorsword:ominous_essence_ii"
+        }
+      ],
+      "results": [
+        {
+          "id": "creatorsword:incomplete_trial_key_die"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "creatorsword:incomplete_trial_key_die"
+  }
+}

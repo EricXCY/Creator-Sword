@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "creatorsword:config_enabled",
+      "key": "ominous_essence"
+    }
+  ],
   "type": "create:mixing",
   "heat_requirement": "heated",
   "ingredients": [
@@ -28,9 +34,6 @@
   "results": [
     {
       "amount": 250,
-      "components": {
-        "minecraft:ominous_bottle_amplifier": 0
-      },
       "id": "creatorsword:ominous_essence"
     }
   ]

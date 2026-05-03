@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "creatorsword:item/incomplete_trial_key_die"
+  }
+}

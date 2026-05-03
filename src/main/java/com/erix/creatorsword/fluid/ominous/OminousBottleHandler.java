@@ -56,7 +56,7 @@ public class OminousBottleHandler implements IFluidHandlerItem {
 
         FluidStack contained = getContainedFluid();
 
-        if (!FluidStack.isSameFluidSameComponents(contained, resource))
+        if (!contained.is(resource.getFluid()))
             return FluidStack.EMPTY;
 
         return drain(resource.getAmount(), action);

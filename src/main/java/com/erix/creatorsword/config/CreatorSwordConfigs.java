@@ -20,7 +20,12 @@ public class CreatorSwordConfigs {
     private static final Map<ModConfig.Type, ConfigBase> CONFIGS =
             new EnumMap<>(ModConfig.Type.class);
 
+    private static CSCommon common;
     private static CSServer server;
+
+    public static CSCommon common() {
+        return common;
+    }
 
     public static CSServer server() {
         return server;
@@ -40,6 +45,7 @@ public class CreatorSwordConfigs {
     }
 
     public static void register(ModContainer container) {
+        common = register(CSCommon::new, ModConfig.Type.COMMON);
         server = register(CSServer::new, ModConfig.Type.SERVER);
 
         for (var e : CONFIGS.entrySet()) {

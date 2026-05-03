@@ -82,5 +82,10 @@
   "fluid.creatorsword.ominous_essence_ii": "Ominous Essence II",
   "fluid.creatorsword.ominous_essence_iii": "Ominous Essence III",
   "fluid.creatorsword.ominous_essence_iv": "Ominous Essence IV",
-  "fluid.creatorsword.ominous_essence_v": "Ominous Essence V"
+  "fluid.creatorsword.ominous_essence_v": "Ominous Essence V",
+
+  "item.creatorsword.trial_key_die": "Trial Key Die",
+  "item.creatorsword.incomplete_trial_key_die": "Incomplete Trial Key Die",
+  "item.creatorsword.ominous_trial_key_die": "Ominous Trial Key Die",
+  "item.creatorsword.incomplete_ominous_trial_key_die": "Incomplete Ominous Trial Key Die"
 }

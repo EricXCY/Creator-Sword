@@ -1,0 +1,14 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "create:copper_sheet"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "creatorsword:trial_key_die"
+    }
+  ]
+}

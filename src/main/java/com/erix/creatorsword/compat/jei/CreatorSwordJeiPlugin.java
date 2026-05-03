@@ -1,14 +1,11 @@
 package com.erix.creatorsword.compat.jei;
 
 import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.fluid.CSFluids;
 import com.erix.creatorsword.fluid.ominous.OminousEssenceHelper;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
-import com.simibubi.create.content.fluids.VirtualFluid;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.helpers.IPlatformFluidHelper;
 import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.vanilla.IVanillaRecipeFactory;
 import mezz.jei.api.registration.*;
@@ -35,25 +32,6 @@ public class CreatorSwordJeiPlugin implements IModPlugin {
     @Override
     public void registerCategories(@NotNull IRecipeCategoryRegistration registration) {
         // registration.addRecipeCategories(new XxxCategory(registration.getJeiHelpers().getGuiHelper()));
-    }
-
-    @Override
-    public <T> void registerFluidSubtypes(ISubtypeRegistration registration, @NotNull IPlatformFluidHelper<T> platformFluidHelper) {
-        OminousEssenceSubtypeInterpreter interpreter = new OminousEssenceSubtypeInterpreter();
-
-        VirtualFluid ominousEssence = CSFluids.OMINOUS_ESSENCE.get();
-
-        registration.registerSubtypeInterpreter(
-                NeoForgeTypes.FLUID_STACK,
-                ominousEssence.getSource(),
-                interpreter
-        );
-
-        registration.registerSubtypeInterpreter(
-                NeoForgeTypes.FLUID_STACK,
-                ominousEssence.getFlowing(),
-                interpreter
-        );
     }
 
     @Override

@@ -82,5 +82,10 @@
   "fluid.creatorsword.ominous_essence_ii": "Зловещая эссенция II",
   "fluid.creatorsword.ominous_essence_iii": "Зловещая эссенция III",
   "fluid.creatorsword.ominous_essence_iv": "Зловещая эссенция IV",
-  "fluid.creatorsword.ominous_essence_v": "Зловещая эссенция V"
+  "fluid.creatorsword.ominous_essence_v": "Зловещая эссенция V",
+
+  "item.creatorsword.trial_key_die": "Матрица ключа испытаний",
+  "item.creatorsword.incomplete_trial_key_die": "Незавершённая матрица ключа испытаний",
+  "item.creatorsword.ominous_trial_key_die": "Матрица зловещего ключа испытаний",
+  "item.creatorsword.incomplete_ominous_trial_key_die": "Незавершённая матрица зловещего ключа испытаний"
 }

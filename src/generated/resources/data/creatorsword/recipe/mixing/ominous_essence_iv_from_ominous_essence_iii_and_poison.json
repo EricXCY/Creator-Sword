@@ -1,14 +1,18 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "creatorsword:config_enabled",
+      "key": "ominous_essence"
+    }
+  ],
   "type": "create:mixing",
   "heat_requirement": "superheated",
   "ingredients": [
     {
       "type": "neoforge:components",
       "amount": 250,
-      "components": {
-        "minecraft:ominous_bottle_amplifier": 2
-      },
-      "fluids": "creatorsword:ominous_essence"
+      "components": {},
+      "fluids": "creatorsword:ominous_essence_iii"
     },
     {
       "type": "neoforge:components",
@@ -25,10 +29,7 @@
   "results": [
     {
       "amount": 250,
-      "components": {
-        "minecraft:ominous_bottle_amplifier": 3
-      },
-      "id": "creatorsword:ominous_essence"
+      "id": "creatorsword:ominous_essence_iv"
     }
   ]
 }

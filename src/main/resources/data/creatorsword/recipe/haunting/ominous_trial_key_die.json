@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "creatorsword:trial_key_die"
+    }
+  ],
+  "results": [
+    {
+      "id": "creatorsword:ominous_trial_key_die"
+    }
+  ]
+}

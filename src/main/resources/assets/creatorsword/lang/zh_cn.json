@@ -81,5 +81,10 @@
   "fluid.creatorsword.ominous_essence_ii": "不祥原浆 II",
   "fluid.creatorsword.ominous_essence_iii": "不祥原浆 III",
   "fluid.creatorsword.ominous_essence_iv": "不祥原浆 IV",
-  "fluid.creatorsword.ominous_essence_v": "不祥原浆 V"
+  "fluid.creatorsword.ominous_essence_v": "不祥原浆 V",
+
+  "item.creatorsword.trial_key_die": "试炼钥匙模具",
+  "item.creatorsword.incomplete_trial_key_die": "未完成的试炼钥匙模具",
+  "item.creatorsword.ominous_trial_key_die": "不祥试炼钥匙模具",
+  "item.creatorsword.incomplete_ominous_trial_key_die": "未完成的不祥试炼钥匙模具"
 }

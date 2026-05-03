@@ -1,6 +1,7 @@
 package com.erix.creatorsword.datagen.recipes;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.data.CSConditions;
 import com.erix.creatorsword.fluid.ominous.OminousEssenceHelper;
 import com.simibubi.create.api.data.recipe.MixingRecipeGen;
 import com.simibubi.create.content.fluids.potion.PotionFluid;
@@ -26,6 +27,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
     }
 
     GeneratedRecipe OMINOUS_ESSENCE = create("ominous_essence_from_oozing_and_slowness", b -> b
+            .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(potionFluid(Potions.OOZING)))
             .require(sized(potionFluid(Potions.SLOWNESS)))
             .output(OminousEssenceHelper.create(250, 0))
@@ -33,6 +35,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_II = create("ominous_essence_ii_from_ominous_essence_and_infested", b -> b
+            .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 0)))
             .require(sized(potionFluid(Potions.INFESTED)))
             .output(OminousEssenceHelper.create(250, 1))
@@ -40,6 +43,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_III = create("ominous_essence_iii_from_ominous_essence_ii_and_weakness", b -> b
+            .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 1)))
             .require(sized(potionFluid(Potions.WEAKNESS)))
             .output(OminousEssenceHelper.create(250, 2))
@@ -47,6 +51,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_IV = create("ominous_essence_iv_from_ominous_essence_iii_and_poison", b -> b
+            .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 2)))
             .require(sized(potionFluid(Potions.POISON)))
             .output(OminousEssenceHelper.create(250, 3))
@@ -54,6 +59,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_V = create("ominous_essence_v_from_ominous_essence_iv_and_harming", b -> b
+            .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 3)))
             .require(sized(potionFluid(Potions.HARMING)))
             .output(OminousEssenceHelper.create(250, 4))
@@ -73,5 +79,9 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
                 new PotionContents(potion),
                 PotionFluid.BottleType.REGULAR
         );
+    }
+
+    private static CSConditions.ConfigEnabledCondition recipeEnabled(String key) {
+        return new CSConditions.ConfigEnabledCondition(key);
     }
 }

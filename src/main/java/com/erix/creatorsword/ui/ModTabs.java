@@ -1,5 +1,6 @@
 package com.erix.creatorsword.ui;
 
+import com.erix.creatorsword.item.CSItems;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
@@ -31,5 +32,7 @@ public class ModTabs {
                         Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());
                         Output.accept(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get());
+                        Output.accept(CSItems.TRIAL_KEY_DIE.get());
+                        Output.accept(CSItems.OMINOUS_TRIAL_KEY_DIE.get());
                     }).build());
 }

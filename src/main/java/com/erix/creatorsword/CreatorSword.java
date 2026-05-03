@@ -1,5 +1,6 @@
 package com.erix.creatorsword;
 
+import com.erix.creatorsword.data.CSConditions;
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.CSLootModifiers;
@@ -9,6 +10,7 @@ import com.erix.creatorsword.fluid.CSFluids;
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.enchantment.CSEnchantmentComponents;
 import com.erix.creatorsword.entity.CSEntities;
+import com.erix.creatorsword.item.CSItems;
 import com.erix.creatorsword.item.cogwheel_shield.ShieldRecoveryEvents;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
@@ -57,6 +59,7 @@ public class CreatorSword {
         FrogportGrappleItem.ITEMS.register(modEventBus);
         FrogportGrappleTravelStat.register(modEventBus);
         CaptureBoxItem.ITEMS.register(modEventBus);
+        CSItems.register(modEventBus);
         SmithingTemplateItems.register(modEventBus);
 
         ModTabs.CREATIVE_TABS.register(modEventBus);
@@ -65,6 +68,7 @@ public class CreatorSword {
         CSEntities.register(modEventBus);
         CSEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
         CSLootModifiers.register(modEventBus);
+        CSConditions.register(modEventBus);
 
         CSFluids.register();
         CSFluidCapabilities.register(modEventBus);
