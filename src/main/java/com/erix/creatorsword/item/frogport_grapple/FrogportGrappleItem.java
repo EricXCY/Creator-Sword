@@ -144,9 +144,12 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         FrogportGrappleSounds.playLatch(level, player);
 
         if (!level.isClientSide) {
-            startBlockHook(stack, level, blockHit, hitPos);
+            FrogportHookTarget target = startBlockHook(stack, level, blockHit, hitPos);
             damageOnHook(level, player, hand, stack);
-            awardTravelStatIfServer(player, eye, hitPos);
+
+            if (!target.dynamic()) {
+                awardTravelStatIfServer(player, eye, hitPos);
+            }
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
@@ -287,7 +290,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         });
     }
 
-    private static void startBlockHook(ItemStack stack, Level level, BlockHitResult blockHit, Vec3 fallbackHitPos) {
+    private static FrogportHookTarget startBlockHook(ItemStack stack, Level level, BlockHitResult blockHit, Vec3 fallbackHitPos) {
         FrogportHookTarget target = FrogportHookTargetResolver.resolve(level, blockHit, fallbackHitPos);
 
         CustomData.update(DataComponents.CUSTOM_DATA, stack, t -> {
@@ -319,6 +322,8 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
                 t.remove(FrogportHookTarget.KEY_HOOK_LOCAL_Z);
             }
         });
+
+        return target;
     }
 
     private static void playRetractAndClear(Level level, Player player, ItemStack stack) {
