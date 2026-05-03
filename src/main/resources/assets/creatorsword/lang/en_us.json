@@ -79,6 +79,7 @@
   "enchantment.creatorsword.sticky_tongue.desc": "Upgrade the capture level of the Frogport Grapple",
 
   "item.creatorsword.crimson_afterglow_smithing_template": "Crimson Afterglow Smithing Template",
+  "item.creatorsword.crimson_afterglow_smithing_template.tooltip.summary": "Obtained through _archaeology_ at Trail Ruins, Desert Pyramids, and Desert Wells",
   "item.creatorsword.crimson_afterglow_smithing_template.applies_to": "Netherite Creator's Sword",
   "item.creatorsword.crimson_afterglow_smithing_template.ingredients": "Sturdy Sheet",
   "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "Crimson Afterglow Upgrade",
@@ -86,6 +87,7 @@
   "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "Add a sturdy sheet",
 
   "item.creatorsword.trial_smithing_template": "Trial Smithing Template",
+  "item.creatorsword.trial_smithing_template.tooltip.summary": "Obtained through _ominous vault_",
   "item.creatorsword.trial_smithing_template.applies_to": "Netherite Creator's Sword",
   "item.creatorsword.trial_smithing_template.ingredients": "Sturdy Sheet",
   "item.creatorsword.trial_smithing_template.upgrade_description": "Trial Upgrade",

@@ -4,6 +4,7 @@ import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteCreatorSwordItems;
+import com.erix.creatorsword.item.smithing_template.SmithingTemplateItems;
 import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipModifier;
 
@@ -29,6 +30,7 @@ public class ClientTooltipRegistration {
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_CREATOR_SWORD.get());
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
             registerCreateTooltip(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
+            registerCreateTooltips(SmithingTemplateItems.CSTEMPLATES);
         });
     }
 

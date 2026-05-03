@@ -6,6 +6,9 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.List;
+import java.util.function.Supplier;
+
 public class SmithingTemplateItems {
     public static final DeferredRegister.Items ITEMS =
             DeferredRegister.createItems(CreatorSword.MODID);
@@ -21,6 +24,11 @@ public class SmithingTemplateItems {
                     "trial_smithing_template",
                     CSmithingTemplateItem::createTrialTemplate
             );
+
+    public static final List<Supplier<? extends Item>> CSTEMPLATES = List.of(
+            CRIMSON_AFTERGLOW_SMITHING_TEMPLATE,
+            TRIAL_SMITHING_TEMPLATE
+    );
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
