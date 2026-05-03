@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:trial_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_trail_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "creatorsword:trial_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_trail_template"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:trial_smithing"
+    ]
+  }
+}
