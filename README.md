@@ -67,7 +67,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
     *   气动增压-提升盾牌旋转加速度;提升机械师之剑攻击时的攻击速度
     *   坚固-忽略小幅度的耐久损失
     *   黏舌-提升抓捕等级
-*   **附魔书:**
+*   **锻造模版:**
     *   赤霞锻造模版可通过在遗迹废墟、沙漠金字塔和沙漠水井进行考古获得。
     *   试炼锻造模版可通过不祥宝库获得。
 
