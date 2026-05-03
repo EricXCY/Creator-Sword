@@ -28,6 +28,7 @@ public class ModTabs {
                         Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.CNY_CREATOR_SWORD.get());
+                        Output.accept(CreatorSwordItems.TRIAL_CREATOR_SWORD.get());
                         Output.accept(CogwheelShieldItems.COGWHEEL_SHIELD.get());
                         Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());

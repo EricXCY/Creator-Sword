@@ -32,6 +32,13 @@
   "item.creatorsword.cny_creator_sword.tooltip.condition2": "При разборке механизмов",
   "item.creatorsword.cny_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
 
+  "item.creatorsword.trial_creator_sword": "Меч искателя испытаний",
+  "item.creatorsword.trial_creator_sword.tooltip.summary": "Меч испытаний с функциями гаечного ключа.",
+  "item.creatorsword.trial_creator_sword.tooltip.condition1": "При атаке",
+  "item.creatorsword.trial_creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
+  "item.creatorsword.trial_creator_sword.tooltip.condition2": "При разборке механизмов",
+  "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
+
   "item.creatorsword.incomplete_creator_sword": "Незавершённый Меч Создателя",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "Сломанный меч.",
   "item.creatorsword.incomplete_netherite_creator_sword": "Незавершённый незеритовый Меч Создателя",

@@ -8,11 +8,15 @@ import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipModifier;
 
 import net.createmod.catnip.lang.FontHelper.Palette;
+import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = "creatorsword", value = Dist.CLIENT)
 public class ClientTooltipRegistration {
@@ -21,16 +25,20 @@ public class ClientTooltipRegistration {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             registerCreateTooltip(CogwheelShieldItems.COGWHEEL_SHIELD.get());
-            registerCreateTooltip(CreatorSwordItems.CREATOR_SWORD.get());
-            registerCreateTooltip(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
-            registerCreateTooltip(CreatorSwordItems.CNY_CREATOR_SWORD.get());
+            registerCreateTooltips(CreatorSwordItems.CREATOR_SWORDS);
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_CREATOR_SWORD.get());
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
             registerCreateTooltip(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
         });
     }
 
-    private static void registerCreateTooltip(net.minecraft.world.item.Item item) {
+    private static void registerCreateTooltips(List<? extends Supplier<? extends Item>> items) {
+        for (Supplier<? extends Item> item : items) {
+            registerCreateTooltip(item.get());
+        }
+    }
+
+    private static void registerCreateTooltip(Item item) {
         TooltipModifier base = new ItemDescription.Modifier(item, Palette.STANDARD_CREATE);
         TooltipModifier.REGISTRY.register(item, base);
     }

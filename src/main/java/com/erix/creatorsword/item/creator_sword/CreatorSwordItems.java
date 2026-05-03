@@ -18,10 +18,13 @@ public class CreatorSwordItems {
             NetheriteCreatorSwordItem::new);
     public static final DeferredItem<SwordItem> CNY_CREATOR_SWORD = ITEMS.registerItem("cny_creator_sword",
             CNYCreatorSwordItem::new);
+    public static final DeferredItem<SwordItem> TRIAL_CREATOR_SWORD = ITEMS.registerItem("trial_creator_sword",
+            TrialCreatorSwordItem::new);
 
     public static final List<Supplier<? extends Item>> CREATOR_SWORDS = List.of(
             CREATOR_SWORD,
             NETHERITE_CREATOR_SWORD,
-            CNY_CREATOR_SWORD
+            CNY_CREATOR_SWORD,
+            TRIAL_CREATOR_SWORD
     );
 }
