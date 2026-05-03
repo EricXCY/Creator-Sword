@@ -3,7 +3,7 @@
 **Creator-Sword** is a mod that adds more weapon options to the [Create Mod](https://www.curseforge.com/minecraft/mc-mods/create). It introduces new weapons that combine combat functionality with Create Mod's mechanical features, providing both utility and combat efficiency.
 
 *   **Creator's Sword:** A unique sword that combines melee combat with wrench functionality from the Create Mod
-    *   **Variants:** Brass, Netherite and Rare Edition.
+    *   **Variants:** Brass, Netherite and Rare Editions.
     *   Attacking mobs with the Creator Sword while wearing a backtank grants 1 unit of air
 *   **Cogwheel Shield:** A gear-shaped shield
     *   Can be rotated by pressing a configurable key (default: `V`)
@@ -13,7 +13,7 @@
     *   While wearing a backtank, shield acceleration is faster, consuming 1 air unit per second
 *   **Frogport Grapple:**
     *   A grappling hook inspired by package frogport
-    *   Supports distances up to 48 meters
+    *   Supports distances up to 64 meters (configurable)
     *   Can latch onto blocks, pull mobs based on the level of **Sticky Tongue Enchantment**
 *   **Capture Box:**
     *   When one hand grabs a mob while the other hand holds a capture box, the mob will be placed into the capture box
@@ -23,16 +23,18 @@
     *   Pneumatic Boost - faster acceleration of rotate speed; faster attack speed for creator's swords when attacking
     *   Sturdy - ignore small durability losses
     *   Sticky Tongue - Upgrade capture level
+*   **Templates:**
+    *   Crimson Afterglow smithing template can be obtained through archaeology at Trail Ruins, Desert Pyramids, and Desert Wells.
+    *   Trial smithing template can be obtained through ominous vault.
 
 **Requires:** Create 6.0.8 or higher
 
 **Translation:** ru\_ru by GromovoyStarWolf
 
-**Tip:** Crimson Afterglow can be obtained through archaeology at Trail Ruins, Desert Pyramids, and Desert Wells with a low probability.
 
 ## Future plans
 
-*   Try to support 1.20.1
+*   New Weapon based on Heavy Core
 
 ## Usage in modpacks
 
@@ -46,7 +48,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
 
 为[机械动力](https://www.curseforge.com/minecraft/mc-mods/create)添加更多武器
 
-*   **机械师之剑：** 一把集成扳手功能的剑（有黄铜和下界合金版本）
+*   **机械师之剑：** 一把集成扳手功能的剑（有黄铜、下界合金和稀有版本）
     *   有背罐时使用机械师之剑攻击生物可以增加1单位空气
 *   **齿轮盾：** 一个齿轮样式的盾
     *   可通过按下可自定义的快捷键（默认：V）来旋转
@@ -55,7 +57,7 @@ You can make any modifications to the mod with the goal of distributing it in a 
     *   持盾时可在右下角显示当前转速
     *   有背罐时会消耗空气让盾牌加速更快，每秒消耗1单位空气
 *   **蛙港抓钩:**
-    *   支持最远48格距离
+    *   支持最远64格距离（可配置）
     *   可以抓上方块，拉取生物
 *   **抓捕盒:**
     *   当一只手拿着抓捕盒，另一只手使用蛙港抓钩拉取实体时可以将实体放入抓捕盒
@@ -65,17 +67,18 @@ You can make any modifications to the mod with the goal of distributing it in a 
     *   气动增压-提升盾牌旋转加速度;提升机械师之剑攻击时的攻击速度
     *   坚固-忽略小幅度的耐久损失
     *   黏舌-提升抓捕等级
+*   **附魔书:**
+    *   赤霞锻造模版可通过在遗迹废墟、沙漠金字塔和沙漠水井进行考古获得。
+    *   试炼锻造模版可通过不祥宝库获得。
 
 **需要：** 机械动力6.0.8 或更高
 
 **翻译：** ru\_ru — GromovoyStarWolf
 
-**提示：** 赤霞可通过在遗迹废墟、沙漠金字塔和沙漠水井进行考古，以较低概率获得。
-
 ## 未来计划&杂谈
 
-*   尝试支持1.20.1版本
-*   基于重锤核心的新道具
+*   可能支持1.20.1版本，但支持1.20.1版本有点不可能
+*   基于重锤核心的新器具
 
 ## 使用
 
