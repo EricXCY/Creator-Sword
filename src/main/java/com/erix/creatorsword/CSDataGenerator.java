@@ -4,8 +4,8 @@ import com.erix.creatorsword.datagen.CSDatapackBuiltinEntriesProvider;
 import com.erix.creatorsword.datagen.advancements.CSAdvancementProvider;
 import com.erix.creatorsword.datagen.recipes.CSMixingRecipeGen;
 import com.erix.creatorsword.datagen.recipes.CSRecipe;
-import com.erix.creatorsword.datagen.tags.ModEnchantmentTag;
-import com.erix.creatorsword.datagen.tags.ModItemTag;
+import com.erix.creatorsword.datagen.tags.CSEnchantmentTag;
+import com.erix.creatorsword.datagen.tags.CSItemTag;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -30,8 +30,8 @@ public class CSDataGenerator {
 
         generator.addProvider(event.includeServer(), new CSRecipe(output, lookupProvider));
         generator.addProvider(event.includeServer(), new CSMixingRecipeGen(output, lookupProvider));
-        generator.addProvider(event.includeServer(), new ModItemTag(output, lookupProvider, blockTags, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModEnchantmentTag(output, registryProvider, existingFileHelper));
+        generator.addProvider(event.includeServer(), new CSItemTag(output, lookupProvider, blockTags, existingFileHelper));
+        generator.addProvider(event.includeServer(), new CSEnchantmentTag(output, registryProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new CSAdvancementProvider(output, lookupProvider, existingFileHelper));
     }
 }

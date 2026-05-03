@@ -6,7 +6,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CreatorSwordItemRenderer extends BaseSwordItemRenderer {
+public class CreatorSwordItemRenderer extends BaseCreatorSwordItemRenderer {
 
     private static final PartialModel SWORD = PartialModel.of(
             ResourceLocation.fromNamespaceAndPath("creatorsword", "item/creator_sword/sword")

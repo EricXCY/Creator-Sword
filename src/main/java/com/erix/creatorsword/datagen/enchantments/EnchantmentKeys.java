@@ -1,13 +1,12 @@
 package com.erix.creatorsword.datagen.enchantments;
 
-import com.erix.creatorsword.datagen.tags.ModItemTag;
+import com.erix.creatorsword.datagen.tags.CSItemTag;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
@@ -37,7 +36,7 @@ public class EnchantmentKeys {
 
         register(context, PNEUMATIC_BOOST, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ModItemTag.ENCHANTABLE_PNEUMATIC_BOOST),
+                        items.getOrThrow(CSItemTag.ENCHANTABLE_PNEUMATIC_BOOST),
                         7,
                         4,
                         Enchantment.dynamicCost(8, 8),
@@ -49,7 +48,7 @@ public class EnchantmentKeys {
 
         register(context, OVERDRIVE, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ModItemTag.ENCHANTABLE_OVERDRIVE),
+                        items.getOrThrow(CSItemTag.ENCHANTABLE_OVERDRIVE),
                         7,
                         1,
                         Enchantment.dynamicCost(8, 8),
@@ -61,7 +60,7 @@ public class EnchantmentKeys {
 
         register(context, STURDY, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ModItemTag.ENCHANTABLE_STURDY),
+                        items.getOrThrow(CSItemTag.ENCHANTABLE_STURDY),
                         8,
                         3,
                         Enchantment.dynamicCost(10, 10),
@@ -73,7 +72,7 @@ public class EnchantmentKeys {
 
         register(context, STICKY_TONGUE, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(ModItemTag.ENCHANTABLE_STICKY_TONGUE),
+                        items.getOrThrow(CSItemTag.ENCHANTABLE_STICKY_TONGUE),
                         8,
                         2,
                         Enchantment.dynamicCost(8, 8),

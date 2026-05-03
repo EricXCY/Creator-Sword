@@ -1,9 +1,13 @@
 package com.erix.creatorsword.item.creator_sword;
 
 import com.erix.creatorsword.CreatorSword;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SwordItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
+import java.util.function.Supplier;
 
 public class CreatorSwordItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreatorSword.MODID);
@@ -14,4 +18,10 @@ public class CreatorSwordItems {
             NetheriteCreatorSwordItem::new);
     public static final DeferredItem<SwordItem> CNY_CREATOR_SWORD = ITEMS.registerItem("cny_creator_sword",
             CNYCreatorSwordItem::new);
+
+    public static final List<Supplier<? extends Item>> CREATOR_SWORDS = List.of(
+            CREATOR_SWORD,
+            NETHERITE_CREATOR_SWORD,
+            CNY_CREATOR_SWORD
+    );
 }

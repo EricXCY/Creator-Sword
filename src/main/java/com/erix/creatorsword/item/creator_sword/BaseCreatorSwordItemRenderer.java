@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.createmod.catnip.animation.AnimationTickHolder;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
 
-public abstract class BaseSwordItemRenderer extends CustomRenderedItemModelRenderer {
+public abstract class BaseCreatorSwordItemRenderer extends CustomRenderedItemModelRenderer {
 
     protected abstract PartialModel getSwordModel();
     protected abstract PartialModel getGearModel();
