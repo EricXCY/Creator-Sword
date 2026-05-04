@@ -98,7 +98,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         CompoundTag tag = data.copyTag();
         if (tag.getBoolean(KEY_HOOKED)) {
             playRetractAndClear(level, player, stack);
-            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+            return InteractionResultHolder.consume(stack);
         }
 
         // 发射
@@ -125,7 +125,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
         if (isEntityCloser(eye, blockHit, entityHit)) {
             if (tryHookEntity(level, player, hand, stack, entityHit)) {
-                return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+                return InteractionResultHolder.consume(stack);
             }
             return InteractionResultHolder.pass(stack);
         }
@@ -152,7 +152,7 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             }
         }
 
-        return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        return InteractionResultHolder.consume(stack);
     }
 
     @Override
