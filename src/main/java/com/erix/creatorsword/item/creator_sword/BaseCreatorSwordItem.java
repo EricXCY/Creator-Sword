@@ -45,16 +45,15 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
     }
 
     private void handleBacktankLogic(Player player) {
-        var backtanks = BacktankUtil.getAllWithAir(player);
-        var tank = backtanks.getFirst();
-        int currentAir = BacktankUtil.getAir(tank);
-        int maxAir = BacktankUtil.maxAir(tank);
+        for (ItemStack tank : player.getArmorSlots()) {
+            if (!AllTags.AllItemTags.PRESSURIZED_AIR_SOURCES.matches(tank))
+                continue;
 
-        if (currentAir >= maxAir)
+            if (BacktankUtil.getAir(tank) >= BacktankUtil.maxAir(tank))
+                continue;
+
+            BacktankUtil.consumeAir(player, tank, -1);
             return;
-        if (!backtanks.isEmpty()) {
-            int airCost = -1;
-            BacktankUtil.consumeAir(player, tank, airCost);
         }
     }
 
