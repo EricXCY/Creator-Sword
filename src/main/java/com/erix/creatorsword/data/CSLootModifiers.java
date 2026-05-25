@@ -16,6 +16,9 @@ public class CSLootModifiers {
     public static final Supplier<MapCodec<ReplaceItemLootModifier>> REPLACE_ITEM =
             REG.register("replace_item", () -> ReplaceItemLootModifier.CODEC);
 
+    public static final Supplier<MapCodec<AddItemLootModifier>> ADD_ITEM =
+            REG.register("add_item", () -> AddItemLootModifier.CODEC);
+
     public static void register(IEventBus bus) {
         REG.register(bus);
     }
