@@ -1,7 +1,5 @@
 package com.erix.creatorsword.compat.ftbultimine;
 
-import dev.ftb.mods.ftbultimine.FTBUltimine;
-import dev.ftb.mods.ftbultimine.FTBUltiminePlayerData;
 import dev.ftb.mods.ftbultimine.api.rightclick.RightClickHandler;
 import dev.ftb.mods.ftbultimine.api.shape.ShapeContext;
 import net.minecraft.core.BlockPos;
@@ -24,54 +22,43 @@ public enum CreatorSwordRightClickHandler implements RightClickHandler {
             Collection<BlockPos> positions
     ) {
         var player = shapeContext.player();
+        var level = player.level();
+
         ItemStack itemStack = player.getItemInHand(hand);
 
         if (!itemStack.is(Tags.Items.TOOLS_WRENCH)) {
             return 0;
         }
 
-        BlockHitResult blockHitResult = FTBUltiminePlayerData.rayTrace(player) instanceof BlockHitResult hit
-                ? hit
-                : null;
-
-        if (blockHitResult == null) {
+        if (!(player.pick(player.blockInteractionRange(), 0.0F, false) instanceof BlockHitResult blockHitResult)) {
             return 0;
         }
 
-        var playerData = FTBUltimine.instance.getOrCreatePlayerData(player);
-        boolean wasPressed = playerData.isPressed();
-
         int didWork = 0;
 
-        playerData.setPressed(false);
-
-        try {
-            for (BlockPos pos : positions) {
-                if (itemStack.isEmpty()) {
-                    break;
-                }
-
-                if (!player.level().isLoaded(pos)) {
-                    continue;
-                }
-
-                if (player.level().getBlockState(pos).isAir()) {
-                    continue;
-                }
-
-                BlockHitResult currentHitResult = blockHitResult.withPosition(pos);
-                UseOnContext context = new UseOnContext(player, hand, currentHitResult);
-
-                InteractionResult result = itemStack.useOn(context);
-
-                if (result != InteractionResult.SUCCESS) {
-                    continue;
-                }
-
-                didWork++;
+        for (BlockPos pos : positions) {
+            if (itemStack.isEmpty()) {
+                break;
             }
-        } finally {
-            playerData.setPressed(wasPressed);
+
+            if (!level.isLoaded(pos)) {
+                continue;
+            }
+
+            if (level.getBlockState(pos).isAir()) {
+                continue;
+            }
+
+            BlockHitResult currentHitResult = blockHitResult.withPosition(pos);
+            UseOnContext context = new UseOnContext(player, hand, currentHitResult);
+
+            InteractionResult result = itemStack.useOn(context);
+
+            if (!result.consumesAction()) {
+                continue;
+            }
+
+            didWork++;
         }
 
         return didWork;
