@@ -1,7 +1,3 @@
-//
-// Functions of wrench comes from simibubi [https://github.com/Creators-of-Create/Create/blob/mc1.21.1/dev/src/main/java/com/simibubi/create/content/equipment/wrench/WrenchItem.java]
-//
-
 package com.erix.creatorsword.item.creator_sword;
 
 import com.simibubi.create.AllSoundEvents;
@@ -9,9 +5,9 @@ import com.simibubi.create.AllTags;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,11 +32,27 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         super(tier, props);
     }
 
+    public ResourceLocation getSwordModelLocation() {
+        return CreatorSwordItems.CREATOR_SWORD_MODEL;
+    }
+
+    public ResourceLocation getGearModelLocation() {
+        return CreatorSwordItems.CREATOR_SWORD_GEAR_MODEL;
+    }
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        consumer.accept(SimpleCustomRenderer.create(this, new BaseCreatorSwordItemRenderer(this)));
+    }
+
     public boolean hurtEnemy(ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+
         if (!attacker.level().isClientSide() && attacker instanceof Player player) {
             handleBacktankLogic(player);
         }
+
         return true;
     }
 
@@ -57,34 +69,31 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         }
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, getRenderer()));
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    protected abstract CustomRenderedItemModelRenderer getRenderer();
-
     @Nonnull
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Player player = context.getPlayer();
+
         if (player != null && player.mayBuild()) {
             BlockState state = context.getLevel().getBlockState(context.getClickedPos());
             Block block = state.getBlock();
+
             if (block instanceof IWrenchable actor) {
-                return player.isShiftKeyDown() ? actor.onSneakWrenched(state, context) : actor.onWrenched(state, context);
+                return player.isShiftKeyDown()
+                        ? actor.onSneakWrenched(state, context)
+                        : actor.onWrenched(state, context);
             } else if (player.isShiftKeyDown() && canWrenchPickup(state)) {
                 return onItemUseOnOther(context);
             }
         }
+
         return super.useOn(context);
     }
 
     private boolean canWrenchPickup(BlockState state) {
         if (AllTags.AllBlockTags.WRENCH_PICKUP.matches(state))
             return true;
+
         return isExtraPickupBlock(state);
     }
 
@@ -110,7 +119,8 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
         BlockPos pos = context.getClickedPos();
         BlockState state = world.getBlockState(pos);
 
-        if (!(world instanceof ServerLevel serverLevel)) return InteractionResult.SUCCESS;
+        if (!(world instanceof ServerLevel serverLevel))
+            return InteractionResult.SUCCESS;
 
         if (player != null && !player.isCreative()) {
             Block.getDrops(state, serverLevel, pos, world.getBlockEntity(pos), player, context.getItemInHand())
@@ -119,7 +129,13 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
 
         state.spawnAfterBreak(serverLevel, pos, ItemStack.EMPTY, true);
         world.destroyBlock(pos, false);
-        AllSoundEvents.WRENCH_REMOVE.playOnServer(world, pos, 1.0F, Create.RANDOM.nextFloat() * 0.5F + 0.5F);
+        AllSoundEvents.WRENCH_REMOVE.playOnServer(
+                world,
+                pos,
+                1.0F,
+                Create.RANDOM.nextFloat() * 0.5F + 0.5F
+        );
+
         return InteractionResult.SUCCESS;
     }
 }

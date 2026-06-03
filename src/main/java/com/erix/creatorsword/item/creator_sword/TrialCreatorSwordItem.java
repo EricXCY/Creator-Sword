@@ -1,6 +1,8 @@
 package com.erix.creatorsword.item.creator_sword;
 
+import com.erix.creatorsword.CreatorSword;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -12,9 +14,13 @@ public class TrialCreatorSwordItem extends BaseCreatorSwordItem {
     }
 
     @Override
-    @OnlyIn(Dist.CLIENT)
-    protected CustomRenderedItemModelRenderer getRenderer() {
-        return new TrialCreatorSwordItemRenderer();
+    public ResourceLocation getSwordModelLocation() {
+        return CreatorSwordItems.TRIAL_CREATOR_SWORD_MODEL;
+    }
+
+    @Override
+    public ResourceLocation getGearModelLocation() {
+        return CreatorSwordItems.TRIAL_CREATOR_SWORD_GEAR_MODEL;
     }
 
     @Override

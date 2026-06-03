@@ -1,27 +1,32 @@
 package com.erix.creatorsword.item.creator_sword;
 
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
-import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
+import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import com.simibubi.create.foundation.item.render.PartialItemModelRenderer;
+import dev.engine_room.flywheel.lib.model.baked.PartialModel;
+import net.createmod.catnip.animation.AnimationTickHolder;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.createmod.catnip.animation.AnimationTickHolder;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueHandler;
 
-public abstract class BaseCreatorSwordItemRenderer extends CustomRenderedItemModelRenderer {
+public class BaseCreatorSwordItemRenderer extends CustomRenderedItemModelRenderer {
+    private final PartialModel swordModel;
+    private final PartialModel gearModel;
 
-    protected abstract PartialModel getSwordModel();
-    protected abstract PartialModel getGearModel();
+    public BaseCreatorSwordItemRenderer(BaseCreatorSwordItem item) {
+        this.swordModel = PartialModel.of(item.getSwordModelLocation());
+        this.gearModel = PartialModel.of(item.getGearModelLocation());
+    }
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
-                          ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-
+                          ItemDisplayContext transformType, PoseStack ms,
+                          MultiBufferSource buffer, int light, int overlay) {
         float rotationAngle = ScrollValueHandler.getScroll(AnimationTickHolder.getPartialTicks());
+
         ms.pushPose();
 
         switch (transformType) {
@@ -69,18 +74,17 @@ public abstract class BaseCreatorSwordItemRenderer extends CustomRenderedItemMod
                 ms.mulPose(Axis.YP.rotationDegrees(90));
                 ms.translate(0.5 / 16f, 0.5 / 16f, -0.75 / 16f);
             }
-            default -> {}
+            default -> {
+            }
         }
 
-        // 渲染剑和齿轮
-        renderer.render(getSwordModel().get(), light);
+        renderer.render(swordModel.get(), light);
 
         ms.pushPose();
         ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
-        renderer.render(getGearModel().get(), light);
+        renderer.render(gearModel.get(), light);
         ms.popPose();
 
         ms.popPose();
     }
 }
-
