@@ -1,11 +1,11 @@
-package com.erix.creatorsword.entity;
+package com.erix.creatorsword.item.cogwheel_shield;
 
 import com.erix.creatorsword.data.CSDataComponents;
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldChargingManager;
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
+import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldStateManager;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -21,29 +21,30 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class ThrownCogwheelShield extends ThrowableItemProjectile {
+public abstract class BaseCogwheelShieldEntity extends ThrowableItemProjectile {
+    private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
+
     private static final EntityDataAccessor<Float> SPEED =
-            SynchedEntityData.defineId(ThrownCogwheelShield.class, EntityDataSerializers.FLOAT);
+            SynchedEntityData.defineId(BaseCogwheelShieldEntity.class, EntityDataSerializers.FLOAT);
 
     private static final EntityDataAccessor<Boolean> RETURNING =
-            SynchedEntityData.defineId(ThrownCogwheelShield.class, EntityDataSerializers.BOOLEAN);
+            SynchedEntityData.defineId(BaseCogwheelShieldEntity.class, EntityDataSerializers.BOOLEAN);
 
     private static final EntityDataAccessor<ItemStack> ITEM_STACK =
-            SynchedEntityData.defineId(ThrownCogwheelShield.class, EntityDataSerializers.ITEM_STACK);
+            SynchedEntityData.defineId(BaseCogwheelShieldEntity.class, EntityDataSerializers.ITEM_STACK);
 
-    private static final float BASE_DAMAGE = 5.0f;
-    private static final int MAX_LIFETIME = 100; // 5秒
-    private static final float RETURN_SPEED = 1.2f;
-    private static final float PICKUP_DISTANCE = 1.0f;
+    protected int lifetime = 0;
 
-    private int lifetime = 0;
-
-    public ThrownCogwheelShield(EntityType<? extends ThrownCogwheelShield> type, Level level) {
+    public BaseCogwheelShieldEntity(EntityType<? extends BaseCogwheelShieldEntity> type, Level level) {
         super(type, level);
     }
 
-    public ThrownCogwheelShield(Level level, LivingEntity shooter, float speed, ItemStack stack) {
-        super(CSEntities.COGWHEEL_SHIELD_ENTITY.get(), shooter, level);
+    public BaseCogwheelShieldEntity(EntityType<? extends BaseCogwheelShieldEntity> type,
+                                    Level level,
+                                    LivingEntity owner,
+                                    float speed,
+                                    ItemStack stack) {
+        super(type, owner, level);
         this.getEntityData().set(SPEED, speed);
         this.getEntityData().set(RETURNING, false);
         this.getEntityData().set(ITEM_STACK, stack.copy());
@@ -59,7 +60,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
 
     @Override
     protected @NotNull Item getDefaultItem() {
-        return CogwheelShieldItems.COGWHEEL_SHIELD.get();
+        return getFallbackItem();
     }
 
     @Override
@@ -69,24 +70,58 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
         if (!stack.isEmpty())
             return stack;
 
-        return new ItemStack(getDefaultItem());
+        return new ItemStack(getFallbackItem());
+    }
+
+    protected abstract Item getFallbackItem();
+
+    protected float getBaseDamage() {
+        return 5.0f;
+    }
+
+    protected int getMaxLifetime() {
+        return 100;
+    }
+
+    protected float getReturnSpeed() {
+        return 1.2f;
+    }
+
+    protected float getPickupDistance() {
+        return 1.0f;
+    }
+
+    protected float getSpeedDecayFactor() {
+        return 0.8f;
+    }
+
+    protected int getSpeedDecayInterval() {
+        return 5;
+    }
+
+    protected int getShieldDamageOnHit() {
+        return 3;
+    }
+
+    protected float getDamage(float speed) {
+        return Math.max(0f, getBaseDamage() * (speed / 256f));
+    }
+
+    public float getShieldSpeed() {
+        return this.getEntityData().get(SPEED);
+    }
+
+    public boolean isReturning() {
+        return this.getEntityData().get(RETURNING);
     }
 
     @Override
     public void tick() {
-        boolean isReturning = this.getEntityData().get(RETURNING);
+        boolean returning = isReturning();
         Entity owner = this.getOwner();
 
-        if (owner instanceof Player player && isReturning) {
-            Vec3 playerPos = player.position().add(0, player.getBbHeight() * 0.5, 0);
-            Vec3 toPlayer = playerPos.subtract(this.position());
-            double distanceToPlayer = toPlayer.length();
-
-            this.setNoGravity(true);
-
-            if (distanceToPlayer > 0.05) {
-                this.setDeltaMovement(toPlayer.normalize().scale(RETURN_SPEED));
-            }
+        if (owner instanceof Player player && returning) {
+            moveTowardPlayer(player);
         }
 
         super.tick();
@@ -102,25 +137,36 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
         lifetime++;
 
         if (owner instanceof Player player) {
-            Vec3 playerPos = player.position().add(0, player.getEyeHeight() / 2, 0);
-            Vec3 toPlayer = playerPos.subtract(this.position());
-            double distanceToPlayer = toPlayer.length();
+            double distanceToPlayer = distanceToPlayer(player);
 
-            if (isReturning || lifetime >= MAX_LIFETIME) {
+            if (returning || lifetime >= getMaxLifetime()) {
                 this.getEntityData().set(RETURNING, true);
-                this.setNoGravity(true);
+                moveTowardPlayer(player);
 
-                if (distanceToPlayer > 0.05) {
-                    this.setDeltaMovement(toPlayer.normalize().scale(RETURN_SPEED));
-                }
-
-                if (distanceToPlayer <= PICKUP_DISTANCE) {
+                if (distanceToPlayer <= getPickupDistance()) {
                     returnToPlayer(player);
+                    return;
                 }
             }
         }
 
         slowDownOverTime();
+    }
+
+    private void moveTowardPlayer(Player player) {
+        Vec3 playerPos = player.position().add(0, player.getBbHeight() * 0.5, 0);
+        Vec3 toPlayer = playerPos.subtract(this.position());
+
+        this.setNoGravity(true);
+
+        if (toPlayer.length() > 0.05) {
+            this.setDeltaMovement(toPlayer.normalize().scale(getReturnSpeed()));
+        }
+    }
+
+    private double distanceToPlayer(Player player) {
+        Vec3 playerPos = player.position().add(0, player.getEyeHeight() / 2, 0);
+        return playerPos.subtract(this.position()).length();
     }
 
     private void returnToPlayer(Player player) {
@@ -132,9 +178,9 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
         }
 
         ItemStack stack = stackData.copy();
+        float speed = getShieldSpeed();
 
-        float speedNow = this.getEntityData().get(SPEED);
-        stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), speedNow);
+        stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), speed);
         stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), true);
         stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
 
@@ -146,19 +192,23 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
             player.inventoryMenu.broadcastChanges();
         }
 
-        if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
-            sp.getPersistentData().remove("creatorsword_thrown_shield");
-            CogwheelShieldChargingManager.remove(sp);
+        if (stack.getItem() instanceof BaseCogwheelShieldItem shield) {
+            shield.onReturned(player, stack, speed);
+        }
+
+        if (player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.getPersistentData().remove(THROWN_SHIELD_TAG);
+            CogwheelShieldStateManager.remove(serverPlayer);
         }
 
         this.discard();
     }
 
     private void slowDownOverTime() {
-        float speed = this.getEntityData().get(SPEED);
+        float speed = getShieldSpeed();
 
-        if (speed > 0 && lifetime % 5 == 0) {
-            float newSpeed = speed * 0.8f;
+        if (speed > 0 && lifetime % getSpeedDecayInterval() == 0) {
+            float newSpeed = speed * getSpeedDecayFactor();
 
             if (newSpeed < 4f)
                 newSpeed = 0f;
@@ -177,17 +227,15 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
             Entity target = entityHit.getEntity();
 
             if (target != this.getOwner()) {
-                float speed = this.getEntityData().get(SPEED);
-                float damage = BASE_DAMAGE * (speed / 256f);
-                damage = Math.max(0f, damage);
+                float damage = getDamage(getShieldSpeed());
 
                 target.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
 
-                if (damageShieldStack(3)) {
+                if (damageShieldStack(getShieldDamageOnHit())) {
                     Entity owner = this.getOwner();
 
-                    if (owner instanceof net.minecraft.server.level.ServerPlayer sp) {
-                        sp.getPersistentData().remove("creatorsword_thrown_shield");
+                    if (owner instanceof ServerPlayer serverPlayer) {
+                        serverPlayer.getPersistentData().remove(THROWN_SHIELD_TAG);
                     }
 
                     this.discard();
@@ -201,9 +249,9 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
     }
 
     public float getRotationAngle(float partialTicks) {
-        float speed = this.getEntityData().get(SPEED);
-
+        float speed = getShieldSpeed();
         float ageInSeconds = (this.tickCount + partialTicks) / 20f;
+
         return (speed * 6f * ageInSeconds) % 360f;
     }
 

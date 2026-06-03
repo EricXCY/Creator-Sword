@@ -1,4 +1,4 @@
-package com.erix.creatorsword.network;
+package com.erix.creatorsword.item.cogwheel_shield.logic;
 
 import com.erix.creatorsword.CreatorSword;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,10 +14,8 @@ public record ShieldFullSpeedPayload(float offhandSpeed, float mainhandSpeed) im
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ShieldFullSpeedPayload> STREAM_CODEC =
             StreamCodec.composite(
-                    ByteBufCodecs.FLOAT,
-                    ShieldFullSpeedPayload::offhandSpeed,
-                    ByteBufCodecs.FLOAT,
-                    ShieldFullSpeedPayload::mainhandSpeed,
+                    ByteBufCodecs.FLOAT, ShieldFullSpeedPayload::offhandSpeed,
+                    ByteBufCodecs.FLOAT, ShieldFullSpeedPayload::mainhandSpeed,
                     ShieldFullSpeedPayload::new
             );
 

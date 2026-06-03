@@ -1,18 +1,14 @@
-package com.erix.creatorsword.client.cogwheel_shield;
+package com.erix.creatorsword.item.cogwheel_shield.logic;
 
-import com.erix.creatorsword.client.KeyBindings;
+import com.erix.creatorsword.KeyBindings;
 import com.erix.creatorsword.data.CSDataComponents;
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
-import com.erix.creatorsword.network.ShieldChargingPayload;
-import com.erix.creatorsword.network.ShieldFullSpeedPayload;
-import com.erix.creatorsword.network.ShieldThrowPayload;
+import com.erix.creatorsword.item.cogwheel_shield.BaseCogwheelShieldItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class CogwheelShieldKeyInputHandler {
-    private static final float THROW_SPEED_THRESHOLD = 64f;
     private static final float FULL_SPEED = 256f;
 
     private static boolean wasDown = false;
@@ -64,7 +60,7 @@ public class CogwheelShieldKeyInputHandler {
 
         handleChargingStatePacket(offhand, mainhand, isDown);
         handleFullSpeedPacket(offhand, mainhand, isDown);
-        handleThrowOnKeyRelease(offhand, isDown);
+        handleThrowOnKeyRelease(offhand, isDown, player);
 
         wasDown = isDown;
     }
@@ -94,8 +90,8 @@ public class CogwheelShieldKeyInputHandler {
     }
 
     private static void syncOrLoadStateWhenHandLayoutChanged(ItemStack offhand, ItemStack mainhand) {
-        boolean offhandIsShield = offhand.getItem() instanceof CogwheelShieldItem;
-        boolean mainhandIsShield = mainhand.getItem() instanceof CogwheelShieldItem;
+        boolean offhandIsShield = offhand.getItem() instanceof BaseCogwheelShieldItem;
+        boolean mainhandIsShield = mainhand.getItem() instanceof BaseCogwheelShieldItem;
 
         boolean offhandChanged = offhand != lastOffhandStack;
         boolean mainhandChanged = mainhand != lastMainhandStack;
@@ -232,13 +228,13 @@ public class CogwheelShieldKeyInputHandler {
     }
 
     private static void tickShieldLogic(ItemStack stack, boolean offhand, boolean isKeyDown, LocalPlayer player) {
-        if (!(stack.getItem() instanceof CogwheelShieldItem shield))
+        if (!(stack.getItem() instanceof BaseCogwheelShieldItem shield))
             return;
 
         long currentTick = player.level().getGameTime();
         long lastUpdateTick = offhand ? offhandLastUpdateTick : mainhandLastUpdateTick;
 
-        if (currentTick - lastUpdateTick < CogwheelShieldItem.UPDATE_INTERVAL_TICKS)
+        if (currentTick - lastUpdateTick < shield.getUpdateIntervalTicks(stack))
             return;
 
         if (offhand) {
@@ -257,11 +253,11 @@ public class CogwheelShieldKeyInputHandler {
                 decaying = false;
             }
 
-            float accelFactor = shield.getClientAccelerationFactor(stack, player, currentTick);
+            float accelFactor = getClientAccelerationFactor(stack, player, shield);
             float nextSpeed = speed * accelFactor;
 
             speed = Math.min(
-                    Math.max(nextSpeed, CogwheelShieldItem.MIN_SPEED),
+                    Math.max(nextSpeed, shield.getMinSpeed(stack)),
                     shield.getMaxSpeed(stack, player)
             );
 
@@ -272,7 +268,7 @@ public class CogwheelShieldKeyInputHandler {
             }
 
             if (decaying) {
-                speed *= CogwheelShieldItem.DECAY_RATE;
+                speed *= shield.getDecayRate(stack);
 
                 if (speed < 1f) {
                     speed = 0f;
@@ -282,6 +278,11 @@ public class CogwheelShieldKeyInputHandler {
         }
 
         setClientState(offhand, speed, charging, decaying);
+    }
+
+    private static float getClientAccelerationFactor(ItemStack stack, LocalPlayer player, BaseCogwheelShieldItem shield) {
+        boolean hasBacktankWithAir = !com.simibubi.create.content.equipment.armor.BacktankUtil.getAllWithAir(player).isEmpty();
+        return shield.getAccelerationFactor(stack, player, hasBacktankWithAir);
     }
 
     private static void updateVisualRotation(boolean offhand, float deltaSeconds) {
@@ -343,8 +344,8 @@ public class CogwheelShieldKeyInputHandler {
 
     private static void handleChargingStatePacket(ItemStack offhand, ItemStack mainhand, boolean isDown) {
         boolean hasShield =
-                offhand.getItem() instanceof CogwheelShieldItem ||
-                        mainhand.getItem() instanceof CogwheelShieldItem;
+                offhand.getItem() instanceof BaseCogwheelShieldItem ||
+                        mainhand.getItem() instanceof BaseCogwheelShieldItem;
 
         if (!hasShield)
             return;
@@ -371,16 +372,16 @@ public class CogwheelShieldKeyInputHandler {
         }
     }
 
-    private static void handleThrowOnKeyRelease(ItemStack offhand, boolean isDown) {
+    private static void handleThrowOnKeyRelease(ItemStack offhand, boolean isDown, LocalPlayer player) {
         if (isDown || !wasDown)
             return;
 
-        if (!(offhand.getItem() instanceof CogwheelShieldItem))
+        if (!(offhand.getItem() instanceof BaseCogwheelShieldItem shield))
             return;
 
         float speed = offhandSpeed;
 
-        if (speed >= THROW_SPEED_THRESHOLD) {
+        if (speed >= shield.getThrowSpeedThreshold(offhand, player)) {
             triggerThrowShield(offhand, speed);
         }
     }
@@ -396,11 +397,11 @@ public class CogwheelShieldKeyInputHandler {
         stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         stack.set(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), mc.player.level().getGameTime());
 
-        PacketDistributor.sendToServer(new ShieldThrowPayload(speed));
+        PacketDistributor.sendToServer(new ShieldThrowPayload());
     }
 
     private static boolean isShieldAtFullSpeed(ItemStack stack, boolean offhand) {
-        if (!(stack.getItem() instanceof CogwheelShieldItem))
+        if (!(stack.getItem() instanceof BaseCogwheelShieldItem))
             return false;
 
         return getSpeed(offhand) >= FULL_SPEED;

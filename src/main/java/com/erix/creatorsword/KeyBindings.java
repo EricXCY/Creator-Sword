@@ -1,4 +1,4 @@
-package com.erix.creatorsword.client;
+package com.erix.creatorsword;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;

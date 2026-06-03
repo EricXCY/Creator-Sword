@@ -1,4 +1,4 @@
-package com.erix.creatorsword.network;
+package com.erix.creatorsword.item.cogwheel_shield.logic;
 
 import com.erix.creatorsword.CreatorSword;
 import net.minecraft.network.RegistryFriendlyByteBuf;

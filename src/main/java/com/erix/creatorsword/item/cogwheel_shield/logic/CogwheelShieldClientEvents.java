@@ -1,8 +1,6 @@
-package com.erix.creatorsword.client.cogwheel_shield;
+package com.erix.creatorsword.item.cogwheel_shield.logic;
 
-import com.erix.creatorsword.data.CSDataComponents;
-import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
-import com.erix.creatorsword.network.ShieldStatePayload;
+import com.erix.creatorsword.item.cogwheel_shield.BaseCogwheelShieldItem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -13,7 +11,6 @@ import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 public class CogwheelShieldClientEvents {
 
@@ -43,8 +40,8 @@ public class CogwheelShieldClientEvents {
         if (mc.player == null || mc.level == null)
             return;
 
-        syncShieldState(mc.player.getOffhandItem(), true);
-        syncShieldState(mc.player.getMainHandItem(), false);
+        loadShieldState(mc.player.getOffhandItem());
+        loadShieldState(mc.player.getMainHandItem());
     }
 
     @SubscribeEvent
@@ -54,8 +51,8 @@ public class CogwheelShieldClientEvents {
         if (mc.player == null)
             return;
 
-        resetAndSyncShield(mc.player.getOffhandItem(), true);
-        resetAndSyncShield(mc.player.getMainHandItem(), false);
+        resetShield(mc.player.getOffhandItem());
+        resetShield(mc.player.getMainHandItem());
     }
 
     @SubscribeEvent
@@ -68,7 +65,7 @@ public class CogwheelShieldClientEvents {
 
         ItemStack offhand = player.getOffhandItem();
 
-        if (!(offhand.getItem() instanceof CogwheelShieldItem))
+        if (!(offhand.getItem() instanceof BaseCogwheelShieldItem))
             return;
 
         if (!player.isUsingItem() || player.getUseItem() != offhand)
@@ -82,31 +79,16 @@ public class CogwheelShieldClientEvents {
         renderSpeedHud(event.getGuiGraphics(), speed);
     }
 
-    private static void syncShieldState(ItemStack stack, boolean isOffhand) {
-        if (!(stack.getItem() instanceof CogwheelShieldItem))
+    private static void loadShieldState(ItemStack stack) {
+        if (!(stack.getItem() instanceof BaseCogwheelShieldItem))
             return;
-
-        float speed = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_SPEED.get(), 0f);
-        boolean charging = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
-        boolean decaying = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_DECAYING.get(), false);
-
-        if (speed > 0) {
-            PacketDistributor.sendToServer(new ShieldStatePayload(isOffhand, speed, charging, decaying));
-        }
     }
 
-    private static void resetAndSyncShield(ItemStack stack, boolean isOffhand) {
-        if (!(stack.getItem() instanceof CogwheelShieldItem))
+    private static void resetShield(ItemStack stack) {
+        if (!(stack.getItem() instanceof BaseCogwheelShieldItem))
             return;
 
-        CogwheelShieldItem.resetNBT(stack);
-
-        PacketDistributor.sendToServer(new ShieldStatePayload(
-                isOffhand,
-                0f,
-                false,
-                true
-        ));
+        BaseCogwheelShieldItem.resetStackState(stack);
     }
 
     private static void renderSpeedHud(GuiGraphics guiGraphics, float speed) {
