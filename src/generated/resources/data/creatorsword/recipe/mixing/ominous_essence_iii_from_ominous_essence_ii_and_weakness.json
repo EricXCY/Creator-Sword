@@ -6,7 +6,7 @@
     }
   ],
   "type": "create:mixing",
-  "heat_requirement": "superheated",
+  "heat_requirement": "heated",
   "ingredients": [
     {
       "type": "neoforge:components",
@@ -28,7 +28,7 @@
   ],
   "results": [
     {
-      "amount": 250,
+      "amount": 500,
       "id": "creatorsword:ominous_essence_iii"
     }
   ]

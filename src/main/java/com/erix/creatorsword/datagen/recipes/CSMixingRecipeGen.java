@@ -30,7 +30,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
             .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(potionFluid(Potions.OOZING)))
             .require(sized(potionFluid(Potions.SLOWNESS)))
-            .output(OminousEssenceHelper.create(250, 0))
+            .output(OminousEssenceHelper.create(500, 0))
             .requiresHeat(HeatCondition.HEATED)
     );
 
@@ -38,7 +38,7 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
             .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 0)))
             .require(sized(potionFluid(Potions.INFESTED)))
-            .output(OminousEssenceHelper.create(250, 1))
+            .output(OminousEssenceHelper.create(500, 1))
             .requiresHeat(HeatCondition.HEATED)
     );
 
@@ -46,24 +46,24 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
             .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 1)))
             .require(sized(potionFluid(Potions.WEAKNESS)))
-            .output(OminousEssenceHelper.create(250, 2))
-            .requiresHeat(HeatCondition.SUPERHEATED)
+            .output(OminousEssenceHelper.create(500, 2))
+            .requiresHeat(HeatCondition.HEATED)
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_IV = create("ominous_essence_iv_from_ominous_essence_iii_and_poison", b -> b
             .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 2)))
             .require(sized(potionFluid(Potions.POISON)))
-            .output(OminousEssenceHelper.create(250, 3))
-            .requiresHeat(HeatCondition.SUPERHEATED)
+            .output(OminousEssenceHelper.create(500, 3))
+            .requiresHeat(HeatCondition.HEATED)
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_V = create("ominous_essence_v_from_ominous_essence_iv_and_harming", b -> b
             .withCondition(recipeEnabled("ominous_essence"))
             .require(sized(OminousEssenceHelper.create(250, 3)))
             .require(sized(potionFluid(Potions.HARMING)))
-            .output(OminousEssenceHelper.create(250, 4))
-            .requiresHeat(HeatCondition.SUPERHEATED)
+            .output(OminousEssenceHelper.create(500, 4))
+            .requiresHeat(HeatCondition.HEATED)
     );
 
     private static SizedFluidIngredient sized(FluidStack stack) {
