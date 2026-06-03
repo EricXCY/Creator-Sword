@@ -31,7 +31,6 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
             .require(sized(potionFluid(Potions.OOZING)))
             .require(sized(potionFluid(Potions.SLOWNESS)))
             .output(OminousEssenceHelper.create(500, 0))
-            .requiresHeat(HeatCondition.HEATED)
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_II = create("ominous_essence_ii_from_ominous_essence_and_infested", b -> b
@@ -39,7 +38,6 @@ public class CSMixingRecipeGen extends MixingRecipeGen {
             .require(sized(OminousEssenceHelper.create(250, 0)))
             .require(sized(potionFluid(Potions.INFESTED)))
             .output(OminousEssenceHelper.create(500, 1))
-            .requiresHeat(HeatCondition.HEATED)
     );
 
     GeneratedRecipe OMINOUS_ESSENCE_III = create("ominous_essence_iii_from_ominous_essence_ii_and_weakness", b -> b

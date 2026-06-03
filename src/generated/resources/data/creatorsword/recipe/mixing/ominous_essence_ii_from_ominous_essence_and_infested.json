@@ -6,7 +6,6 @@
     }
   ],
   "type": "create:mixing",
-  "heat_requirement": "heated",
   "ingredients": [
     {
       "type": "neoforge:components",
