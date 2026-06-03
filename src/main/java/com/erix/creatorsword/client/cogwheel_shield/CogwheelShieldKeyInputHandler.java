@@ -3,6 +3,7 @@ package com.erix.creatorsword.client.cogwheel_shield;
 import com.erix.creatorsword.client.KeyBindings;
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
+import com.erix.creatorsword.network.ShieldChargingPayload;
 import com.erix.creatorsword.network.ShieldFullSpeedPayload;
 import com.erix.creatorsword.network.ShieldThrowPayload;
 import net.minecraft.client.Minecraft;
@@ -61,6 +62,7 @@ public class CogwheelShieldKeyInputHandler {
         tickShieldLogic(offhand, true, isDown, player);
         tickShieldLogic(mainhand, false, isDown, player);
 
+        handleChargingStatePacket(offhand, mainhand, isDown);
         handleFullSpeedPacket(offhand, mainhand, isDown);
         handleThrowOnKeyRelease(offhand, isDown);
 
@@ -336,6 +338,23 @@ public class CogwheelShieldKeyInputHandler {
             mainhandSpeed = speed;
             mainhandCharging = charging;
             mainhandDecaying = decaying;
+        }
+    }
+
+    private static void handleChargingStatePacket(ItemStack offhand, ItemStack mainhand, boolean isDown) {
+        boolean hasShield =
+                offhand.getItem() instanceof CogwheelShieldItem ||
+                        mainhand.getItem() instanceof CogwheelShieldItem;
+
+        if (!hasShield)
+            return;
+
+        if (isDown && !wasDown) {
+            PacketDistributor.sendToServer(new ShieldChargingPayload(true));
+        }
+
+        if (!isDown && wasDown) {
+            PacketDistributor.sendToServer(new ShieldChargingPayload(false));
         }
     }
 

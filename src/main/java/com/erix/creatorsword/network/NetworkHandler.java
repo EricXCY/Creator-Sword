@@ -2,6 +2,7 @@ package com.erix.creatorsword.network;
 
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.entity.ThrownCogwheelShield;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldChargingManager;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,7 +12,9 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
-import static com.erix.creatorsword.data.CSDataComponents.*;
+import static com.erix.creatorsword.data.CSDataComponents.GEAR_SHIELD_CHARGING;
+import static com.erix.creatorsword.data.CSDataComponents.GEAR_SHIELD_DECAYING;
+import static com.erix.creatorsword.data.CSDataComponents.GEAR_SHIELD_SPEED;
 
 public class NetworkHandler {
     private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
@@ -23,6 +26,33 @@ public class NetworkHandler {
     @SubscribeEvent
     public static void registerPayloads(RegisterPayloadHandlersEvent event) {
         PayloadRegistrar registrar = event.registrar("1");
+
+        registrar.playToServer(
+                ShieldChargingPayload.TYPE,
+                ShieldChargingPayload.STREAM_CODEC,
+                (payload, context) -> {
+                    ServerPlayer player = (ServerPlayer) context.player();
+
+                    ItemStack shieldStack = getHeldCogwheelShield(player);
+
+                    if (shieldStack.isEmpty())
+                        return;
+
+                    if (payload.charging()) {
+                        float initialSpeed;
+
+                        if (CogwheelShieldChargingManager.isActive(player)) {
+                            initialSpeed = CogwheelShieldChargingManager.getSpeed(player);
+                        } else {
+                            initialSpeed = shieldStack.getOrDefault(GEAR_SHIELD_SPEED.get(), 0f);
+                        }
+
+                        CogwheelShieldChargingManager.start(player, initialSpeed);
+                    } else {
+                        CogwheelShieldChargingManager.stop(player);
+                    }
+                }
+        );
 
         registrar.playToServer(
                 ShieldFullSpeedPayload.TYPE,
@@ -71,7 +101,13 @@ public class NetworkHandler {
                     if (hasExistingThrownShield(player))
                         return;
 
-                    float speed = Math.clamp(payload.speed(), 0f, MAX_SYNC_SPEED);
+                    float speed = CogwheelShieldChargingManager.getSpeed(player);
+
+                    if (speed <= 0f) {
+                        speed = offhand.getOrDefault(GEAR_SHIELD_SPEED.get(), 0f);
+                    }
+
+                    speed = Math.clamp(speed, 0f, MAX_SYNC_SPEED);
 
                     if (speed < THROW_SPEED_THRESHOLD)
                         return;
@@ -96,6 +132,7 @@ public class NetworkHandler {
 
                     player.level().addFreshEntity(projectile);
                     player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+                    CogwheelShieldChargingManager.remove(player);
                 }
         );
 
@@ -133,6 +170,20 @@ public class NetworkHandler {
                     }
                 }
         );
+    }
+
+    private static ItemStack getHeldCogwheelShield(ServerPlayer player) {
+        ItemStack offhand = player.getItemInHand(InteractionHand.OFF_HAND);
+
+        if (offhand.getItem() instanceof CogwheelShieldItem)
+            return offhand;
+
+        ItemStack mainhand = player.getItemInHand(InteractionHand.MAIN_HAND);
+
+        if (mainhand.getItem() instanceof CogwheelShieldItem)
+            return mainhand;
+
+        return ItemStack.EMPTY;
     }
 
     private static boolean hasExistingThrownShield(ServerPlayer player) {

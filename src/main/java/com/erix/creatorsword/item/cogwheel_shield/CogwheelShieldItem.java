@@ -7,6 +7,7 @@ import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
@@ -52,37 +53,62 @@ public class CogwheelShieldItem extends ShieldItem {
                 stack
         );
 
-        int k = level + 1;
+        int boostFactor = level + 1;
 
-        var tanks = BacktankUtil.getAllWithAir(player);
-        boolean hasBacktankWithAir = !tanks.isEmpty();
+        boolean hasBacktankWithAir = !BacktankUtil.getAllWithAir(player).isEmpty();
+        int hasTank = hasBacktankWithAir ? 1 : 0;
 
-        int hasTank = 0;
-
-        if (hasBacktankWithAir) {
-            boolean paid = consumeAirIfNeeded(stack, player, tick, k, tanks.getFirst());
-            hasTank = paid ? 1 : 0;
-        }
-
-        return 1.05f + 0.1f * hasTank * k + 0.05f * level;
+        return 1.05f + 0.1f * hasTank * boostFactor + 0.05f * level;
     }
 
-    @OnlyIn(Dist.CLIENT)
-    private boolean consumeAirIfNeeded(ItemStack stack, Player player, long tick, int enchantLevel, ItemStack tank) {
-        long lastConsumeTick = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), 0L);
+    public void serverTickAcceleration(ItemStack stack, Player player, long tick) {
+        if (player.level().isClientSide())
+            return;
 
+        if (!(player instanceof ServerPlayer serverPlayer))
+            return;
+
+        int level = EnchantmentKeys.getEnchantmentLevel(
+                player.level().registryAccess(),
+                EnchantmentKeys.PNEUMATIC_BOOST,
+                stack
+        );
+
+        int boostFactor = level + 1;
+        boolean paid = tryConsumeServerAir(player, tick, boostFactor);
+        int hasTank = paid ? 1 : 0;
+        float accelFactor = 1.05f + 0.1f * hasTank * boostFactor + 0.05f * level;
+        float speed = CogwheelShieldChargingManager.getSpeed(serverPlayer);
+        float nextSpeed = speed * accelFactor;
+
+        speed = Math.min(
+                Math.max(nextSpeed, MIN_SPEED),
+                getMaxSpeed(stack, player)
+        );
+
+        CogwheelShieldChargingManager.setSpeed(serverPlayer, speed);
+    }
+
+    private boolean tryConsumeServerAir(Player player, long tick, int boostFactor) {
+        if (!(player instanceof ServerPlayer serverPlayer))
+            return false;
+
+        var tanks = BacktankUtil.getAllWithAir(player);
+        if (tanks.isEmpty())
+            return false;
+
+        ItemStack tank = tanks.getFirst();
+        long lastConsumeTick = CogwheelShieldChargingManager.getLastAirTick(serverPlayer);
         if (tick - lastConsumeTick < AIR_CONSUME_INTERVAL_TICKS)
             return true;
 
-        stack.set(CSDataComponents.GEAR_SHIELD_LAST_AIR_TICK.get(), tick);
-
-        int airCost = enchantLevel * 2;
-        int air = BacktankUtil.getAir(tank);
-
-        if (air < airCost)
+        int airCost = boostFactor * 2;
+        if (BacktankUtil.getAir(tank) < airCost)
             return false;
 
+        CogwheelShieldChargingManager.setLastAirTick(serverPlayer, tick);
         BacktankUtil.consumeAir(player, tank, airCost);
+
         return true;
     }
 

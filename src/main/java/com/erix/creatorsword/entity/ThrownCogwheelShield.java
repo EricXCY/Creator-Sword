@@ -1,6 +1,7 @@
 package com.erix.creatorsword.entity;
 
 import com.erix.creatorsword.data.CSDataComponents;
+import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldChargingManager;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -147,6 +148,7 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
 
         if (player instanceof net.minecraft.server.level.ServerPlayer sp) {
             sp.getPersistentData().remove("creatorsword_thrown_shield");
+            CogwheelShieldChargingManager.remove(sp);
         }
 
         this.discard();
@@ -202,8 +204,6 @@ public class ThrownCogwheelShield extends ThrowableItemProjectile {
         float speed = this.getEntityData().get(SPEED);
 
         float ageInSeconds = (this.tickCount + partialTicks) / 20f;
-
-        // speed 是 RPM：1 RPM = 6 degrees per second
         return (speed * 6f * ageInSeconds) % 360f;
     }
 
