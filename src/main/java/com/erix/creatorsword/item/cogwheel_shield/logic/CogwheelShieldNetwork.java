@@ -13,8 +13,6 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class CogwheelShieldNetwork {
-    private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
-
     private static final float FULL_SPEED_THRESHOLD = 256f;
     private static final float MAX_SYNC_SPEED = 512f;
 
@@ -69,13 +67,10 @@ public final class CogwheelShieldNetwork {
 
                     CompoundTag persistentData = player.getPersistentData();
 
-                    if (persistentData.contains(THROWN_SHIELD_TAG))
-                        return;
-
                     if (hasExistingThrownShield(player))
                         return;
 
-                    float speed = CogwheelShieldUtil.getServerOrStackSpeed(player, stack);
+                    float speed = payload.speed();
                     speed = Math.clamp(speed, 0f, shield.getMaxSpeed(stack, player));
 
                     if (speed < shield.getThrowSpeedThreshold(stack, player))
@@ -84,8 +79,6 @@ public final class CogwheelShieldNetwork {
                     stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), speed);
                     stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
                     stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), true);
-
-                    persistentData.put(THROWN_SHIELD_TAG, stack.save(player.registryAccess()));
 
                     BaseCogwheelShieldEntity projectile =
                             shield.createThrownEntity(player.level(), player, speed, stack.copy());

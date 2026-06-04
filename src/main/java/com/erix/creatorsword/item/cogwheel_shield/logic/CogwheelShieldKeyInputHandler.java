@@ -13,6 +13,7 @@ public class CogwheelShieldKeyInputHandler {
 
     private static boolean wasDown = false;
     private static boolean sentFullSpeedThisHold = false;
+    private static boolean offhandReadyParticlesShown = false;
 
     private static long lastRenderTimeNanos = 0L;
 
@@ -166,6 +167,7 @@ public class CogwheelShieldKeyInputHandler {
         offhandCharging = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         offhandDecaying = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_DECAYING.get(), false) || offhandSpeed > 0f;
         offhandLastUpdateTick = stack.getOrDefault(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), 0L);
+        offhandReadyParticlesShown = false;
     }
 
     private static void loadMainhandStateFromStack(ItemStack stack) {
@@ -189,6 +191,7 @@ public class CogwheelShieldKeyInputHandler {
         offhandCharging = mainhandCharging;
         offhandDecaying = mainhandDecaying;
         offhandLastUpdateTick = mainhandLastUpdateTick;
+        offhandReadyParticlesShown = false;
 
         clearMainhandState();
     }
@@ -205,6 +208,7 @@ public class CogwheelShieldKeyInputHandler {
         offhandDecaying = mainhandDecaying;
         offhandLastUpdateTick = mainhandLastUpdateTick;
         offhandAngle = mainhandAngle;
+        offhandReadyParticlesShown = false;
 
         mainhandSpeed = speed;
         mainhandCharging = charging;
@@ -214,13 +218,16 @@ public class CogwheelShieldKeyInputHandler {
     }
 
     private static void clearOffhandState() {
+        offhandAngle = 0f;
         offhandSpeed = 0f;
         offhandCharging = false;
         offhandDecaying = false;
         offhandLastUpdateTick = 0L;
+        offhandReadyParticlesShown = false;
     }
 
     private static void clearMainhandState() {
+        mainhandAngle = 0f;
         mainhandSpeed = 0f;
         mainhandCharging = false;
         mainhandDecaying = false;
@@ -278,11 +285,31 @@ public class CogwheelShieldKeyInputHandler {
         }
 
         setClientState(offhand, speed, charging, decaying);
+
+        if (offhand) {
+            handleOffhandReadyParticles(stack, speed, isKeyDown, player, shield);
+        }
     }
 
     private static float getClientAccelerationFactor(ItemStack stack, LocalPlayer player, BaseCogwheelShieldItem shield) {
         boolean hasBacktankWithAir = !com.simibubi.create.content.equipment.armor.BacktankUtil.getAllWithAir(player).isEmpty();
         return shield.getAccelerationFactor(stack, player, hasBacktankWithAir);
+    }
+
+    private static void handleOffhandReadyParticles(ItemStack stack, float speed, boolean isKeyDown,
+                                                    LocalPlayer player, BaseCogwheelShieldItem shield) {
+        float threshold = shield.getThrowSpeedThreshold(stack, player);
+        boolean ready = speed >= threshold;
+
+        if (!ready) {
+            offhandReadyParticlesShown = false;
+            return;
+        }
+
+        if (isKeyDown && !offhandReadyParticlesShown && shield.canThrowFromHand(stack, player, net.minecraft.world.InteractionHand.OFF_HAND)) {
+            CogwheelShieldParticleHandler.spawnOffhandReadyParticles(player, speed, threshold);
+            offhandReadyParticlesShown = true;
+        }
     }
 
     private static void updateVisualRotation(boolean offhand, float deltaSeconds) {
@@ -397,7 +424,15 @@ public class CogwheelShieldKeyInputHandler {
         stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), false);
         stack.set(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), mc.player.level().getGameTime());
 
-        PacketDistributor.sendToServer(new ShieldThrowPayload());
+        PacketDistributor.sendToServer(new ShieldThrowPayload(speed));
+
+        offhandSpeed = speed;
+        offhandCharging = false;
+        offhandDecaying = speed > 0f;
+        offhandReadyParticlesShown = false;
+
+        wasDown = false;
+        sentFullSpeedThisHold = false;
     }
 
     private static boolean isShieldAtFullSpeed(ItemStack stack, boolean offhand) {

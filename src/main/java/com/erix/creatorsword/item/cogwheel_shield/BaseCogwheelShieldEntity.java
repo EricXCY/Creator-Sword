@@ -2,6 +2,7 @@ package com.erix.creatorsword.item.cogwheel_shield;
 
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldStateManager;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -22,8 +23,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class BaseCogwheelShieldEntity extends ThrowableItemProjectile {
-    private static final String THROWN_SHIELD_TAG = "creatorsword_thrown_shield";
-
     private static final EntityDataAccessor<Float> SPEED =
             SynchedEntityData.defineId(BaseCogwheelShieldEntity.class, EntityDataSerializers.FLOAT);
 
@@ -197,7 +196,6 @@ public abstract class BaseCogwheelShieldEntity extends ThrowableItemProjectile {
         }
 
         if (player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.getPersistentData().remove(THROWN_SHIELD_TAG);
             CogwheelShieldStateManager.remove(serverPlayer);
         }
 
@@ -232,12 +230,6 @@ public abstract class BaseCogwheelShieldEntity extends ThrowableItemProjectile {
                 target.hurt(this.damageSources().thrown(this, this.getOwner()), damage);
 
                 if (damageShieldStack(getShieldDamageOnHit())) {
-                    Entity owner = this.getOwner();
-
-                    if (owner instanceof ServerPlayer serverPlayer) {
-                        serverPlayer.getPersistentData().remove(THROWN_SHIELD_TAG);
-                    }
-
                     this.discard();
                     return;
                 }
@@ -246,6 +238,39 @@ public abstract class BaseCogwheelShieldEntity extends ThrowableItemProjectile {
 
         this.getEntityData().set(RETURNING, true);
         this.setNoGravity(true);
+    }
+
+    @Override
+    public void addAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.addAdditionalSaveData(tag);
+
+        tag.putFloat("ShieldSpeed", getShieldSpeed());
+        tag.putBoolean("Returning", isReturning());
+        tag.putInt("Lifetime", lifetime);
+
+        ItemStack stack = this.getEntityData().get(ITEM_STACK);
+
+        if (!stack.isEmpty()) {
+            tag.put("ShieldStack", stack.save(this.registryAccess()));
+        }
+    }
+
+    @Override
+    public void readAdditionalSaveData(@NotNull CompoundTag tag) {
+        super.readAdditionalSaveData(tag);
+
+        this.getEntityData().set(SPEED, tag.getFloat("ShieldSpeed"));
+        this.getEntityData().set(RETURNING, tag.getBoolean("Returning"));
+        this.lifetime = tag.getInt("Lifetime");
+
+        if (tag.contains("ShieldStack")) {
+            ItemStack stack = ItemStack.parse(
+                    this.registryAccess(),
+                    tag.getCompound("ShieldStack")
+            ).orElse(ItemStack.EMPTY);
+
+            this.getEntityData().set(ITEM_STACK, stack);
+        }
     }
 
     public float getRotationAngle(float partialTicks) {
