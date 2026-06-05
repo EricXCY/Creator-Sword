@@ -138,15 +138,7 @@ public class BaseCogwheelShieldRenderer extends CustomRenderedItemModelRenderer 
             case FIRST_PERSON_RIGHT_HAND, THIRD_PERSON_RIGHT_HAND ->
                     CogwheelShieldKeyInputHandler.getMainhandAngle();
 
-            default -> {
-                if (player.getOffhandItem().is(stack.getItem()))
-                    yield CogwheelShieldKeyInputHandler.getOffhandAngle();
-
-                if (player.getMainHandItem().is(stack.getItem()))
-                    yield CogwheelShieldKeyInputHandler.getMainhandAngle();
-
-                yield 0f;
-            }
+            default -> 0f;
         };
     }
 }
