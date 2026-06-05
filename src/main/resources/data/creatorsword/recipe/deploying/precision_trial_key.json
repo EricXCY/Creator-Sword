@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "creatorsword:config_enabled",
+      "key": "precision_trial_key"
+    }
+  ],
   "type": "create:deploying",
   "ingredients": [
     {
