@@ -93,6 +93,11 @@
   "item.creatorsword.trial_smithing_template.base_slot_description": "放入一把下界合金机械师之剑",
   "item.creatorsword.trial_smithing_template.additions_slot_description": "放入一块坚固板",
 
+  "item.creatorsword.precision_trial_key": "智能试炼钥匙",
+  "item.creatorsword.precision_trial_key.tooltip.summary": "更高级的试炼钥匙，似乎能绕过某个桎梏。",
+  "item.creatorsword.precision_ominous_trial_key": "智能不祥试炼钥匙",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.summary": "更高级的不祥试炼钥匙，似乎能绕过某个桎梏。",
+
   "fluid.creatorsword.ominous_essence": "不祥原浆",
   "fluid.creatorsword.ominous_essence_ii": "不祥原浆 II",
   "fluid.creatorsword.ominous_essence_iii": "不祥原浆 III",

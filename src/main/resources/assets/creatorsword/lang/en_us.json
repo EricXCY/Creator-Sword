@@ -94,6 +94,11 @@
   "item.creatorsword.trial_smithing_template.base_slot_description": "Add a Netherite Creator's Sword",
   "item.creatorsword.trial_smithing_template.additions_slot_description": "Add a sturdy sheet",
 
+  "item.creatorsword.precision_trial_key": "Smart Trial Key",
+  "item.creatorsword.precision_trial_key.tooltip.summary": "A more advanced Trial Key. It seems to slip past a certain restriction.",
+  "item.creatorsword.precision_ominous_trial_key": "Smart Ominous Trial Key",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.summary": "A more advanced Ominous Trial Key. It seems to slip past a certain restriction.",
+
   "fluid.creatorsword.ominous_essence": "Ominous Essence",
   "fluid.creatorsword.ominous_essence_ii": "Ominous Essence II",
   "fluid.creatorsword.ominous_essence_iii": "Ominous Essence III",
