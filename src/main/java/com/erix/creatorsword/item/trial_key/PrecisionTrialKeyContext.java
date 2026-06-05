@@ -1,4 +1,4 @@
-package com.erix.creatorsword.item;
+package com.erix.creatorsword.item.trial_key;
 
 import net.minecraft.world.item.ItemStack;
 

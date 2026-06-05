@@ -1,5 +1,6 @@
-package com.erix.creatorsword.item;
+package com.erix.creatorsword.item.trial_key;
 
+import com.erix.creatorsword.item.CSItems;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.entity.vault.VaultConfig;

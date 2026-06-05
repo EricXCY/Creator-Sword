@@ -1,6 +1,6 @@
 package com.erix.creatorsword.mixin;
 
-import com.erix.creatorsword.item.PrecisionTrialKeyUtil;
+import com.erix.creatorsword.item.trial_key.PrecisionTrialKeyUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.vault.VaultBlockEntity;
 import net.minecraft.world.level.block.entity.vault.VaultConfig;

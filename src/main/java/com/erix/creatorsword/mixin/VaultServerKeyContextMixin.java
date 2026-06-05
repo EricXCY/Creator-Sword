@@ -1,7 +1,7 @@
 package com.erix.creatorsword.mixin;
 
-import com.erix.creatorsword.item.PrecisionTrialKeyContext;
-import com.erix.creatorsword.item.PrecisionTrialKeyUtil;
+import com.erix.creatorsword.item.trial_key.PrecisionTrialKeyContext;
+import com.erix.creatorsword.item.trial_key.PrecisionTrialKeyUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
