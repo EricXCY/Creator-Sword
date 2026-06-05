@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "minecraft:ominous_trial_key"
+    },
+    {
+      "item": "create:precision_mechanism"
+    }
+  ],
+  "results": [
+    {
+      "id": "creatorsword:precision_ominous_trial_key"
+    }
+  ]
+}

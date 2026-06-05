@@ -1,7 +1,6 @@
 package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.client.cogwheel_shield.CogwheelShieldKeyInputHandler;
+import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldKeyInputHandler;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.simibubi.create.foundation.item.render.CustomRenderedItemModel;
@@ -15,22 +14,45 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
-public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer {
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-    private static final PartialModel HANDLE = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/handle")
-    );
+public class BaseCogwheelShieldRenderer extends CustomRenderedItemModelRenderer {
+    private static final Map<ResourceLocation, PartialModel> MODEL_CACHE = new ConcurrentHashMap<>();
 
-    private static final PartialModel ROTATING_GEAR = PartialModel.of(
-            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/cogwheel_shield/cogwheel_shield_handless")
-    );
+    private final PartialModel handleModel;
+    private final PartialModel rotatingGearModel;
+
+    public BaseCogwheelShieldRenderer(BaseCogwheelShieldItem item) {
+        this.handleModel = getCachedModel(item.getHandleModelLocation());
+        this.rotatingGearModel = getCachedModel(item.getRotatingGearModelLocation());
+    }
+
+    private static PartialModel getCachedModel(ResourceLocation location) {
+        return MODEL_CACHE.computeIfAbsent(location, PartialModel::of);
+    }
 
     @Override
     protected void render(ItemStack stack, CustomRenderedItemModel model, PartialItemModelRenderer renderer,
-                          ItemDisplayContext transformType, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-
+                          ItemDisplayContext transformType, PoseStack ms,
+                          MultiBufferSource buffer, int light, int overlay) {
         ms.pushPose();
 
+        applyTransform(stack, transformType, ms);
+
+        renderer.render(handleModel.get(), light);
+
+        float rotationAngle = getVisualRotationAngle(stack, transformType);
+
+        ms.pushPose();
+        ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
+        renderer.render(rotatingGearModel.get(), light);
+        ms.popPose();
+
+        ms.popPose();
+    }
+
+    private void applyTransform(ItemStack stack, ItemDisplayContext transformType, PoseStack ms) {
         switch (transformType) {
             case THIRD_PERSON_RIGHT_HAND -> {
                 ms.mulPose(Axis.YP.rotationDegrees(90));
@@ -93,28 +115,17 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
             default -> {
             }
         }
-
-        renderer.render(HANDLE.get(), light);
-
-        float rotationAngle = getVisualRotationAngle(stack, transformType);
-
-        ms.pushPose();
-        ms.mulPose(Axis.YP.rotationDegrees(rotationAngle));
-        renderer.render(ROTATING_GEAR.get(), light);
-        ms.popPose();
-
-        ms.popPose();
     }
 
-    private static boolean isBlockingWith(ItemStack stack) {
+    private boolean isBlockingWith(ItemStack stack) {
         LocalPlayer player = Minecraft.getInstance().player;
 
         return player != null
                 && player.isUsingItem()
-                && player.getUseItem() == stack;
+                && player.getUseItem().is(stack.getItem());
     }
 
-    private static float getVisualRotationAngle(ItemStack stack, ItemDisplayContext transformType) {
+    private float getVisualRotationAngle(ItemStack stack, ItemDisplayContext transformType) {
         LocalPlayer player = Minecraft.getInstance().player;
 
         if (player == null)
@@ -128,10 +139,10 @@ public class CogwheelShieldItemRenderer extends CustomRenderedItemModelRenderer 
                     CogwheelShieldKeyInputHandler.getMainhandAngle();
 
             default -> {
-                if (stack == player.getOffhandItem())
+                if (player.getOffhandItem().is(stack.getItem()))
                     yield CogwheelShieldKeyInputHandler.getOffhandAngle();
 
-                if (stack == player.getMainHandItem())
+                if (player.getMainHandItem().is(stack.getItem()))
                     yield CogwheelShieldKeyInputHandler.getMainhandAngle();
 
                 yield 0f;

@@ -1,21 +1,20 @@
-package com.erix.creatorsword.client.entity;
+package com.erix.creatorsword.item.cogwheel_shield;
 
-import com.erix.creatorsword.entity.CSEntities;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-public class EntityRendererSetup {
+public class CogwheelShieldClientSetup {
 
     public static void register(IEventBus modEventBus) {
-        modEventBus.register(EntityRendererSetup.class);
+        modEventBus.register(CogwheelShieldClientSetup.class);
     }
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(
-                CSEntities.COGWHEEL_SHIELD_ENTITY.get(),
-                ThrownCogwheelShieldRenderer::new
+                CogwheelShieldItems.COGWHEEL_SHIELD_ENTITY.get(),
+                BaseCogwheelShieldEntityRenderer::new
         );
     }
 }

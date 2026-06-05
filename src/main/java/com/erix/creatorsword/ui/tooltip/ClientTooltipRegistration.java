@@ -1,5 +1,6 @@
 package com.erix.creatorsword.ui.tooltip;
 
+import com.erix.creatorsword.item.CSItems;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
@@ -31,6 +32,8 @@ public class ClientTooltipRegistration {
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
             registerCreateTooltip(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
             registerCreateTooltips(SmithingTemplateItems.CSTEMPLATES);
+            registerCreateTooltip(CSItems.PRECISION_TRIAL_KEY.get());
+            registerCreateTooltip(CSItems.PRECISION_OMINOUS_TRIAL_KEY.get());
         });
     }
 

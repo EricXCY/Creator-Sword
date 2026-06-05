@@ -36,5 +36,7 @@ public class ModTabs {
                         Output.accept(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get());
                         Output.accept(CSItems.TRIAL_KEY_DIE.get());
                         Output.accept(CSItems.OMINOUS_TRIAL_KEY_DIE.get());
+                        Output.accept(CSItems.PRECISION_TRIAL_KEY.get());
+                        Output.accept(CSItems.PRECISION_OMINOUS_TRIAL_KEY.get());
                     }).build());
 }

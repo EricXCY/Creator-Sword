@@ -5,7 +5,11 @@
     "CrushingWheelControllerBlockEntityMixin",
     "EnchantmentHelperMixin",
     "ItemProviderEntryMixin",
-    "RadialWrenchHandlerMixin"
+    "RadialWrenchHandlerMixin",
+    "VaultServerDataMixin",
+    "VaultServerKeyContextMixin",
+    "VaultSharedDataMixin",
+    "VaultValidKeyMixin"
   ],
   "client": [
   ],

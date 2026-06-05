@@ -94,6 +94,11 @@
   "item.creatorsword.trial_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
   "item.creatorsword.trial_smithing_template.additions_slot_description": "Добавьте прочную пластину",
 
+  "item.creatorsword.precision_trial_key": "Умный ключ испытаний",
+  "item.creatorsword.precision_trial_key.tooltip.summary": "Более продвинутый ключ испытаний. Кажется, он способен обойти некое ограничение.",
+  "item.creatorsword.precision_ominous_trial_key": "Умный зловещий ключ испытаний",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.summary": "Более продвинутый зловещий ключ испытаний. Кажется, он способен обойти некое ограничение.",
+
   "fluid.creatorsword.ominous_essence": "Зловещая эссенция",
   "fluid.creatorsword.ominous_essence_ii": "Зловещая эссенция II",
   "fluid.creatorsword.ominous_essence_iii": "Зловещая эссенция III",
