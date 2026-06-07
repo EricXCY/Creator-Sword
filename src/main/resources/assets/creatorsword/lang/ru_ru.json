@@ -64,8 +64,8 @@
   "tooltip.creatorsword.capture_box.health": "Здоровье: %s",
   "itemGroup.creatorsword": "Меч Создателя",
 
-  "advancement.creatorsword.cogwheelshields_full_speed.title": "Мобильное дробильное колесо?!",
-  "advancement.creatorsword.cogwheelshields_full_speed.description": "Держите зубчатый щит в обеих руках на полной скорости вращения.",
+  "advancement.creatorsword.cogwheelshields_advancement_speed.title": "Мобильное дробильное колесо?!",
+  "advancement.creatorsword.cogwheelshields_advancement_speed.description": "Достигните скорости вращения 512 с зубчатыми щитами в обеих руках.",
   "advancement.creatorsword.traveling_frog.title": "Путешествующая лягушка",
   "advancement.creatorsword.traveling_frog.description": "Накопите 100000 блоков перемещения с помощью Крюка квакопорта.",
 

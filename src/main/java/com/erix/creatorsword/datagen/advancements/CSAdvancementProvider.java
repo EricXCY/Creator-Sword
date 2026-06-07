@@ -1,5 +1,6 @@
 package com.erix.creatorsword.datagen.advancements;
 
+import com.erix.creatorsword.data.advancement.AdvancementSpeedTrigger;
 import com.erix.creatorsword.data.advancement.TravelingFrogTrigger;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
@@ -15,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.data.AdvancementProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import com.erix.creatorsword.data.advancement.FullSpeedTrigger;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -28,21 +29,25 @@ public class CSAdvancementProvider extends AdvancementProvider {
 
     private static final class ModAdvancementGenerator implements AdvancementProvider.AdvancementGenerator {
         @Override
-        public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper) {
+        public void generate(HolderLookup.@NotNull Provider registries, @NotNull Consumer<AdvancementHolder> saver, @NotNull ExistingFileHelper existingFileHelper) {
             Advancement.Builder builder = Advancement.Builder.advancement();
             builder.display(
                     new ItemStack((ItemLike) CogwheelShieldItems.COGWHEEL_SHIELD),
-                    Component.translatable("advancement.creatorsword.cogwheelshields_full_speed.title"),
-                    Component.translatable("advancement.creatorsword.cogwheelshields_full_speed.description"),
+                    Component.translatable("advancement.creatorsword.cogwheelshields_advancement_speed.title"),
+                    Component.translatable("advancement.creatorsword.cogwheelshields_advancement_speed.description"),
                     null,
                     AdvancementType.CHALLENGE,
                     true,
                     true,
                     false
             );
-            builder.addCriterion("get_full_speed", FullSpeedTrigger.criterion());
-            builder.requirements(AdvancementRequirements.allOf(List.of("get_full_speed")));
-            builder.save(saver, ResourceLocation.fromNamespaceAndPath("creatorsword", "achievements/cogwheelshields_full_speed"), existingFileHelper);
+            builder.addCriterion("reach_advancement_speed", AdvancementSpeedTrigger.criterion());
+            builder.requirements(AdvancementRequirements.allOf(List.of("reach_advancement_speed")));
+            builder.save(
+                    saver,
+                    ResourceLocation.fromNamespaceAndPath("creatorsword", "achievements/cogwheelshields_advancement_speed"),
+                    existingFileHelper
+            );
 
             builder = Advancement.Builder.advancement();
             builder.display(

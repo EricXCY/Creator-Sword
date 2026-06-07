@@ -14,12 +14,23 @@ import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Consumer;
 
 public abstract class BaseCogwheelShieldItem extends ShieldItem {
     public BaseCogwheelShieldItem(Properties properties) {
         super(properties.stacksTo(1));
+    }
+
+    @Override
+    public boolean isEnchantable(@NotNull ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public int getEnchantmentValue(@NotNull ItemStack stack) {
+        return 15;
     }
 
     public ResourceLocation getHandleModelLocation() {

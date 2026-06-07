@@ -2,9 +2,8 @@ package com.erix.creatorsword.item.cogwheel_shield.logic;
 
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
-import com.erix.creatorsword.item.cogwheel_shield.BaseCogwheelShieldItem;
 import com.erix.creatorsword.item.cogwheel_shield.BaseCogwheelShieldEntity;
-import net.minecraft.nbt.CompoundTag;
+import com.erix.creatorsword.item.cogwheel_shield.BaseCogwheelShieldItem;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
@@ -13,8 +12,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public final class CogwheelShieldNetwork {
-    private static final float FULL_SPEED_THRESHOLD = 256f;
-    private static final float MAX_SYNC_SPEED = 512f;
+    private static final float ADVANCEMENT_SPEED_THRESHOLD = 512f;
 
     private CogwheelShieldNetwork() {
     }
@@ -25,7 +23,7 @@ public final class CogwheelShieldNetwork {
 
         registerCharging(registrar);
         registerThrow(registrar);
-        registerFullSpeed(registrar);
+        registerAdvancementSpeed(registrar);
     }
 
     private static void registerCharging(PayloadRegistrar registrar) {
@@ -65,8 +63,6 @@ public final class CogwheelShieldNetwork {
                     if (!shield.canThrowFromHand(stack, player, InteractionHand.OFF_HAND))
                         return;
 
-                    CompoundTag persistentData = player.getPersistentData();
-
                     if (hasExistingThrownShield(player))
                         return;
 
@@ -101,10 +97,10 @@ public final class CogwheelShieldNetwork {
         );
     }
 
-    private static void registerFullSpeed(PayloadRegistrar registrar) {
+    private static void registerAdvancementSpeed(PayloadRegistrar registrar) {
         registrar.playToServer(
-                ShieldFullSpeedPayload.TYPE,
-                ShieldFullSpeedPayload.STREAM_CODEC,
+                ShieldAdvancementSpeedPayload.TYPE,
+                ShieldAdvancementSpeedPayload.STREAM_CODEC,
                 (payload, context) -> {
                     ServerPlayer player = (ServerPlayer) context.player();
 
@@ -117,16 +113,13 @@ public final class CogwheelShieldNetwork {
                     if (!(mainhand.getItem() instanceof BaseCogwheelShieldItem))
                         return;
 
-                    float offhandSpeed = Math.clamp(payload.offhandSpeed(), 0f, MAX_SYNC_SPEED);
-                    float mainhandSpeed = Math.clamp(payload.mainhandSpeed(), 0f, MAX_SYNC_SPEED);
-
-                    if (offhandSpeed < FULL_SPEED_THRESHOLD)
+                    if (payload.offhandSpeed() < ADVANCEMENT_SPEED_THRESHOLD)
                         return;
 
-                    if (mainhandSpeed < FULL_SPEED_THRESHOLD)
+                    if (payload.mainhandSpeed() < ADVANCEMENT_SPEED_THRESHOLD)
                         return;
 
-                    CreatorSwordCriteriaTriggers.FULL_SPEED.get().trigger(player);
+                    CreatorSwordCriteriaTriggers.ADVANCEMENT_SPEED.get().trigger(player);
                 }
         );
     }

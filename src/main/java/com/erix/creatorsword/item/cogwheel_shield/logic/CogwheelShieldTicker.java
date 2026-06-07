@@ -17,7 +17,7 @@ public final class CogwheelShieldTicker {
 
     @SubscribeEvent
     public static void onServerTick(ServerTickEvent.Post event) {
-        long tick = event.getServer().overworld().getGameTime();
+        long tick = event.getServer().getTickCount();
 
         for (ServerPlayer player : event.getServer().getPlayerList().getPlayers()) {
             CogwheelShieldStateManager.State state = CogwheelShieldStateManager.get(player);
