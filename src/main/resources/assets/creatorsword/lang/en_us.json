@@ -64,8 +64,8 @@
   "tooltip.creatorsword.capture_box.health": "Health: %s",
   "itemGroup.creatorsword": "Creator's Sword",
 
-  "advancement.creatorsword.cogwheelshields_full_speed.title": "Mobile Crushing Wheel?!",
-  "advancement.creatorsword.cogwheelshields_full_speed.description": "Both hands hold cogwheel shield with full rotation speed.",
+  "advancement.creatorsword.cogwheelshields_advancement_speed.title": "Mobile Crushing Wheels?!",
+  "advancement.creatorsword.cogwheelshields_advancement_speed.description": "Reach a speed of 512 with cogwheel shields in both hands.",
   "advancement.creatorsword.traveling_frog.title": "Traveling Frog",
   "advancement.creatorsword.traveling_frog.description": "Accumulate 100000 blocks of movement using the Frogport Grapple.",
 

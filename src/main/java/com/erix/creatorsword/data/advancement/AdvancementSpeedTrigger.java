@@ -2,15 +2,16 @@ package com.erix.creatorsword.data.advancement;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
-public class FullSpeedTrigger extends SimpleCriterionTrigger<FullSpeedTrigger.Instance> {
-    public FullSpeedTrigger() {}
+public class AdvancementSpeedTrigger extends SimpleCriterionTrigger<AdvancementSpeedTrigger.Instance> {
+    public AdvancementSpeedTrigger() {
+    }
 
     @Override
     public @NotNull Codec<Instance> codec() {
@@ -22,19 +23,19 @@ public class FullSpeedTrigger extends SimpleCriterionTrigger<FullSpeedTrigger.In
     }
 
     public record Instance(Optional<ContextAwarePredicate> player) implements SimpleInstance {
-
         public static final Codec<Instance> CODEC = ContextAwarePredicate.CODEC
-                    .optionalFieldOf("player")
-                    .xmap(Instance::new, i -> i.player)
-                    .codec();
+                .optionalFieldOf("player")
+                .xmap(Instance::new, Instance::player)
+                .codec();
 
-            @Override
-            public @NotNull Optional<ContextAwarePredicate> player() {
-                return this.player;
-            }
+        @Override
+        public @NotNull Optional<ContextAwarePredicate> player() {
+            return this.player;
         }
+    }
 
     public static Criterion<Instance> criterion() {
-        return CreatorSwordCriteriaTriggers.FULL_SPEED.get().createCriterion(new Instance(Optional.empty()));
+        return CreatorSwordCriteriaTriggers.ADVANCEMENT_SPEED.get()
+                .createCriterion(new Instance(Optional.empty()));
     }
 }

@@ -9,10 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 public class CogwheelShieldKeyInputHandler {
-    private static final float FULL_SPEED = 256f;
+    private static final float ADVANCEMENT_SPEED_THRESHOLD = 512f;
 
     private static boolean wasDown = false;
-    private static boolean sentFullSpeedThisHold = false;
+    private static boolean sentAdvancementSpeedThisHold = false;
     private static boolean offhandReadyParticlesShown = false;
 
     private static long lastRenderTimeNanos = 0L;
@@ -60,7 +60,7 @@ public class CogwheelShieldKeyInputHandler {
         tickShieldLogic(mainhand, false, isDown, player);
 
         handleChargingStatePacket(offhand, mainhand, isDown);
-        handleFullSpeedPacket(offhand, mainhand, isDown);
+        handleAdvancementSpeedPacket(offhand, mainhand, isDown);
         handleThrowOnKeyRelease(offhand, isDown, player);
 
         wasDown = isDown;
@@ -98,6 +98,26 @@ public class CogwheelShieldKeyInputHandler {
         boolean mainhandChanged = mainhand != lastMainhandStack;
         boolean bothHandsChanged = offhandChanged && mainhandChanged;
 
+        if (offhandChanged && lastOffhandWasShield) {
+            saveStateToStack(
+                    lastOffhandStack,
+                    offhandSpeed,
+                    offhandCharging,
+                    offhandDecaying,
+                    offhandLastUpdateTick
+            );
+        }
+
+        if (mainhandChanged && lastMainhandWasShield) {
+            saveStateToStack(
+                    lastMainhandStack,
+                    mainhandSpeed,
+                    mainhandCharging,
+                    mainhandDecaying,
+                    mainhandLastUpdateTick
+            );
+        }
+
         if (bothHandsChanged
                 && lastOffhandWasShield
                 && lastMainhandWasShield
@@ -105,7 +125,7 @@ public class CogwheelShieldKeyInputHandler {
                 && mainhandIsShield) {
 
             swapHandStates();
-            updateLastHandState(offhand, mainhand, offhandIsShield, mainhandIsShield);
+            updateLastHandState(offhand, mainhand, true, true);
             return;
         }
 
@@ -369,6 +389,16 @@ public class CogwheelShieldKeyInputHandler {
         }
     }
 
+    private static void saveStateToStack(ItemStack stack, float speed, boolean charging, boolean decaying, long updateTick) {
+        if (stack.isEmpty())
+            return;
+
+        stack.set(CSDataComponents.GEAR_SHIELD_SPEED.get(), speed);
+        stack.set(CSDataComponents.GEAR_SHIELD_CHARGING.get(), charging);
+        stack.set(CSDataComponents.GEAR_SHIELD_DECAYING.get(), decaying);
+        stack.set(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), updateTick);
+    }
+
     private static void handleChargingStatePacket(ItemStack offhand, ItemStack mainhand, boolean isDown) {
         boolean hasShield =
                 offhand.getItem() instanceof BaseCogwheelShieldItem ||
@@ -386,16 +416,16 @@ public class CogwheelShieldKeyInputHandler {
         }
     }
 
-    private static void handleFullSpeedPacket(ItemStack offhand, ItemStack mainhand, boolean isDown) {
-        if (isDown && !sentFullSpeedThisHold) {
-            if (isShieldAtFullSpeed(offhand, true) && isShieldAtFullSpeed(mainhand, false)) {
-                PacketDistributor.sendToServer(new ShieldFullSpeedPayload(offhandSpeed, mainhandSpeed));
-                sentFullSpeedThisHold = true;
+    private static void handleAdvancementSpeedPacket(ItemStack offhand, ItemStack mainhand, boolean isDown) {
+        if (isDown && !sentAdvancementSpeedThisHold) {
+            if (hasReachedAdvancementSpeed(offhand, true) && hasReachedAdvancementSpeed(mainhand, false)) {
+                PacketDistributor.sendToServer(new ShieldAdvancementSpeedPayload(offhandSpeed, mainhandSpeed));
+                sentAdvancementSpeedThisHold = true;
             }
         }
 
         if (!isDown) {
-            sentFullSpeedThisHold = false;
+            sentAdvancementSpeedThisHold = false;
         }
     }
 
@@ -432,13 +462,13 @@ public class CogwheelShieldKeyInputHandler {
         offhandReadyParticlesShown = false;
 
         wasDown = false;
-        sentFullSpeedThisHold = false;
+        sentAdvancementSpeedThisHold = false;
     }
 
-    private static boolean isShieldAtFullSpeed(ItemStack stack, boolean offhand) {
+    private static boolean hasReachedAdvancementSpeed(ItemStack stack, boolean offhand) {
         if (!(stack.getItem() instanceof BaseCogwheelShieldItem))
             return false;
 
-        return getSpeed(offhand) >= FULL_SPEED;
+        return getSpeed(offhand) >= ADVANCEMENT_SPEED_THRESHOLD;
     }
 }

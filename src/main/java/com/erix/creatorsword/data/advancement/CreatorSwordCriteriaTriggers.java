@@ -11,8 +11,8 @@ public class CreatorSwordCriteriaTriggers {
     public static final DeferredRegister<CriterionTrigger<?>> TRIGGERS =
             DeferredRegister.create(Registries.TRIGGER_TYPE, CreatorSword.MODID);
 
-    public static final DeferredHolder<CriterionTrigger<?>, FullSpeedTrigger> FULL_SPEED =
-            TRIGGERS.register("cogwheelshields_full_speed", FullSpeedTrigger::new);
+    public static final DeferredHolder<CriterionTrigger<?>, AdvancementSpeedTrigger> ADVANCEMENT_SPEED =
+            TRIGGERS.register("advancement_speed", AdvancementSpeedTrigger::new);
 
     public static final DeferredHolder<CriterionTrigger<?>, TravelingFrogTrigger> TRAVELING_FROG =
             TRIGGERS.register("traveling_frog", TravelingFrogTrigger::new);
