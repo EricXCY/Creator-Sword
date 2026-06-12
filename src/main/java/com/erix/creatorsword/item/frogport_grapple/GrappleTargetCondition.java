@@ -10,6 +10,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.monster.warden.Warden;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
@@ -27,9 +28,12 @@ public final class GrappleTargetCondition {
     }
 
     public static boolean canPullTarget(ItemStack stack, Entity target, Level level) {
-        int sticky = getStickyTongueLevel(stack, level);
-
         var cfg = CreatorSwordConfigs.server().frogportGrapple;
+
+        if (target instanceof Player && !cfg.allowTargetPlayers.get())
+            return false;
+
+        int sticky = getStickyTongueLevel(stack, level);
 
         if (cfg == null || cfg.ruleMode.get() == RuleMode.DEFAULT) {
             GrappleTargetType type = classifyTarget(target);

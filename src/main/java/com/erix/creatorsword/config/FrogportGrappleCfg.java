@@ -17,6 +17,13 @@ public class FrogportGrappleCfg extends ConfigBase {
 
     public final ConfigEnum<RuleMode> ruleMode =
             e(RuleMode.DEFAULT, "captureRuleMode", Comments.ruleMode);
+
+    public final ConfigBool allowTargetPlayers = b(
+            true,
+            "allowTargetPlayers",
+            Comments.allowTargetPlayers
+    );
+
     public final ConfigInt tongueLength = i(48, 1, "tongueLength", Comments.tongueLength);
 
     private ModConfigSpec.ConfigValue<List<? extends String>> level0;
@@ -109,6 +116,7 @@ public class FrogportGrappleCfg extends ConfigBase {
 
     private static class Comments {
         static String ruleMode = "Rule mode: DEFAULT uses built-in rules; CUSTOM uses config selector lists.";
+        static String allowTargetPlayers = "Allow Frogport Grapple to target and pull player entities.";
         static String tongueLength = "Max tongue reach distance (blocks).";
     }
 }

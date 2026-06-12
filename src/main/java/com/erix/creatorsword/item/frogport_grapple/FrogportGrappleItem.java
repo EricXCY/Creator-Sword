@@ -478,6 +478,8 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
     }
 
     private static boolean tryCaptureWithBox(Player player, LivingEntity target) {
+        if (target instanceof Player)
+            return false;
         ItemStack main = player.getMainHandItem();
         ItemStack off = player.getOffhandItem();
 
