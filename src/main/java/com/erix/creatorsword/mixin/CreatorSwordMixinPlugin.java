@@ -21,7 +21,7 @@ public class CreatorSwordMixinPlugin implements IMixinConfigPlugin {
 
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("com.erix.creatorsword.compat.mixin.simulated.ThrottleLeverBlockMixin")) {
+        if (mixinClassName.equals("com.erix.creatorsword.compat.mixin.aeronautics.ThrottleLeverBlockMixin")) {
             return LoadingModList.get().getModFileById("simulated") != null;
         }
 

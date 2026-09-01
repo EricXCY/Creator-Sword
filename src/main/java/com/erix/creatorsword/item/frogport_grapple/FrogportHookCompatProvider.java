@@ -13,4 +13,9 @@ public interface FrogportHookCompatProvider {
 
     @Nullable
     Vec3 tryResolveCurrentWorldPos(Level level, CompoundTag tag);
+
+    default boolean tryPullDynamicTarget(Level level, CompoundTag tag, Vec3 playerPos,
+                                         double impulseStrength, double maxSpeed) {
+        return false;
+    }
 }

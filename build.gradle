@@ -110,6 +110,9 @@ dependencies {
     runtimeOnly("dev.eriksonn.aeronautics:aeronautics-neoforge-${minecraft_version}:${aeronautics_version}") {
         transitive = false
     }
+    runtimeOnly("dev.ryanhcode.offroad:offroad-neoforge-${minecraft_version}:${offroad_version}") {
+        transitive = false
+    }
 }
 
 tasks.withType(ProcessResources).configureEach {

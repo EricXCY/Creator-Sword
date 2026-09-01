@@ -131,8 +131,8 @@ public class CaptureBoxItem extends Item {
         if (type == null || entityNbt == null)
             return false;
 
-        BlockPos pos = hit.getBlockPos();
-        Vec3 spawnPos = Vec3.atCenterOf(pos).add(0, 0.5, 0);
+        BlockPos spawnBlockPos = hit.getBlockPos().relative(hit.getDirection());
+        Vec3 spawnPos = Vec3.atBottomCenterOf(spawnBlockPos);
 
         Entity entity = type.create(level);
         if (!(entity instanceof LivingEntity living))
@@ -140,7 +140,9 @@ public class CaptureBoxItem extends Item {
 
         living.load(entityNbt);
         living.moveTo(spawnPos.x, spawnPos.y, spawnPos.z, player.getYRot(), player.getXRot());
-        level.addFreshEntity(living);
+
+        if (!level.addFreshEntity(living))
+            return false;
 
         updateDataComponents(stack, KEY_HAS_ENTITY, KEY_ENTITY_TYPE, KEY_ENTITY_NBT);
         return true;

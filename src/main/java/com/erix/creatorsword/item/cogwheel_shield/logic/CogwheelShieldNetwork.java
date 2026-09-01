@@ -66,7 +66,14 @@ public final class CogwheelShieldNetwork {
                     if (hasExistingThrownShield(player))
                         return;
 
-                    float speed = payload.speed();
+                    if (!Float.isFinite(payload.speed()))
+                        return;
+
+                    float speed = CogwheelShieldUtil.getServerOrStackSpeed(player, stack);
+
+                    if (!Float.isFinite(speed))
+                        return;
+
                     speed = Math.clamp(speed, 0f, shield.getMaxSpeed(stack, player));
 
                     if (speed < shield.getThrowSpeedThreshold(stack, player))
@@ -88,7 +95,9 @@ public final class CogwheelShieldNetwork {
                             1.0F
                     );
 
-                    player.level().addFreshEntity(projectile);
+                    if (!player.level().addFreshEntity(projectile))
+                        return;
+
                     player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
 
                     shield.onThrown(player, stack, speed);
@@ -113,10 +122,22 @@ public final class CogwheelShieldNetwork {
                     if (!(mainhand.getItem() instanceof BaseCogwheelShieldItem))
                         return;
 
+                    if (!Float.isFinite(payload.offhandSpeed()) || !Float.isFinite(payload.mainhandSpeed()))
+                        return;
+
                     if (payload.offhandSpeed() < ADVANCEMENT_SPEED_THRESHOLD)
                         return;
 
                     if (payload.mainhandSpeed() < ADVANCEMENT_SPEED_THRESHOLD)
+                        return;
+
+                    BaseCogwheelShieldItem offhandShield = (BaseCogwheelShieldItem) offhand.getItem();
+                    BaseCogwheelShieldItem mainhandShield = (BaseCogwheelShieldItem) mainhand.getItem();
+
+                    if (offhandShield.getMaxSpeed(offhand, player) < ADVANCEMENT_SPEED_THRESHOLD)
+                        return;
+
+                    if (mainhandShield.getMaxSpeed(mainhand, player) < ADVANCEMENT_SPEED_THRESHOLD)
                         return;
 
                     CreatorSwordCriteriaTriggers.ADVANCEMENT_SPEED.get().trigger(player);

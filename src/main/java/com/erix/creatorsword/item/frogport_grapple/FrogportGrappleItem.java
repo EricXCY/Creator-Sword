@@ -351,6 +351,21 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
             return;
         }
 
+        if (player.isShiftKeyDown() && player.onGround()) {
+            if (tag.getBoolean(FrogportHookTarget.KEY_HOOK_DYNAMIC)) {
+                var cfg = CreatorSwordConfigs.server().frogportGrapple;
+                Vec3 playerCenter = player.position().add(0, player.getBbHeight() * 0.5, 0);
+                FrogportHookTargetResolver.tryPullDynamicTarget(
+                        level,
+                        tag,
+                        playerCenter,
+                        cfg.physicalStructurePullStrength(),
+                        cfg.physicalStructurePullMaxSpeed()
+                );
+            }
+            return;
+        }
+
         applyPullMotion(player, toHook.normalize(), 0.6, 1.2);
 
         if (player.getDeltaMovement().y() > -0.2) {

@@ -26,6 +26,9 @@ public class FrogportGrappleCfg extends ConfigBase {
 
     public final ConfigInt tongueLength = i(48, 1, "tongueLength", Comments.tongueLength);
 
+    private ModConfigSpec.ConfigValue<Double> physicalStructurePullStrength;
+    private ModConfigSpec.ConfigValue<Double> physicalStructurePullMaxSpeed;
+
     private ModConfigSpec.ConfigValue<List<? extends String>> level0;
     private ModConfigSpec.ConfigValue<List<? extends String>> level1;
     private ModConfigSpec.ConfigValue<List<? extends String>> level2;
@@ -35,6 +38,19 @@ public class FrogportGrappleCfg extends ConfigBase {
     @Override
     public void registerAll(ModConfigSpec.@NotNull Builder b) {
         super.registerAll(b);
+
+        physicalStructurePullStrength = b
+                .comment(Comments.physicalStructurePullStrength)
+                .define("physicalStructurePullStrength", 5.0D,
+                        value -> value instanceof Number number
+                                && Double.isFinite(number.doubleValue())
+                                && number.doubleValue() >= 0.0D);
+        physicalStructurePullMaxSpeed = b
+                .comment(Comments.physicalStructurePullMaxSpeed)
+                .define("physicalStructurePullMaxSpeed", 5.0D,
+                        value -> value instanceof Number number
+                                && Double.isFinite(number.doubleValue())
+                                && number.doubleValue() >= 0.0D);
 
         b.push("custom_rule_lists");
         b.comment("Advanced: edit rules here (GUI may not support list editing well).");
@@ -111,6 +127,14 @@ public class FrogportGrappleCfg extends ConfigBase {
         );
     }
 
+    public double physicalStructurePullStrength() {
+        return physicalStructurePullStrength.get();
+    }
+
+    public double physicalStructurePullMaxSpeed() {
+        return physicalStructurePullMaxSpeed.get();
+    }
+
     @Override
     public @NotNull String getName() { return "Frogport Grapple"; }
 
@@ -118,5 +142,9 @@ public class FrogportGrappleCfg extends ConfigBase {
         static String ruleMode = "Rule mode: DEFAULT uses built-in rules; CUSTOM uses config selector lists.";
         static String allowTargetPlayers = "Allow Frogport Grapple to target and pull player entities.";
         static String tongueLength = "Max tongue reach distance (blocks).";
+        static String physicalStructurePullStrength =
+                "Impulse applied each tick when a grounded player holds Shift while hooked to a physical structure.";
+        static String physicalStructurePullMaxSpeed =
+                "Maximum structure velocity toward the player caused by the grapple.";
     }
 }

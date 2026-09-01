@@ -39,4 +39,15 @@ public final class FrogportHookTargetResolver {
 
         return FrogportHookTarget.readFallbackWorldPos(tag);
     }
+
+    public static boolean tryPullDynamicTarget(Level level, CompoundTag tag, Vec3 playerPos,
+                                               double impulseStrength, double maxSpeed) {
+        for (FrogportHookCompatProvider provider : PROVIDERS) {
+            if (provider.tryPullDynamicTarget(level, tag, playerPos, impulseStrength, maxSpeed)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
