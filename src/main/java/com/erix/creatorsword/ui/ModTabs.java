@@ -4,6 +4,7 @@ import com.erix.creatorsword.item.CSItems;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import com.erix.creatorsword.item.smithing_template.SmithingTemplateItems;
 import net.minecraft.core.registries.Registries;
@@ -29,6 +30,7 @@ public class ModTabs {
                         Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.CNY_CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.TRIAL_CREATOR_SWORD.get());
+                        Output.accept(FlywheelMaceItem.FLYWHEEL_MACE.get());
                         Output.accept(CogwheelShieldItems.COGWHEEL_SHIELD.get());
                         Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());

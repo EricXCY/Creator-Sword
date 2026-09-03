@@ -17,6 +17,7 @@ import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldClientSetup;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldNetwork;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleTravelStat;
 import com.erix.creatorsword.item.incomplete_creator_sword.IncompleteCreatorSwordItems;
@@ -48,6 +49,7 @@ public class CreatorSword {
         CreatorSwordConfigs.register(container);
 
         CreatorSwordItems.ITEMS.register(modEventBus);
+        FlywheelMaceItem.ITEMS.register(modEventBus);
         CogwheelShieldItems.register(modEventBus);
         IncompleteCreatorSwordItems.ITEMS.register(modEventBus);
         IncompleteEnchantmentBookItems.ITEMS.register(modEventBus);

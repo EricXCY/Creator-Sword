@@ -3,6 +3,7 @@ package com.erix.creatorsword.datagen.tags;
 import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
+import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
 import com.erix.creatorsword.item.frogport_grapple.FrogportGrappleItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -49,18 +50,26 @@ public class CSItemTag extends ItemTagsProvider {
         addAll(tag(ItemTags.SWORDS), CreatorSwordItems.CREATOR_SWORDS);
         addAll(tag(Tags.Items.MELEE_WEAPON_TOOLS), CreatorSwordItems.CREATOR_SWORDS);
         addAll(tag(Tags.Items.TOOLS_WRENCH), CreatorSwordItems.CREATOR_SWORDS);
-        tag(Tags.Items.TOOLS)
-                .add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
-
-        tag(Tags.Items.TOOLS_SHIELD)
-                .add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+        tag(Tags.Items.TOOLS).add(
+                FrogportGrappleItem.FROGPORT_GRAPPLE.get());
+        tag(Tags.Items.TOOLS_SHIELD).add(
+                CogwheelShieldItems.COGWHEEL_SHIELD.get());
+        tag(Tags.Items.TOOLS_MACE).add(
+                FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ItemTags.VANISHING_ENCHANTABLE).add(
                 CogwheelShieldItems.COGWHEEL_SHIELD.get(),
-                FrogportGrappleItem.FROGPORT_GRAPPLE.get());
+                FrogportGrappleItem.FROGPORT_GRAPPLE.get(),
+                FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ItemTags.DURABILITY_ENCHANTABLE).add(
                 CogwheelShieldItems.COGWHEEL_SHIELD.get(),
-                FrogportGrappleItem.FROGPORT_GRAPPLE.get());
+                FrogportGrappleItem.FROGPORT_GRAPPLE.get(),
+                FlywheelMaceItem.FLYWHEEL_MACE.get());
 
+        tag(ItemTags.MACE_ENCHANTABLE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
+        tag(ItemTags.WEAPON_ENCHANTABLE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
+        tag(ItemTags.DECORATED_POT_INGREDIENTS).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
+        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
+        tag(Tags.Items.MELEE_WEAPON_TOOLS).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(CogwheelShieldItems.COGWHEEL_SHIELD.get()));
         addAll(tag(ENCHANTABLE_PNEUMATIC_BOOST), CreatorSwordItems.CREATOR_SWORDS);

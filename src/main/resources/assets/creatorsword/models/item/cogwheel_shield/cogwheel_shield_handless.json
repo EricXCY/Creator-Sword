@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:block/large_wheels",
 	"textures": {
-		"0": "creatorsword:item/cogwheel_axis",
+		"0": "creatorsword:item/cogwheel_shield/cogwheel_axis",
 		"3": "create:block/axis_top",
 		"4": "create:block/large_cogwheel"
 	},

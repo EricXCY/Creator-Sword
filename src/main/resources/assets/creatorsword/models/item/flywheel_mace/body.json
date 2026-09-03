@@ -1,0 +1,189 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Flywheel Mace, edited Blockbench export",
+	"textures": {
+		"1": "creatorsword:item/flywheel_mace/brass",
+		"5": "creatorsword:item/flywheel_mace/body"
+	},
+	"elements": [
+		{
+			"name": "Pommel",
+			"from": [6.75, -1, 6.75],
+			"to": [9.25, 1, 9.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [9.5, 8, 12, 10], "texture": "#5"},
+				"east": {"uv": [9.5, 8, 12, 10], "texture": "#5"},
+				"south": {"uv": [9.5, 8, 12, 10], "texture": "#5"},
+				"west": {"uv": [9.5, 8, 12, 10], "texture": "#5"},
+				"up": {"uv": [2, 2, 6, 6], "texture": "#5"},
+				"down": {"uv": [2, 2, 6, 6], "texture": "#5"}
+			}
+		},
+		{
+			"name": "Top cap",
+			"from": [6.5, 20.4, 6.5],
+			"to": [9.5, 21.9, 9.5],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [9.5, 8, 12, 10], "texture": "#1"},
+				"east": {"uv": [9.5, 8, 12, 10], "texture": "#1"},
+				"south": {"uv": [9.5, 8, 12, 10], "texture": "#1"},
+				"west": {"uv": [9.5, 8, 12, 10], "texture": "#1"},
+				"up": {"uv": [2, 2, 6, 6], "texture": "#1"},
+				"down": {"uv": [2, 2, 6, 6], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Handle",
+			"from": [7.25, 1, 7.25],
+			"to": [8.75, 19.2, 8.75],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [8, 8, 9.5, 16], "texture": "#1"},
+				"east": {"uv": [8, 8, 9.5, 16], "texture": "#1"},
+				"south": {"uv": [8, 8, 9.5, 16], "texture": "#1"},
+				"west": {"uv": [8, 8, 9.5, 16], "texture": "#1"},
+				"up": {"uv": [12.5, 8, 14.25, 9.75], "texture": "#1"},
+				"down": {"uv": [12.5, 8, 14.25, 9.75], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Middle Handle",
+			"from": [7.15, 1.9, 7.15],
+			"to": [8.85, 9.3, 8.85],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 6.575, 8]},
+			"faces": {
+				"north": {"uv": [8, 8, 9.5, 16], "texture": "#5"},
+				"east": {"uv": [8, 8, 9.5, 16], "texture": "#5"},
+				"south": {"uv": [8, 8, 9.5, 16], "texture": "#5"},
+				"west": {"uv": [8, 8, 9.5, 16], "texture": "#5"},
+				"up": {"uv": [12, 8, 13.75, 9.75], "texture": "#5"},
+				"down": {"uv": [12, 8, 13.75, 9.75], "texture": "#5"}
+			}
+		},
+		{
+			"name": "Mace head",
+			"from": [1, 11, 4],
+			"to": [15, 19, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 15, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"east": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"up": {"uv": [0, 0, 8, 8], "rotation": 90, "texture": "#5"},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#5"}
+			}
+		},
+		{
+			"name": "Left brass binding",
+			"from": [3.9, 10.94, 3.94],
+			"to": [4.55, 19.06, 12.06],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"east": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"south": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"west": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"up": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"down": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Right brass binding",
+			"from": [11.45, 10.94, 3.94],
+			"to": [12.1, 19.06, 12.06],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"east": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"south": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"west": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"up": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"down": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Upper grip collar",
+			"from": [6.95, 9.7, 6.95],
+			"to": [9.05, 10.35, 9.05],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"east": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"south": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"west": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"up": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"down": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Lower grip collar",
+			"from": [6.95, 1, 6.95],
+			"to": [9.05, 1.55, 9.05],
+			"rotation": {"angle": -45, "axis": "y", "origin": [8, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"east": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"south": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"west": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"up": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"},
+				"down": {"uv": [8.1, 10, 8.8, 14], "texture": "#1"}
+			}
+		},
+		{
+			"name": "Left enlarged striking head",
+			"from": [-0.3, 10.25, 3.25],
+			"to": [3.6, 19.75, 12.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"east": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"up": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#5"}
+			}
+		},
+		{
+			"name": "Right enlarged striking head",
+			"from": [12.4, 10.25, 3.25],
+			"to": [16.3, 19.75, 12.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 10.575, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"east": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"south": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"west": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"up": {"uv": [0, 8, 8, 16], "texture": "#5"},
+				"down": {"uv": [0, 8, 8, 16], "texture": "#5"}
+			}
+		}
+	],
+	"gui_light": "front",
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [0, 90, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"firstperson_righthand": {
+			"rotation": [-5, -74, 0],
+			"translation": [1.75, 1.5, -2.5],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"ground": {
+			"rotation": [-180, 0, 0],
+			"translation": [0, 4.5, 0],
+			"scale": [0.45, 0.45, 0.45]
+		},
+		"gui": {
+			"rotation": [28, -163, 43],
+			"translation": [-3, -2, 0],
+			"scale": [0.7, 0.7, 0.7]
+		},
+		"fixed": {
+			"translation": [0, -3.5, 0]
+		}
+	}
+}

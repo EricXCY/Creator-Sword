@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:block/large_wheels",
 	"textures": {
-		"2": "creatorsword:item/handle",
-		"5": "creatorsword:item/handle_base"
+		"2": "creatorsword:item/cogwheel_shield/handle",
+		"5": "creatorsword:item/cogwheel_shield/handle_base"
 	},
 	"elements": [
 		{

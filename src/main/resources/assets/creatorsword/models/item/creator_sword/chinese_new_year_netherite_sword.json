@@ -4,11 +4,12 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"5": "creatorsword:item/chinese_new_year_netherite_sword"
+		"flame": "creatorsword:item/creator_sword/chinese_new_year_sword_flame",
+		"5": "creatorsword:item/creator_sword/chinese_new_year_netherite_sword"
 	},
 	"elements": [
 		{
-			"name": "handle",
+			"name": "grip",
 			"from": [7.5, 1, 7.5],
 			"to": [8.5, 8, 8.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [9, 12, 8]},
@@ -21,7 +22,7 @@
 			}
 		},
 		{
-			"name": "axle",
+			"name": "gear_axle",
 			"from": [7.6, 8, 7.6],
 			"to": [8.4, 10, 8.4],
 			"rotation": {"angle": -45, "axis": "y", "origin": [8, 9, 8]},
@@ -35,7 +36,7 @@
 			}
 		},
 		{
-			"name": "handle_top",
+			"name": "guard_lower",
 			"from": [7, 7, 7],
 			"to": [9, 8, 9],
 			"rotation": {"angle": 0, "axis": "y", "origin": [10, 10, 8]},
@@ -49,7 +50,7 @@
 			}
 		},
 		{
-			"name": "handle_top",
+			"name": "guard_upper",
 			"from": [7, 10, 7],
 			"to": [9, 10.5, 9],
 			"rotation": {"angle": 0, "axis": "y", "origin": [10, 13, 8]},
@@ -63,7 +64,7 @@
 			}
 		},
 		{
-			"name": "handle_bottom",
+			"name": "pommel",
 			"from": [7, 0.25, 7],
 			"to": [9, 1.25, 9],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0.75, 8]},
@@ -77,6 +78,7 @@
 			}
 		},
 		{
+			"name": "blade_main",
 			"from": [7.75, 10.5, 7],
 			"to": [8.25, 27, 9],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 19.25, 8]},
@@ -90,6 +92,7 @@
 			}
 		},
 		{
+			"name": "blade_tip",
 			"from": [7.7501, 26.38135, 7.0876],
 			"to": [8.2499, 27.79365, 8.4999],
 			"rotation": {"angle": -45, "axis": "x", "origin": [8, 27.29375, 8]},
@@ -100,6 +103,146 @@
 				"west": {"uv": [8, 8, 4, 12], "texture": "#5"},
 				"up": {"uv": [8, 8, 7, 12], "texture": "#5"},
 				"down": {"uv": [4, 11, 8, 12], "texture": "#5"}
+			}
+		},
+		{
+			"name": "flame_surface_east_01",
+			"from": [8.32, 10.8, 7.25],
+			"to": [8.32, 26.8, 7.49],
+			"shade": false,
+			"faces": {
+				"east": {"uv": [0.5, 0, 1, 16], "texture": "#flame"},
+				"west": {"uv": [1, 0, 0.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_east_02",
+			"from": [8.34, 11.8, 7.92],
+			"to": [8.34, 27.8, 8.24],
+			"shade": false,
+			"faces": {
+				"east": {"uv": [2.5, 0, 3, 16], "texture": "#flame"},
+				"west": {"uv": [3, 0, 2.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_east_03",
+			"from": [8.31, 12.6, 8.6],
+			"to": [8.31, 28.6, 8.78],
+			"shade": false,
+			"faces": {
+				"east": {"uv": [4.5, 0, 5, 16], "texture": "#flame"},
+				"west": {"uv": [5, 0, 4.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_west_01",
+			"from": [7.68, 10.6, 7.38],
+			"to": [7.68, 26.6, 7.66],
+			"shade": false,
+			"faces": {
+				"west": {"uv": [6.5, 0, 7, 16], "texture": "#flame"},
+				"east": {"uv": [7, 0, 6.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_west_02",
+			"from": [7.66, 12.1, 8.1],
+			"to": [7.66, 28.1, 8.3],
+			"shade": false,
+			"faces": {
+				"west": {"uv": [8.5, 0, 9, 16], "texture": "#flame"},
+				"east": {"uv": [9, 0, 8.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_west_03",
+			"from": [7.69, 11.3, 8.68],
+			"to": [7.69, 27.3, 8.94],
+			"shade": false,
+			"faces": {
+				"west": {"uv": [10.5, 0, 11, 16], "texture": "#flame"},
+				"east": {"uv": [11, 0, 10.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_north_01",
+			"from": [7.62, 11.4, 6.88],
+			"to": [7.8, 27.4, 6.88],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [2.5, 0, 3, 16], "texture": "#flame"},
+				"south": {"uv": [3, 0, 2.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_north_02",
+			"from": [8.04, 12.5, 6.86],
+			"to": [8.28, 28.5, 6.86],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [8.5, 0, 9, 16], "texture": "#flame"},
+				"south": {"uv": [9, 0, 8.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_south_01",
+			"from": [7.7, 10.9, 9.12],
+			"to": [7.92, 26.9, 9.12],
+			"shade": false,
+			"faces": {
+				"south": {"uv": [4.5, 0, 5, 16], "texture": "#flame"},
+				"north": {"uv": [5, 0, 4.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_surface_south_02",
+			"from": [8.12, 12, 9.14],
+			"to": [8.28, 28, 9.14],
+			"shade": false,
+			"faces": {
+				"south": {"uv": [10.5, 0, 11, 16], "texture": "#flame"},
+				"north": {"uv": [11, 0, 10.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_outer_east",
+			"from": [8.58, 11.7, 7.55],
+			"to": [8.58, 27.7, 7.73],
+			"shade": false,
+			"faces": {
+				"east": {"uv": [6.5, 0, 7, 16], "texture": "#flame"},
+				"west": {"uv": [7, 0, 6.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_outer_west",
+			"from": [7.42, 12.8, 8.32],
+			"to": [7.42, 28.8, 8.58],
+			"shade": false,
+			"faces": {
+				"west": {"uv": [0.5, 0, 1, 16], "texture": "#flame"},
+				"east": {"uv": [1, 0, 0.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_outer_north",
+			"from": [7.86, 13, 6.62],
+			"to": [8.02, 29, 6.62],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [10.5, 0, 11, 16], "texture": "#flame"},
+				"south": {"uv": [11, 0, 10.5, 16], "texture": "#flame"}
+			}
+		},
+		{
+			"name": "flame_outer_south",
+			"from": [7.94, 11.6, 9.4],
+			"to": [8.14, 27.6, 9.4],
+			"shade": false,
+			"faces": {
+				"south": {"uv": [2.5, 0, 3, 16], "texture": "#flame"},
+				"north": {"uv": [3, 0, 2.5, 16], "texture": "#flame"}
 			}
 		}
 	],
@@ -142,18 +285,25 @@
 	},
 	"groups": [
 		{
-			"name": "handle",
+			"name": "hilt",
 			"origin": [8, 8, 8],
 			"scope": 0,
 			"color": 0,
 			"children": [0, 1, 2, 3, 4]
 		},
 		{
-			"name": "sword",
+			"name": "blade",
 			"origin": [8, 8, 8],
 			"scope": 0,
 			"color": 0,
 			"children": [5, 6]
+		},
+		{
+			"name": "flames",
+			"origin": [8, 19.25, 8],
+			"scope": 0,
+			"color": 1,
+			"children": [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 		}
 	]
 }

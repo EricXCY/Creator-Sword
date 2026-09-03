@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "particle": "creatorsword:item/handle_base"
+    "particle": "creatorsword:item/cogwheel_shield/handle_base"
   },
   "display": {
     "thirdperson_righthand": { "rotation": [0,0,0], "translation": [0,0,0], "scale": [1,1,1] },

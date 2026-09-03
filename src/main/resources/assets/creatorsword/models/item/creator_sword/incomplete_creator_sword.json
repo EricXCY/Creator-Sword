@@ -3,8 +3,8 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"1": "creatorsword:item/gear",
-		"5": "creatorsword:item/incomplete_creator_sword"
+		"1": "creatorsword:item/creator_sword/gear",
+		"5": "creatorsword:item/creator_sword/incomplete_creator_sword"
 	},
 	"elements": [
 		{

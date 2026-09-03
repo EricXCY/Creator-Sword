@@ -3,7 +3,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "create:item/wrench/item",
 	"textures": {
-		"2": "creatorsword:item/trial_gear"
+		"2": "creatorsword:item/creator_sword/trial_gear"
 	},
 	"elements": [
 		{

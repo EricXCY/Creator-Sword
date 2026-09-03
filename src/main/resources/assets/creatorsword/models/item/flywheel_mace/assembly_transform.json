@@ -1,0 +1,26 @@
+{
+    "scale":  [
+                  0.211997832,
+                  0.189238,
+                  0.200618343
+              ],
+    "resource":  "create:block/flywheel/block",
+    "rotationAxis":  [
+                         0,
+                         1,
+                         0
+                     ],
+    "diameter":  9.31491,
+    "partialModel":  "AllPartialModels.FLYWHEEL",
+    "pivot":  [
+                  8,
+                  20,
+                  8
+              ],
+    "note":  "Design metadata; not loaded by Minecraft",
+    "rotation":  [
+                     0,
+                     0,
+                     0
+                 ]
+}

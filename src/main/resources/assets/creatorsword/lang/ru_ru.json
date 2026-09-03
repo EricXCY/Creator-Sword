@@ -39,6 +39,8 @@
   "item.creatorsword.trial_creator_sword.tooltip.condition2": "При разборке механизмов",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
 
+  "item.creatorsword.flywheel_mace": "Булава с маховиком",
+
   "item.creatorsword.incomplete_creator_sword": "Незавершённый Меч Создателя",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "Сломанный меч.",
   "item.creatorsword.incomplete_netherite_creator_sword": "Незавершённый незеритовый Меч Создателя",
