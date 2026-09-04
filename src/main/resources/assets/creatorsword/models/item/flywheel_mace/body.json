@@ -173,7 +173,7 @@
 			"scale": [0.7, 0.7, 0.7]
 		},
 		"ground": {
-			"rotation": [-180, 0, 0],
+			"rotation": [0, 0, 180],
 			"translation": [0, 4.5, 0],
 			"scale": [0.45, 0.45, 0.45]
 		},
@@ -183,7 +183,8 @@
 			"scale": [0.7, 0.7, 0.7]
 		},
 		"fixed": {
-			"translation": [0, -3.5, 0]
+			"rotation": [0, 0, -180],
+			"translation": [0, 6.5, -4.75]
 		}
 	}
 }

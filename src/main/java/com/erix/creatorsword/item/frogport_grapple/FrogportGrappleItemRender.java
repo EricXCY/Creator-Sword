@@ -63,8 +63,8 @@ public class FrogportGrappleItemRender extends CustomRenderedItemModelRenderer {
             }
             case FIXED -> {
                 ms.mulPose(Axis.XP.rotationDegrees(-90f));
-                ms.mulPose(Axis.YP.rotationDegrees(-180f));
-                ms.translate(0f, 0f, -3f / 16f);
+                ms.mulPose(Axis.YP.rotationDegrees(-900f));
+                ms.translate(0f, 0.3f, 0f);
             }
             default -> {
                 ms.scale(0.5f, 0.5f, 0.5f);
