@@ -2,36 +2,28 @@
 
 **Creator-Sword** is a mod that adds more weapon options to the [Create Mod](https://www.curseforge.com/minecraft/mc-mods/create). It introduces new weapons that combine combat functionality with Create Mod's mechanical features, providing both utility and combat efficiency.
 
-*   **Creator's Sword:** A unique sword that combines melee combat with wrench functionality from the Create Mod
-    *   **Variants:** Brass, Netherite and Rare Editions.
-    *   Attacking mobs with the Creator Sword while wearing a backtank grants 1 unit of air
+*   **Creator's Sword:** A versatile weapon with built-in Create wrench functionality, available in Brass, Netherite, and Rare variants.
 *   **Cogwheel Shield:** A gear-shaped shield
-    *   Can be rotated by pressing a configurable key (default: `V`)
-    *   Increase rotation speed by pressing button, and release to throw shield at a certain speed
-    *   Cause damage to mobs in its thrown path, and the damage is based on rotation speed
-    *   The rotation speed can be read in the lower right corner when holding the shield
-    *   While wearing a backtank, shield acceleration is faster, consuming 1 air unit per second
-*   **Frogport Grapple:**
-    *   A grappling hook inspired by package frogport
-    *   Supports distances up to 64 meters (configurable)
-    *   Can latch onto blocks, pull mobs based on the level of **Sticky Tongue Enchantment**
-*   **Capture Box:**
-    *   When one hand grabs a mob while the other hand holds a capture box, the mob will be placed into the capture box
-    *   Release the mob by right-click the capture box
-*   **Enchantment Book:**
-    *   Overdrive - allow the rotation speed to reach 512 PRM
-    *   Pneumatic Boost - faster acceleration of rotate speed; faster attack speed for creator's swords when attacking
-    *   Sturdy - ignore small durability losses
-    *   Sticky Tongue - Upgrade capture level
+    *   Hold a configurable key (`V` by default) to spin the shield, then release it to throw.
+    *   The thrown shield damages mobs along its path.
+*   **Flywheel Mace:** A mace that stores kinetic energy.
+    *   Hold right-click to charge, then release to dash in the direction you are looking.
+    *   Performs smash attacks against mobs along the dash path, using damage mechanics similar to the vanilla mace’s falling attack.
+*   **Frogport Grapple:** A grappling hook that can latch onto blocks and pull mobs or physical structures.
+    *   Its maximum range is 64 blocks and can be changed in the configuration.
+*   **Capture Box:** A container designed to work with the Frogport Grapple.
+    *   Hold the Capture Box in one hand and use the Frogport Grapple with the other to pull and capture a mob.
+    *   Right-click the Capture Box to release the captured mob.
 
 **Requires:** Create 6.0.8 or higher
 
-**Translation:** ru\_ru by GromovoyStarWolf
-
-
 ## Future plans
 
-*   New Weapon based on Heavy Core
+*   This will likely be the final release before 1.0.0. The next step is to improve the weapon models, refine the Flywheel Mace’s mechanics, and fix the remaining issues before releasing 1.0.0. At that point, the mod’s original vision will be largely complete.
+*   Future 2.0 updates will further expand the weapon and shield systems:
+    *  Add more Creator’s Swords, including Nether and End series. 
+    *  Add a modular sword assembly system in which each component has unique properties. 
+    *  Expand the shield system with new models, mechanics, and series.
 
 ## Usage in modpacks
 
@@ -45,34 +37,30 @@ You can make any modifications to the mod with the goal of distributing it in a 
 
 为[机械动力](https://www.curseforge.com/minecraft/mc-mods/create)添加更多武器
 
-*   **机械师之剑：** 一把集成扳手功能的剑（有黄铜、下界合金和稀有版本）
-    *   有背罐时使用机械师之剑攻击生物可以增加1单位空气
+*   **机械师之剑：** 集成扳手功能的多用途武器，拥有黄铜、下界合金及稀有变体。
 *   **齿轮盾：** 一个齿轮样式的盾
-    *   可通过按下可自定义的快捷键（默认：V）来旋转
-    *   持续按键可增加旋转速度，松开后可将盾牌掷出
-    *   掷出的盾牌会对路径上的生物造成伤害，伤害基于转速
-    *   持盾时可在右下角显示当前转速
-    *   有背罐时会消耗空气让盾牌加速更快，每秒消耗1单位空气
-*   **蛙港抓钩:**
-    *   支持最远64格距离（可配置）
-    *   可以抓上方块，拉取生物
-*   **抓捕盒:**
-    *   当一只手拿着抓捕盒，另一只手使用蛙港抓钩拉取实体时可以将实体放入抓捕盒
-    *   右键抓捕盒放出实体
-*   **附魔书:**
-    *   转速突破-盾牌转速可达到512RPM
-    *   气动增压-提升盾牌旋转加速度;提升机械师之剑攻击时的攻击速度
-    *   坚固-忽略小幅度的耐久损失
-    *   黏舌-提升抓捕等级
+    *   按住可自定义的快捷键（默认为 `V`）使盾牌旋转，松开后将其掷出。
+    *   掷出的盾牌会沿路径攻击生物。
+*   **飞轮重锤:** 一把能够积蓄动能的重锤。
+    *   按住右键蓄力，松开后沿视角方向冲刺。
+    *   对冲刺路径上的生物发动重击，伤害机制与原版重锤的下落攻击相同。
+*   **蛙港抓钩:** 能够抓附方块，并拉动生物和物理结构的抓钩。
+    *   最远抓取距离为 64 格，可通过配置调整。
+*   **抓捕盒:** 用于配合蛙港抓钩收纳实体。
+    *   一只手持有抓捕盒，另一只手使用蛙港抓钩拉取实体时，可将实体收入盒中。
 
 **需要：** 机械动力6.0.8 或更高
 
-**翻译：** ru\_ru — GromovoyStarWolf
 
 ## 未来计划&杂谈
 
 *   可能支持1.20.1版本，但支持1.20.1版本有点不可能
-*   基于重锤核心的新器具
+
+*   这大概会是正式版 1.0.0 发布前的最后一个版本。接下来将继续改进武器模型、完善飞轮重锤机制并修复遗留问题，之后正式发布 1.0.0。至此，本模组最初规划的内容已基本实现。
+*   后续 2.0 版本将围绕武器与盾牌系统展开进一步扩展： 
+    * 加入更多机械师之剑。 
+    * 加入剑组件自由拼装系统，让每个组件拥有不同特性。 
+    * 扩展盾牌系统，加入新的模型、机制与系列。
 
 ## 使用
 
