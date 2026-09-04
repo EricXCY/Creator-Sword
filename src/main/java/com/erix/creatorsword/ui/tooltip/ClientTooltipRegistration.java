@@ -30,7 +30,8 @@ public class ClientTooltipRegistration {
             registerCreateTooltips(CreatorSwordItems.CREATOR_SWORDS);
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_CREATOR_SWORD.get());
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
-            registerCreateTooltip(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
+            TooltipModifier.REGISTRY.register(FrogportGrappleItem.FROGPORT_GRAPPLE.get(),
+                    new FrogportGrappleTooltipModifier(FrogportGrappleItem.FROGPORT_GRAPPLE.get()));
             registerCreateTooltips(SmithingTemplateItems.CSTEMPLATES);
             registerCreateTooltip(CSItems.PRECISION_TRIAL_KEY.get());
             registerCreateTooltip(CSItems.PRECISION_OMINOUS_TRIAL_KEY.get());

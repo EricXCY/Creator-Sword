@@ -58,6 +58,8 @@
   "item.creatorsword.frogport_grapple.tooltip.behaviour1": "_Hook_ up to a distance of up to 48 squares.",
   "item.creatorsword.frogport_grapple.tooltip.condition2": "Towards mob",
   "item.creatorsword.frogport_grapple.tooltip.behaviour2": "_Pull_ mob and _catch_ it if holding a capture box in another hand.",
+  "item.creatorsword.frogport_grapple.tooltip.aeronautics.condition": "When hooked onto an Aeronautics physics structure",
+  "item.creatorsword.frogport_grapple.tooltip.aeronautics.behaviour": "_Pulls you towards the structure_. _Sneak_ while standing on the ground to _pull the structure towards you_.",
 
   "item.creatorsword.capture_box": "Capture Box",
   "item.creatorsword.capture_box.empty": "Empty",

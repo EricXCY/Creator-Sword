@@ -58,6 +58,8 @@
   "item.creatorsword.frogport_grapple.tooltip.behaviour1": "_Цепляется_ за цель на расстоянии до 48 блоков.",
   "item.creatorsword.frogport_grapple.tooltip.condition2": "При наведении на существо",
   "item.creatorsword.frogport_grapple.tooltip.behaviour2": "_Притягивает_ существо и _захватывает_ его, если в другой руке находится _Коробка ловушка_.",
+  "item.creatorsword.frogport_grapple.tooltip.aeronautics.condition": "При зацеплении за физическую конструкцию Aeronautics",
+  "item.creatorsword.frogport_grapple.tooltip.aeronautics.behaviour": "_Притягивает вас к конструкции_. _Крадитесь_, стоя на земле, чтобы _притянуть конструкцию к себе_.",
 
   "item.creatorsword.capture_box": "Коробка ловушка",
   "item.creatorsword.capture_box.empty": "Пусто",
