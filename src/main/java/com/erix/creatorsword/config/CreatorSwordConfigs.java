@@ -1,11 +1,5 @@
 package com.erix.creatorsword.config;
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
-import org.apache.commons.lang3.tuple.Pair;
-
 import net.createmod.catnip.config.ConfigBase;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -13,6 +7,11 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 @EventBusSubscriber
 public class CreatorSwordConfigs {

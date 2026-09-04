@@ -10,6 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -19,12 +20,11 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import net.minecraft.data.tags.TagsProvider;
 
-import java.util.List;
-import java.util.function.Supplier;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 public class CSItemTag extends ItemTagsProvider {
     public static final TagKey<Item> ENCHANTABLE_PNEUMATIC_BOOST =
@@ -71,6 +71,7 @@ public class CSItemTag extends ItemTagsProvider {
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(Tags.Items.MELEE_WEAPON_TOOLS).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
+        tag(ENCHANTABLE_OVERDRIVE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(CogwheelShieldItems.COGWHEEL_SHIELD.get()));
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(FlywheelMaceItem.FLYWHEEL_MACE.get()));
         addAll(tag(ENCHANTABLE_PNEUMATIC_BOOST), CreatorSwordItems.CREATOR_SWORDS);

@@ -3,13 +3,11 @@ package com.erix.creatorsword.mixin;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.capture_box.CaptureBoxLoot;
 import com.simibubi.create.content.kinetics.crusher.CrushingWheelControllerBlockEntity;
+import com.simibubi.create.content.processing.recipe.ProcessingInventory;
 import com.simibubi.create.foundation.damageTypes.CreateDamageSources;
 import com.simibubi.create.foundation.item.ItemHelper;
-import com.simibubi.create.content.processing.recipe.ProcessingInventory;
-
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

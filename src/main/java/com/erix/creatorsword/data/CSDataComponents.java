@@ -18,6 +18,18 @@ public class CSDataComponents {
     private static final StreamCodec<ByteBuf, Boolean> SC_BOOL = ByteBufCodecs.BOOL;
     private static final StreamCodec<ByteBuf, Long> SC_LONG = ByteBufCodecs.VAR_LONG;
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> FLYWHEEL_ENERGY =
+            DATA_COMPONENTS.registerComponentType("flywheel_energy",
+                    b -> b.networkSynchronized(SC_FLOAT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> FLYWHEEL_ROTATION =
+            DATA_COMPONENTS.registerComponentType("flywheel_rotation",
+                    b -> b.networkSynchronized(SC_FLOAT));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Long>> FLYWHEEL_LAST_AIR_TICK =
+            DATA_COMPONENTS.registerComponentType("flywheel_last_air_tick",
+                    b -> b.networkSynchronized(SC_LONG));
+
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> GEAR_SHIELD_SPEED =
             DATA_COMPONENTS.registerComponentType("gear_shield_speed",
                     b -> b.persistent(Codec.FLOAT).networkSynchronized(SC_FLOAT));

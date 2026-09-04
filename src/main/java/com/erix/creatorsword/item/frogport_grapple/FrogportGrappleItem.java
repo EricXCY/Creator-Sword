@@ -1,8 +1,8 @@
 package com.erix.creatorsword.item.frogport_grapple;
 
 import com.erix.creatorsword.CreatorSword;
-import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
+import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
 import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
@@ -26,11 +26,7 @@ import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;

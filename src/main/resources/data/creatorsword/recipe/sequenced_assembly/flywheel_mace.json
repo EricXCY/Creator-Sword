@@ -1,0 +1,65 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:mace"
+  },
+  "results": [
+    {
+      "chance": 1.0,
+      "id": "creatorsword:flywheel_mace"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:mace"
+        },
+        {
+          "item": "minecraft:heavy_core"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:mace"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:mace"
+        },
+        {
+          "item": "minecraft:heavy_core"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:mace"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "minecraft:mace"
+        },
+        {
+          "item": "create:flywheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "minecraft:mace"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "minecraft:mace"
+  }
+}

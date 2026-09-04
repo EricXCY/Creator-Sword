@@ -1,6 +1,7 @@
 package com.erix.creatorsword.item.frogport_grapple;
 
 import com.erix.creatorsword.config.CreatorSwordConfigs;
+import com.erix.creatorsword.config.FrogportGrappleCfg.RuleMode;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -14,7 +15,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
-import com.erix.creatorsword.config.FrogportGrappleCfg.RuleMode;
 
 public final class GrappleTargetCondition {
 

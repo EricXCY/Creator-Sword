@@ -1,7 +1,9 @@
 package com.erix.creatorsword.item.creator_sword;
 
 import com.simibubi.create.AllItems;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
 import org.jetbrains.annotations.NotNull;
 
 public class CreatorSwordItem extends BaseCreatorSwordItem {

@@ -40,6 +40,9 @@
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
 
   "item.creatorsword.flywheel_mace": "Булава с маховиком",
+  "item.creatorsword.flywheel_mace.tooltip.summary": "Накапливайте энергию. Бейте булавой.",
+  "item.creatorsword.flywheel_mace.tooltip.condition1": "При удержании правой кнопки мыши",
+  "item.creatorsword.flywheel_mace.tooltip.behaviour1": "Накапливает кинетическую энергию; отпустите кнопку, чтобы совершить _рывок вперёд_ и нанести _сокрушительный удар_ целям на пути.",
 
   "item.creatorsword.incomplete_creator_sword": "Незавершённый Меч Создателя",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "Сломанный меч.",
@@ -74,9 +77,9 @@
   "advancement.creatorsword.traveling_frog.description": "Накопите 100000 блоков перемещения с помощью Крюка квакопорта.",
 
   "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Увеличивает скорость вращения зубчатого щита, расходуя воздух из баллона.\nПовышает скорость атаки Меча Создателя.\nПовышает скорость атаки булавы с маховиком.",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Повышает ускорение вращения зубчатого щита и булавы с маховиком; при надетом баллоне расходует воздух для дополнительного ускорения.\nПовышает скорость атаки Меча Создателя и булавы с маховиком.",
   "enchantment.creatorsword.overdrive": "Форсаж",
-  "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения.",
+  "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения зубчатого щита.\nУдваивает запас энергии булавы с маховиком; базовое время зарядки — 8 секунд.",
   "enchantment.creatorsword.sturdy": "Устойчивость",
   "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности. Эффект усиливается с уровнем.",
   "enchantment.creatorsword.sticky_tongue": "Липкий язык",

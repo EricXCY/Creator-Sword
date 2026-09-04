@@ -5,6 +5,7 @@
     "CrushingWheelControllerBlockEntityMixin",
     "EnchantmentHelperMixin",
     "ItemProviderEntryMixin",
+    "LivingEntityAttackStrengthAccessor",
     "RadialWrenchHandlerMixin",
     "VaultServerDataMixin",
     "VaultServerKeyContextMixin",

@@ -8,6 +8,9 @@ public class CSServer extends ConfigBase {
     public final FrogportGrappleCfg frogportGrapple =
             nested(0, FrogportGrappleCfg::new, Comments.frogport_rules);
 
+    public final FlywheelMaceCfg flywheelMace =
+            nested(0, FlywheelMaceCfg::new, "Flywheel Mace charge and dash settings.");
+
     @Override
     public @NotNull String getName() {
         return "server";

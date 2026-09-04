@@ -2,8 +2,6 @@ package com.erix.creatorsword.item.creator_sword;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
 
 public class CNYCreatorSwordItem extends BaseCreatorSwordItem {

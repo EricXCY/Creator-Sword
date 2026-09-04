@@ -40,6 +40,9 @@
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
 
   "item.creatorsword.flywheel_mace": "飞轮重锤",
+  "item.creatorsword.flywheel_mace.tooltip.summary": "积蓄能量，重锤出击。",
+  "item.creatorsword.flywheel_mace.tooltip.condition1": "按住右键时",
+  "item.creatorsword.flywheel_mace.tooltip.behaviour1": "蓄积动能，松开向前_冲刺_并对路径上的目标造成_重击_。",
 
   "item.creatorsword.incomplete_creator_sword": "不完整的机械师之剑",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "被折断的机械师之剑。",
@@ -74,9 +77,9 @@
   "advancement.creatorsword.traveling_frog.description": "累计使用蛙港抓钩移动 100000 格。",
 
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
-  "enchantment.creatorsword.pneumatic_boost.desc": "消耗背罐的空气提升齿轮盾的旋转加速度。\n提升机械师之剑的攻速。\n提升飞轮重锤的攻速。",
+  "enchantment.creatorsword.pneumatic_boost.desc": "提升齿轮盾与飞轮重锤的旋转加速度；装备背罐时，消耗空气进一步加速。\n提升机械师之剑与飞轮重锤的攻速。",
   "enchantment.creatorsword.overdrive": "转速突破",
-  "enchantment.creatorsword.overdrive.desc": "最大转速翻倍",
+  "enchantment.creatorsword.overdrive.desc": "齿轮盾的最大转速翻倍。\n飞轮重锤的蓄力上限翻倍。",
   "enchantment.creatorsword.sturdy": "坚固",
   "enchantment.creatorsword.sturdy.desc": "无视小幅度耐久消耗",
   "enchantment.creatorsword.sticky_tongue": "黏舌",

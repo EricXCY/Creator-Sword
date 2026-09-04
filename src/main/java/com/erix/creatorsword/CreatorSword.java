@@ -1,6 +1,5 @@
 package com.erix.creatorsword;
 
-import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldClientEvents;
 import com.erix.creatorsword.compat.aeronautics.FrogportAeronauticsCompat;
 import com.erix.creatorsword.compat.ftbultimine.CreatorSwordFTBUltimineCompat;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
@@ -15,6 +14,7 @@ import com.erix.creatorsword.item.CSItems;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldClientSetup;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
+import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldClientEvents;
 import com.erix.creatorsword.item.cogwheel_shield.logic.CogwheelShieldNetwork;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
