@@ -44,6 +44,7 @@ public class FrogportGrappleItemRender extends CustomRenderedItemModelRenderer {
             case GUI -> {
                 ms.mulPose(Axis.XP.rotationDegrees(34f));
                 ms.mulPose(Axis.YP.rotationDegrees(130f));
+                ms.translate(0f, 1f / 16f, 0f);
                 ms.scale(0.6f, 0.6f, 0.6f);
             }
             case FIRST_PERSON_RIGHT_HAND -> {

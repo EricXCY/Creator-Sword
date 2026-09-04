@@ -24,7 +24,7 @@ public class ModTabs {
             CREATIVE_TABS.register("creator_sword", ()-> CreativeModeTab.builder()
                     .withTabsBefore(BASE_CREATIVE_TAB.getKey())
                     .title(Component.translatable("itemGroup.creatorsword"))
-                    .icon(()-> CreatorSwordItems.CREATOR_SWORD.get().getDefaultInstance())
+                    .icon(()-> CreatorSwordItems.NETHERITE_CREATOR_SWORD.get().getDefaultInstance())
                     .displayItems((Parameters, Output) -> {
                         Output.accept(CreatorSwordItems.CREATOR_SWORD.get());
                         Output.accept(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());

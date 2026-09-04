@@ -57,14 +57,14 @@ public class BaseCreatorSwordItemRenderer extends CustomRenderedItemModelRendere
             case GROUND -> {
                 ms.mulPose(Axis.XP.rotationDegrees(-90));
                 ms.mulPose(Axis.YP.rotationDegrees(-124));
-                ms.scale(0.76914f, 0.76914f, 0.76914f);
+                ms.scale(0.77f, 0.77f, 0.77f);
             }
             case GUI -> {
-                ms.mulPose(Axis.XP.rotationDegrees(28));
-                ms.mulPose(Axis.YP.rotationDegrees(-163));
-                ms.mulPose(Axis.ZP.rotationDegrees(43));
-                ms.translate(1 / 16f, -2.25 / 16f, 0);
-                ms.scale(0.85f, 0.85f, 0.85f);
+                ms.mulPose(Axis.XP.rotationDegrees(-90));
+                ms.mulPose(Axis.YP.rotationDegrees(-50));
+                ms.mulPose(Axis.ZP.rotationDegrees(-90));
+                ms.translate(-1 / 16f, -3.5 / 16f, 0);
+                ms.scale(0.8f, 0.8f, 0.8f);
             }
             case HEAD -> {
                 ms.mulPose(Axis.XP.rotationDegrees(143));
