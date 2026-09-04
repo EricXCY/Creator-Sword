@@ -11,6 +11,7 @@ import com.simibubi.create.foundation.item.TooltipModifier;
 
 import net.createmod.catnip.lang.FontHelper.Palette;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -35,6 +36,7 @@ public class ClientTooltipRegistration {
             registerCreateTooltips(SmithingTemplateItems.CSTEMPLATES);
             registerCreateTooltip(CSItems.PRECISION_TRIAL_KEY.get());
             registerCreateTooltip(CSItems.PRECISION_OMINOUS_TRIAL_KEY.get());
+            TooltipModifier.REGISTRY.register(Items.ENCHANTED_BOOK, new EnchantedBookTooltipModifier());
         });
     }
 
