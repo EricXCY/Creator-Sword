@@ -4,8 +4,8 @@
 	"parent": "block/block",
 	"texture_size": [32, 32],
 	"textures": {
-		"flame": "creatorsword:item/creator_sword/chinese_new_year_sword_flame",
-		"5": "creatorsword:item/creator_sword/chinese_new_year_netherite_sword"
+		"5": "creatorsword:item/creator_sword/chinese_new_year_netherite_sword",
+		"flame": "creatorsword:item/creator_sword/chinese_new_year_sword_flame"
 	},
 	"elements": [
 		{
@@ -141,8 +141,8 @@
 			"to": [7.68, 26.6, 7.66],
 			"shade": false,
 			"faces": {
-				"west": {"uv": [6.5, 0, 7, 16], "texture": "#flame"},
-				"east": {"uv": [7, 0, 6.5, 16], "texture": "#flame"}
+				"east": {"uv": [7, 0, 6.5, 16], "texture": "#flame"},
+				"west": {"uv": [6.5, 0, 7, 16], "texture": "#flame"}
 			}
 		},
 		{
@@ -151,8 +151,8 @@
 			"to": [7.66, 28.1, 8.3],
 			"shade": false,
 			"faces": {
-				"west": {"uv": [8.5, 0, 9, 16], "texture": "#flame"},
-				"east": {"uv": [9, 0, 8.5, 16], "texture": "#flame"}
+				"east": {"uv": [9, 0, 8.5, 16], "texture": "#flame"},
+				"west": {"uv": [8.5, 0, 9, 16], "texture": "#flame"}
 			}
 		},
 		{
@@ -161,8 +161,8 @@
 			"to": [7.69, 27.3, 8.94],
 			"shade": false,
 			"faces": {
-				"west": {"uv": [10.5, 0, 11, 16], "texture": "#flame"},
-				"east": {"uv": [11, 0, 10.5, 16], "texture": "#flame"}
+				"east": {"uv": [11, 0, 10.5, 16], "texture": "#flame"},
+				"west": {"uv": [10.5, 0, 11, 16], "texture": "#flame"}
 			}
 		},
 		{
@@ -191,8 +191,8 @@
 			"to": [7.92, 26.9, 9.12],
 			"shade": false,
 			"faces": {
-				"south": {"uv": [4.5, 0, 5, 16], "texture": "#flame"},
-				"north": {"uv": [5, 0, 4.5, 16], "texture": "#flame"}
+				"north": {"uv": [5, 0, 4.5, 16], "texture": "#flame"},
+				"south": {"uv": [4.5, 0, 5, 16], "texture": "#flame"}
 			}
 		},
 		{
@@ -201,8 +201,8 @@
 			"to": [8.28, 28, 9.14],
 			"shade": false,
 			"faces": {
-				"south": {"uv": [10.5, 0, 11, 16], "texture": "#flame"},
-				"north": {"uv": [11, 0, 10.5, 16], "texture": "#flame"}
+				"north": {"uv": [11, 0, 10.5, 16], "texture": "#flame"},
+				"south": {"uv": [10.5, 0, 11, 16], "texture": "#flame"}
 			}
 		},
 		{
@@ -221,8 +221,8 @@
 			"to": [7.42, 28.8, 8.58],
 			"shade": false,
 			"faces": {
-				"west": {"uv": [0.5, 0, 1, 16], "texture": "#flame"},
-				"east": {"uv": [1, 0, 0.5, 16], "texture": "#flame"}
+				"east": {"uv": [1, 0, 0.5, 16], "texture": "#flame"},
+				"west": {"uv": [0.5, 0, 1, 16], "texture": "#flame"}
 			}
 		},
 		{
@@ -241,8 +241,8 @@
 			"to": [8.14, 27.6, 9.4],
 			"shade": false,
 			"faces": {
-				"south": {"uv": [2.5, 0, 3, 16], "texture": "#flame"},
-				"north": {"uv": [3, 0, 2.5, 16], "texture": "#flame"}
+				"north": {"uv": [3, 0, 2.5, 16], "texture": "#flame"},
+				"south": {"uv": [2.5, 0, 3, 16], "texture": "#flame"}
 			}
 		}
 	],
