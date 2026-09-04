@@ -74,7 +74,7 @@
   "advancement.creatorsword.traveling_frog.description": "Накопите 100000 блоков перемещения с помощью Крюка квакопорта.",
 
   "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Увеличивает скорость вращения зубчатого щита, расходуя воздух из баллона, а также повышает скорость атаки Меча Создателя.",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Увеличивает скорость вращения зубчатого щита, расходуя воздух из баллона.\nПовышает скорость атаки Меча Создателя.\nПовышает скорость атаки булавы с маховиком.",
   "enchantment.creatorsword.overdrive": "Форсаж",
   "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения.",
   "enchantment.creatorsword.sturdy": "Устойчивость",

@@ -3,6 +3,7 @@ package com.erix.creatorsword.enchantment;
 import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.erix.creatorsword.item.creator_sword.BaseCreatorSwordItem;
+import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -28,7 +29,8 @@ public class PneumaticBoostAttackSpeedHandler {
 
         ItemStack stack = player.getMainHandItem();
 
-        if (!(stack.getItem() instanceof BaseCreatorSwordItem)) {
+        if (!(stack.getItem() instanceof BaseCreatorSwordItem)
+                && !(stack.getItem() instanceof FlywheelMaceItem)) {
             removeModifier(player);
             return;
         }

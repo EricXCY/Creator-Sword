@@ -39,9 +39,15 @@ public final class EnchantedBookTooltipModifier implements TooltipModifier {
                 }
                 hasDescription = true;
                 if (expanded) {
-                    tooltip.addAll(i + 1, TooltipHelper.cutStringTextComponent(
-                            I18n.get(descriptionKey), Palette.STANDARD_CREATE.primary(),
-                            Palette.STANDARD_CREATE.highlight(), 1));
+                    int insertionIndex = i + 1;
+                    // Split explicit line breaks before Create's width-based wrapping.
+                    for (String line : I18n.get(descriptionKey).split("\\R", -1)) {
+                        var wrappedLines = TooltipHelper.cutStringTextComponent(
+                                line, Palette.STANDARD_CREATE.primary(),
+                                Palette.STANDARD_CREATE.highlight(), 1);
+                        tooltip.addAll(insertionIndex, wrappedLines);
+                        insertionIndex += wrappedLines.size();
+                    }
                 }
                 break;
             }

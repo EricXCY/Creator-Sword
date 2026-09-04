@@ -1,7 +1,5 @@
 package com.erix.creatorsword.item.creator_sword;
 
-import com.erix.creatorsword.CreatorSword;
-import com.simibubi.create.foundation.item.render.CustomRenderedItemModelRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.neoforged.api.distmarker.Dist;

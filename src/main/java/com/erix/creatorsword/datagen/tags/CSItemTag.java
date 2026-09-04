@@ -72,6 +72,7 @@ public class CSItemTag extends ItemTagsProvider {
         tag(Tags.Items.MELEE_WEAPON_TOOLS).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(CogwheelShieldItems.COGWHEEL_SHIELD.get()));
+        tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(FlywheelMaceItem.FLYWHEEL_MACE.get()));
         addAll(tag(ENCHANTABLE_PNEUMATIC_BOOST), CreatorSwordItems.CREATOR_SWORDS);
         tag(ENCHANTABLE_STURDY).addTag(ItemTags.DURABILITY_ENCHANTABLE);
         tag(ENCHANTABLE_STICKY_TONGUE).add(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
