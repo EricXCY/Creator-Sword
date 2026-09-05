@@ -13,6 +13,7 @@
     "VaultValidKeyMixin"
   ],
   "client": [
+    "ItemSpriteAnimationMixin"
   ],
   "server": [
   ],
