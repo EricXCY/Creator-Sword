@@ -19,7 +19,6 @@
 
 ## Future plans
 
-*   This will likely be the final release before 1.0.0. The next step is to improve the weapon models, refine the Flywheel Mace’s mechanics, and fix the remaining issues before releasing 1.0.0. At that point, the mod’s original vision will be largely complete.
 *   Future 2.0 updates will further expand the weapon and shield systems:
     *  Add more Creator’s Swords, including Nether and End series. 
     *  Add a modular sword assembly system in which each component has unique properties. 
@@ -56,7 +55,6 @@ You can make any modifications to the mod with the goal of distributing it in a 
 
 *   可能支持1.20.1版本，但支持1.20.1版本有点不可能
 
-*   这大概会是正式版 1.0.0 发布前的最后一个版本。接下来将继续改进武器模型、完善飞轮重锤机制并修复遗留问题，之后正式发布 1.0.0。至此，本模组最初规划的内容已基本实现。
 *   后续 2.0 版本将围绕武器与盾牌系统展开进一步扩展： 
     * 加入更多机械师之剑。 
     * 加入剑组件自由拼装系统，让每个组件拥有不同特性。 
