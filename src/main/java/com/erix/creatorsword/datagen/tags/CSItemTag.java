@@ -31,6 +31,8 @@ public class CSItemTag extends ItemTagsProvider {
             createTagKey("pneumatic_boost");
     public static final TagKey<Item> ENCHANTABLE_OVERDRIVE =
             createTagKey("overdrive");
+    public static final TagKey<Item> ENCHANTABLE_INERTIAL_STORAGE =
+            createTagKey("inertial_storage");
     public static final TagKey<Item> ENCHANTABLE_STURDY =
             createTagKey("sturdy");
     public static final TagKey<Item> ENCHANTABLE_STICKY_TONGUE =
@@ -72,6 +74,7 @@ public class CSItemTag extends ItemTagsProvider {
         tag(Tags.Items.MELEE_WEAPON_TOOLS).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ENCHANTABLE_OVERDRIVE).add(CogwheelShieldItems.COGWHEEL_SHIELD.get());
         tag(ENCHANTABLE_OVERDRIVE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
+        tag(ENCHANTABLE_INERTIAL_STORAGE).add(FlywheelMaceItem.FLYWHEEL_MACE.get());
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(CogwheelShieldItems.COGWHEEL_SHIELD.get()));
         tag(ENCHANTABLE_PNEUMATIC_BOOST).add(key(FlywheelMaceItem.FLYWHEEL_MACE.get()));
         addAll(tag(ENCHANTABLE_PNEUMATIC_BOOST), CreatorSwordItems.CREATOR_SWORDS);

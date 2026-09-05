@@ -21,6 +21,7 @@ public class CSEnchantmentTag extends EnchantmentTagsProvider {
 
         this.tag(EnchantmentTags.TREASURE)
                 .add(EnchantmentKeys.OVERDRIVE)
+                .add(EnchantmentKeys.INERTIAL_STORAGE)
                 .add(EnchantmentKeys.PNEUMATIC_BOOST)
                 .add(EnchantmentKeys.STURDY)
                 .add(EnchantmentKeys.STICKY_TONGUE);

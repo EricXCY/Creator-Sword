@@ -50,6 +50,7 @@
   "item.creatorsword.incomplete_netherite_creator_sword.tooltip.summary": "Сломанный незеритовый меч.",
 
   "item.creatorsword.incomplete_pneumatic_boost_book": "Незавершённая книга «Пневмобуст»",
+  "item.creatorsword.incomplete_inertial_storage_book": "Незавершённая книга «Инерционное накопление»",
   "item.creatorsword.incomplete_overdrive_book": "Незавершённая книга «Форсаж»",
   "item.creatorsword.incomplete_sturdy_book": "Незавершённая книга «Устойчивость»",
   "item.creatorsword.incomplete_sticky_tongue_book": "Незавершённая книга «Липкий язык»",
@@ -78,6 +79,8 @@
 
   "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
   "enchantment.creatorsword.pneumatic_boost.desc": "Повышает ускорение вращения зубчатого щита и булавы с маховиком; при надетом баллоне расходует воздух для дополнительного ускорения.\nПовышает скорость атаки Меча Создателя и булавы с маховиком.",
+  "enchantment.creatorsword.inertial_storage": "Инерционное накопление",
+  "enchantment.creatorsword.inertial_storage.desc": "Повышает эффективность накопления энергии булавы с маховиком.",
   "enchantment.creatorsword.overdrive": "Форсаж",
   "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения зубчатого щита.\nУдваивает запас энергии булавы с маховиком; базовое время зарядки — 8 секунд.",
   "enchantment.creatorsword.sturdy": "Устойчивость",

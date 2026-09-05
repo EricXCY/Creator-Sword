@@ -50,6 +50,7 @@
   "item.creatorsword.incomplete_netherite_creator_sword.tooltip.summary": "A broken netherite sword.",
 
   "item.creatorsword.incomplete_pneumatic_boost_book": "Incomplete Pneumatic Boost Book",
+  "item.creatorsword.incomplete_inertial_storage_book": "Incomplete Inertial Storage Book",
   "item.creatorsword.incomplete_overdrive_book": "Incomplete Overdrive Book",
   "item.creatorsword.incomplete_sturdy_book": "Incomplete Sturdy Book",
   "item.creatorsword.incomplete_sticky_tongue_book": "Incomplete Sticky Tongue Book",
@@ -78,6 +79,8 @@
 
   "enchantment.creatorsword.pneumatic_boost": "Pneumatic Boost",
   "enchantment.creatorsword.pneumatic_boost.desc": "Increases the rotational acceleration of cogwheel shields and flywheel maces; while a backtank is equipped, consumes air to accelerate them further.\nIncreases the attack speed of creator's swords and flywheel maces.",
+  "enchantment.creatorsword.inertial_storage": "Inertial Storage",
+  "enchantment.creatorsword.inertial_storage.desc": "Improves the flywheel mace's energy storage efficiency.",
   "enchantment.creatorsword.overdrive": "Overdrive",
   "enchantment.creatorsword.overdrive.desc": "Doubles the cogwheel shield's maximum rotation speed.\nDoubles the flywheel mace's charge capacity; base full-charge time is 8 seconds.",
   "enchantment.creatorsword.sturdy": "Sturdy",

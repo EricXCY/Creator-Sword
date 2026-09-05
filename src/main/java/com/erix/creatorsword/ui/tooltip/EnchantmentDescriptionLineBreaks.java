@@ -21,6 +21,7 @@ public final class EnchantmentDescriptionLineBreaks {
     private static final List<String> DESCRIPTION_KEYS = List.of(
             "enchantment.creatorsword.pneumatic_boost.desc",
             "enchantment.creatorsword.overdrive.desc",
+            "enchantment.creatorsword.inertial_storage.desc",
             "enchantment.creatorsword.sturdy.desc",
             "enchantment.creatorsword.sticky_tongue.desc");
 

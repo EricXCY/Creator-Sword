@@ -50,6 +50,7 @@
   "item.creatorsword.incomplete_netherite_creator_sword.tooltip.summary": "被折断的下界机械师之剑。",
 
   "item.creatorsword.incomplete_pneumatic_boost_book": "未完成的气动增压附魔书",
+  "item.creatorsword.incomplete_inertial_storage_book": "未完成的惯性储能附魔书",
   "item.creatorsword.incomplete_overdrive_book": "未完成的转速突破附魔书",
   "item.creatorsword.incomplete_sturdy_book": "未完成的坚固附魔书",
   "item.creatorsword.incomplete_sticky_tongue_book": "未完成的黏舌附魔书",
@@ -78,6 +79,8 @@
 
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
   "enchantment.creatorsword.pneumatic_boost.desc": "提升齿轮盾与飞轮重锤的旋转加速度；装备背罐时，消耗空气进一步加速。\n提升机械师之剑与飞轮重锤的攻速。",
+  "enchantment.creatorsword.inertial_storage": "惯性储能",
+  "enchantment.creatorsword.inertial_storage.desc": "使飞轮重锤的储能效率提高。",
   "enchantment.creatorsword.overdrive": "转速突破",
   "enchantment.creatorsword.overdrive.desc": "齿轮盾的最大转速翻倍。\n飞轮重锤的蓄力上限翻倍。",
   "enchantment.creatorsword.sturdy": "坚固",
