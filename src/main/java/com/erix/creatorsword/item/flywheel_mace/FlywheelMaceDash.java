@@ -3,6 +3,7 @@ package com.erix.creatorsword.item.flywheel_mace;
 import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.CSDataComponents;
+import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.erix.creatorsword.mixin.LivingEntityAttackStrengthAccessor;
 import com.simibubi.create.AllSoundEvents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -29,6 +30,7 @@ import java.util.*;
 @EventBusSubscriber(modid = CreatorSword.MODID)
 public final class FlywheelMaceDash {
     public static final int MIN_CHARGE_TICKS = 5;
+    private static final int RELAY_BOOST_TICKS = 10;
     private static final Map<ServerPlayer, Dash> DASHES = new WeakHashMap<>();
 
     private FlywheelMaceDash() {}
@@ -100,6 +102,7 @@ public final class FlywheelMaceDash {
         player.serverLevel().sendParticles(ParticleTypes.CLOUD,
                 player.getX(), player.getY() + 0.2, player.getZ(), 2, 0.2, 0.1, 0.2, 0.01);
         propel(player, dash);
+        if (dash.relayBoostTicks > 0) dash.relayBoostTicks--;
     }
 
     private static void hitPath(ServerPlayer player, Dash dash, Vec3 current) {
@@ -122,7 +125,11 @@ public final class FlywheelMaceDash {
 
             dash.hit.add(target.getUUID());
             double previousY = player.getDeltaMovement().y;
+            float healthBefore = target.getHealth() + target.getAbsorptionAmount();
             smash(player, target, dash.energy);
+            if (dash.relayLevel > 0 && target.getHealth() + target.getAbsorptionAmount() < healthBefore) {
+                dash.relayBoostTicks = RELAY_BOOST_TICKS;
+            }
             double afterHitY = player.getDeltaMovement().y;
             if (afterHitY != previousY && afterHitY > 0.011) {
                 dash.verticalImpulse = Math.max(dash.verticalImpulse, afterHitY - 0.01);
@@ -151,6 +158,7 @@ public final class FlywheelMaceDash {
 
     private static void propel(ServerPlayer player, Dash dash) {
         double speed = baseDashSpeed() + energyDashSpeed() * dash.energy;
+        if (dash.relayBoostTicks > 0) speed += 0.3 * dash.relayLevel;
         Vec3 velocity = dash.direction.scale(speed);
         player.setDeltaMovement(velocity.x, velocity.y + dash.verticalImpulse, velocity.z);
         dash.verticalImpulse *= 0.98;
@@ -173,6 +181,8 @@ public final class FlywheelMaceDash {
         private final ItemStack stack;
         private final Vec3 direction;
         private final float initialEnergy;
+        private final int relayLevel;
+        private int relayBoostTicks;
         private final ResourceKey<Level> dimension;
         private final Set<UUID> hit = new HashSet<>();
         private Vec3 previous;
@@ -188,6 +198,9 @@ public final class FlywheelMaceDash {
             this.previous = previous;
             this.energy = energy;
             this.initialEnergy = energy;
+            this.relayLevel = stack.getTagEnchantments().entrySet().stream()
+                    .filter(entry -> entry.getKey().is(EnchantmentKeys.RELAY_IMPACT))
+                    .mapToInt(entry -> Math.max(0, entry.getIntValue())).findFirst().orElse(0);
             this.remaining = duration;
             this.duration = duration;
             this.dimension = dimension;

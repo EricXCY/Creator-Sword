@@ -22,6 +22,7 @@ public final class EnchantmentDescriptionLineBreaks {
             "enchantment.creatorsword.pneumatic_boost.desc",
             "enchantment.creatorsword.overdrive.desc",
             "enchantment.creatorsword.inertial_storage.desc",
+            "enchantment.creatorsword.relay_impact.desc",
             "enchantment.creatorsword.sturdy.desc",
             "enchantment.creatorsword.sticky_tongue.desc");
 

@@ -1,5 +1,5 @@
 {
-  "creatorsword.keybinds.category":  "Creator's Sword",
+  "creatorsword.keybinds.category": "Creator's Sword",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "Rotate Cogwheel Shield",
 
   "item.creatorsword.cogwheel_shield": "Cogwheel Shield",
@@ -51,6 +51,7 @@
 
   "item.creatorsword.incomplete_pneumatic_boost_book": "Incomplete Pneumatic Boost Book",
   "item.creatorsword.incomplete_inertial_storage_book": "Incomplete Inertial Storage Book",
+  "item.creatorsword.incomplete_relay_impact_book": "Incomplete Relay Impact Book",
   "item.creatorsword.incomplete_overdrive_book": "Incomplete Overdrive Book",
   "item.creatorsword.incomplete_sturdy_book": "Incomplete Sturdy Book",
   "item.creatorsword.incomplete_sticky_tongue_book": "Incomplete Sticky Tongue Book",
@@ -79,12 +80,14 @@
 
   "enchantment.creatorsword.pneumatic_boost": "Pneumatic Boost",
   "enchantment.creatorsword.pneumatic_boost.desc": "Increases the rotational acceleration of cogwheel shields and flywheel maces; while a backtank is equipped, consumes air to accelerate them further.\nIncreases the attack speed of creator's swords and flywheel maces.",
+  "enchantment.creatorsword.relay_impact": "Relay Impact",
+  "enchantment.creatorsword.relay_impact.desc": "Briefly accelerates the flywheel mace after hitting a creature during a dash.",
   "enchantment.creatorsword.inertial_storage": "Inertial Storage",
   "enchantment.creatorsword.inertial_storage.desc": "Improves the flywheel mace's energy storage efficiency.",
   "enchantment.creatorsword.overdrive": "Overdrive",
-  "enchantment.creatorsword.overdrive.desc": "Doubles the cogwheel shield's maximum rotation speed.\nDoubles the flywheel mace's charge capacity; base full-charge time is 8 seconds.",
+  "enchantment.creatorsword.overdrive.desc": "Doubles the cogwheel shield's maximum rotation speed.\nDoubles the flywheel mace's charge capacity.",
   "enchantment.creatorsword.sturdy": "Sturdy",
-  "enchantment.creatorsword.sturdy.desc": "Ignore small durability losses, scaling with level",
+  "enchantment.creatorsword.sturdy.desc": "Ignores small durability losses",
   "enchantment.creatorsword.sticky_tongue": "Sticky Tongue",
   "enchantment.creatorsword.sticky_tongue.desc": "Upgrade the capture level of the Frogport Grapple",
 

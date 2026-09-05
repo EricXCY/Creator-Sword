@@ -51,6 +51,7 @@
 
   "item.creatorsword.incomplete_pneumatic_boost_book": "未完成的气动增压附魔书",
   "item.creatorsword.incomplete_inertial_storage_book": "未完成的惯性储能附魔书",
+  "item.creatorsword.incomplete_relay_impact_book": "未完成的接力冲击附魔书",
   "item.creatorsword.incomplete_overdrive_book": "未完成的转速突破附魔书",
   "item.creatorsword.incomplete_sturdy_book": "未完成的坚固附魔书",
   "item.creatorsword.incomplete_sticky_tongue_book": "未完成的黏舌附魔书",
@@ -79,6 +80,8 @@
 
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
   "enchantment.creatorsword.pneumatic_boost.desc": "提升齿轮盾与飞轮重锤的旋转加速度；装备背罐时，消耗空气进一步加速。\n提升机械师之剑与飞轮重锤的攻速。",
+  "enchantment.creatorsword.relay_impact": "接力冲击",
+  "enchantment.creatorsword.relay_impact.desc": "使飞轮重锤在冲刺命中生物后短暂加速。",
   "enchantment.creatorsword.inertial_storage": "惯性储能",
   "enchantment.creatorsword.inertial_storage.desc": "使飞轮重锤的储能效率提高。",
   "enchantment.creatorsword.overdrive": "转速突破",

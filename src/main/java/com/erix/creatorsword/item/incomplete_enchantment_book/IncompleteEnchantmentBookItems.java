@@ -15,6 +15,8 @@ public class IncompleteEnchantmentBookItems extends Item {
 
     public static final DeferredItem<com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems> INCOMPLETE_INERTIAL_STORAGE = ITEMS.registerItem("incomplete_inertial_storage_book",
             com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems::new);
+    public static final DeferredItem<com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems> INCOMPLETE_RELAY_IMPACT = ITEMS.registerItem("incomplete_relay_impact_book",
+            com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems::new);
 
     public static final DeferredItem<com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems> INCOMPLETE_PNEUMATIC_BOOST = ITEMS.registerItem("incomplete_pneumatic_boost_book",
             com.erix.creatorsword.item.incomplete_enchantment_book.IncompleteEnchantmentBookItems::new);

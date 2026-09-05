@@ -1,5 +1,5 @@
 {
-  "creatorsword.keybinds.category":  "Меч Создателя",
+  "creatorsword.keybinds.category": "Меч Создателя",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "Раскрутить Зубчатый щит",
 
   "item.creatorsword.cogwheel_shield": "Зубчатый щит",
@@ -51,6 +51,7 @@
 
   "item.creatorsword.incomplete_pneumatic_boost_book": "Незавершённая книга «Пневмобуст»",
   "item.creatorsword.incomplete_inertial_storage_book": "Незавершённая книга «Инерционное накопление»",
+  "item.creatorsword.incomplete_relay_impact_book": "Незавершённая книга «Эстафетный удар»",
   "item.creatorsword.incomplete_overdrive_book": "Незавершённая книга «Форсаж»",
   "item.creatorsword.incomplete_sturdy_book": "Незавершённая книга «Устойчивость»",
   "item.creatorsword.incomplete_sticky_tongue_book": "Незавершённая книга «Липкий язык»",
@@ -79,12 +80,14 @@
 
   "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
   "enchantment.creatorsword.pneumatic_boost.desc": "Повышает ускорение вращения зубчатого щита и булавы с маховиком; при надетом баллоне расходует воздух для дополнительного ускорения.\nПовышает скорость атаки Меча Создателя и булавы с маховиком.",
+  "enchantment.creatorsword.relay_impact": "Эстафетный удар",
+  "enchantment.creatorsword.relay_impact.desc": "Ненадолго ускоряет булаву с маховиком при попадании по существу во время рывка.",
   "enchantment.creatorsword.inertial_storage": "Инерционное накопление",
   "enchantment.creatorsword.inertial_storage.desc": "Повышает эффективность накопления энергии булавы с маховиком.",
   "enchantment.creatorsword.overdrive": "Форсаж",
-  "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения зубчатого щита.\nУдваивает запас энергии булавы с маховиком; базовое время зарядки — 8 секунд.",
+  "enchantment.creatorsword.overdrive.desc": "Удваивает максимальную скорость вращения зубчатого щита.\nУдваивает запас энергии булавы с маховиком.",
   "enchantment.creatorsword.sturdy": "Устойчивость",
-  "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности. Эффект усиливается с уровнем.",
+  "enchantment.creatorsword.sturdy.desc": "Игнорирует небольшую потерю прочности",
   "enchantment.creatorsword.sticky_tongue": "Липкий язык",
   "enchantment.creatorsword.sticky_tongue.desc": "Повышает уровень захвата лягушачьего гарпуна.",
 
