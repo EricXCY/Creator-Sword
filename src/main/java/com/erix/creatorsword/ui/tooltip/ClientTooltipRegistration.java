@@ -34,7 +34,10 @@ public class ClientTooltipRegistration {
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
             TooltipModifier.REGISTRY.register(FrogportGrappleItem.FROGPORT_GRAPPLE.get(),
                     new FrogportGrappleTooltipModifier(FrogportGrappleItem.FROGPORT_GRAPPLE.get()));
-            registerCreateTooltips(SmithingTemplateItems.CSTEMPLATES);
+            TooltipModifier.REGISTRY.register(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get(),
+                    new TemplateTooltipModifier(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get()));
+            TooltipModifier.REGISTRY.register(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get(),
+                    new TemplateTooltipModifier(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get()));
             registerCreateTooltip(CSItems.PRECISION_TRIAL_KEY.get());
             registerCreateTooltip(CSItems.PRECISION_OMINOUS_TRIAL_KEY.get());
             TooltipModifier.REGISTRY.register(Items.ENCHANTED_BOOK, new EnchantedBookTooltipModifier());
@@ -50,6 +53,12 @@ public class ClientTooltipRegistration {
     private static void registerCreateTooltip(Item item) {
         TooltipModifier base = new ItemDescription.Modifier(item, Palette.STANDARD_CREATE);
         TooltipModifier.REGISTRY.register(item, base);
+    }
+
+    @SubscribeEvent
+    public static void registerPaletteReload(net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent event) {
+        event.registerReloadListener((net.minecraft.server.packs.resources.ResourceManagerReloadListener)
+                manager -> TextureTooltipColors.reload());
     }
 
     @SubscribeEvent

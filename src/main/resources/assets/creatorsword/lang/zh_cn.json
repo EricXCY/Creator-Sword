@@ -99,7 +99,9 @@
   "enchantment.creatorsword.sticky_tongue.desc": "提升蛙港抓钩对生物的抓捕等级",
 
   "item.creatorsword.crimson_afterglow_smithing_template": "赤霞锻造模板",
-  "item.creatorsword.crimson_afterglow_smithing_template.tooltip.summary": "在_遗迹废墟_、_沙漠金字塔_和_沙漠水井_进行_考古_获得",
+  "item.creatorsword.crimson_afterglow_smithing_template.tooltip.summary": "_刻着落日余烬的古老铸板。_风沙掩埋了炉火，却没能带走最后一抹余温。",
+  "item.creatorsword.crimson_afterglow_smithing_template.tooltip.condition1": "获取方式",
+  "item.creatorsword.crimson_afterglow_smithing_template.tooltip.behaviour1": "在_遗迹废墟_、_沙漠金字塔_和_沙漠水井_进行_考古_获得。",
   "item.creatorsword.crimson_afterglow_smithing_template.applies_to": "下界合金机械师之剑",
   "item.creatorsword.crimson_afterglow_smithing_template.ingredients": "坚固板",
   "item.creatorsword.crimson_afterglow_smithing_template.upgrade_description": "赤霞升级",
@@ -107,7 +109,9 @@
   "item.creatorsword.crimson_afterglow_smithing_template.additions_slot_description": "放入一块坚固板",
 
   "item.creatorsword.trial_smithing_template": "试炼锻造模板",
-  "item.creatorsword.trial_smithing_template.tooltip.summary": "通过_不祥宝库_获得",
+  "item.creatorsword.trial_smithing_template.tooltip.summary": "_铭刻试炼印记的铜铸凭证。_铜锈爬满了刻痕，唯有剑锋经过的地方仍然明亮。",
+  "item.creatorsword.trial_smithing_template.tooltip.condition1": "获取方式",
+  "item.creatorsword.trial_smithing_template.tooltip.behaviour1": "通过_不祥宝库_获得。",
   "item.creatorsword.trial_smithing_template.applies_to": "下界合金机械师之剑",
   "item.creatorsword.trial_smithing_template.ingredients": "坚固板",
   "item.creatorsword.trial_smithing_template.upgrade_description": "试炼升级",
