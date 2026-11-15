@@ -74,6 +74,11 @@
   "item.creatorsword.frogport_grapple.tooltip.aeronautics.behaviour": "将你_拉向结构_。在地面上_潜行_时，结构将_拉向你_。",
 
   "item.creatorsword.capture_box": "抓捕盒",
+  "item.creatorsword.capture_box.tooltip.summary": "用于_收容与搬运生物_的盒子。",
+  "item.creatorsword.capture_box.tooltip.condition1": "装有生物时右键方块",
+  "item.creatorsword.capture_box.tooltip.behaviour1": "_释放_盒中的生物，保留空盒。",
+  "item.creatorsword.capture_box.tooltip.condition2": "将装有生物的抓捕盒投入粉碎轮时",
+  "item.creatorsword.capture_box.tooltip.behaviour2": "获得_%s倍_掉落收益（独立抽取战利品表%s次）。_消耗_生物与抓捕盒，不返还空盒。",
   "item.creatorsword.capture_box.empty": "空盒子",
   "item.creatorsword.capture_box.filled": "已捕获：%s",
   "item.creatorsword.capture_box.filled.unknown": "已捕获：<未知>",
@@ -86,7 +91,7 @@
   "advancement.creatorsword.traveling_frog.description": "累计使用蛙港抓钩移动 100000 格。",
 
   "enchantment.creatorsword.pneumatic_boost": "气动增压",
-  "enchantment.creatorsword.pneumatic_boost.desc": "提升齿轮盾与飞轮重锤的旋转加速度；装备背罐时，消耗空气进一步加速。\n提升机械师之剑与飞轮重锤的攻速。",
+  "enchantment.creatorsword.pneumatic_boost.desc": "加快齿轮盾的旋转提速与飞轮重锤的蓄能。\n背罐中有空气时，消耗空气进一步加快上述过程。\n提高机械师之剑与飞轮重锤的攻击速度。",
   "enchantment.creatorsword.relay_impact": "接力冲击",
   "enchantment.creatorsword.relay_impact.desc": "使飞轮重锤在冲刺命中生物后短暂加速。",
   "enchantment.creatorsword.inertial_charge": "惯性蓄能",

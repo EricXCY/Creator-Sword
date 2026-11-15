@@ -1,5 +1,7 @@
 package com.erix.creatorsword.item.capture_box;
 
+import com.erix.creatorsword.config.CreatorSwordConfigs;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -21,6 +23,11 @@ import java.util.Optional;
 public final class CaptureBoxLoot {
 
     private CaptureBoxLoot() {}
+
+    public static int getLootRolls() {
+        var config = CreatorSwordConfigs.server();
+        return config == null || !config.specification.isLoaded() ? 3 : config.captureBox.lootRolls.get();
+    }
 
     public static Optional<List<ItemStack>> tryRollLoot(
             ServerLevel level,
@@ -71,7 +78,7 @@ public final class CaptureBoxLoot {
         ResourceKey<LootTable> lootTableId = living.getLootTable();
         LootTable table = level.getServer().reloadableRegistries().getLootTable(lootTableId);
 
-        int rolls = 2;
+        int rolls = getLootRolls();
         List<ItemStack> out = new java.util.ArrayList<>();
         for (int i = 0; i < rolls; i++) {
             out.addAll(table.getRandomItems(params));

@@ -74,6 +74,11 @@
   "item.creatorsword.frogport_grapple.tooltip.aeronautics.behaviour": "_Pulls you towards the structure_. _Sneak_ while standing on the ground to _pull the structure towards you_.",
 
   "item.creatorsword.capture_box": "Capture Box",
+  "item.creatorsword.capture_box.tooltip.summary": "A box for _containing and transporting creatures_.",
+  "item.creatorsword.capture_box.tooltip.condition1": "When right-clicking a block with a filled box",
+  "item.creatorsword.capture_box.tooltip.behaviour1": "_Releases_ the captured creature and leaves an empty box.",
+  "item.creatorsword.capture_box.tooltip.condition2": "When processing a filled box with Crushing Wheels",
+  "item.creatorsword.capture_box.tooltip.behaviour2": "Grants _%sx_ loot rewards (%s independent loot table rolls). _Consumes_ the creature and Capture Box; no empty box is returned.",
   "item.creatorsword.capture_box.empty": "Empty",
   "item.creatorsword.capture_box.filled": "Containing: %s",
   "item.creatorsword.capture_box.filled.unknown": "Containing: <Unknown>",
@@ -86,7 +91,7 @@
   "advancement.creatorsword.traveling_frog.description": "Accumulate 100000 blocks of movement using the Frogport Grapple.",
 
   "enchantment.creatorsword.pneumatic_boost": "Pneumatic Boost",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Increases the rotational acceleration of cogwheel shields and flywheel maces; while a backtank is equipped, consumes air to accelerate them further.\nIncreases the attack speed of creator's swords and flywheel maces.",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Makes cogwheel shields spin up faster and flywheel maces charge faster.\nWhen a backtank contains air, consumes it to further speed up these processes.\nIncreases the attack speed of creator's swords and flywheel maces.",
   "enchantment.creatorsword.relay_impact": "Relay Impact",
   "enchantment.creatorsword.relay_impact.desc": "Briefly accelerates the flywheel mace after hitting a creature during a dash.",
   "enchantment.creatorsword.inertial_charge": "Inertial Charge",

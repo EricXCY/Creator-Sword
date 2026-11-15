@@ -28,14 +28,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.function.Consumer;
 
 public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
@@ -62,10 +62,15 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
         super(properties);
     }
 
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, new FrogportGrappleItemRender()));
+    @EventBusSubscriber(modid = CreatorSword.MODID, value = Dist.CLIENT)
+    public static final class ClientExtensions {
+        private ClientExtensions() {}
+
+        @SubscribeEvent
+        public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+            var item = FROGPORT_GRAPPLE.get();
+            event.registerItem(SimpleCustomRenderer.create(item, new FrogportGrappleItemRender()), item);
+        }
     }
 
     @Override

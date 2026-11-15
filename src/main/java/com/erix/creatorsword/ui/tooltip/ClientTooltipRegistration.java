@@ -1,6 +1,7 @@
 package com.erix.creatorsword.ui.tooltip;
 
 import com.erix.creatorsword.item.CSItems;
+import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
@@ -29,6 +30,8 @@ public class ClientTooltipRegistration {
         event.enqueueWork(() -> {
             registerCreateTooltip(CogwheelShieldItems.COGWHEEL_SHIELD.get());
             registerCreateTooltip(FlywheelMaceItem.FLYWHEEL_MACE.get());
+            TooltipModifier.REGISTRY.register(CaptureBoxItem.CAPTURE_BOX.get(),
+                    new CaptureBoxTooltipModifier(CaptureBoxItem.CAPTURE_BOX.get()));
             registerCreateTooltips(CreatorSwordItems.CREATOR_SWORDS);
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_CREATOR_SWORD.get());
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());

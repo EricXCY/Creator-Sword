@@ -74,6 +74,11 @@
   "item.creatorsword.frogport_grapple.tooltip.aeronautics.behaviour": "_Притягивает вас к конструкции_. _Крадитесь_, стоя на земле, чтобы _притянуть конструкцию к себе_.",
 
   "item.creatorsword.capture_box": "Коробка ловушка",
+  "item.creatorsword.capture_box.tooltip.summary": "Коробка для _хранения и перевозки существ_.",
+  "item.creatorsword.capture_box.tooltip.condition1": "При нажатии ПКМ по блоку с заполненной коробкой",
+  "item.creatorsword.capture_box.tooltip.behaviour1": "_Выпускает_ пойманное существо, оставляя пустую коробку.",
+  "item.creatorsword.capture_box.tooltip.condition2": "При переработке заполненной коробки дробильными колёсами",
+  "item.creatorsword.capture_box.tooltip.behaviour2": "Даёт _в %s раза больше_ добычи (%s независимых розыгрыша таблицы добычи). Существо и коробка _расходуются_; пустая коробка не возвращается.",
   "item.creatorsword.capture_box.empty": "Пусто",
   "item.creatorsword.capture_box.filled": "Содержит: %s",
   "item.creatorsword.capture_box.filled.unknown": "Содержит: <Неизвестно>",
@@ -86,7 +91,7 @@
   "advancement.creatorsword.traveling_frog.description": "Накопите 100000 блоков перемещения с помощью Крюка квакопорта.",
 
   "enchantment.creatorsword.pneumatic_boost": "Пневмобуст",
-  "enchantment.creatorsword.pneumatic_boost.desc": "Повышает ускорение вращения зубчатого щита и булавы с маховиком; при надетом баллоне расходует воздух для дополнительного ускорения.\nПовышает скорость атаки Меча Создателя и булавы с маховиком.",
+  "enchantment.creatorsword.pneumatic_boost.desc": "Ускоряет раскрутку зубчатого щита и зарядку булавы с маховиком.\nЕсли в баллоне есть воздух, расходует его для дополнительного ускорения этих процессов.\nПовышает скорость атаки Меча Создателя и булавы с маховиком.",
   "enchantment.creatorsword.relay_impact": "Эстафетный удар",
   "enchantment.creatorsword.relay_impact.desc": "Ненадолго ускоряет булаву с маховиком при попадании по существу во время рывка.",
   "enchantment.creatorsword.inertial_charge": "Инерционный заряд",

@@ -4,6 +4,8 @@ import net.createmod.catnip.config.ConfigBase;
 import org.jetbrains.annotations.NotNull;
 
 public class CSServer extends ConfigBase {
+    public final CaptureBoxCfg captureBox =
+            nested(0, CaptureBoxCfg::new, "Capture Box crushing loot settings.");
 
     public final FrogportGrappleCfg frogportGrapple =
             nested(0, FrogportGrappleCfg::new, Comments.frogport_rules);
