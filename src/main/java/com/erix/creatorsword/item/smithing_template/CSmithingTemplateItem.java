@@ -38,6 +38,14 @@ public class CSmithingTemplateItem {
         );
     }
 
+    public static Item createTidecrestTemplate() {
+        return createTemplate(
+                "tidecrest_smithing_template",
+                SWORD_BASE_SLOT_TEXTURES,
+                INGOT_ADDITION_SLOT_TEXTURES
+        );
+    }
+
     private static Item createTemplate(
             String name,
             List<ResourceLocation> baseSlotTextures,

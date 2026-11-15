@@ -25,9 +25,16 @@ public class SmithingTemplateItems {
                     CSmithingTemplateItem::createTrialTemplate
             );
 
+    public static final DeferredItem<Item> TIDECREST_SMITHING_TEMPLATE =
+            ITEMS.register(
+                    "tidecrest_smithing_template",
+                    CSmithingTemplateItem::createTidecrestTemplate
+            );
+
     public static final List<Supplier<? extends Item>> CSTEMPLATES = List.of(
             CRIMSON_AFTERGLOW_SMITHING_TEMPLATE,
-            TRIAL_SMITHING_TEMPLATE
+            TRIAL_SMITHING_TEMPLATE,
+            TIDECREST_SMITHING_TEMPLATE
     );
 
     public static void register(IEventBus eventBus) {

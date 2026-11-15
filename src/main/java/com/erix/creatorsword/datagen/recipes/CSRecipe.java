@@ -84,5 +84,16 @@ public class CSRecipe extends RecipeProvider {
                 .unlocks("has_trail_template",
                         has(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get()))
                 .save(recipeOutput, "trial_smithing");
+
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(SmithingTemplateItems.TIDECREST_SMITHING_TEMPLATE.get()),
+                        Ingredient.of(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get()),
+                        Ingredient.of(AllItems.STURDY_SHEET.get()),
+                        RecipeCategory.COMBAT,
+                        CreatorSwordItems.TIDECREST_CREATOR_SWORD.get()
+                )
+                .unlocks("has_tidecrest_template",
+                        has(SmithingTemplateItems.TIDECREST_SMITHING_TEMPLATE.get()))
+                .save(recipeOutput, "tidecrest_smithing");
     }
 }
