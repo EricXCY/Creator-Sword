@@ -118,6 +118,16 @@
   "item.creatorsword.trial_smithing_template.base_slot_description": "放入一把下界合金机械师之剑",
   "item.creatorsword.trial_smithing_template.additions_slot_description": "放入一块坚固板",
 
+  "item.creatorsword.tidecrest_smithing_template": "沧澜锻造模板",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.summary": "_刻着潮汐齿轮的海底遗物。_潮水磨去了铭文，却没能抹去齿轮的纹路。",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.condition1": "获取方式",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.behaviour1": "在_冷水海底废墟_和_暖水海底废墟_进行_考古_获得。",
+  "item.creatorsword.tidecrest_smithing_template.applies_to": "下界合金机械师之剑",
+  "item.creatorsword.tidecrest_smithing_template.ingredients": "坚固板",
+  "item.creatorsword.tidecrest_smithing_template.upgrade_description": "沧澜升级",
+  "item.creatorsword.tidecrest_smithing_template.base_slot_description": "放入一把下界合金机械师之剑",
+  "item.creatorsword.tidecrest_smithing_template.additions_slot_description": "放入一块坚固板",
+
   "item.creatorsword.precision_trial_key": "智能试炼钥匙",
   "item.creatorsword.precision_trial_key.tooltip.summary": "更高级的试炼钥匙，似乎能绕过某个桎梏。",
   "item.creatorsword.precision_ominous_trial_key": "智能不祥试炼钥匙",

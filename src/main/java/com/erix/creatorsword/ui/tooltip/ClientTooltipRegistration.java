@@ -34,10 +34,9 @@ public class ClientTooltipRegistration {
             registerCreateTooltip(IncompleteCreatorSwordItems.INCOMPLETE_NETHERITE_CREATOR_SWORD.get());
             TooltipModifier.REGISTRY.register(FrogportGrappleItem.FROGPORT_GRAPPLE.get(),
                     new FrogportGrappleTooltipModifier(FrogportGrappleItem.FROGPORT_GRAPPLE.get()));
-            TooltipModifier.REGISTRY.register(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get(),
-                    new TemplateTooltipModifier(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get()));
-            TooltipModifier.REGISTRY.register(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get(),
-                    new TemplateTooltipModifier(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get()));
+            for (Supplier<? extends Item> template : SmithingTemplateItems.CSTEMPLATES) {
+                TooltipModifier.REGISTRY.register(template.get(), new TemplateTooltipModifier(template.get()));
+            }
             registerCreateTooltip(CSItems.PRECISION_TRIAL_KEY.get());
             registerCreateTooltip(CSItems.PRECISION_OMINOUS_TRIAL_KEY.get());
             TooltipModifier.REGISTRY.register(Items.ENCHANTED_BOOK, new EnchantedBookTooltipModifier());

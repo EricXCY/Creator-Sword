@@ -118,6 +118,16 @@
   "item.creatorsword.trial_smithing_template.base_slot_description": "Add a Netherite Creator's Sword",
   "item.creatorsword.trial_smithing_template.additions_slot_description": "Add a sturdy sheet",
 
+  "item.creatorsword.tidecrest_smithing_template": "Tidecrest Smithing Template",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.summary": "_A relic from the seabed, etched with a tidal gear._The tides wore away its inscription, yet the outlines of its gears remain.",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.condition1": "Obtaining",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.behaviour1": "Obtained through _archaeology_ at _cold ocean ruins_ and _warm ocean ruins_.",
+  "item.creatorsword.tidecrest_smithing_template.applies_to": "Netherite Creator's Sword",
+  "item.creatorsword.tidecrest_smithing_template.ingredients": "Sturdy Sheet",
+  "item.creatorsword.tidecrest_smithing_template.upgrade_description": "Tidecrest Upgrade",
+  "item.creatorsword.tidecrest_smithing_template.base_slot_description": "Add a Netherite Creator's Sword",
+  "item.creatorsword.tidecrest_smithing_template.additions_slot_description": "Add a sturdy sheet",
+
   "item.creatorsword.precision_trial_key": "Smart Trial Key",
   "item.creatorsword.precision_trial_key.tooltip.summary": "A more advanced Trial Key. It seems to slip past a certain restriction.",
   "item.creatorsword.precision_ominous_trial_key": "Smart Ominous Trial Key",

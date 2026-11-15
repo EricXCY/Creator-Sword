@@ -118,6 +118,16 @@
   "item.creatorsword.trial_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
   "item.creatorsword.trial_smithing_template.additions_slot_description": "Добавьте прочную пластину",
 
+  "item.creatorsword.tidecrest_smithing_template": "Кузнечный шаблон Гребень прилива",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.summary": "_Реликвия морского дна с узором приливной шестерни._Приливы стёрли надписи, но не смогли стереть очертания шестерён.",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.condition1": "Получение",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.behaviour1": "Можно получить с помощью _археологии_ в _холодных_ и _тёплых подводных руинах_.",
+  "item.creatorsword.tidecrest_smithing_template.applies_to": "Незеритовый Меч Создателя",
+  "item.creatorsword.tidecrest_smithing_template.ingredients": "Прочная пластина",
+  "item.creatorsword.tidecrest_smithing_template.upgrade_description": "Улучшение Гребень прилива",
+  "item.creatorsword.tidecrest_smithing_template.base_slot_description": "Добавьте Незеритовый Меч Создателя",
+  "item.creatorsword.tidecrest_smithing_template.additions_slot_description": "Добавьте прочную пластину",
+
   "item.creatorsword.precision_trial_key": "Умный ключ испытаний",
   "item.creatorsword.precision_trial_key.tooltip.summary": "Более продвинутый ключ испытаний. Кажется, он способен обойти некое ограничение.",
   "item.creatorsword.precision_ominous_trial_key": "Умный зловещий ключ испытаний",
