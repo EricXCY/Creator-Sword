@@ -35,6 +35,12 @@ public class CreatorSwordItems {
     public static final ResourceLocation TRIAL_CREATOR_SWORD_GEAR_MODEL =
             ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/creator_sword/trial_gear");
 
+    public static final ResourceLocation TIDECREST_CREATOR_SWORD_MODEL =
+            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/creator_sword/tidecrest_sword");
+
+    public static final ResourceLocation TIDECREST_CREATOR_SWORD_GEAR_MODEL =
+            ResourceLocation.fromNamespaceAndPath(CreatorSword.MODID, "item/creator_sword/tidecrest_gear");
+
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreatorSword.MODID);
 
     public static final DeferredItem<SwordItem> CREATOR_SWORD = ITEMS.registerItem("creator_sword",
@@ -49,10 +55,14 @@ public class CreatorSwordItems {
     public static final DeferredItem<SwordItem> TRIAL_CREATOR_SWORD = ITEMS.registerItem("trial_creator_sword",
             TrialCreatorSwordItem::new);
 
+    public static final DeferredItem<SwordItem> TIDECREST_CREATOR_SWORD = ITEMS.registerItem("tidecrest_creator_sword",
+            TidecrestCreatorSwordItem::new);
+
     public static final List<Supplier<? extends Item>> CREATOR_SWORDS = List.of(
             CREATOR_SWORD,
             NETHERITE_CREATOR_SWORD,
             CNY_CREATOR_SWORD,
-            TRIAL_CREATOR_SWORD
+            TRIAL_CREATOR_SWORD,
+            TIDECREST_CREATOR_SWORD
     );
 }

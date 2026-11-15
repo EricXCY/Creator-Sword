@@ -39,6 +39,13 @@
   "item.creatorsword.trial_creator_sword.tooltip.condition2": "При разборке механизмов",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
 
+  "item.creatorsword.tidecrest_creator_sword": "Гребень прилива",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.summary": "Утраченный меч с функциями гаечного ключа.",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition1": "При атаке",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition2": "При разборке механизмов",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour2": "Можно разобрать _дополнительные редстоун-компоненты_.",
+
   "item.creatorsword.flywheel_mace": "Булава с маховиком",
   "item.creatorsword.flywheel_mace.tooltip.summary": "Накапливайте энергию. Бейте булавой.",
   "item.creatorsword.flywheel_mace.tooltip.condition1": "При удержании правой кнопки мыши",

@@ -39,6 +39,13 @@
   "item.creatorsword.trial_creator_sword.tooltip.condition2": "拆除组件时",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
 
+  "item.creatorsword.tidecrest_creator_sword": "沧澜",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.summary": "集成扳手功能的失落之剑。",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition1": "攻击时",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition2": "拆除组件时",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
+
   "item.creatorsword.flywheel_mace": "飞轮重锤",
   "item.creatorsword.flywheel_mace.tooltip.summary": "积蓄能量，重锤出击。",
   "item.creatorsword.flywheel_mace.tooltip.condition1": "按住右键时",

@@ -39,6 +39,13 @@
   "item.creatorsword.trial_creator_sword.tooltip.condition2": "When dismantling components",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "_More redstone comonents_ can be dismantled.",
 
+  "item.creatorsword.tidecrest_creator_sword": "Tidecrest",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.summary": "A lost sword with wrench functionality.",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition1": "When attacking",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour1": "_Add air_ to the backtank.",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition2": "When dismantling components",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour2": "_More redstone comonents_ can be dismantled.",
+
   "item.creatorsword.flywheel_mace": "Flywheel Mace",
   "item.creatorsword.flywheel_mace.tooltip.summary": "Store energy. Strike with the mace.",
   "item.creatorsword.flywheel_mace.tooltip.condition1": "While holding right-click",

@@ -53,6 +53,7 @@ public class CreatorSwordJeiPlugin implements IModPlugin {
                 makeAnvilRepair(vanilla, CreatorSwordItems.NETHERITE_CREATOR_SWORD.get(), Items.NETHERITE_INGOT),
                 makeAnvilRepair(vanilla, CreatorSwordItems.CNY_CREATOR_SWORD.get(), Items.NETHERITE_INGOT),
                 makeAnvilRepair(vanilla, CreatorSwordItems.TRIAL_CREATOR_SWORD.get(), Items.NETHERITE_INGOT),
+                makeAnvilRepair(vanilla, CreatorSwordItems.TIDECREST_CREATOR_SWORD.get(), Items.NETHERITE_INGOT),
                 makeAnvilRepair(vanilla, FlywheelMaceItem.FLYWHEEL_MACE.get(), Items.HEAVY_CORE)
         ));
     }
