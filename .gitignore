@@ -27,3 +27,4 @@ repo
 /src/generated/resources/.cache/
 /docs
 /tools
+/tmp
