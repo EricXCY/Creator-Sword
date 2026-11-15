@@ -7,7 +7,7 @@
   "item.creatorsword.cogwheel_shield.tooltip.condition1": "При нажатии ПКМ",
   "item.creatorsword.cogwheel_shield.tooltip.behaviour1": "Отображает _RPM_ в _правом нижнем_ углу экрана.",
   "item.creatorsword.cogwheel_shield.tooltip.condition2": "При нажатии и удерживании клавиши вращения",
-  "item.creatorsword.cogwheel_shield.tooltip.behaviour2": "Раскручивается с фиксированным ускорением. Надетый _баллон_ расходует воздух для _увеличения ускорения_.",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour2": "Постепенно увеличивает скорость вращения щита. Надетый _баллон_ расходует воздух для _увеличения ускорения_.",
   "item.creatorsword.cogwheel_shield.tooltip.condition3": "При отпускании клавиши вращения (скорость вращения ≥ 64 RPM)",
   "item.creatorsword.cogwheel_shield.tooltip.behaviour3": "_Бросается_ и наносит _урон_ существам на своём пути. _Урон_ зависит от _скорости вращения_.",
 

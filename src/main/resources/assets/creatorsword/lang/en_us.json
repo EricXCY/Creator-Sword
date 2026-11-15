@@ -7,7 +7,7 @@
   "item.creatorsword.cogwheel_shield.tooltip.condition1": "When right-clicking",
   "item.creatorsword.cogwheel_shield.tooltip.behaviour1": "Displays _RPM_ in the _bottom right_ corner of the screen.",
   "item.creatorsword.cogwheel_shield.tooltip.condition2": "When pressing rotation key",
-  "item.creatorsword.cogwheel_shield.tooltip.behaviour2": "Rotates at a fixed acceleration. Equipping a _backtank_ can consume air to _increase acceleration_.",
+  "item.creatorsword.cogwheel_shield.tooltip.behaviour2": "Continuously increases the shield's rotation speed. Equipping a _backtank_ can consume air to _increase acceleration_.",
   "item.creatorsword.cogwheel_shield.tooltip.condition3": "When releasing key, rotation speed>=64RPM",
   "item.creatorsword.cogwheel_shield.tooltip.behaviour3": "_Thrown_ and causes _damage_ to mobs along the path. _Damage_ depends on _rotation speed_.",
 
