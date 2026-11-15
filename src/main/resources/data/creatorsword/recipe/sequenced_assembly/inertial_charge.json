@@ -10,7 +10,7 @@
       "components": {
         "minecraft:stored_enchantments": {
           "levels": {
-            "creatorsword:inertial_storage": 1
+            "creatorsword:inertial_charge": 1
           }
         }
       }

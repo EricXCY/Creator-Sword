@@ -33,9 +33,9 @@ import java.util.function.Consumer;
 public class FlywheelMaceItem extends MaceItem {
     private static final int USE_DURATION = 72000;
 
-    private static float getInertialStorageMultiplier(ItemStack stack) {
+    private static float getInertialChargeMultiplier(ItemStack stack) {
         for (var entry : stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY).entrySet()) {
-            if (entry.getKey().is(EnchantmentKeys.INERTIAL_STORAGE)) {
+            if (entry.getKey().is(EnchantmentKeys.INERTIAL_CHARGE)) {
                 return 1f + 0.3f * Math.max(0, entry.getIntValue());
             }
         }
@@ -44,9 +44,9 @@ public class FlywheelMaceItem extends MaceItem {
 
     public static float getMaxEnergy(ItemStack stack) {
         for (var entry : stack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY).entrySet()) {
-            if (entry.getKey().is(EnchantmentKeys.OVERDRIVE) && entry.getIntValue() > 0) return 2f * getInertialStorageMultiplier(stack);
+            if (entry.getKey().is(EnchantmentKeys.OVERDRIVE) && entry.getIntValue() > 0) return 2f * getInertialChargeMultiplier(stack);
         }
-        return getInertialStorageMultiplier(stack);
+        return getInertialChargeMultiplier(stack);
     }
 
     public static int getPneumaticBoostLevel(ItemStack stack) {
@@ -62,7 +62,7 @@ public class FlywheelMaceItem extends MaceItem {
         int level = getPneumaticBoostLevel(stack);
         float enchantmentBoost = 0.3f * level;
         float airBoost = paidAir ? 0.15f * (level + 1) : 0f;
-        return (1f + enchantmentBoost + airBoost) * getInertialStorageMultiplier(stack);
+        return (1f + enchantmentBoost + airBoost) * getInertialChargeMultiplier(stack);
     }
 
     public FlywheelMaceItem(Properties properties) {

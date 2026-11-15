@@ -21,7 +21,7 @@ import static com.erix.creatorsword.ResourceLocationUtil.getResourceLocation;
 public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> PNEUMATIC_BOOST = registerKey("pneumatic_boost");
     public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive");
-    public static final ResourceKey<Enchantment> INERTIAL_STORAGE = registerKey("inertial_storage");
+    public static final ResourceKey<Enchantment> INERTIAL_CHARGE = registerKey("inertial_charge");
     public static final ResourceKey<Enchantment> RELAY_IMPACT = registerKey("relay_impact");
     public static final ResourceKey<Enchantment> STURDY = registerKey("sturdy");
     public static final ResourceKey<Enchantment> STICKY_TONGUE = registerKey("sticky_tongue");
@@ -60,9 +60,9 @@ public class EnchantmentKeys {
                 )
         ));
 
-        register(context, INERTIAL_STORAGE, new Enchantment.Builder(
+        register(context, INERTIAL_CHARGE, new Enchantment.Builder(
                 Enchantment.definition(
-                        items.getOrThrow(CSItemTag.ENCHANTABLE_INERTIAL_STORAGE),
+                        items.getOrThrow(CSItemTag.ENCHANTABLE_INERTIAL_CHARGE),
                         7,
                         3,
                         Enchantment.dynamicCost(8, 8),

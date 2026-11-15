@@ -1,7 +1,7 @@
 {
   "anvil_cost": 1,
   "description": {
-    "translate": "enchantment.creatorsword.inertial_storage"
+    "translate": "enchantment.creatorsword.inertial_charge"
   },
   "max_cost": {
     "base": 30,
@@ -15,6 +15,6 @@
   "slots": [
     "hand"
   ],
-  "supported_items": "#creatorsword:inertial_storage",
+  "supported_items": "#creatorsword:inertial_charge",
   "weight": 7
 }
