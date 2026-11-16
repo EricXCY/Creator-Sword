@@ -67,7 +67,7 @@
   "item.creatorsword.frogport_grapple": "Frogport Grapple",
   "item.creatorsword.frogport_grapple.tooltip.summary": "A grappling hook inspired by package frogport.",
   "item.creatorsword.frogport_grapple.tooltip.condition1": "When right-clicking",
-  "item.creatorsword.frogport_grapple.tooltip.behaviour1": "_Hook_ up to a distance of up to 48 squares.",
+  "item.creatorsword.frogport_grapple.tooltip.behaviour1": "_Hook_ targets up to %s blocks away.",
   "item.creatorsword.frogport_grapple.tooltip.condition2": "Towards mob",
   "item.creatorsword.frogport_grapple.tooltip.behaviour2": "_Pull_ mob and _catch_ it if holding a capture box in another hand.",
   "item.creatorsword.frogport_grapple.tooltip.aeronautics.condition": "When hooked onto an Aeronautics physics structure",
