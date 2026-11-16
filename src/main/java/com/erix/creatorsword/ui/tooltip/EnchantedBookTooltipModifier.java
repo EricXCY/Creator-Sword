@@ -1,7 +1,7 @@
 package com.erix.creatorsword.ui.tooltip;
 
 import com.erix.creatorsword.CreatorSword;
-import com.simibubi.create.foundation.item.TooltipHelper;
+import com.simibubi.create.foundation.item.ItemDescription;
 import com.simibubi.create.foundation.item.TooltipModifier;
 import com.simibubi.create.foundation.utility.CreateLang;
 import net.createmod.catnip.lang.FontHelper.Palette;
@@ -26,28 +26,22 @@ public final class EnchantedBookTooltipModifier implements TooltipModifier {
             if (key == null || !CreatorSword.MODID.equals(key.location().getNamespace())) {
                 continue;
             }
-            String descriptionKey = key.location().toLanguageKey("enchantment") + ".desc";
-            if (!I18n.exists(descriptionKey)) {
+            String enchantmentKey = key.location().toLanguageKey("enchantment");
+            String summaryKey = enchantmentKey + ".tooltip.summary";
+            if (!I18n.exists(summaryKey)) {
                 continue;
             }
 
             String name = Enchantment.getFullname(entry.getKey(), entry.getIntValue()).getString();
-            // Reuse the vanilla name line instead of adding a second enchantment heading.
             for (int i = 0; i < tooltip.size(); i++) {
                 if (!tooltip.get(i).getString().equals(name)) {
                     continue;
                 }
                 hasDescription = true;
                 if (expanded) {
-                    int insertionIndex = i + 1;
-                    // Split explicit line breaks before Create's width-based wrapping.
-                    for (String line : I18n.get(descriptionKey).split("\\R", -1)) {
-                        var wrappedLines = TooltipHelper.cutStringTextComponent(
-                                line, Palette.STANDARD_CREATE.primary(),
-                                Palette.STANDARD_CREATE.highlight(), 1);
-                        tooltip.addAll(insertionIndex, wrappedLines);
-                        insertionIndex += wrappedLines.size();
-                    }
+                    ItemDescription description = buildDescription(enchantmentKey);
+                    var lines = description.linesOnShift();
+                    tooltip.addAll(i + 1, lines.subList(2, lines.size()));
                 }
                 break;
             }
@@ -59,4 +53,23 @@ public final class EnchantedBookTooltipModifier implements TooltipModifier {
                     .withStyle(ChatFormatting.DARK_GRAY));
         }
     }
+
+    private static ItemDescription buildDescription(String enchantmentKey) {
+        String tooltipKey = enchantmentKey + ".tooltip";
+        String summaryKey = tooltipKey + ".summary";
+        ItemDescription.Builder builder = new ItemDescription.Builder(Palette.STANDARD_CREATE);
+        for (String line : I18n.get(summaryKey).split("\\R", -1)) {
+            builder.addSummary(line);
+        }
+        for (int index = 1; ; index++) {
+            String conditionKey = tooltipKey + ".condition" + index;
+            String behaviourKey = tooltipKey + ".behaviour" + index;
+            if (!I18n.exists(conditionKey) || !I18n.exists(behaviourKey)) {
+                break;
+            }
+            builder.addBehaviour(I18n.get(conditionKey), I18n.get(behaviourKey));
+        }
+        return builder.build();
+    }
+
 }
