@@ -28,7 +28,7 @@ public class CSFluids {
         return REGISTRATE.virtualFluid(
                         name,
                         (properties, stillTexture, flowingTexture) ->
-                                new OminousEssenceFluidType(properties, stillTexture, flowingTexture, amplifier),
+                                new OminousEssenceFluidType(properties, amplifier),
                         VirtualFluid::createSource,
                         VirtualFluid::createFlowing
                 )

@@ -4,7 +4,6 @@ import com.erix.creatorsword.CreatorSword;
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.datagen.enchantments.EnchantmentKeys;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -21,14 +20,9 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Consumer;
 
 public class FlywheelMaceItem extends MaceItem {
     private static final int USE_DURATION = 72000;
@@ -210,12 +204,6 @@ public class FlywheelMaceItem extends MaceItem {
         newWithoutAnimation.remove(CSDataComponents.FLYWHEEL_ROTATION.get());
         newWithoutAnimation.remove(CSDataComponents.FLYWHEEL_LAST_AIR_TICK.get());
         return slotChanged || !ItemStack.matches(oldWithoutAnimation, newWithoutAnimation);
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, new FlywheelMaceRenderer()));
     }
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CreatorSword.MODID);

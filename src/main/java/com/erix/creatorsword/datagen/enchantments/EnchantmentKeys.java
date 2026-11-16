@@ -7,15 +7,13 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.block.Block;
 
-import static com.erix.creatorsword.ResourceLocationUtil.getResourceLocation;
+import static com.erix.creatorsword.CreatorSword.asResource;
 
 
 public class EnchantmentKeys {
@@ -27,14 +25,11 @@ public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> STICKY_TONGUE = registerKey("sticky_tongue");
 
     private static ResourceKey<Enchantment> registerKey(String name) {
-        return ResourceKey.create(Registries.ENCHANTMENT, getResourceLocation(name));
+        return ResourceKey.create(Registries.ENCHANTMENT, asResource(name));
     }
 
     public static void bootstrap(BootstrapContext<Enchantment> context) {
-        HolderGetter<DamageType> damageTypes = context.lookup(Registries.DAMAGE_TYPE);
-        HolderGetter<Enchantment> enchantments = context.lookup(Registries.ENCHANTMENT);
         HolderGetter<Item> items = context.lookup(Registries.ITEM);
-        HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
 
         register(context, PNEUMATIC_BOOST, new Enchantment.Builder(
                 Enchantment.definition(

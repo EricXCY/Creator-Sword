@@ -5,7 +5,6 @@ import com.erix.creatorsword.config.CreatorSwordConfigs;
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.simibubi.create.foundation.item.CustomArmPoseItem;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -27,10 +26,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.*;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -60,17 +55,6 @@ public class FrogportGrappleItem extends Item implements CustomArmPoseItem {
 
     public FrogportGrappleItem(Properties properties) {
         super(properties);
-    }
-
-    @EventBusSubscriber(modid = CreatorSword.MODID, value = Dist.CLIENT)
-    public static final class ClientExtensions {
-        private ClientExtensions() {}
-
-        @SubscribeEvent
-        public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-            var item = FROGPORT_GRAPPLE.get();
-            event.registerItem(SimpleCustomRenderer.create(item, new FrogportGrappleItemRender()), item);
-        }
     }
 
     @Override

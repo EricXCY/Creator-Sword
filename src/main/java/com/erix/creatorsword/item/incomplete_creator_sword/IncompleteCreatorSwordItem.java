@@ -5,7 +5,6 @@
 package com.erix.creatorsword.item.incomplete_creator_sword;
 
 import com.simibubi.create.content.equipment.wrench.WrenchItem;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -21,6 +20,7 @@ public class IncompleteCreatorSwordItem extends WrenchItem {
     @Override
     @OnlyIn(Dist.CLIENT)
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, new IncompleteCreatorSwordItemRenderer()));
+        // Suppress WrenchItem's legacy renderer; ClientExtensions registers ours.
     }
+
 }

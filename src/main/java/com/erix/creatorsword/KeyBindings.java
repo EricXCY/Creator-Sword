@@ -22,11 +22,4 @@ public class KeyBindings {
         event.register(ROTATE_COGWHEEL);
     }
 
-    public static KeyMapping getRotateKey() {
-        return ROTATE_COGWHEEL;
-    }
-
-    public static boolean isKeyDown(KeyMapping key) {
-        return key.isDown();
-    }
 }

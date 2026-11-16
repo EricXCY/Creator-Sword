@@ -23,7 +23,7 @@ repositories {
         url = "https://maven.architectury.dev"
     }
     maven {
-        url "https://maven.ftb.dev/releases"
+        url = "https://maven.ftb.dev/releases"
         content {
             includeGroup "dev.ftb.mods"
         }

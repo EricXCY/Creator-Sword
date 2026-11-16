@@ -2,10 +2,8 @@ package com.erix.creatorsword.item.creator_sword;
 
 import com.simibubi.create.AllSoundEvents;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.wrench.IWrenchable;
-import com.simibubi.create.foundation.item.render.SimpleCustomRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -21,13 +19,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import java.util.function.Consumer;
 
 public abstract class BaseCreatorSwordItem extends SwordItem {
     public BaseCreatorSwordItem(Tiers tier, Properties props) {
@@ -40,12 +34,6 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
 
     public ResourceLocation getGearModelLocation() {
         return CreatorSwordItems.CREATOR_SWORD_GEAR_MODEL;
-    }
-
-    @Override
-    @OnlyIn(Dist.CLIENT)
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(SimpleCustomRenderer.create(this, new BaseCreatorSwordItemRenderer(this)));
     }
 
     public boolean hurtEnemy(ItemStack stack, @NotNull LivingEntity target, @NotNull LivingEntity attacker) {
@@ -135,7 +123,7 @@ public abstract class BaseCreatorSwordItem extends SwordItem {
                 world,
                 pos,
                 1.0F,
-                Create.RANDOM.nextFloat() * 0.5F + 0.5F
+                world.getRandom().nextFloat() * 0.5F + 0.5F
         );
 
         return InteractionResult.SUCCESS;

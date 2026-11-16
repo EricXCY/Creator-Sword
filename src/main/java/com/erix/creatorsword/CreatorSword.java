@@ -7,7 +7,6 @@ import com.erix.creatorsword.data.CSConditions;
 import com.erix.creatorsword.data.CSDataComponents;
 import com.erix.creatorsword.data.CSLootModifiers;
 import com.erix.creatorsword.data.advancement.CreatorSwordCriteriaTriggers;
-import com.erix.creatorsword.enchantment.CSEnchantmentComponents;
 import com.erix.creatorsword.fluid.CSFluidCapabilities;
 import com.erix.creatorsword.fluid.CSFluids;
 import com.erix.creatorsword.item.CSItems;
@@ -64,7 +63,6 @@ public class CreatorSword {
         CSDataComponents.DATA_COMPONENTS.register(modEventBus);
         CreatorSwordCriteriaTriggers.TRIGGERS.register(modEventBus);
 
-        CSEnchantmentComponents.ENCHANTMENT_COMPONENT_TYPES.register(modEventBus);
         CSLootModifiers.register(modEventBus);
         CSConditions.register(modEventBus);
 
