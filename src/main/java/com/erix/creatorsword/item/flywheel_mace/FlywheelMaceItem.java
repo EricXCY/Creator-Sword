@@ -147,10 +147,9 @@ public class FlywheelMaceItem extends MaceItem {
     }
 
     private static boolean tryConsumeAir(ServerPlayer player, ItemStack stack) {
-        int boostLevel = getPneumaticBoostLevel(stack);
-        if (boostLevel <= 0) return false;
         var tanks = BacktankUtil.getAllWithAir(player);
         if (tanks.isEmpty()) return false;
+        int boostLevel = getPneumaticBoostLevel(stack);
 
         long tick = player.level().getGameTime();
         long lastAirTick = stack.getOrDefault(CSDataComponents.FLYWHEEL_LAST_AIR_TICK.get(), -1L);
