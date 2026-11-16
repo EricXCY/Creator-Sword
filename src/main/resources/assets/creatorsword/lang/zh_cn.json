@@ -31,6 +31,8 @@
   "item.creatorsword.cny_creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
   "item.creatorsword.cny_creator_sword.tooltip.condition2": "拆除组件时",
   "item.creatorsword.cny_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
+  "item.creatorsword.cny_creator_sword.tooltip.condition3": "右键加工材料时",
+  "item.creatorsword.cny_creator_sword.tooltip.behaviour3": "批量_烟熏_瞄准的掉落物或台面材料并消耗_1点耐久_。",
 
   "item.creatorsword.trial_creator_sword": "试炼之剑",
   "item.creatorsword.trial_creator_sword.tooltip.summary": "集成扳手功能的试炼之剑。",
@@ -38,6 +40,8 @@
   "item.creatorsword.trial_creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
   "item.creatorsword.trial_creator_sword.tooltip.condition2": "拆除组件时",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
+  "item.creatorsword.trial_creator_sword.tooltip.condition3": "右键加工材料时",
+  "item.creatorsword.trial_creator_sword.tooltip.behaviour3": "批量_砂纸打磨_瞄准的掉落物或台面材料并消耗_1点耐久_。",
 
   "item.creatorsword.tidecrest_creator_sword": "沧澜",
   "item.creatorsword.tidecrest_creator_sword.tooltip.summary": "集成扳手功能的失落之剑。",
@@ -45,6 +49,8 @@
   "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
   "item.creatorsword.tidecrest_creator_sword.tooltip.condition2": "拆除组件时",
   "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour2": "可以拆除_更多的红石组件_。",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.condition3": "右键加工材料时",
+  "item.creatorsword.tidecrest_creator_sword.tooltip.behaviour3": "批量_水洗_瞄准的掉落物或台面材料并消耗_1点耐久_。",
 
   "item.creatorsword.flywheel_mace": "飞轮重锤",
   "item.creatorsword.flywheel_mace.tooltip.summary": "积蓄能量，重锤出击。",
@@ -52,6 +58,8 @@
   "item.creatorsword.flywheel_mace.tooltip.behaviour1": "蓄积动能，松开向前_冲刺_并对路径上的目标造成_重击_。",
   "item.creatorsword.flywheel_mace.tooltip.condition2": "装备背罐时",
   "item.creatorsword.flywheel_mace.tooltip.behaviour2": "消耗_空气_来加速_蓄力_",
+  "item.creatorsword.flywheel_mace.tooltip.condition3": "左键加工材料时",
+  "item.creatorsword.flywheel_mace.tooltip.behaviour3": "批量_辊压_掉落物或台面材料和_压块_工作盆材料并消耗_1点耐久_。",
 
   "item.creatorsword.incomplete_creator_sword": "不完整的机械师之剑",
   "item.creatorsword.incomplete_creator_sword.tooltip.summary": "被折断的机械师之剑。",
