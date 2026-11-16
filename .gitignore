@@ -25,6 +25,7 @@ run-data
 
 repo
 /src/generated/resources/.cache/
+/src/gametest/
 /docs
 /tools
 /tmp
