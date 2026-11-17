@@ -54,12 +54,13 @@ public class CogwheelShieldKeyInputHandler {
         ItemStack offhand = player.getOffhandItem();
         ItemStack mainhand = player.getMainHandItem();
 
+        boolean heldShieldChanged = offhand != lastOffhandStack || mainhand != lastMainhandStack;
         syncOrLoadStateWhenHandLayoutChanged(offhand, mainhand);
 
         tickShieldLogic(offhand, true, isDown, player);
         tickShieldLogic(mainhand, false, isDown, player);
 
-        handleChargingStatePacket(offhand, mainhand, isDown);
+        handleChargingStatePacket(offhand, mainhand, isDown, heldShieldChanged);
         handleAdvancementSpeedPacket(offhand, mainhand, isDown);
         handleThrowOnKeyRelease(offhand, isDown, player);
 
@@ -399,7 +400,7 @@ public class CogwheelShieldKeyInputHandler {
         stack.set(CSDataComponents.GEAR_SHIELD_LAST_UPDATE.get(), updateTick);
     }
 
-    private static void handleChargingStatePacket(ItemStack offhand, ItemStack mainhand, boolean isDown) {
+    private static void handleChargingStatePacket(ItemStack offhand, ItemStack mainhand, boolean isDown, boolean heldShieldChanged) {
         boolean hasShield =
                 offhand.getItem() instanceof BaseCogwheelShieldItem ||
                         mainhand.getItem() instanceof BaseCogwheelShieldItem;
@@ -407,7 +408,7 @@ public class CogwheelShieldKeyInputHandler {
         if (!hasShield)
             return;
 
-        if (isDown && !wasDown) {
+        if (isDown && (!wasDown || heldShieldChanged)) {
             PacketDistributor.sendToServer(new ShieldChargingPayload(true));
         }
 

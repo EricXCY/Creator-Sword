@@ -24,6 +24,7 @@ public class CSEnchantmentTag extends EnchantmentTagsProvider {
                 .add(EnchantmentKeys.INERTIAL_CHARGE)
                 .add(EnchantmentKeys.RELAY_IMPACT)
                 .add(EnchantmentKeys.PNEUMATIC_BOOST)
+                .add(EnchantmentKeys.REBOUND)
                 .add(EnchantmentKeys.STURDY)
                 .add(EnchantmentKeys.STICKY_TONGUE);
     }

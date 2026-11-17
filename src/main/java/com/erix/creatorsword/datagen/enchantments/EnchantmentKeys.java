@@ -21,6 +21,7 @@ public class EnchantmentKeys {
     public static final ResourceKey<Enchantment> OVERDRIVE = registerKey("overdrive");
     public static final ResourceKey<Enchantment> INERTIAL_CHARGE = registerKey("inertial_charge");
     public static final ResourceKey<Enchantment> RELAY_IMPACT = registerKey("relay_impact");
+    public static final ResourceKey<Enchantment> REBOUND = registerKey("rebound");
     public static final ResourceKey<Enchantment> STURDY = registerKey("sturdy");
     public static final ResourceKey<Enchantment> STICKY_TONGUE = registerKey("sticky_tongue");
 
@@ -76,6 +77,16 @@ public class EnchantmentKeys {
                         1,
                         EquipmentSlotGroup.HAND
                 )
+        ));
+
+        register(context, REBOUND, new Enchantment.Builder(
+                Enchantment.definition(items.getOrThrow(CSItemTag.ENCHANTABLE_REBOUND),
+                        7,
+                        1,
+                        Enchantment.dynamicCost(8, 8),
+                        Enchantment.dynamicCost(30, 15),
+                        1,
+                        EquipmentSlotGroup.HAND)
         ));
 
         register(context, STURDY, new Enchantment.Builder(
