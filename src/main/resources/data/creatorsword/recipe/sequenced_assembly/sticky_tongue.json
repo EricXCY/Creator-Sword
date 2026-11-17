@@ -3,7 +3,7 @@
   "ingredient": {
     "item": "minecraft:book"
   },
-  "loops": 1,
+  "loops": 3,
   "results": [
     {
       "chance": 20.0,
@@ -21,7 +21,7 @@
       "id": "minecraft:book"
     },
     {
-      "chance": 10.0,
+      "chance": 5.0,
       "id": "minecraft:slime_ball"
     },
     {
@@ -38,7 +38,7 @@
         },
         [
           {
-            "item": "minecraft:slime_block"
+            "item": "minecraft:slime_ball"
           }
         ]
       ],

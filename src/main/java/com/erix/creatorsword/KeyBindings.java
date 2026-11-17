@@ -21,5 +21,4 @@ public class KeyBindings {
     public static void onRegisterKeyMappings(RegisterKeyMappingsEvent event) {
         event.register(ROTATE_COGWHEEL);
     }
-
 }
