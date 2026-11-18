@@ -89,6 +89,9 @@ def refreshGeneratedResources = tasks.register('refreshGeneratedResources', Copy
     into layout.buildDirectory.dir('resources/main')
 }
 tasks.matching { it.name == 'runData' }.configureEach { finalizedBy refreshGeneratedResources }
+tasks.matching { it.name in ['runClient', 'runServer', 'runGameTestServer'] }.configureEach {
+    mustRunAfter refreshGeneratedResources
+}
 
 
 // Opt-in integration tests run with the real game, registries and Mixin transformations.

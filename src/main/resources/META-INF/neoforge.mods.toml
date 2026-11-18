@@ -51,7 +51,10 @@ description='''${mod_description}'''
 config="${mod_id}.mixins.json"
 
 [[mixins]]
-config="creatorsword-compat.mixins.json"
+config="${mod_id}.compat.mixins.json"
+
+[[mixins]]
+config="${mod_id}.pedestal.mixins.json"
 
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
