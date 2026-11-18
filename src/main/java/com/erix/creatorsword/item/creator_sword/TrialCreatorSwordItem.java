@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TrialCreatorSwordItem extends BaseCreatorSwordItem {
     public TrialCreatorSwordItem(Properties properties) {
-        super(Tiers.NETHERITE, properties.fireResistant().durability(2031).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 6, -1.8f)).rarity(Rarity.EPIC));
+        super(Tiers.NETHERITE, properties.fireResistant().durability(2031).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 7, -1.8f)).rarity(Rarity.EPIC));
     }
 
     @Override

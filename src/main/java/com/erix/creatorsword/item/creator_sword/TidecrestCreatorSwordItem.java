@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TidecrestCreatorSwordItem extends BaseCreatorSwordItem {
     public TidecrestCreatorSwordItem(Properties properties) {
-        super(Tiers.NETHERITE, properties.fireResistant().durability(2031).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 5, -1.5f)).rarity(Rarity.EPIC));
+        super(Tiers.NETHERITE, properties.fireResistant().durability(2031).attributes(SwordItem.createAttributes(Tiers.NETHERITE, 6, -1.5f)).rarity(Rarity.EPIC));
     }
 
     @Override
