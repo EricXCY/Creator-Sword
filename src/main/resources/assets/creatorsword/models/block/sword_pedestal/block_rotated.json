@@ -8,7 +8,7 @@
     "2": "creatorsword:block/sword_pedestal/sword_pedestal_top",
     "particle": "create:block/andesite_casing",
     "casing": "create:block/andesite_casing",
-    "side": "create:block/andesite_encased_cogwheel_side"
+    "side": "creatorsword:block/sword_pedestal/andesite_encased_sword_pedestal_side"
   },
   "elements": [
     {

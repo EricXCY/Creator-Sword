@@ -6,13 +6,13 @@
     "EnchantmentHelperMixin",
     "ItemProviderEntryMixin",
     "LivingEntityAttackStrengthAccessor",
-    "RadialWrenchHandlerMixin",
     "VaultServerDataMixin",
     "VaultServerKeyContextMixin",
     "VaultSharedDataMixin",
     "VaultValidKeyMixin"
   ],
   "client": [
+    "RadialWrenchHandlerMixin",
     "ItemSpriteAnimationMixin"
   ],
   "server": [

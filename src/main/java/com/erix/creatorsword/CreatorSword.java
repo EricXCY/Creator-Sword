@@ -1,5 +1,6 @@
 package com.erix.creatorsword;
 
+import com.erix.creatorsword.block.sword_pedestal.SwordPedestalBlocks;
 import com.erix.creatorsword.compat.aeronautics.FrogportAeronauticsCompat;
 import com.erix.creatorsword.compat.ftbultimine.CreatorSwordFTBUltimineCompat;
 import com.erix.creatorsword.config.CreatorSwordConfigs;
@@ -57,6 +58,7 @@ public class CreatorSword {
         FrogportGrappleTravelStat.register(modEventBus);
         CaptureBoxItem.ITEMS.register(modEventBus);
         CSItems.register(modEventBus);
+        SwordPedestalBlocks.register();
         SmithingTemplateItems.register(modEventBus);
 
         ModTabs.CREATIVE_TABS.register(modEventBus);

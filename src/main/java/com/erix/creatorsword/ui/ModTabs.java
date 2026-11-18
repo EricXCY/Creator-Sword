@@ -1,5 +1,6 @@
 package com.erix.creatorsword.ui;
 
+import com.erix.creatorsword.block.sword_pedestal.SwordPedestalBlocks;
 import com.erix.creatorsword.item.CSItems;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
@@ -35,9 +36,13 @@ public class ModTabs {
                         Output.accept(CogwheelShieldItems.COGWHEEL_SHIELD.get());
                         Output.accept(FrogportGrappleItem.FROGPORT_GRAPPLE.get());
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());
+
+                        Output.accept(SwordPedestalBlocks.SWORD_PEDESTAL.get());
+
                         Output.accept(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get());
                         Output.accept(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get());
                         Output.accept(SmithingTemplateItems.TIDECREST_SMITHING_TEMPLATE.get());
+
                         Output.accept(CSItems.TRIAL_KEY_DIE.get());
                         Output.accept(CSItems.OMINOUS_TRIAL_KEY_DIE.get());
                         Output.accept(CSItems.PRECISION_TRIAL_KEY.get());
