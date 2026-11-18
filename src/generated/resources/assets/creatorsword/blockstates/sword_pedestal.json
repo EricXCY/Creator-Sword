@@ -1,0 +1,108 @@
+{
+  "variants": {
+    "axis_along_first=false,bottom_shaft=false,facing=down": {
+      "model": "creatorsword:block/sword_pedestal/block_rotated",
+      "x": 180
+    },
+    "axis_along_first=false,bottom_shaft=false,facing=east": {
+      "model": "creatorsword:block/sword_pedestal/block",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=false,bottom_shaft=false,facing=north": {
+      "model": "creatorsword:block/sword_pedestal/block_rotated",
+      "x": 90
+    },
+    "axis_along_first=false,bottom_shaft=false,facing=south": {
+      "model": "creatorsword:block/sword_pedestal/block_rotated",
+      "x": 90,
+      "y": 180
+    },
+    "axis_along_first=false,bottom_shaft=false,facing=up": {
+      "model": "creatorsword:block/sword_pedestal/block_rotated"
+    },
+    "axis_along_first=false,bottom_shaft=false,facing=west": {
+      "model": "creatorsword:block/sword_pedestal/block",
+      "x": 90,
+      "y": 270
+    },
+    "axis_along_first=false,bottom_shaft=true,facing=down": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom_rotated",
+      "x": 180
+    },
+    "axis_along_first=false,bottom_shaft=true,facing=east": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=false,bottom_shaft=true,facing=north": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom_rotated",
+      "x": 90
+    },
+    "axis_along_first=false,bottom_shaft=true,facing=south": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom_rotated",
+      "x": 90,
+      "y": 180
+    },
+    "axis_along_first=false,bottom_shaft=true,facing=up": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom_rotated"
+    },
+    "axis_along_first=false,bottom_shaft=true,facing=west": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom",
+      "x": 90,
+      "y": 270
+    },
+    "axis_along_first=true,bottom_shaft=false,facing=down": {
+      "model": "creatorsword:block/sword_pedestal/block",
+      "x": 180
+    },
+    "axis_along_first=true,bottom_shaft=false,facing=east": {
+      "model": "creatorsword:block/sword_pedestal/block_rotated",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,bottom_shaft=false,facing=north": {
+      "model": "creatorsword:block/sword_pedestal/block",
+      "x": 90
+    },
+    "axis_along_first=true,bottom_shaft=false,facing=south": {
+      "model": "creatorsword:block/sword_pedestal/block",
+      "x": 90,
+      "y": 180
+    },
+    "axis_along_first=true,bottom_shaft=false,facing=up": {
+      "model": "creatorsword:block/sword_pedestal/block"
+    },
+    "axis_along_first=true,bottom_shaft=false,facing=west": {
+      "model": "creatorsword:block/sword_pedestal/block_rotated",
+      "x": 90,
+      "y": 270
+    },
+    "axis_along_first=true,bottom_shaft=true,facing=down": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom",
+      "x": 180
+    },
+    "axis_along_first=true,bottom_shaft=true,facing=east": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom_rotated",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,bottom_shaft=true,facing=north": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom",
+      "x": 90
+    },
+    "axis_along_first=true,bottom_shaft=true,facing=south": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom",
+      "x": 90,
+      "y": 180
+    },
+    "axis_along_first=true,bottom_shaft=true,facing=up": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom"
+    },
+    "axis_along_first=true,bottom_shaft=true,facing=west": {
+      "model": "creatorsword:block/sword_pedestal/block_bottom_rotated",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
