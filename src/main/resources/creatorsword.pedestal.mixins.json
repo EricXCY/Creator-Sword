@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.erix.creatorsword.block.sword_pedestal.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SwordPedestalRadialWrenchMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

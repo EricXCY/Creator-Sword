@@ -1,5 +1,6 @@
 package com.erix.creatorsword.datagen.recipes;
 
+import com.erix.creatorsword.block.sword_pedestal.SwordPedestalBlocks;
 import com.erix.creatorsword.item.capture_box.CaptureBoxItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
@@ -24,7 +25,7 @@ public class CSRecipe extends RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput) { // 有序合成
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CogwheelShieldItems.COGWHEEL_SHIELD.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, CogwheelShieldItems.COGWHEEL_SHIELD.get())
                 .pattern("PSP")
                 .pattern("PPP")
                 .pattern(" P ")
@@ -33,7 +34,7 @@ public class CSRecipe extends RecipeProvider {
                 .unlockedBy("has_andesite",has(AllBlocks.SHAFT))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, FrogportGrappleItem.FROGPORT_GRAPPLE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, FrogportGrappleItem.FROGPORT_GRAPPLE.get())
                 .pattern(" G ")
                 .pattern(" F ")
                 .pattern("SBS")
@@ -44,7 +45,35 @@ public class CSRecipe extends RecipeProvider {
                 .unlockedBy("has_package_frogport",has(AllBlocks.PACKAGE_FROGPORT))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, CaptureBoxItem.CAPTURE_BOX.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SwordPedestalBlocks.SWORD_PEDESTAL)
+                .pattern(" D ")
+                .pattern(" C ")
+                .define('D', AllBlocks.DEPOT)
+                .define('C', AllBlocks.COGWHEEL)
+                .unlockedBy("has_andesite_casing",has(AllBlocks.ANDESITE_CASING))
+                .save(recipeOutput, "creatorsword:sword_pedestal_from_depot");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SwordPedestalBlocks.SWORD_PEDESTAL)
+                .pattern(" A ")
+                .pattern(" B ")
+                .pattern(" C ")
+                .define('A', AllItems.ANDESITE_ALLOY)
+                .define('B', AllBlocks.ANDESITE_CASING)
+                .define('C', AllBlocks.COGWHEEL)
+                .unlockedBy("has_andesite_casing",has(AllBlocks.ANDESITE_CASING))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SwordPedestalBlocks.BRASS_SWORD_PEDESTAL)
+                .pattern(" P ")
+                .pattern(" S ")
+                .pattern(" B ")
+                .define('P', AllItems.PRECISION_MECHANISM)
+                .define('S', SwordPedestalBlocks.SWORD_PEDESTAL)
+                .define('B', AllBlocks.BRASS_CASING)
+                .unlockedBy("has_andesite_casing",has(AllItems.PRECISION_MECHANISM))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, CaptureBoxItem.CAPTURE_BOX.get())
                 .pattern(" C ")
                 .pattern(" B ")
                 .pattern(" C ")

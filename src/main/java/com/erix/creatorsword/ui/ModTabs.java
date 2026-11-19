@@ -38,6 +38,7 @@ public class ModTabs {
                         Output.accept(CaptureBoxItem.CAPTURE_BOX.get());
 
                         Output.accept(SwordPedestalBlocks.SWORD_PEDESTAL.get());
+                        Output.accept(SwordPedestalBlocks.BRASS_SWORD_PEDESTAL.get());
 
                         Output.accept(SmithingTemplateItems.CRIMSON_AFTERGLOW_SMITHING_TEMPLATE.get());
                         Output.accept(SmithingTemplateItems.TRIAL_SMITHING_TEMPLATE.get());

@@ -1,5 +1,6 @@
 {
   "creatorsword.keybinds.category": "机械师之剑",
+  "itemGroup.creatorsword": "机械师之剑",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "旋转齿轮盾",
 
   "item.creatorsword.cogwheel_shield": "齿轮盾",
@@ -34,7 +35,7 @@
   "item.creatorsword.cny_creator_sword.tooltip.condition3": "右键加工材料时",
   "item.creatorsword.cny_creator_sword.tooltip.behaviour3": "批量_烟熏_瞄准的掉落物或台面材料并消耗_1点耐久_。",
 
-  "item.creatorsword.trial_creator_sword": "试炼之剑",
+  "item.creatorsword.trial_creator_sword": "试炼者",
   "item.creatorsword.trial_creator_sword.tooltip.summary": "集成扳手功能的试炼之剑。",
   "item.creatorsword.trial_creator_sword.tooltip.condition1": "攻击时",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour1": "为背罐_增加空气_。",
@@ -94,7 +95,17 @@
   "item.creatorsword.capture_box.filled": "已捕获：%s",
   "item.creatorsword.capture_box.filled.unknown": "已捕获：<未知>",
   "tooltip.creatorsword.capture_box.health": "血量: %s",
-  "itemGroup.creatorsword": "机械师之剑",
+
+  "block.creatorsword.sword_pedestal": "剑座",
+  "block.creatorsword.brass_sword_pedestal": "黄铜剑座",
+  "creatorsword.ponder.sword_pedestal.header": "使用剑座提供动力",
+  "creatorsword.ponder.sword_pedestal.text_1": "右键插入扳手或机械师之剑，剑座就能以 64 RPM 的转速提供应力。",
+  "creatorsword.ponder.sword_pedestal.text_2": "插入不同物品提供不同应力量。",
+  "creatorsword.ponder.sword_pedestal.text_3": "扳手提供 4,096 SU。",
+  "creatorsword.ponder.sword_pedestal.text_4": "稀有的机械师之剑提供 32,768 SU。",
+  "creatorsword.ponder.sword_pedestal.text_5": "对准侧面下方的开关，按住右键选择转向。",
+  "creatorsword.ponder.sword_pedestal.text_6": "用扳手右键侧面改变姿态。",
+  "creatorsword.ponder.sword_pedestal.text_7": "用扳手右键底面，可以显示或隐藏输出轴。",
 
   "advancement.creatorsword.cogwheelshields_advancement_speed.title": "移动的粉碎轮?!",
   "advancement.creatorsword.cogwheelshields_advancement_speed.description": "主副手同时持有转速达到 512 的齿轮盾。",

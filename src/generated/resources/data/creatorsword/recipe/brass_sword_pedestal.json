@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "create:brass_casing"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "S": {
+      "item": "creatorsword:sword_pedestal"
+    }
+  },
+  "pattern": [
+    " P ",
+    " S ",
+    " B "
+  ],
+  "result": {
+    "count": 1,
+    "id": "creatorsword:brass_sword_pedestal"
+  }
+}

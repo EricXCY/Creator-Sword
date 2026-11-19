@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "creatorsword:incomplete_creator_sword",
+      "required": false
+    },
+    {
+      "id": "creatorsword:incomplete_netherite_creator_sword",
+      "required": false
+    },
+    {
+      "id": "create:wrench",
+      "required": false
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 package com.erix.creatorsword.datagen.tags;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.block.sword_pedestal.SwordPedestalTags;
+import com.simibubi.create.content.equipment.wrench.WrenchItem;
 import com.erix.creatorsword.item.cogwheel_shield.CogwheelShieldItems;
 import com.erix.creatorsword.item.creator_sword.CreatorSwordItems;
 import com.erix.creatorsword.item.flywheel_mace.FlywheelMaceItem;
@@ -56,6 +58,19 @@ public class CSItemTag extends ItemTagsProvider {
         addAll(tag(ItemTags.SWORDS), CreatorSwordItems.CREATOR_SWORDS);
         addAll(tag(Tags.Items.MELEE_WEAPON_TOOLS), CreatorSwordItems.CREATOR_SWORDS);
         addAll(tag(Tags.Items.TOOLS_WRENCH), CreatorSwordItems.CREATOR_SWORDS);
+        var pedestalWrenches = tag(SwordPedestalTags.LOWEST);
+        for (Item item : BuiltInRegistries.ITEM) {
+            if (item instanceof WrenchItem) {
+                pedestalWrenches.addOptional(BuiltInRegistries.ITEM.getKey(item));
+            }
+        }
+        tag(SwordPedestalTags.LOW).add(CreatorSwordItems.CREATOR_SWORD.get());
+        tag(SwordPedestalTags.MEDIUM).add(CreatorSwordItems.NETHERITE_CREATOR_SWORD.get());
+        tag(SwordPedestalTags.HIGH).add(
+                CreatorSwordItems.CNY_CREATOR_SWORD.get(),
+                CreatorSwordItems.TRIAL_CREATOR_SWORD.get(),
+                CreatorSwordItems.TIDECREST_CREATOR_SWORD.get());
+        tag(SwordPedestalTags.HIGHEST);
         tag(Tags.Items.TOOLS).add(
                 FrogportGrappleItem.FROGPORT_GRAPPLE.get());
         tag(Tags.Items.TOOLS_SHIELD).add(

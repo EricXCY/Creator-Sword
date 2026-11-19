@@ -1,5 +1,6 @@
 {
   "creatorsword.keybinds.category": "Меч Создателя",
+  "itemGroup.creatorsword": "Меч Создателя",
   "creatorsword.keybinds.keybind.rotate_cogwheel": "Раскрутить Зубчатый щит",
 
   "item.creatorsword.cogwheel_shield": "Зубчатый щит",
@@ -34,7 +35,7 @@
   "item.creatorsword.cny_creator_sword.tooltip.condition3": "При обработке материалов правой кнопкой мыши",
   "item.creatorsword.cny_creator_sword.tooltip.behaviour3": "Выполняет _копчение_ всей партии выброшенных предметов или материалов на рабочих поверхностях, на которые вы нацелены, расходуя _1 единицу прочности_.",
 
-  "item.creatorsword.trial_creator_sword": "Меч испытаний",
+  "item.creatorsword.trial_creator_sword": "Испытатель",
   "item.creatorsword.trial_creator_sword.tooltip.summary": "Меч испытаний с функциями гаечного ключа.",
   "item.creatorsword.trial_creator_sword.tooltip.condition1": "При атаке",
   "item.creatorsword.trial_creator_sword.tooltip.behaviour1": "_Добавляет воздух_ в баллон.",
@@ -66,12 +67,12 @@
   "item.creatorsword.incomplete_netherite_creator_sword": "Незавершённый незеритовый Меч Создателя",
   "item.creatorsword.incomplete_netherite_creator_sword.tooltip.summary": "Сломанный незеритовый Меч Создателя.",
 
-  "item.creatorsword.incomplete_pneumatic_boost_book": "Незавершённая книга «Пневмобуст»",
-  "item.creatorsword.incomplete_inertial_storage_book": "Незавершённая книга «Инерционный заряд»",
-  "item.creatorsword.incomplete_relay_impact_book": "Незавершённая книга «Эстафетный удар»",
-  "item.creatorsword.incomplete_overdrive_book": "Незавершённая книга «Форсаж»",
-  "item.creatorsword.incomplete_sturdy_book": "Незавершённая книга «Устойчивость»",
-  "item.creatorsword.incomplete_sticky_tongue_book": "Незавершённая книга «Липкий язык»",
+  "item.creatorsword.incomplete_pneumatic_boost_book": "Незавершённая зачарованная книга «Пневмобуст»",
+  "item.creatorsword.incomplete_inertial_storage_book": "Незавершённая зачарованная книга «Инерционный заряд»",
+  "item.creatorsword.incomplete_relay_impact_book": "Незавершённая зачарованная книга «Эстафетный удар»",
+  "item.creatorsword.incomplete_overdrive_book": "Незавершённая зачарованная книга «Форсаж»",
+  "item.creatorsword.incomplete_sturdy_book": "Незавершённая зачарованная книга «Устойчивость»",
+  "item.creatorsword.incomplete_sticky_tongue_book": "Незавершённая зачарованная книга «Липкий язык»",
 
   "item.creatorsword.supreme_glue": "Превосходный клей",
 
@@ -94,7 +95,17 @@
   "item.creatorsword.capture_box.filled": "Поймано: %s",
   "item.creatorsword.capture_box.filled.unknown": "Поймано: <Неизвестно>",
   "tooltip.creatorsword.capture_box.health": "Здоровье: %s",
-  "itemGroup.creatorsword": "Меч Создателя",
+
+  "block.creatorsword.sword_pedestal": "Пьедестал для меча",
+  "block.creatorsword.brass_sword_pedestal": "Латунный пьедестал для меча",
+  "creatorsword.ponder.sword_pedestal.header": "Приведение механизмов в движение с помощью пьедестала для меча",
+  "creatorsword.ponder.sword_pedestal.text_1": "Вставьте гаечный ключ или Меч Создателя правой кнопкой мыши. Пьедестал для меча обеспечивает нагрузочную способность при скорости 64 RPM.",
+  "creatorsword.ponder.sword_pedestal.text_2": "Разные вставленные предметы обеспечивают разную нагрузочную способность.",
+  "creatorsword.ponder.sword_pedestal.text_3": "Гаечные ключи обеспечивают 4 096 SU.",
+  "creatorsword.ponder.sword_pedestal.text_4": "Редкие мечи Создателя обеспечивают 32 768 SU.",
+  "creatorsword.ponder.sword_pedestal.text_5": "Наведитесь на переключатель в нижней части боковой стороны и удерживайте правую кнопку мыши, чтобы выбрать направление вращения.",
+  "creatorsword.ponder.sword_pedestal.text_6": "Нажмите ключом по боковой стороне правой кнопкой мыши, чтобы изменить положение пьедестала.",
+  "creatorsword.ponder.sword_pedestal.text_7": "Нажмите ключом по нижней стороне правой кнопкой мыши, чтобы показать или скрыть выходной вал.",
 
   "advancement.creatorsword.cogwheelshields_advancement_speed.title": "Мобильное дробильное колесо?!",
   "advancement.creatorsword.cogwheelshields_advancement_speed.description": "Одновременно держите в каждой руке зубчатый щит со скоростью вращения 512 RPM.",
@@ -163,7 +174,7 @@
   "item.creatorsword.tidecrest_smithing_template": "Кузнечный шаблон Гребень прилива",
   "item.creatorsword.tidecrest_smithing_template.tooltip.summary": "_Реликвия морского дна с узором приливной шестерни._ Приливы стёрли надписи, но не смогли стереть очертания шестерён.",
   "item.creatorsword.tidecrest_smithing_template.tooltip.condition1": "Получение",
-  "item.creatorsword.tidecrest_smithing_template.tooltip.behaviour1": "Можно получить с помощью _археологии_ в _холодных_ и _тёплых подводных руинах_.",
+  "item.creatorsword.tidecrest_smithing_template.tooltip.behaviour1": "Можно получить с помощью _археологии_ в _холодных подводных руинах_ и _тёплых подводных руинах_.",
   "item.creatorsword.tidecrest_smithing_template.applies_to": "Незеритовый Меч Создателя",
   "item.creatorsword.tidecrest_smithing_template.ingredients": "Прочная пластина",
   "item.creatorsword.tidecrest_smithing_template.upgrade_description": "Улучшение Гребень прилива",
