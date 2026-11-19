@@ -113,7 +113,7 @@ public final class AeronauticsHookCompatProvider implements FrogportHookCompatPr
         pullDirection = pullDirection.normalize();
 
         RigidBodyHandle handle = RigidBodyHandle.of(serverSubLevel);
-        if (handle == null || !handle.isValid()) {
+        if (!handle.isValid()) {
             return false;
         }
 

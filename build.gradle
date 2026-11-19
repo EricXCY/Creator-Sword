@@ -82,24 +82,6 @@ sourceSets.main.resources {
     exclude '**/.cache/**'
 }
 
-// runData needs processResources before launching, so its newly generated files
-// otherwise remain absent/stale in the classpath used by an IDE client launch.
-def refreshGeneratedResources = tasks.register('refreshGeneratedResources', Copy) {
-    from('src/generated/resources') { exclude '.cache/**', '**/*.bbmodel' }
-    into layout.buildDirectory.dir('resources/main')
-}
-tasks.matching { it.name == 'runData' }.configureEach { finalizedBy refreshGeneratedResources }
-tasks.matching { it.name in ['runClient', 'runServer', 'runGameTestServer'] }.configureEach {
-    mustRunAfter refreshGeneratedResources
-}
-
-
-// Opt-in integration tests run with the real game, registries and Mixin transformations.
-if (providers.gradleProperty('flywheelGameTests').isPresent()) {
-    sourceSets.main.java.srcDir 'src/gametest/java'
-    sourceSets.main.resources.srcDir 'src/gametest/resources'
-}
-
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
@@ -176,21 +158,13 @@ tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
-// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+// Optional IDE attachments; enable only when sources/Javadoc are needed.
 idea {
     module {
-        downloadSources = true
-        downloadJavadoc = true
+        downloadSources = providers.gradleProperty('downloadIdeSources').map { it.toBoolean() }.getOrElse(false)
+        downloadJavadoc = providers.gradleProperty('downloadIdeJavadoc').map { it.toBoolean() }.getOrElse(false)
     }
 }
 
-if (providers.gradleProperty('pedestalGameTests').isPresent()) {
-    def pedestalTests = objects.sourceDirectorySet('pedestalTests', 'Sword pedestal game tests')
-    pedestalTests.srcDir 'src/gametest/java'
-    pedestalTests.include 'com/erix/creatorsword/block/sword_pedestal/**'
-    sourceSets.main.java.source(pedestalTests)
-    sourceSets.main.resources.srcDir 'src/gametest/resources'
-    ['dev.ryanhcode.sable', 'dev.simulated_team.simulated', 'dev.eriksonn.aeronautics', 'dev.ryanhcode.offroad'].each {
-        configurations.runtimeClasspath.exclude group: it
-    }
-}
+// Optional local integration tests; normal builds contain production sources only.
+apply from: 'gradle/game-tests.gradle'

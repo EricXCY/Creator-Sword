@@ -16,6 +16,7 @@ out
 # gradle
 build
 .gradle
+game-tests.gradle
 
 # other
 eclipse
