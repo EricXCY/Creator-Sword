@@ -165,6 +165,3 @@ idea {
         downloadJavadoc = providers.gradleProperty('downloadIdeJavadoc').map { it.toBoolean() }.getOrElse(false)
     }
 }
-
-// Optional local integration tests; normal builds contain production sources only.
-apply from: 'gradle/game-tests.gradle'
