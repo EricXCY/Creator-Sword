@@ -29,7 +29,7 @@ public class SwordPedestalPonder implements PonderPlugin {
 
     @Override public @NotNull String getModId() { return "creatorsword"; }
 
-    @Override public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
+    @Override public void registerScenes(@NotNull PonderSceneRegistrationHelper<ResourceLocation> helper) {
         for (var pedestal : new ResourceLocation[]{SwordPedestalBlocks.SWORD_PEDESTAL.getId(),
                 SwordPedestalBlocks.BRASS_SWORD_PEDESTAL.getId()}) {
             helper.addStoryBoard(pedestal, "sword_pedestal/power", SwordPedestalPonder::power);

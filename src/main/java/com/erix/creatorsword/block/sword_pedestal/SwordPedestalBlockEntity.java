@@ -19,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 public class SwordPedestalBlockEntity extends GeneratingKineticBlockEntity {
     public static final float RPM = 64;
@@ -31,7 +32,7 @@ public class SwordPedestalBlockEntity extends GeneratingKineticBlockEntity {
             if (slot != 0) throw new IndexOutOfBoundsException("Invalid pedestal slot: " + slot);
         }
         @Override public int getSlots() { return 1; }
-        @Override public ItemStack getStackInSlot(int slot) {
+        @Override public @NotNull ItemStack getStackInSlot(int slot) {
             checkSlot(slot);
             return getHeldItem();
         }
@@ -43,13 +44,13 @@ public class SwordPedestalBlockEntity extends GeneratingKineticBlockEntity {
             checkSlot(slot);
             return !stack.isEmpty() && capacityFor(stack) > 0;
         }
-        @Override public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+        @Override public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             checkSlot(slot);
             if (!isItemValid(slot, stack) || hasHeldItem() || level == null || isRemoved()) return stack;
             if (!simulate && (level.isClientSide || !SwordPedestalBlockEntity.this.insertItem(stack))) return stack;
             return stack.copyWithCount(stack.getCount() - 1);
         }
-        @Override public ItemStack extractItem(int slot, int amount, boolean simulate) {
+        @Override public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             checkSlot(slot);
             if (amount <= 0 || !hasHeldItem() || level == null || isRemoved()) return ItemStack.EMPTY;
             return simulate ? getHeldItem() : extract();
