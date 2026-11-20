@@ -95,6 +95,8 @@
   "item.creatorsword.capture_box.filled": "已捕获：%s",
   "item.creatorsword.capture_box.filled.unknown": "已捕获：<未知>",
   "tooltip.creatorsword.capture_box.health": "血量: %s",
+  "item.creatorsword.capture_box.spawner_success": "已将刷怪笼设置为：%s",
+  "item.creatorsword.capture_box.spawner_failed": "无法投放到此刷怪笼，生物仍保留在盒中。",
 
   "block.creatorsword.sword_pedestal": "剑座",
   "block.creatorsword.brass_sword_pedestal": "黄铜剑座",
@@ -200,5 +202,5 @@
   "item.creatorsword.trial_key_die": "试炼钥匙模具",
   "item.creatorsword.incomplete_trial_key_die": "未完成的试炼钥匙模具",
   "item.creatorsword.ominous_trial_key_die": "不祥试炼钥匙模具",
-  "item.creatorsword.incomplete_ominous_trial_key_die": "未完成的不祥试炼钥匙模具"
+  "item.creatorsword.incomplete_ominous_trial_key_die": "未完成的不祥试炼钥匙模具",
 }

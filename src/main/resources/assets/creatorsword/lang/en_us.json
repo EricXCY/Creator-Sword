@@ -95,6 +95,8 @@
   "item.creatorsword.capture_box.filled": "Captured: %s",
   "item.creatorsword.capture_box.filled.unknown": "Captured: <Unknown>",
   "tooltip.creatorsword.capture_box.health": "Health: %s",
+  "item.creatorsword.capture_box.spawner_success": "Spawner set to: %s",
+  "item.creatorsword.capture_box.spawner_failed": "Cannot insert into this spawner. The creature remains in the box.",
 
   "block.creatorsword.sword_pedestal": "Sword Pedestal",
   "block.creatorsword.brass_sword_pedestal": "Brass Sword Pedestal",

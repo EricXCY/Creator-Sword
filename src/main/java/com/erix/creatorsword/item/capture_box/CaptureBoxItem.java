@@ -1,6 +1,9 @@
 package com.erix.creatorsword.item.capture_box;
 
 import com.erix.creatorsword.CreatorSword;
+import com.erix.creatorsword.config.CreatorSwordConfigs;
+import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
+import net.minecraft.world.level.gameevent.GameEvent;
 import com.erix.creatorsword.ui.tooltip.CaptureBoxTooltip;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -187,12 +190,52 @@ public class CaptureBoxItem extends Item {
         if (hit.getType() != net.minecraft.world.phys.HitResult.Type.BLOCK)
             return InteractionResultHolder.pass(stack);
 
+        if (isSpawnerInsertionEnabled() && level.getBlockEntity(hit.getBlockPos()) instanceof SpawnerBlockEntity spawner) {
+            if (!level.isClientSide && !insertIntoSpawner(level, player, stack, hit, spawner))
+                return InteractionResultHolder.fail(stack);
+            return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+        }
+
         if (!level.isClientSide) {
             if (!releaseEntity(level, player, stack, hit))
                 return InteractionResultHolder.pass(stack);
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
+    }
+
+    private static boolean isSpawnerInsertionEnabled() {
+        var config = CreatorSwordConfigs.server();
+        return config != null && config.specification.isLoaded() && config.captureBox.allowSpawnerInsertion.get();
+    }
+
+    private static boolean insertIntoSpawner(Level level, Player player, ItemStack stack, BlockHitResult hit,
+                                             SpawnerBlockEntity spawner) {
+        BlockPos pos = hit.getBlockPos();
+        EntityType<?> type = getStoredEntityType(stack);
+        if (!level.mayInteract(player, pos) || !player.mayUseItemAt(pos, hit.getDirection(), stack)
+                || type == null || getCapturedEntityNbt(stack) == null
+                || !type.isEnabled(level.enabledFeatures()) || !(type.create(level) instanceof LivingEntity)) {
+            player.displayClientMessage(Component.translatable("item.creatorsword.capture_box.spawner_failed"), true);
+            return false;
+        }
+
+        CompoundTag spawnerData = spawner.getSpawner().save(new CompoundTag());
+        CompoundTag entityData = new CompoundTag();
+        entityData.putString("id", EntityType.getKey(type).toString());
+        CompoundTag spawnData = new CompoundTag();
+        spawnData.put("entity", entityData);
+        spawnerData.put("SpawnData", spawnData);
+        spawnerData.remove("SpawnPotentials");
+        spawner.getSpawner().load(level, pos, spawnerData);
+        spawner.setChanged();
+        var state = level.getBlockState(pos);
+        level.sendBlockUpdated(pos, state, state, 3);
+        level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
+        updateDataComponents(stack, KEY_HAS_ENTITY, KEY_ENTITY_TYPE, KEY_ENTITY_NBT);
+        player.displayClientMessage(Component.translatable("item.creatorsword.capture_box.spawner_success",
+                type.getDescription()), true);
+        return true;
     }
 
     @Override
