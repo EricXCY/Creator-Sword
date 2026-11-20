@@ -64,6 +64,11 @@ public class SwordPedestalBlocks {
         return builder.register();
     }
 
+    public static void registerCapabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,
+                SWORD_PEDESTAL_ENTITY.get(), (pedestal, side) -> pedestal.getItemHandler());
+    }
+
     public static void register() {
         // Load this class to register its entries with the shared CreateRegistrate.
     }

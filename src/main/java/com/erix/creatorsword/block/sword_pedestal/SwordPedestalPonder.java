@@ -30,7 +30,10 @@ public class SwordPedestalPonder implements PonderPlugin {
     @Override public @NotNull String getModId() { return "creatorsword"; }
 
     @Override public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        helper.addStoryBoard(SwordPedestalBlocks.SWORD_PEDESTAL.getId(), "sword_pedestal/power", SwordPedestalPonder::power);
+        for (var pedestal : new ResourceLocation[]{SwordPedestalBlocks.SWORD_PEDESTAL.getId(),
+                SwordPedestalBlocks.BRASS_SWORD_PEDESTAL.getId()}) {
+            helper.addStoryBoard(pedestal, "sword_pedestal/power", SwordPedestalPonder::power);
+        }
     }
 
     private static void power(SceneBuilder builder, SceneBuildingUtil util) {
@@ -79,7 +82,7 @@ public class SwordPedestalPonder implements PonderPlugin {
         var control = util.vector().of(2.5, 1 + 3 / 16.0, 3.001);
         scene.overlay().showFilterSlotInput(control, Direction.SOUTH, 35);
         scene.overlay().showControls(control, Pointing.UP, 35).rightClick();
-        scene.idle(45);
+        scene.idle(60);
         scene.overlay().showText(100).text("Hold right-click on the lower side panel to select the rotation direction.")
                 .pointAt(control).placeNearTarget();
         scene.idle(40);
@@ -87,23 +90,31 @@ public class SwordPedestalPonder implements PonderPlugin {
                 tag -> tag.putInt("ScrollValue", 1));
         scene.world().setKineticSpeed(util.select().position(pos), -64);
         scene.world().setKineticSpeed(util.select().fromTo(cog, stressGauge), 64);
-        scene.idle(70);
-
+        scene.idle(80);
+        scene.world().setBlock(pos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), false);
+        scene.world().setBlock(pos, SwordPedestalBlocks.BRASS_SWORD_PEDESTAL.getDefaultState(), false);
+        setDisplayedItem(scene, util, pos, items[1]);
+        scene.world().modifyBlockEntityNBT(util.select().position(pos), SwordPedestalBlockEntity.class,
+                tag -> tag.putInt("ScrollValue", -64));
+        scene.world().setKineticSpeed(util.select().position(pos), -64);
+        scene.overlay().showFilterSlotInput(control, Direction.SOUTH, 35);
+        scene.overlay().showText(80).text("The Brass Sword Pedestal also lets you adjust the rotation speed.")
+                .pointAt(util.vector().centerOf(pos)).placeNearTarget();
+        scene.idle(120);
         scene.addKeyframe();
         var side = util.vector().of(3, 1.5, 2.5);
         scene.overlay().showControls(side, Pointing.DOWN, 35).rightClick().withItem(AllItems.WRENCH.asStack());
         scene.idle(45);
-        scene.overlay().showText(100).text("Right-click a side with a wrench to change the pedestal's pose.")
+        scene.overlay().showText(90).text("Right-click a side with a wrench to change the pedestal's pose.")
                 .pointAt(side).placeNearTarget();
         scene.idle(40);
-        var rotated = SwordPedestalBlocks.SWORD_PEDESTAL.get().getRotatedBlockState(
-                SwordPedestalBlocks.SWORD_PEDESTAL.getDefaultState(), Direction.EAST);
+        var rotated = SwordPedestalBlocks.BRASS_SWORD_PEDESTAL.get().getRotatedBlockState(
+                SwordPedestalBlocks.BRASS_SWORD_PEDESTAL.getDefaultState(), Direction.EAST);
         scene.world().modifyBlock(pos, state -> rotated, true);
         scene.world().setKineticSpeed(util.select().fromTo(cog, stressGauge), 0);
         scene.world().modifyBlockEntity(stressGauge, StressGaugeBlockEntity.class,
                 be -> be.updateFromNetwork(0, 0, 3));
-        scene.idle(70);
-
+        scene.idle(60);
         scene.addKeyframe();
         var back = rotated.getValue(SwordPedestalBlock.FACING).getOpposite();
         if (back == Direction.NORTH || back == Direction.WEST) scene.rotateCameraY(180);

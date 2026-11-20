@@ -104,8 +104,9 @@
   "creatorsword.ponder.sword_pedestal.text_3": "Wrenches provide 4,096 SU.",
   "creatorsword.ponder.sword_pedestal.text_4": "Rare Creator's Swords provide 32,768 SU.",
   "creatorsword.ponder.sword_pedestal.text_5": "Aim at the switch on the lower part of a side and hold right-click to select the rotation direction.",
-  "creatorsword.ponder.sword_pedestal.text_6": "Right-click a side with a wrench to change the pedestal's pose.",
-  "creatorsword.ponder.sword_pedestal.text_7": "Right-click the bottom face with a wrench to show or hide the output shaft.",
+  "creatorsword.ponder.sword_pedestal.text_6": "The Brass Sword Pedestal also lets you adjust the rotation speed.",
+  "creatorsword.ponder.sword_pedestal.text_7": "Right-click a side with a wrench to change the pedestal's pose.",
+  "creatorsword.ponder.sword_pedestal.text_8": "Right-click the bottom face with a wrench to show or hide the output shaft.",
 
   "advancement.creatorsword.cogwheelshields_advancement_speed.title": "Mobile Crushing Wheels?!",
   "advancement.creatorsword.cogwheelshields_advancement_speed.description": "Hold a Cogwheel Shield spinning at 512 RPM in each hand at the same time.",
@@ -183,8 +184,12 @@
 
   "item.creatorsword.precision_trial_key": "Smart Trial Key",
   "item.creatorsword.precision_trial_key.tooltip.summary": "A more advanced Trial Key. It seems to slip past a certain restriction.",
+  "item.creatorsword.precision_trial_key.tooltip.condition1": "When using the key",
+  "item.creatorsword.precision_trial_key.tooltip.behaviour1": "Allows _Vaults_ to be opened _repeatedly_.",
   "item.creatorsword.precision_ominous_trial_key": "Smart Ominous Trial Key",
   "item.creatorsword.precision_ominous_trial_key.tooltip.summary": "A more advanced Ominous Trial Key. It seems to slip past a certain restriction.",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.condition1": "When using the key",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.behaviour1": "Allows _Ominous Vaults_ to be opened _repeatedly_.",
 
   "fluid.creatorsword.ominous_essence": "Ominous Essence",
   "fluid.creatorsword.ominous_essence_ii": "Ominous Essence II",

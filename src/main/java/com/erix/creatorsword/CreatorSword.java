@@ -59,6 +59,7 @@ public class CreatorSword {
         CaptureBoxItem.ITEMS.register(modEventBus);
         CSItems.register(modEventBus);
         SwordPedestalBlocks.register();
+        modEventBus.addListener(SwordPedestalBlocks::registerCapabilities);
         SmithingTemplateItems.register(modEventBus);
 
         ModTabs.CREATIVE_TABS.register(modEventBus);

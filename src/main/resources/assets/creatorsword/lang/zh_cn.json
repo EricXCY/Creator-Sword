@@ -104,8 +104,9 @@
   "creatorsword.ponder.sword_pedestal.text_3": "扳手提供 4,096 SU。",
   "creatorsword.ponder.sword_pedestal.text_4": "稀有的机械师之剑提供 32,768 SU。",
   "creatorsword.ponder.sword_pedestal.text_5": "对准侧面下方的开关，按住右键选择转向。",
-  "creatorsword.ponder.sword_pedestal.text_6": "用扳手右键侧面改变姿态。",
-  "creatorsword.ponder.sword_pedestal.text_7": "用扳手右键底面，可以显示或隐藏输出轴。",
+  "creatorsword.ponder.sword_pedestal.text_6": "黄铜剑座还可以调整输出转速。",
+  "creatorsword.ponder.sword_pedestal.text_7": "用扳手右键侧面改变姿态。",
+  "creatorsword.ponder.sword_pedestal.text_8": "用扳手右键底面，可以显示或隐藏输出轴。",
 
   "advancement.creatorsword.cogwheelshields_advancement_speed.title": "移动的粉碎轮?!",
   "advancement.creatorsword.cogwheelshields_advancement_speed.description": "主副手同时持有转速达到 512 的齿轮盾。",
@@ -183,8 +184,12 @@
 
   "item.creatorsword.precision_trial_key": "智能试炼钥匙",
   "item.creatorsword.precision_trial_key.tooltip.summary": "更高级的试炼钥匙，似乎能绕过某个桎梏。",
+  "item.creatorsword.precision_trial_key.tooltip.condition1": "使用钥匙时",
+  "item.creatorsword.precision_trial_key.tooltip.behaviour1": "允许_重复_开启_宝库_。",
   "item.creatorsword.precision_ominous_trial_key": "智能不祥试炼钥匙",
   "item.creatorsword.precision_ominous_trial_key.tooltip.summary": "更高级的不祥试炼钥匙，似乎能绕过某个桎梏。",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.condition1": "使用钥匙时",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.behaviour1": "允许_重复_开启_不祥宝库_。",
 
   "fluid.creatorsword.ominous_essence": "不祥原浆",
   "fluid.creatorsword.ominous_essence_ii": "不祥原浆 II",

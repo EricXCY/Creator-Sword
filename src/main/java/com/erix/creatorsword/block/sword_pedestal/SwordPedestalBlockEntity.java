@@ -8,6 +8,7 @@ import com.simibubi.create.content.kinetics.motor.KineticScrollValueBehaviour;
 import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.foundation.utility.CreateLang;
 import java.util.List;
+import net.neoforged.neoforge.items.IItemHandler;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.*;
 import net.minecraft.nbt.CompoundTag;
@@ -24,6 +25,38 @@ public class SwordPedestalBlockEntity extends GeneratingKineticBlockEntity {
     private ScrollOptionBehaviour<RotationDirection> movementDirection;
     private ScrollValueBehaviour targetSpeed;
     private ItemStack heldItem = ItemStack.EMPTY;
+
+    private final IItemHandler itemHandler = new IItemHandler() {
+        private void checkSlot(int slot) {
+            if (slot != 0) throw new IndexOutOfBoundsException("Invalid pedestal slot: " + slot);
+        }
+        @Override public int getSlots() { return 1; }
+        @Override public ItemStack getStackInSlot(int slot) {
+            checkSlot(slot);
+            return getHeldItem();
+        }
+        @Override public int getSlotLimit(int slot) {
+            checkSlot(slot);
+            return 1;
+        }
+        @Override public boolean isItemValid(int slot, ItemStack stack) {
+            checkSlot(slot);
+            return !stack.isEmpty() && capacityFor(stack) > 0;
+        }
+        @Override public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
+            checkSlot(slot);
+            if (!isItemValid(slot, stack) || hasHeldItem() || level == null || isRemoved()) return stack;
+            if (!simulate && (level.isClientSide || !SwordPedestalBlockEntity.this.insertItem(stack))) return stack;
+            return stack.copyWithCount(stack.getCount() - 1);
+        }
+        @Override public ItemStack extractItem(int slot, int amount, boolean simulate) {
+            checkSlot(slot);
+            if (amount <= 0 || !hasHeldItem() || level == null || isRemoved()) return ItemStack.EMPTY;
+            return simulate ? getHeldItem() : extract();
+        }
+    };
+    public IItemHandler getItemHandler() { return itemHandler; }
+
     public SwordPedestalBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) { super(type, pos, state); }
     public boolean hasHeldItem() { return !heldItem.isEmpty(); }
     private int capacityFor(ItemStack stack) {
@@ -68,11 +101,17 @@ public class SwordPedestalBlockEntity extends GeneratingKineticBlockEntity {
         if (!heldItem.isEmpty() || capacityFor(stack) == 0) return false;
         if (level == null) return false;
         if (level.isClientSide) return true;
+        if (!insertItem(stack)) return false;
+        if (!player.isCreative()) stack.shrink(1);
+        return true;
+    }
+    private boolean insertItem(ItemStack stack) {
+        if (level == null || level.isClientSide || hasHeldItem() || stack.isEmpty() || capacityFor(stack) <= 0)
+            return false;
         syncDirectionWithNetwork();
         if (targetSpeed != null && getTheoreticalSpeed() != 0)
             targetSpeed.setValue((int) Math.copySign(Math.abs(targetSpeed.getValue()), getTheoreticalSpeed()));
         heldItem = stack.copyWithCount(1);
-        if (!player.isCreative()) stack.shrink(1);
         changed();
         return true;
     }
@@ -90,6 +129,7 @@ public class SwordPedestalBlockEntity extends GeneratingKineticBlockEntity {
     private void changed() {
         setChanged();
         updateGeneratedRotation();
+        sendData();
         if (level != null) level.updateNeighbourForOutputSignal(worldPosition, getBlockState().getBlock());
     }
     @Override public void destroy() {

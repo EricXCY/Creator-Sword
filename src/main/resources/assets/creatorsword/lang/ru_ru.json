@@ -104,8 +104,9 @@
   "creatorsword.ponder.sword_pedestal.text_3": "Гаечные ключи обеспечивают 4 096 SU.",
   "creatorsword.ponder.sword_pedestal.text_4": "Редкие мечи Создателя обеспечивают 32 768 SU.",
   "creatorsword.ponder.sword_pedestal.text_5": "Наведитесь на переключатель в нижней части боковой стороны и удерживайте правую кнопку мыши, чтобы выбрать направление вращения.",
-  "creatorsword.ponder.sword_pedestal.text_6": "Нажмите ключом по боковой стороне правой кнопкой мыши, чтобы изменить положение пьедестала.",
-  "creatorsword.ponder.sword_pedestal.text_7": "Нажмите ключом по нижней стороне правой кнопкой мыши, чтобы показать или скрыть выходной вал.",
+  "creatorsword.ponder.sword_pedestal.text_6": "Латунный пьедестал для меча также позволяет регулировать скорость вращения.",
+  "creatorsword.ponder.sword_pedestal.text_7": "Нажмите ключом по боковой стороне правой кнопкой мыши, чтобы изменить положение пьедестала.",
+  "creatorsword.ponder.sword_pedestal.text_8": "Нажмите ключом по нижней стороне правой кнопкой мыши, чтобы показать или скрыть выходной вал.",
 
   "advancement.creatorsword.cogwheelshields_advancement_speed.title": "Мобильное дробильное колесо?!",
   "advancement.creatorsword.cogwheelshields_advancement_speed.description": "Одновременно держите в каждой руке зубчатый щит со скоростью вращения 512 RPM.",
@@ -183,8 +184,12 @@
 
   "item.creatorsword.precision_trial_key": "Умный ключ испытаний",
   "item.creatorsword.precision_trial_key.tooltip.summary": "Более продвинутый ключ испытаний. Кажется, он способен обойти некое ограничение.",
+  "item.creatorsword.precision_trial_key.tooltip.condition1": "При использовании ключа",
+  "item.creatorsword.precision_trial_key.tooltip.behaviour1": "Позволяет _повторно_ открывать _хранилища_.",
   "item.creatorsword.precision_ominous_trial_key": "Умный зловещий ключ испытаний",
   "item.creatorsword.precision_ominous_trial_key.tooltip.summary": "Более продвинутый зловещий ключ испытаний. Кажется, он способен обойти некое ограничение.",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.condition1": "При использовании ключа",
+  "item.creatorsword.precision_ominous_trial_key.tooltip.behaviour1": "Позволяет _повторно_ открывать _зловещие хранилища_.",
 
   "fluid.creatorsword.ominous_essence": "Зловещая эссенция",
   "fluid.creatorsword.ominous_essence_ii": "Зловещая эссенция II",
